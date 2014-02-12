@@ -7,12 +7,16 @@
 //
 
 #import "BLKAppDelegate.h"
+#import "BLKConstants.h"
+#import <Parse/Parse.h>
 
 @implementation BLKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
+    [PFFacebookUtils initializeFacebook];
     return YES;
 }
 							
@@ -36,11 +40,21 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - FBIntegration
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
 }
 
 @end

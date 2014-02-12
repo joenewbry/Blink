@@ -7,10 +7,8 @@
 //
 
 #import "BLKViewController.h"
-
-@interface BLKViewController ()
-
-@end
+#import <Parse/Parse.h>
+#import "BLKProfileViewController.h"
 
 @implementation BLKViewController
 
@@ -26,4 +24,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)facebookLoginPressed:(id)sender {
+    NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday"];
+
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+
+        if (!user) {
+            if (!error) {
+                NSLog(@"User canceled facebook login");
+            } else {
+                NSLog(@"An error occuered: %@", error);
+            }
+
+        } else if (user.isNew) {
+            NSLog(@"there is a new user");
+            BLKProfileViewController *profileVC = [[BLKProfileViewController alloc] init];
+            [self presentViewController:profileVC animated:NO completion:nil];
+        } else {
+            NSLog(@"Existing FBUser logged in");
+            BLKProfileViewController *profileVC = [[BLKProfileViewController alloc] init];
+            [self presentViewController:profileVC animated:NO completion:nil];
+        }
+
+    }];
+}
 @end
