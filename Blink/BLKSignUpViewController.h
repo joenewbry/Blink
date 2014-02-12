@@ -1,13 +1,13 @@
 //
-//  BLKProfileDataSource.h
+//  BLKViewController.h
 //  Blink
 //
 //  Created by Joe Newbry on 2/9/14.
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface BLKProfileDataSource : NSObject
+@interface BLKSignUpViewController : UIViewController
 
 @end

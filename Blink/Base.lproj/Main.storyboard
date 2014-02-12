@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="BLKViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="BLKSignUpViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w8z-HP-zqY"/>
                         <viewControllerLayoutGuide type="bottom" id="wzL-0e-XZT"/>

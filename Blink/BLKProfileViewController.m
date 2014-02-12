@@ -12,6 +12,7 @@
 @interface BLKProfileViewController ()
 
 @property (strong, nonatomic) NSMutableData *imgData;
+@property (strong, nonatomic) NSURLConnection *URLConnection;
 
 @end
 
@@ -74,21 +75,20 @@
             NSString *relationship = userData[@"relationship_status"];
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
 
+            // save facebook information to parse
             PFUser *currentUser = [PFUser currentUser];
-
             [PFUser currentUser][@"facebookID"] = facebookID;
             [PFUser currentUser][@"profileName"] = name;
             [PFUser currentUser][@"gender"] = gender;
             [PFUser currentUser][@"birthday"] = birthday;
             [PFUser currentUser][@"relationship"] = relationship;
-
             [currentUser saveInBackground];
 
             _imgData = [[NSMutableData alloc] init];
 
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.0f];
 
-            NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+            self.URLConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
         }
     }];
 }

@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import "BLKViewController.h"
+#import "BLKSignUpViewController.h"
 #import <Parse/Parse.h>
 #import "BLKProfileViewController.h"
 
-@implementation BLKViewController
+@implementation BLKSignUpViewController
 
 - (void)viewDidLoad
 {
