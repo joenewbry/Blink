@@ -19,7 +19,6 @@ Blink.xcodeproj/project.xcworkspace/xcshareddata/
 
 # Pods config
 Pods
-Blink.xcodeproj
 Podfile.lock
 
 # untracked folders (stuff not needed for app release or that should be kept private)

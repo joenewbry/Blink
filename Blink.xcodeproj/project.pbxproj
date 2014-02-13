@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		696B44203B6247E094E60B53 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DA1E5E3D04835B1E7731C /* libPods.a */; };
+		D84AEB3718A7F4220027FCFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3618A7F4220027FCFA /* Foundation.framework */; };
+		D84AEB3918A7F4220027FCFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3818A7F4220027FCFA /* CoreGraphics.framework */; };
+		D84AEB3B18A7F4220027FCFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3A18A7F4220027FCFA /* UIKit.framework */; };
+		D84AEB4118A7F4220027FCFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84AEB3F18A7F4220027FCFA /* InfoPlist.strings */; };
+		D84AEB4318A7F4220027FCFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB4218A7F4220027FCFA /* main.m */; };
+		D84AEB4718A7F4220027FCFA /* BLKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB4618A7F4220027FCFA /* BLKAppDelegate.m */; };
+		D84AEB4A18A7F4220027FCFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84AEB4818A7F4220027FCFA /* Main.storyboard */; };
+		D84AEB4D18A7F4220027FCFA /* BLKSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB4C18A7F4220027FCFA /* BLKSignUpViewController.m */; };
+		D84AEB4F18A7F4220027FCFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D84AEB4E18A7F4220027FCFA /* Images.xcassets */; };
+		D84AEB5618A7F4220027FCFA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB5518A7F4220027FCFA /* XCTest.framework */; };
+		D84AEB5718A7F4220027FCFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3618A7F4220027FCFA /* Foundation.framework */; };
+		D84AEB5818A7F4220027FCFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3A18A7F4220027FCFA /* UIKit.framework */; };
+		D84AEB6018A7F4220027FCFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84AEB5E18A7F4220027FCFA /* InfoPlist.strings */; };
+		D84AEB6218A7F4220027FCFA /* BlinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6118A7F4220027FCFA /* BlinkTests.m */; };
+		D84AEB6D18A7F8490027FCFA /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6C18A7F8490027FCFA /* BLKConstants.m */; };
+		D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */; };
+		D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA018AB43DC0092B9A1 /* SBUser.m */; };
+		D8D03BA318AB44CF0092B9A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */; };
+		D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA718ABED380092B9A1 /* SBUserDiscovery.m */; };
+		D8D03BAB18ABED740092B9A1 /* SBBroadcastUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BAA18ABED740092B9A1 /* SBBroadcastUser.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D84AEB5918A7F4220027FCFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D84AEB2B18A7F4220027FCFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D84AEB3218A7F4220027FCFA;
+			remoteInfo = Blink;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		74F52CF771734F63ABA9B791 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		7F6DA1E5E3D04835B1E7731C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84AEB3318A7F4220027FCFA /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84AEB3618A7F4220027FCFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D84AEB3818A7F4220027FCFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D84AEB3A18A7F4220027FCFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D84AEB3E18A7F4220027FCFA /* Blink-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Blink-Info.plist"; sourceTree = "<group>"; };
+		D84AEB4018A7F4220027FCFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D84AEB4218A7F4220027FCFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D84AEB4418A7F4220027FCFA /* Blink-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Blink-Prefix.pch"; sourceTree = "<group>"; };
+		D84AEB4518A7F4220027FCFA /* BLKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLKAppDelegate.h; sourceTree = "<group>"; };
+		D84AEB4618A7F4220027FCFA /* BLKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLKAppDelegate.m; sourceTree = "<group>"; };
+		D84AEB4918A7F4220027FCFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D84AEB4B18A7F4220027FCFA /* BLKSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLKSignUpViewController.h; sourceTree = "<group>"; };
+		D84AEB4C18A7F4220027FCFA /* BLKSignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLKSignUpViewController.m; sourceTree = "<group>"; };
+		D84AEB4E18A7F4220027FCFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D84AEB5418A7F4220027FCFA /* BlinkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlinkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D84AEB5518A7F4220027FCFA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D84AEB5D18A7F4220027FCFA /* BlinkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlinkTests-Info.plist"; sourceTree = "<group>"; };
+		D84AEB5F18A7F4220027FCFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D84AEB6118A7F4220027FCFA /* BlinkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlinkTests.m; sourceTree = "<group>"; };
+		D84AEB6B18A7F8490027FCFA /* BLKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLKConstants.h; path = Blink/BLKConstants.h; sourceTree = SOURCE_ROOT; };
+		D84AEB6C18A7F8490027FCFA /* BLKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLKConstants.m; path = Blink/BLKConstants.m; sourceTree = SOURCE_ROOT; };
+		D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKProfileViewController.h; sourceTree = "<group>"; };
+		D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKProfileViewController.m; sourceTree = "<group>"; };
+		D8D03B9F18AB43DC0092B9A1 /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
+		D8D03BA018AB43DC0092B9A1 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
+		D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		D8D03BA618ABED380092B9A1 /* SBUserDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUserDiscovery.h; sourceTree = "<group>"; };
+		D8D03BA718ABED380092B9A1 /* SBUserDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUserDiscovery.m; sourceTree = "<group>"; };
+		D8D03BA918ABED740092B9A1 /* SBBroadcastUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBroadcastUser.h; sourceTree = "<group>"; };
+		D8D03BAA18ABED740092B9A1 /* SBBroadcastUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBroadcastUser.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D84AEB3018A7F4220027FCFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D03BA318AB44CF0092B9A1 /* CoreBluetooth.framework in Frameworks */,
+				D84AEB3918A7F4220027FCFA /* CoreGraphics.framework in Frameworks */,
+				D84AEB3B18A7F4220027FCFA /* UIKit.framework in Frameworks */,
+				D84AEB3718A7F4220027FCFA /* Foundation.framework in Frameworks */,
+				696B44203B6247E094E60B53 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84AEB5118A7F4220027FCFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84AEB5618A7F4220027FCFA /* XCTest.framework in Frameworks */,
+				D84AEB5818A7F4220027FCFA /* UIKit.framework in Frameworks */,
+				D84AEB5718A7F4220027FCFA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D84AEB2A18A7F4220027FCFA = {
+			isa = PBXGroup;
+			children = (
+				D84AEB3C18A7F4220027FCFA /* Blink */,
+				D84AEB5B18A7F4220027FCFA /* BlinkTests */,
+				D84AEB3518A7F4220027FCFA /* Frameworks */,
+				D84AEB3418A7F4220027FCFA /* Products */,
+				74F52CF771734F63ABA9B791 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		D84AEB3418A7F4220027FCFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D84AEB3318A7F4220027FCFA /* Blink.app */,
+				D84AEB5418A7F4220027FCFA /* BlinkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D84AEB3518A7F4220027FCFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */,
+				D8D03B9F18AB43DC0092B9A1 /* SBUser.h */,
+				D8D03BA018AB43DC0092B9A1 /* SBUser.m */,
+				D8D03BA618ABED380092B9A1 /* SBUserDiscovery.h */,
+				D8D03BA718ABED380092B9A1 /* SBUserDiscovery.m */,
+				D8D03BA918ABED740092B9A1 /* SBBroadcastUser.h */,
+				D8D03BAA18ABED740092B9A1 /* SBBroadcastUser.m */,
+				D84AEB3618A7F4220027FCFA /* Foundation.framework */,
+				D84AEB3818A7F4220027FCFA /* CoreGraphics.framework */,
+				D84AEB3A18A7F4220027FCFA /* UIKit.framework */,
+				D84AEB5518A7F4220027FCFA /* XCTest.framework */,
+				7F6DA1E5E3D04835B1E7731C /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D84AEB3C18A7F4220027FCFA /* Blink */ = {
+			isa = PBXGroup;
+			children = (
+				D84AEB4518A7F4220027FCFA /* BLKAppDelegate.h */,
+				D84AEB4618A7F4220027FCFA /* BLKAppDelegate.m */,
+				D84AEB4818A7F4220027FCFA /* Main.storyboard */,
+				D84AEB7718A7FE810027FCFA /* Profile */,
+				D84AEB4B18A7F4220027FCFA /* BLKSignUpViewController.h */,
+				D84AEB4C18A7F4220027FCFA /* BLKSignUpViewController.m */,
+				D84AEB4E18A7F4220027FCFA /* Images.xcassets */,
+				D84AEB3D18A7F4220027FCFA /* Supporting Files */,
+			);
+			path = Blink;
+			sourceTree = "<group>";
+		};
+		D84AEB3D18A7F4220027FCFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D84AEB6B18A7F8490027FCFA /* BLKConstants.h */,
+				D84AEB6C18A7F8490027FCFA /* BLKConstants.m */,
+				D84AEB3E18A7F4220027FCFA /* Blink-Info.plist */,
+				D84AEB3F18A7F4220027FCFA /* InfoPlist.strings */,
+				D84AEB4218A7F4220027FCFA /* main.m */,
+				D84AEB4418A7F4220027FCFA /* Blink-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D84AEB5B18A7F4220027FCFA /* BlinkTests */ = {
+			isa = PBXGroup;
+			children = (
+				D84AEB6118A7F4220027FCFA /* BlinkTests.m */,
+				D84AEB5C18A7F4220027FCFA /* Supporting Files */,
+			);
+			path = BlinkTests;
+			sourceTree = "<group>";
+		};
+		D84AEB5C18A7F4220027FCFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D84AEB5D18A7F4220027FCFA /* BlinkTests-Info.plist */,
+				D84AEB5E18A7F4220027FCFA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D84AEB7718A7FE810027FCFA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */,
+				D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D84AEB3218A7F4220027FCFA /* Blink */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D84AEB6518A7F4220027FCFA /* Build configuration list for PBXNativeTarget "Blink" */;
+			buildPhases = (
+				E9EB7019A9094C749B714BE8 /* Check Pods Manifest.lock */,
+				D84AEB2F18A7F4220027FCFA /* Sources */,
+				D84AEB3018A7F4220027FCFA /* Frameworks */,
+				D84AEB3118A7F4220027FCFA /* Resources */,
+				BB2DCE7B90B94F26956F3408 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Blink;
+			productName = Blink;
+			productReference = D84AEB3318A7F4220027FCFA /* Blink.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D84AEB5318A7F4220027FCFA /* BlinkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D84AEB6818A7F4220027FCFA /* Build configuration list for PBXNativeTarget "BlinkTests" */;
+			buildPhases = (
+				D84AEB5018A7F4220027FCFA /* Sources */,
+				D84AEB5118A7F4220027FCFA /* Frameworks */,
+				D84AEB5218A7F4220027FCFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D84AEB5A18A7F4220027FCFA /* PBXTargetDependency */,
+			);
+			name = BlinkTests;
+			productName = BlinkTests;
+			productReference = D84AEB5418A7F4220027FCFA /* BlinkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D84AEB2B18A7F4220027FCFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BLK;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Joe Newbry";
+				TargetAttributes = {
+					D84AEB5318A7F4220027FCFA = {
+						TestTargetID = D84AEB3218A7F4220027FCFA;
+					};
+				};
+			};
+			buildConfigurationList = D84AEB2E18A7F4220027FCFA /* Build configuration list for PBXProject "Blink" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D84AEB2A18A7F4220027FCFA;
+			productRefGroup = D84AEB3418A7F4220027FCFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D84AEB3218A7F4220027FCFA /* Blink */,
+				D84AEB5318A7F4220027FCFA /* BlinkTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D84AEB3118A7F4220027FCFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84AEB4F18A7F4220027FCFA /* Images.xcassets in Resources */,
+				D84AEB4118A7F4220027FCFA /* InfoPlist.strings in Resources */,
+				D84AEB4A18A7F4220027FCFA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84AEB5218A7F4220027FCFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84AEB6018A7F4220027FCFA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BB2DCE7B90B94F26956F3408 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9EB7019A9094C749B714BE8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D84AEB2F18A7F4220027FCFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84AEB4718A7F4220027FCFA /* BLKAppDelegate.m in Sources */,
+				D84AEB4318A7F4220027FCFA /* main.m in Sources */,
+				D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */,
+				D84AEB4D18A7F4220027FCFA /* BLKSignUpViewController.m in Sources */,
+				D8D03BAB18ABED740092B9A1 /* SBBroadcastUser.m in Sources */,
+				D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */,
+				D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84AEB5018A7F4220027FCFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D84AEB6218A7F4220027FCFA /* BlinkTests.m in Sources */,
+				D84AEB6D18A7F8490027FCFA /* BLKConstants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D84AEB5A18A7F4220027FCFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D84AEB3218A7F4220027FCFA /* Blink */;
+			targetProxy = D84AEB5918A7F4220027FCFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D84AEB3F18A7F4220027FCFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D84AEB4018A7F4220027FCFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D84AEB4818A7F4220027FCFA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D84AEB4918A7F4220027FCFA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D84AEB5E18A7F4220027FCFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D84AEB5F18A7F4220027FCFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D84AEB6318A7F4220027FCFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D84AEB6418A7F4220027FCFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D84AEB6618A7F4220027FCFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74F52CF771734F63ABA9B791 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Blink/Blink-Prefix.pch";
+				INFOPLIST_FILE = "Blink/Blink-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D84AEB6718A7F4220027FCFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74F52CF771734F63ABA9B791 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Blink/Blink-Prefix.pch";
+				INFOPLIST_FILE = "Blink/Blink-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D84AEB6918A7F4220027FCFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blink.app/Blink";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Blink/Blink-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BlinkTests/BlinkTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D84AEB6A18A7F4220027FCFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Blink.app/Blink";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Blink/Blink-Prefix.pch";
+				INFOPLIST_FILE = "BlinkTests/BlinkTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D84AEB2E18A7F4220027FCFA /* Build configuration list for PBXProject "Blink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84AEB6318A7F4220027FCFA /* Debug */,
+				D84AEB6418A7F4220027FCFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D84AEB6518A7F4220027FCFA /* Build configuration list for PBXNativeTarget "Blink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84AEB6618A7F4220027FCFA /* Debug */,
+				D84AEB6718A7F4220027FCFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D84AEB6818A7F4220027FCFA /* Build configuration list for PBXNativeTarget "BlinkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84AEB6918A7F4220027FCFA /* Debug */,
+				D84AEB6A18A7F4220027FCFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D84AEB2B18A7F4220027FCFA /* Project object */;
+}

@@ -10,7 +10,7 @@
 #import "BLKConstants.h"
 #import <Parse/Parse.h>
 #import "SBBroadcastUser.h"
-#import "SBDiscoverUser.h"
+#import "SBUserDiscovery.h"
 #import "SBUser.h"
 
 @implementation BLKAppDelegate
@@ -23,8 +23,9 @@
 
     [SBUser createUserWithName:@"Joe Newbry"];
     [SBBroadcastUser buildUserBroadcastScaffold];
-    [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserNameService];
-    [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerBroadcastServices];
+    SBBroadcastUser *broadcastUser = [SBBroadcastUser currentBroadcastScaffold];
+    [broadcastUser peripheralAddUserNameService];
+    [broadcastUser peripheralManagerBroadcastServices];
 
     [SBUserDiscovery buildUserDiscoveryScaffold];
     [[SBUserDiscovery userDiscoveryScaffold] searchForUsers];

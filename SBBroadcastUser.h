@@ -10,6 +10,7 @@
 
 extern NSString const *SBBroadcastUserUserPeripheralUUID;
 extern NSString const *SBBroadcastUserUserNameCharacteristicUUID;
+extern NSString const *SBBroadcastUserServiceUUID;
 
 
 @interface SBBroadcastUser : NSObject

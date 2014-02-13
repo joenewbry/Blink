@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import "SBDiscoverUser.h"
+#import "SBUserDiscovery.h"
 #import "SBBroadcastUser.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
@@ -32,18 +32,18 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 {
     static SBUserDiscovery *mySBUserDiscovery = nil;
     @synchronized(self) {
-        if (mySBUserDiscovery ==nil) mySBUserDiscovery = [[self alloc] init];
-        // creates central manager that will look for peripherals with the specified
-        // CBUUID as one of the services
-        mySBUserDiscovery.centralManager = [[CBCentralManager alloc] initWithDelegate:mySBUserDiscovery queue:nil options:@{ CBCentralManagerOptionShowPowerAlertKey : @YES,
-                                                          CBCentralManagerOptionRestoreIdentifierKey : centralManagerRestorationUUID                                                            }];
+        if (mySBUserDiscovery == nil) mySBUserDiscovery = [[SBUserDiscovery alloc] init];
     }
     return mySBUserDiscovery;
 }
 
 + (id)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
 {
-    return [self buildUserDiscoveryScaffold];
+    static SBUserDiscovery *mySBUserDiscovery = nil;
+    @synchronized(self) {
+        if (mySBUserDiscovery == nil) mySBUserDiscovery = [[SBUserDiscovery alloc] initWithLaunchOptions:launchOptions];
+    }
+    return mySBUserDiscovery;
 }
 
 + (id)userDiscoveryScaffold
@@ -56,9 +56,22 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     return mySBUserDiscovery;
 }
 
+- (id)init
+{
+    return [self initWithLaunchOptions:nil];
+}
+
+- (id)initWithLaunchOptions:(NSDictionary *)launchOptions
+{
+    if (self = [super init]) {
+        if (launchOptions) self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{ CBCentralManagerOptionShowPowerAlertKey : @YES,
+                                CBCentralManagerOptionRestoreIdentifierKey : launchOptions[UIApplicationLaunchOptionsBluetoothCentralsKey]                                                            }];
+    }
+    return self;
+}
 - (void)searchForUsers
 {
-    [self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:SBBroadcastUserUserNameCharacteristicUUID]] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO }];
+    [self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:SBBroadcastUserServiceUUID]] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO }];
 }
 
 - (void)stopSearchForUsers
@@ -68,10 +81,17 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
 #pragma mark - Internal Implementation
 
+
 // central manager delegate methods
+
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
+{
+
+}
+
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    switch ([central state]) {
+    switch (central.state) {
         CBCentralManagerStatePoweredOff:
             NSLog(@"State powered off");
             break;

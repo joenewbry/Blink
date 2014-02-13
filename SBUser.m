@@ -17,22 +17,29 @@
 
 + (SBUser *)currentUser
 {
-    static SBUser *currentUser = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        currentUser = [[self alloc] init];
-    });
-    return currentUser;
+    static SBUser *mySBUser = nil;
+    @synchronized(self) {
+        if (mySBUser == nil) mySBUser = [[self alloc] initWithUserName:@"Default User"];
+    }
+    return mySBUser;
 }
 
 + (SBUser *)createUserWithName:(NSString *)user
 {
     static SBUser *mySBUser = nil;
     @synchronized(self) {
-        if (mySBUser == nil) mySBUser = [[self alloc] init];
-        mySBUser.userName = user;
+        if (mySBUser == nil) mySBUser = [[self alloc] initWithUserName:user];
     }
     return mySBUser;
+}
+
+- (id)initWithUserName:(NSString *)userName
+{
+    if (self = [super init])
+    {
+        self.userName = userName;
+    }
+    return self;
 }
 
 - (BOOL)shouldBroadcastProfile

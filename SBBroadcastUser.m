@@ -13,9 +13,13 @@
 NSString const *SBBroadcastUserUserPeripheralUUID = @"FC038B47-0022-4F8B-A8A3-74EC7D930B56";
 NSString const *peripheralRestorationUUID = @"A6499ECB-0B6C-4609-B161-E3D15687AF3D";
 NSString const *SBBroadcastUserUserNameCharacteristicUUID = @"2863DBD0-C65D-4F75-86B2-4A29D59776A5";
+NSString const *SBBroadcastUserServiceUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A1F6";
 
 
 @interface SBBroadcastUser () <CBPeripheralManagerDelegate>
+
+- (id)init;
+- (id)initWithLaunchOptions:(NSDictionary *)launchOptions;
 
 @property (nonatomic, strong) CBPeripheralManager *peripheralManager;
 
@@ -24,7 +28,7 @@ NSString const *SBBroadcastUserUserNameCharacteristicUUID = @"2863DBD0-C65D-4F75
 
 @end
 
-@implementation SBBroadcastUser 
+@implementation SBBroadcastUser
 
 + (id)buildUserBroadcastScaffold
 {
@@ -32,25 +36,46 @@ NSString const *SBBroadcastUserUserNameCharacteristicUUID = @"2863DBD0-C65D-4F75
     @synchronized(self) {
         if (mySBUserBroadcast ==nil) mySBUserBroadcast = [[self alloc] init];
         // creates peripheral manager
-        mySBUserBroadcast.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:mySBUserBroadcast queue:nil options:@{ CBCentralManagerOptionShowPowerAlertKey : @YES, CBCentralManagerOptionRestoreIdentifierKey : peripheralRestorationUUID }];
-        // listen for broadcast serv
     }
     return mySBUserBroadcast;
 }
 
 + (id)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
 {
-    return [self buildUserBroadcastScaffold];
+    static SBBroadcastUser *mySBUserBroadcast = nil;
+    @synchronized(self) {
+        if (mySBUserBroadcast == nil) mySBUserBroadcast = [[self alloc] initWithLaunchOptions:launchOptions];
+    }
+    return mySBUserBroadcast;
 }
 
 + (id)currentBroadcastScaffold
 {
-    static SBBroadcastUser *mySBuserBroadcast = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        mySBuserBroadcast = [[self alloc] init];
-    });
-    return mySBuserBroadcast;
+    static SBBroadcastUser *mySBUserBroadcast = nil;
+    @synchronized(self) {
+        if (mySBUserBroadcast == nil) mySBUserBroadcast = [[self alloc] init];
+    }
+    return mySBUserBroadcast;
+}
+
+- (id)init
+{
+    return [self initWithLaunchOptions:nil];
+}
+
+- (id)initWithLaunchOptions:(NSDictionary *)launchOptions
+{
+    if (self = [super init]) {
+        if (launchOptions) {
+            self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{ CBCentralManagerOptionShowPowerAlertKey : @YES,
+                CBCentralManagerOptionRestoreIdentifierKey : launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey]
+                                                                                                             }];
+        } else {
+            self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{ CBCentralManagerOptionShowPowerAlertKey : @YES
+                                                                                                             }];
+        }
+    }
+    return self;
 }
 
 - (void)peripheralManagerBroadcastServices
@@ -58,7 +83,8 @@ NSString const *SBBroadcastUserUserNameCharacteristicUUID = @"2863DBD0-C65D-4F75
     NSString *username = [SBUser currentUser].userName;
 
     [self.peripheralManager startAdvertising:@{ CBAdvertisementDataLocalNameKey : username,
-                                                CBAdvertisementDataLocalNameKey : SBBroadcastUserUserPeripheralUUID}];
+                                                CBAdvertisementDataServiceUUIDsKey : [CBUUID UUIDWithString:SBBroadcastUserUserPeripheralUUID]
+                                                }];
 }
 
 - (void)peripheralManagerEndBroadcastServices
@@ -71,8 +97,8 @@ NSString const *SBBroadcastUserUserNameCharacteristicUUID = @"2863DBD0-C65D-4F75
     NSString *username = [SBUser currentUser].userName;
     NSData *usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
     self.userNameCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserUserNameCharacteristicUUID] properties:CBCharacteristicPropertyRead value:usernameData permissions:CBAttributePermissionsReadable];
-    CBMutableService *userNameService = [[CBMutableService alloc] init];
-    userNameService.characteristics = @[SBBroadcastUserUserNameCharacteristicUUID];
+    CBMutableService *userNameService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserServiceUUID] primary:YES];
+    userNameService.characteristics = @[self.userNameCharacteristic];
     [self.peripheralManager addService:userNameService];
 }
 
