@@ -12,9 +12,9 @@
 
 @interface SBUserDiscovery : NSObject
 
-+ (id)runUserDiscovery;
-+ (id)runUserDiscovery:(NSDictionary *)launchOptions;
-+ (id)userDiscoveryObject;
++ (id)buildUserDiscoveryScaffold;
++ (id)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
++ (id)userDiscoveryScaffold;
 
 - (void)searchForUsers;
 - (void)stopSearchForUsers;

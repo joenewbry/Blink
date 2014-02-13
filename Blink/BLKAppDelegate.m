@@ -26,9 +26,8 @@
     [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserNameService];
     [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerBroadcastServices];
 
-    [SBDiscoverUser ]
-
-    
+    [SBUserDiscovery buildUserDiscoveryScaffold];
+    [[SBUserDiscovery userDiscoveryScaffold] searchForUsers];
 
     return YES;
 }

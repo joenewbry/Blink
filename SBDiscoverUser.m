@@ -28,7 +28,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 @synthesize discoveredUsers;
 
 #pragma mark - External API
-+ (id)runUserDiscovery
++ (id)buildUserDiscoveryScaffold
 {
     static SBUserDiscovery *mySBUserDiscovery = nil;
     @synchronized(self) {
@@ -41,12 +41,12 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     return mySBUserDiscovery;
 }
 
-+ (id)runUserDiscovery:(NSDictionary *)launchOptions
++ (id)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
 {
-    return [self runUserDiscovery];
+    return [self buildUserDiscoveryScaffold];
 }
 
-+ (id)userDiscoveryObject
++ (id)userDiscoveryScaffold
 {
     static SBUserDiscovery *mySBUserDiscovery = nil;
     static dispatch_once_t onceToken;
