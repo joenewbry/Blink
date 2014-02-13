@@ -7,7 +7,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="BLKSignUpViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signUp" id="vXZ-lx-hvc" customClass="BLKSignUpViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w8z-HP-zqY"/>
                         <viewControllerLayoutGuide type="bottom" id="wzL-0e-XZT"/>

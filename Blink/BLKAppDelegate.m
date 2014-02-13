@@ -12,6 +12,7 @@
 #import "SBBroadcastUser.h"
 #import "SBUserDiscovery.h"
 #import "SBUser.h"
+#import "BLKSignUpViewController.h"
 
 @implementation BLKAppDelegate
 
@@ -28,8 +29,19 @@
     [broadcastUser peripheralManagerBroadcastServices];
 
     [SBUserDiscovery buildUserDiscoveryScaffold];
-    [[SBUserDiscovery userDiscoveryScaffold] searchForUsers];
 
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    self.window.backgroundColor = [UIColor whiteColor];
+
+    BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
+    [signUpVC.navigationController setNavigationBarHidden:true];
+
+    self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
+
+    [self.window setRootViewController:self.navController];
+
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							

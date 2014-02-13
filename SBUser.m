@@ -15,6 +15,7 @@
 
 @implementation SBUser
 
+//TODO: how to make it so both of these methods look at the same place?
 + (SBUser *)currentUser
 {
     static SBUser *mySBUser = nil;

@@ -19,6 +19,8 @@
 - (void)searchForUsers;
 - (void)stopSearchForUsers;
 
+@property (strong, nonatomic) NSMutableSet *discoveredUserNames;
+
 @end
 
 @protocol SBDiscoverUser
