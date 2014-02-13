@@ -24,7 +24,8 @@ NSString const *SBBroadcastUserServiceUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A
 @property (nonatomic, strong) CBPeripheralManager *peripheralManager;
 
 // characteristics
-@property (nonatomic, strong) CBCharacteristic *userNameCharacteristic;
+@property (nonatomic, strong) CBMutableCharacteristic *userNameCharacteristic;
+@property (nonatomic, strong) CBMutableService *userService;
 
 @end
 
@@ -80,10 +81,8 @@ NSString const *SBBroadcastUserServiceUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A
 
 - (void)peripheralManagerBroadcastServices
 {
-    NSString *username = [SBUser currentUser].userName;
-
-    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataLocalNameKey : username,
-                                                CBAdvertisementDataServiceUUIDsKey : [CBUUID UUIDWithString:SBBroadcastUserUserPeripheralUUID]
+    [self.peripheralManager startAdvertising:@{ 
+                                                CBAdvertisementDataServiceUUIDsKey : @[self.userService.UUID]
                                                 }];
 }
 
@@ -94,12 +93,13 @@ NSString const *SBBroadcastUserServiceUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A
 
 - (void)peripheralAddUserNameService
 {
-    NSString *username = [SBUser currentUser].userName;
+    NSString *username = [SBUser createUserWithName:@"Test"].userName;
     NSData *usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
     self.userNameCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserUserNameCharacteristicUUID] properties:CBCharacteristicPropertyRead value:usernameData permissions:CBAttributePermissionsReadable];
-    CBMutableService *userNameService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserServiceUUID] primary:YES];
-    userNameService.characteristics = @[self.userNameCharacteristic];
-    [self.peripheralManager addService:userNameService];
+    self.userService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserServiceUUID] primary:YES];
+    [self.userService setCharacteristics:@[self.userNameCharacteristic]];
+    self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{ CBPeripheralManagerOptionShowPowerAlertKey : @YES } ];
+    [self.peripheralManager addService:self.userService];
 }
 
 #pragma mark - peripheral manager delegate
@@ -146,7 +146,7 @@ NSString const *SBBroadcastUserServiceUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A
     if (error) {
         NSLog(@"Error advertising: %@", [error localizedDescription]);
     } else {
-        NSLog(@"peripheral did start advertising peripheral named: %@", peripheral);
+        NSLog(@"peripheral did start advertising peripheral named: %@", peripheral.description);
     }
 }
 

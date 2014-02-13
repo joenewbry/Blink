@@ -11,5 +11,6 @@
 @interface BLKAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property UINavigationController *navController;
 
 @end

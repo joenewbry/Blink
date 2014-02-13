@@ -25,7 +25,7 @@
         NSLog(@"user name is %@", user.userName);
     }
 
-    NSLog(@"username is %@", [PFUser currentUser].username);
+    //NSLog(@"username is %@", [PFUser currentUser].username);
 }
 
 - (void)didReceiveMemoryWarning

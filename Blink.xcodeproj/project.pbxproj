@@ -24,6 +24,7 @@
 		D84AEB6218A7F4220027FCFA /* BlinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6118A7F4220027FCFA /* BlinkTests.m */; };
 		D84AEB6D18A7F8490027FCFA /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6C18A7F8490027FCFA /* BLKConstants.m */; };
 		D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */; };
+		D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C518B818AD42A40085CB25 /* SignUpView.xib */; };
 		D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA018AB43DC0092B9A1 /* SBUser.m */; };
 		D8D03BA318AB44CF0092B9A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */; };
 		D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA718ABED380092B9A1 /* SBUserDiscovery.m */; };
@@ -66,6 +67,7 @@
 		D84AEB6C18A7F8490027FCFA /* BLKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLKConstants.m; path = Blink/BLKConstants.m; sourceTree = SOURCE_ROOT; };
 		D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKProfileViewController.h; sourceTree = "<group>"; };
 		D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKProfileViewController.m; sourceTree = "<group>"; };
+		D8C518B818AD42A40085CB25 /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
 		D8D03B9F18AB43DC0092B9A1 /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		D8D03BA018AB43DC0092B9A1 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -149,6 +151,7 @@
 				D84AEB7718A7FE810027FCFA /* Profile */,
 				D84AEB4B18A7F4220027FCFA /* BLKSignUpViewController.h */,
 				D84AEB4C18A7F4220027FCFA /* BLKSignUpViewController.m */,
+				D8C518B818AD42A40085CB25 /* SignUpView.xib */,
 				D84AEB4E18A7F4220027FCFA /* Images.xcassets */,
 				D84AEB3D18A7F4220027FCFA /* Supporting Files */,
 			);
@@ -274,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */,
 				D84AEB4F18A7F4220027FCFA /* Images.xcassets in Resources */,
 				D84AEB4118A7F4220027FCFA /* InfoPlist.strings in Resources */,
 				D84AEB4A18A7F4220027FCFA /* Main.storyboard in Resources */,
