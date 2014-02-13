@@ -12,7 +12,10 @@
 }
 
 @property (strong, nonatomic) NSString *userName;
-+ (id)createUserWithName:(NSString *)user;
-+ (id)currentUser;
++ (SBUser *)createUserWithName:(NSString *)user;
++ (SBUser *)currentUser;
+
+- (BOOL)shouldBroadcastProfile;
+- (void)shouldEndProfileBroadcast;
 
 @end

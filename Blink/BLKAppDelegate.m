@@ -9,6 +9,9 @@
 #import "BLKAppDelegate.h"
 #import "BLKConstants.h"
 #import <Parse/Parse.h>
+#import "SBBroadcastUser.h"
+#import "SBDiscoverUser.h"
+#import "SBUser.h"
 
 @implementation BLKAppDelegate
 
@@ -17,6 +20,16 @@
     // Override point for customization after application launch.
     [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
     [PFFacebookUtils initializeFacebook];
+
+    [SBUser createUserWithName:@"Joe Newbry"];
+    [SBBroadcastUser buildUserBroadcastScaffold];
+    [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserNameService];
+    [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerBroadcastServices];
+
+    [SBDiscoverUser ]
+
+    
+
     return YES;
 }
 							

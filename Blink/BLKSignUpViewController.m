@@ -9,6 +9,7 @@
 #import "BLKSignUpViewController.h"
 #import <Parse/Parse.h>
 #import "BLKProfileViewController.h"
+#import "SBUser.h"
 
 @implementation BLKSignUpViewController
 
@@ -16,6 +17,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    [SBUser createUserWithName:@"Joe Newbry"];
+    NSMutableArray *users = [NSMutableArray arrayWithArray:@[[SBUser currentUser]]];
+    [users addObject:[SBUser createUserWithName:@"Chad Newbry"]];
+    for (SBUser *user  in users){
+        NSLog(@"user name is %@", user.userName);
+    }
+
+    NSLog(@"username is %@", [PFUser currentUser].username);
 }
 
 - (void)didReceiveMemoryWarning

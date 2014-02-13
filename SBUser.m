@@ -7,29 +7,25 @@
 //
 
 #import "SBUser.h"
-#import <CoreBluetooth/CoreBluetooth.h>
 
 @interface SBUser () {
 }
-
-@property (strong, nonatomic) CBCentralManager *centralManager;
-@property (strong, nonatomic) CBPeripheralManager *peripheralManager;
-@property (strong, nonatomic) CBPeripheral *userPeripheral;
 
 @end
 
 @implementation SBUser
 
-+ (id)currentUser
++ (SBUser *)currentUser
 {
-    static SBUser *mySBUser = nil;
-    @synchronized(self) {
-    if (mySBUser == nil) mySBUser = [[self alloc] init];
-    }
-    return mySBUser;
+    static SBUser *currentUser = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        currentUser = [[self alloc] init];
+    });
+    return currentUser;
 }
 
-+ (id)createUserWithName:(NSString *)user
++ (SBUser *)createUserWithName:(NSString *)user
 {
     static SBUser *mySBUser = nil;
     @synchronized(self) {
@@ -37,6 +33,17 @@
         mySBUser.userName = user;
     }
     return mySBUser;
+}
+
+- (BOOL)shouldBroadcastProfile
+{
+#warning how to crash app if user profile there isn't an instance of this class?
+    return true;
+}
+
+- (void)shouldEndProfileBroadcast
+{
+    
 }
 
 @end
