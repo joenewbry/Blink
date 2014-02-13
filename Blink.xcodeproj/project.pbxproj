@@ -25,6 +25,8 @@
 		D84AEB6D18A7F8490027FCFA /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6C18A7F8490027FCFA /* BLKConstants.m */; };
 		D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */; };
 		D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C518B818AD42A40085CB25 /* SignUpView.xib */; };
+		D8C518BC18AD86AC0085CB25 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C518BB18AD86AC0085CB25 /* HomeViewController.m */; };
+		D8C518BF18AD87310085CB25 /* SwipeViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C518BE18AD87310085CB25 /* SwipeViewDataSource.m */; };
 		D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA018AB43DC0092B9A1 /* SBUser.m */; };
 		D8D03BA318AB44CF0092B9A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */; };
 		D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA718ABED380092B9A1 /* SBUserDiscovery.m */; };
@@ -68,6 +70,10 @@
 		D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKProfileViewController.h; sourceTree = "<group>"; };
 		D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKProfileViewController.m; sourceTree = "<group>"; };
 		D8C518B818AD42A40085CB25 /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
+		D8C518BA18AD86AC0085CB25 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		D8C518BB18AD86AC0085CB25 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		D8C518BD18AD87310085CB25 /* SwipeViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeViewDataSource.h; sourceTree = "<group>"; };
+		D8C518BE18AD87310085CB25 /* SwipeViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeViewDataSource.m; sourceTree = "<group>"; };
 		D8D03B9F18AB43DC0092B9A1 /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		D8D03BA018AB43DC0092B9A1 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -145,6 +151,10 @@
 		D84AEB3C18A7F4220027FCFA /* Blink */ = {
 			isa = PBXGroup;
 			children = (
+				D8C518BA18AD86AC0085CB25 /* HomeViewController.h */,
+				D8C518BB18AD86AC0085CB25 /* HomeViewController.m */,
+				D8C518BD18AD87310085CB25 /* SwipeViewDataSource.h */,
+				D8C518BE18AD87310085CB25 /* SwipeViewDataSource.m */,
 				D84AEB4518A7F4220027FCFA /* BLKAppDelegate.h */,
 				D84AEB4618A7F4220027FCFA /* BLKAppDelegate.m */,
 				D84AEB4818A7F4220027FCFA /* Main.storyboard */,
@@ -248,6 +258,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Joe Newbry";
 				TargetAttributes = {
+					D84AEB3218A7F4220027FCFA = {
+						DevelopmentTeam = 2RCTX396VF;
+					};
 					D84AEB5318A7F4220027FCFA = {
 						TestTargetID = D84AEB3218A7F4220027FCFA;
 					};
@@ -338,7 +351,9 @@
 				D84AEB4D18A7F4220027FCFA /* BLKSignUpViewController.m in Sources */,
 				D8D03BAB18ABED740092B9A1 /* SBBroadcastUser.m in Sources */,
 				D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */,
+				D8C518BF18AD87310085CB25 /* SwipeViewDataSource.m in Sources */,
 				D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */,
+				D8C518BC18AD86AC0085CB25 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Joe Newbry (R3P3E236K7)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Blink/Blink-Prefix.pch";
 				INFOPLIST_FILE = "Blink/Blink-Info.plist";
@@ -481,6 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Joseph  Newbry (2RCTX396VF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Blink/Blink-Prefix.pch";
 				INFOPLIST_FILE = "Blink/Blink-Info.plist";
