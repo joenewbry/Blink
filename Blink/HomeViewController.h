@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SwipeView/SwipeView.h>
 
 @interface HomeViewController : UIViewController
+
+@property (nonatomic, strong) SwipeView *profileViews;
 
 @end

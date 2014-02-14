@@ -173,6 +173,9 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     NSString *myString = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
     NSLog(@"Data from correct peripheral and service is %@", myString);
     [self.discoveredUserNames addObject:myString];
+
+    NSNotificationCenter *mainCenter = [NSNotificationCenter defaultCenter];
+    [mainCenter postNotificationName:@"kUserFound" object:self userInfo:@{@"username" : myString}];
 }
 
 @end

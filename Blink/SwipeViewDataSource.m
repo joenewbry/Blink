@@ -10,30 +10,20 @@
 
 @interface SwipeViewDataSource ()
 
-@property (nonatomic, strong) NSMutableArray *discoveredUsers;
+@property (weak) SwipeView *swipeView;
 
 @end
 
 @implementation SwipeViewDataSource
 
--(id)initWithParentView:(UIView *)
+-(id)initWithParentView:(SwipeView *)swipeView
 {
     if (self = [super init]) {
-        self.discoveredUsers = [[NSMutableArray alloc] initWithArray:@[@1,@2,@3]];
+        self.swipeView = swipeView;
     }
     return self;
 }
 
-- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
-{
-    return [self.discoveredUsers count];
-}
 
-- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
-{
-    UIView *currentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    UILabel *outOf = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 40)];
-    outOf.text = (@"%@ / %@", [super]
-}
 
 @end

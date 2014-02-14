@@ -13,6 +13,7 @@
 #import "SBUserDiscovery.h"
 #import "SBUser.h"
 #import "BLKSignUpViewController.h"
+#import "HomeViewController.h"
 
 @implementation BLKAppDelegate
 
@@ -34,7 +35,7 @@
 
     self.window.backgroundColor = [UIColor whiteColor];
 
-    BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
+    HomeViewController *signUpVC = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
     [signUpVC.navigationController setNavigationBarHidden:true];
 
     self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];

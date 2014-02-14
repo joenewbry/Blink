@@ -8,8 +8,8 @@
 
 #import "BLKSignUpViewController.h"
 #import <Parse/Parse.h>
-#import "BLKProfileViewController.h"
 #import "SBUser.h"
+#import "HomeViewController.h"
 
 @implementation BLKSignUpViewController
 
@@ -48,12 +48,12 @@
 
         } else if (user.isNew) {
             NSLog(@"there is a new user");
-            BLKProfileViewController *profileVC = [[BLKProfileViewController alloc] init];
-            [self presentViewController:profileVC animated:NO completion:nil];
+            HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+            [self presentViewController:homeVC animated:NO completion:nil];
         } else {
             NSLog(@"Existing FBUser logged in");
-            BLKProfileViewController *profileVC = [[BLKProfileViewController alloc] init];
-            [self presentViewController:profileVC animated:NO completion:nil];
+            HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+            [self presentViewController:homeVC animated:NO completion:nil];
         }
 
     }];

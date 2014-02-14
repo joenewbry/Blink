@@ -11,4 +11,6 @@
 
 @interface SwipeViewDataSource : NSObject <SwipeViewDataSource>
 
+-(id)initWithParentView:(SwipeView *)swipeView;
+
 @end
