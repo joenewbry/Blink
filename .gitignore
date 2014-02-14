@@ -16,6 +16,7 @@ profile
 DerivedData
 .idea/:w
 Blink.xcodeproj/project.xcworkspace/xcshareddata/
+Blink.xcodeproj/project.pbxproj
 
 # Pods config
 Pods
