@@ -13,35 +13,50 @@
 #import "SBUserDiscovery.h"
 #import "SBUser.h"
 #import "BLKSignUpViewController.h"
+#import "BLKDiscoveredProfileViewController.h"
 
 @implementation BLKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
-    [PFFacebookUtils initializeFacebook];
+    BOOL local = false;
+    
+    
+    if (local) {
+        //setup parse authorization, facebook login
+        [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
+        [PFFacebookUtils initializeFacebook];
 
-    [SBUser createUserWithName:@"Joe Newbry"];
-    [SBBroadcastUser buildUserBroadcastScaffold];
-    SBBroadcastUser *broadcastUser = [SBBroadcastUser currentBroadcastScaffold];
-    [broadcastUser peripheralAddUserNameService];
-    [broadcastUser peripheralManagerBroadcastServices];
+        //social bluetooth framework setup
+        [SBUser createUserWithName:@"Joe Newbry"];
+        [SBBroadcastUser buildUserBroadcastScaffold];
+        SBBroadcastUser *broadcastUser = [SBBroadcastUser currentBroadcastScaffold];
+        [broadcastUser peripheralAddUserNameService];
+        [broadcastUser peripheralManagerBroadcastServices];
+        [SBUserDiscovery buildUserDiscoveryScaffold];
+        
+    
+        //init the window
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.backgroundColor = [UIColor whiteColor];
 
-    [SBUserDiscovery buildUserDiscoveryScaffold];
+        //makes sign up view controller
+        BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
+        [signUpVC.navigationController setNavigationBarHidden:true];
 
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
 
-    self.window.backgroundColor = [UIColor whiteColor];
+        [self.window setRootViewController:self.navController];
+        [self.window makeKeyAndVisible];
 
-    BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
-    [signUpVC.navigationController setNavigationBarHidden:true];
-
-    self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
-
+    }
+    
+    
+    BLKDiscoveredProfileViewController *discoveredViewController = [[BLKDiscoveredProfileViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]     ];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:discoveredViewController];
+    
     [self.window setRootViewController:self.navController];
-
-    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							
