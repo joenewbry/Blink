@@ -33,13 +33,8 @@
         self.window.backgroundColor = [UIColor whiteColor];
 
         //makes sign up view controller
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        //BLKSignUpViewController *signUpVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"signUp"];
         BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
-        [signUpVC.navigationController setNavigationBarHidden:true];
-
         self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
-
         [self.window setRootViewController:self.navController];
         [self.window makeKeyAndVisible];
 

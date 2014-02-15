@@ -44,10 +44,6 @@
         // TODO: update so that bluetooth framework provides this, just implement delegate
         self.mainCenter = [NSNotificationCenter defaultCenter];
         [self.mainCenter addObserver:self selector:@selector(foundNewUser:) name:@"kUserFoundWithObjectId" object:nil];
-
-        //
-        self.navigationItem.title = @"Blink";
-        self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     }
     return self;
 }
@@ -83,6 +79,12 @@
 
     [self.view addSubview:self.profileViews];
     [self.profileViews reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:false];
+    [self setTitle:@"Blink"];
 }
 
 - (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
