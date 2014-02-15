@@ -24,9 +24,10 @@
 		D84AEB6218A7F4220027FCFA /* BlinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6118A7F4220027FCFA /* BlinkTests.m */; };
 		D84AEB6D18A7F8490027FCFA /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6C18A7F8490027FCFA /* BLKConstants.m */; };
 		D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */; };
+		D88F442418AEAF100004D2EE /* BLKDiscoveredProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */; };
+		D88F442518AEAF100004D2EE /* BLKDiscoveredProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */; };
 		D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C518B818AD42A40085CB25 /* SignUpView.xib */; };
 		D8C518BC18AD86AC0085CB25 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C518BB18AD86AC0085CB25 /* HomeViewController.m */; };
-		D8C518BF18AD87310085CB25 /* SwipeViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C518BE18AD87310085CB25 /* SwipeViewDataSource.m */; };
 		D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA018AB43DC0092B9A1 /* SBUser.m */; };
 		D8D03BA318AB44CF0092B9A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */; };
 		D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA718ABED380092B9A1 /* SBUserDiscovery.m */; };
@@ -69,11 +70,12 @@
 		D84AEB6C18A7F8490027FCFA /* BLKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLKConstants.m; path = Blink/BLKConstants.m; sourceTree = SOURCE_ROOT; };
 		D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKProfileViewController.h; sourceTree = "<group>"; };
 		D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKProfileViewController.m; sourceTree = "<group>"; };
+		D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLKDiscoveredProfileView.xib; sourceTree = "<group>"; };
+		D88F442218AEAF100004D2EE /* BLKDiscoveredProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKDiscoveredProfileViewController.h; sourceTree = "<group>"; };
+		D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKDiscoveredProfileViewController.m; sourceTree = "<group>"; };
 		D8C518B818AD42A40085CB25 /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
 		D8C518BA18AD86AC0085CB25 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		D8C518BB18AD86AC0085CB25 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		D8C518BD18AD87310085CB25 /* SwipeViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeViewDataSource.h; sourceTree = "<group>"; };
-		D8C518BE18AD87310085CB25 /* SwipeViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeViewDataSource.m; sourceTree = "<group>"; };
 		D8D03B9F18AB43DC0092B9A1 /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		D8D03BA018AB43DC0092B9A1 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		D8D03BA218AB44CF0092B9A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -151,10 +153,6 @@
 		D84AEB3C18A7F4220027FCFA /* Blink */ = {
 			isa = PBXGroup;
 			children = (
-				D8C518BA18AD86AC0085CB25 /* HomeViewController.h */,
-				D8C518BB18AD86AC0085CB25 /* HomeViewController.m */,
-				D8C518BD18AD87310085CB25 /* SwipeViewDataSource.h */,
-				D8C518BE18AD87310085CB25 /* SwipeViewDataSource.m */,
 				D84AEB4518A7F4220027FCFA /* BLKAppDelegate.h */,
 				D84AEB4618A7F4220027FCFA /* BLKAppDelegate.m */,
 				D84AEB4818A7F4220027FCFA /* Main.storyboard */,
@@ -204,6 +202,11 @@
 			children = (
 				D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */,
 				D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */,
+				D8C518BA18AD86AC0085CB25 /* HomeViewController.h */,
+				D8C518BB18AD86AC0085CB25 /* HomeViewController.m */,
+				D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */,
+				D88F442218AEAF100004D2EE /* BLKDiscoveredProfileViewController.h */,
+				D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */,
+				D88F442418AEAF100004D2EE /* BLKDiscoveredProfileView.xib in Resources */,
 				D84AEB4F18A7F4220027FCFA /* Images.xcassets in Resources */,
 				D84AEB4118A7F4220027FCFA /* InfoPlist.strings in Resources */,
 				D84AEB4A18A7F4220027FCFA /* Main.storyboard in Resources */,
@@ -351,7 +355,7 @@
 				D84AEB4D18A7F4220027FCFA /* BLKSignUpViewController.m in Sources */,
 				D8D03BAB18ABED740092B9A1 /* SBBroadcastUser.m in Sources */,
 				D8D03BA818ABED380092B9A1 /* SBUserDiscovery.m in Sources */,
-				D8C518BF18AD87310085CB25 /* SwipeViewDataSource.m in Sources */,
+				D88F442518AEAF100004D2EE /* BLKDiscoveredProfileViewController.m in Sources */,
 				D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */,
 				D8C518BC18AD86AC0085CB25 /* HomeViewController.m in Sources */,
 			);

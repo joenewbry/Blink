@@ -24,7 +24,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self update];
         
     }
     return self;
@@ -41,21 +40,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (Profile* )profile {
-    
-    if (!_profile) _profile = [[Profile alloc] init];
-    
-    return _profile;
-}
-
-- (void)update {
-    
-    
-    self.collegeLabel.text = self.profile.college;
-    [self.collegeLabel setText:@"Some text"];
-    
 }
 
 @end

@@ -85,6 +85,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 - (void)stopSearchForUsers
 {
     [self.centralManager stopScan];
+    self.centralManager = nil;
 }
 
 #pragma mark - Internal Implementation
@@ -175,7 +176,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     [self.discoveredUserNames addObject:myString];
 
     NSNotificationCenter *mainCenter = [NSNotificationCenter defaultCenter];
-    [mainCenter postNotificationName:@"kUserFound" object:self userInfo:@{@"username" : myString}];
+    [mainCenter postNotificationName:@"kUserFoundWithObjectId" object:self userInfo:@{@"objectId" : myString}];
 }
 
 @end

@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Profile.h"
 
 @interface BLKDiscoveredProfileViewController : UIViewController
-
-@property (nonatomic)Profile *profile;
 
 @end

@@ -43,15 +43,4 @@
     return self;
 }
 
-- (BOOL)shouldBroadcastProfile
-{
-#warning how to crash app if user profile there isn't an instance of this class?
-    return true;
-}
-
-- (void)shouldEndProfileBroadcast
-{
-    
-}
-
 @end

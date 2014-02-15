@@ -10,6 +10,5 @@
 
 @interface BLKProfileViewController : UIViewController <NSURLConnectionDelegate>
 
-- (id)initWithPFUserObjectID:(NSString *)userObjectID;
 
 @end

@@ -89,13 +89,14 @@ NSString const *SBBroadcastUserServiceUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A
 - (void)peripheralManagerEndBroadcastServices
 {
     [self.peripheralManager stopAdvertising];
+    self.peripheralManager = nil;
 }
 
 - (void)peripheralAddUserNameService
 {
-    NSString *username = [SBUser createUserWithName:@"Test"].userName;
-    NSData *usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
-    self.userNameCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserUserNameCharacteristicUUID] properties:CBCharacteristicPropertyRead value:usernameData permissions:CBAttributePermissionsReadable];
+    NSString *objectId = [SBUser currentUser].objectId;
+    NSData *objectIdData = [objectId dataUsingEncoding:NSUTF8StringEncoding];
+    self.userNameCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserUserNameCharacteristicUUID] properties:CBCharacteristicPropertyRead value:objectIdData permissions:CBAttributePermissionsReadable];
     self.userService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastUserServiceUUID] primary:YES];
     [self.userService setCharacteristics:@[self.userNameCharacteristic]];
     self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{ CBPeripheralManagerOptionShowPowerAlertKey : @YES } ];

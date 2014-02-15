@@ -20,27 +20,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    BOOL local = false;
+    BOOL local = true;
     
     
     if (local) {
         //setup parse authorization, facebook login
         [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
         [PFFacebookUtils initializeFacebook];
-
-        //social bluetooth framework setup
-        [SBUser createUserWithName:@"Joe Newbry"];
-        [SBBroadcastUser buildUserBroadcastScaffold];
-        SBBroadcastUser *broadcastUser = [SBBroadcastUser currentBroadcastScaffold];
-        [broadcastUser peripheralAddUserNameService];
-        [broadcastUser peripheralManagerBroadcastServices];
-        [SBUserDiscovery buildUserDiscoveryScaffold];
     
         //init the window
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.backgroundColor = [UIColor whiteColor];
 
         //makes sign up view controller
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        //BLKSignUpViewController *signUpVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"signUp"];
         BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
         [signUpVC.navigationController setNavigationBarHidden:true];
 
@@ -51,11 +45,11 @@
 
     }
     
-    BLKDiscoveredProfileViewController *discoveredViewController = [[BLKDiscoveredProfileViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]     ];
-    self.navController = [[UINavigationController alloc] initWithRootViewController:discoveredViewController];
-    
-    [self.window setRootViewController:self.navController];
-    
+//    BLKDiscoveredProfileViewController *discoveredViewController = [[BLKDiscoveredProfileViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]     ];
+//    self.navController = [[UINavigationController alloc] initWithRootViewController:discoveredViewController];
+//    
+//    [self.window setRootViewController:self.navController];
+
     return YES;
 }
 							
