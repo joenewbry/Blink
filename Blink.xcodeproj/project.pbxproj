@@ -24,6 +24,7 @@
 		D84AEB6218A7F4220027FCFA /* BlinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6118A7F4220027FCFA /* BlinkTests.m */; };
 		D84AEB6D18A7F8490027FCFA /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6C18A7F8490027FCFA /* BLKConstants.m */; };
 		D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */; };
+		D88648BE18B02DE200108D22 /* loading-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = D88648BD18B02DE200108D22 /* loading-screen.png */; };
 		D88F442418AEAF100004D2EE /* BLKDiscoveredProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */; };
 		D88F442518AEAF100004D2EE /* BLKDiscoveredProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */; };
 		D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C518B818AD42A40085CB25 /* SignUpView.xib */; };
@@ -70,6 +71,7 @@
 		D84AEB6C18A7F8490027FCFA /* BLKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLKConstants.m; path = Blink/BLKConstants.m; sourceTree = SOURCE_ROOT; };
 		D84AEB6E18A7FD810027FCFA /* BLKProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKProfileViewController.h; sourceTree = "<group>"; };
 		D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKProfileViewController.m; sourceTree = "<group>"; };
+		D88648BD18B02DE200108D22 /* loading-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-screen.png"; sourceTree = "<group>"; };
 		D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLKDiscoveredProfileView.xib; sourceTree = "<group>"; };
 		D88F442218AEAF100004D2EE /* BLKDiscoveredProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKDiscoveredProfileViewController.h; sourceTree = "<group>"; };
 		D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKDiscoveredProfileViewController.m; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		D84AEB3D18A7F4220027FCFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D88648BF18B02DE800108D22 /* Images */,
 				D84AEB6B18A7F8490027FCFA /* BLKConstants.h */,
 				D84AEB6C18A7F8490027FCFA /* BLKConstants.m */,
 				D84AEB3E18A7F4220027FCFA /* Blink-Info.plist */,
@@ -209,6 +212,14 @@
 				D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		D88648BF18B02DE800108D22 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D88648BD18B02DE200108D22 /* loading-screen.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88648BE18B02DE200108D22 /* loading-screen.png in Resources */,
 				D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */,
 				D88F442418AEAF100004D2EE /* BLKDiscoveredProfileView.xib in Resources */,
 				D84AEB4F18A7F4220027FCFA /* Images.xcassets in Resources */,

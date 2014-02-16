@@ -6,6 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BLKSignUpViewController">
             <connections>
+                <outlet property="appIconButton" destination="XtB-17-raD" id="hQl-5e-2X4"/>
+                <outlet property="signUpButton" destination="xZz-fb-7dZ" id="Gaa-Rm-scO"/>
+                <outlet property="taglineLabel" destination="VON-yz-VbI" id="9yK-on-ZzS"/>
                 <outlet property="view" destination="1" id="N1O-MP-wVn"/>
             </connections>
         </placeholder>
@@ -14,10 +17,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LgI-ih-nqO">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZz-fb-7dZ">
                     <rect key="frame" x="20" y="480" width="280" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -27,7 +26,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="23"/>
                     <state key="normal" title="Sign Up With Facebook">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -40,7 +39,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy the moments around you" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="VON-yz-VbI">
-                    <rect key="frame" x="20" y="26" width="280" height="67"/>
+                    <rect key="frame" x="20" y="113" width="280" height="67"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="Ypf-E8-ILY"/>
@@ -50,13 +49,31 @@
                     <color key="textColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blink" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUV-XS-9Gb">
+                    <rect key="frame" x="92" y="47" width="137" height="58"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="61"/>
+                    <color key="textColor" red="0.43529411759999997" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtB-17-raD">
+                    <rect key="frame" x="106" y="237" width="108" height="94"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="xZz-fb-7dZ" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="Bsa-6L-CKE"/>
                 <constraint firstItem="VON-yz-VbI" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="JiT-aR-hq4"/>
                 <constraint firstAttribute="trailing" secondItem="VON-yz-VbI" secondAttribute="trailing" constant="20" id="ObP-dh-5Cu"/>
-                <constraint firstItem="VON-yz-VbI" firstAttribute="top" secondItem="1" secondAttribute="top" constant="26" id="aVo-is-Agt"/>
+                <constraint firstItem="xUV-XS-9Gb" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="92" id="RgU-VY-j0Z"/>
+                <constraint firstAttribute="trailing" secondItem="xUV-XS-9Gb" secondAttribute="trailing" constant="91" id="UNs-Kt-d0s"/>
+                <constraint firstItem="VON-yz-VbI" firstAttribute="top" secondItem="1" secondAttribute="top" constant="113" id="aVo-is-Agt"/>
+                <constraint firstItem="VON-yz-VbI" firstAttribute="top" secondItem="xUV-XS-9Gb" secondAttribute="bottom" constant="8" id="oyt-GW-PWj"/>
+                <constraint firstItem="xUV-XS-9Gb" firstAttribute="top" secondItem="1" secondAttribute="top" constant="47" id="sup-b6-pkh"/>
                 <constraint firstAttribute="trailing" secondItem="xZz-fb-7dZ" secondAttribute="trailing" constant="20" symbolic="YES" id="tey-Wb-oNV"/>
                 <constraint firstAttribute="bottom" secondItem="xZz-fb-7dZ" secondAttribute="bottom" constant="38" id="vYi-i7-SER"/>
             </constraints>

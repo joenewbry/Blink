@@ -15,6 +15,9 @@
 
 @property (nonatomic, strong) NSMutableData *imgData;
 @property (strong, nonatomic) NSURLConnection *URLConnection;
+@property (strong, nonatomic) IBOutlet UILabel *taglineLabel;
+@property (strong, nonatomic) IBOutlet UIButton *signUpButton;
+@property (strong, nonatomic) IBOutlet UIButton *appIconButton;
 
 @end
 
@@ -28,7 +31,17 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.taglineLabel.alpha = 0;
+    self.signUpButton.alpha = 0;
     [self.navigationController setNavigationBarHidden:true];
+    [UIView animateWithDuration:1 animations:^{
+        self.taglineLabel.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:1 animations:^{
+            self.signUpButton.alpha = 1;
+        }];
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,7 +52,12 @@
 
 - (IBAction)facebookLoginPressed:(id)sender {
     NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday"];
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+    [UIView animateWithDuration:1 animations:^{
+        self.appIconButton.transform = CGAffineTransformMakeRotation(2 * M_PI);
+    } completion:^(BOOL finished) {
+
+    }];
+        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
 
         if (!user) {
             if (!error) {

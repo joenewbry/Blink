@@ -84,7 +84,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:false];
-    [self setTitle:@"Blink"];
+    [self setTitle:@"Looking for people around you ..."];
 }
 
 - (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
