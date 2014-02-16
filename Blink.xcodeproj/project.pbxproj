@@ -26,6 +26,12 @@
 		D84AEB7018A7FD810027FCFA /* BLKProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6F18A7FD810027FCFA /* BLKProfileViewController.m */; };
 		D88F442418AEAF100004D2EE /* BLKDiscoveredProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */; };
 		D88F442518AEAF100004D2EE /* BLKDiscoveredProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */; };
+		D8B30C7618B083CD0072882D /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B30C7318B083CD0072882D /* AppIcon29x29@2x.png */; };
+		D8B30C7718B083CD0072882D /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B30C7418B083CD0072882D /* AppIcon40x40@2x.png */; };
+		D8B30C7818B083CD0072882D /* AppIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B30C7518B083CD0072882D /* AppIcon60x60@2x.png */; };
+		D8B30C7C18B0843E0072882D /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B30C7A18B0843E0072882D /* LaunchImage@2x.png */; };
+		D8B30C7D18B0843E0072882D /* LaunchImage@R4.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B30C7B18B0843E0072882D /* LaunchImage@R4.png */; };
+		D8B30C7F18B0874B0072882D /* IconNoBackground60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8B30C7E18B0874B0072882D /* IconNoBackground60x60@2x.png */; };
 		D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C518B818AD42A40085CB25 /* SignUpView.xib */; };
 		D8C518BC18AD86AC0085CB25 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C518BB18AD86AC0085CB25 /* HomeViewController.m */; };
 		D8D03BA118AB43DC0092B9A1 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D03BA018AB43DC0092B9A1 /* SBUser.m */; };
@@ -73,6 +79,12 @@
 		D88F442118AEAF100004D2EE /* BLKDiscoveredProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLKDiscoveredProfileView.xib; sourceTree = "<group>"; };
 		D88F442218AEAF100004D2EE /* BLKDiscoveredProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKDiscoveredProfileViewController.h; sourceTree = "<group>"; };
 		D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKDiscoveredProfileViewController.m; sourceTree = "<group>"; };
+		D8B30C7318B083CD0072882D /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
+		D8B30C7418B083CD0072882D /* AppIcon40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@2x.png"; sourceTree = "<group>"; };
+		D8B30C7518B083CD0072882D /* AppIcon60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@2x.png"; sourceTree = "<group>"; };
+		D8B30C7A18B0843E0072882D /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
+		D8B30C7B18B0843E0072882D /* LaunchImage@R4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@R4.png"; sourceTree = "<group>"; };
+		D8B30C7E18B0874B0072882D /* IconNoBackground60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconNoBackground60x60@2x.png"; sourceTree = "<group>"; };
 		D8C518B818AD42A40085CB25 /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
 		D8C518BA18AD86AC0085CB25 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		D8C518BB18AD86AC0085CB25 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -169,6 +181,7 @@
 		D84AEB3D18A7F4220027FCFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D8B30C7918B083D30072882D /* AppIcon */,
 				D84AEB6B18A7F8490027FCFA /* BLKConstants.h */,
 				D84AEB6C18A7F8490027FCFA /* BLKConstants.m */,
 				D84AEB3E18A7F4220027FCFA /* Blink-Info.plist */,
@@ -209,6 +222,19 @@
 				D88F442318AEAF100004D2EE /* BLKDiscoveredProfileViewController.m */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		D8B30C7918B083D30072882D /* AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				D8B30C7318B083CD0072882D /* AppIcon29x29@2x.png */,
+				D8B30C7418B083CD0072882D /* AppIcon40x40@2x.png */,
+				D8B30C7518B083CD0072882D /* AppIcon60x60@2x.png */,
+				D8B30C7A18B0843E0072882D /* LaunchImage@2x.png */,
+				D8B30C7B18B0843E0072882D /* LaunchImage@R4.png */,
+				D8B30C7E18B0874B0072882D /* IconNoBackground60x60@2x.png */,
+			);
+			name = AppIcon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,9 +320,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C518B918AD42A40085CB25 /* SignUpView.xib in Resources */,
+				D8B30C7C18B0843E0072882D /* LaunchImage@2x.png in Resources */,
 				D88F442418AEAF100004D2EE /* BLKDiscoveredProfileView.xib in Resources */,
+				D8B30C7D18B0843E0072882D /* LaunchImage@R4.png in Resources */,
+				D8B30C7718B083CD0072882D /* AppIcon40x40@2x.png in Resources */,
 				D84AEB4F18A7F4220027FCFA /* Images.xcassets in Resources */,
 				D84AEB4118A7F4220027FCFA /* InfoPlist.strings in Resources */,
+				D8B30C7618B083CD0072882D /* AppIcon29x29@2x.png in Resources */,
+				D8B30C7818B083CD0072882D /* AppIcon60x60@2x.png in Resources */,
+				D8B30C7F18B0874B0072882D /* IconNoBackground60x60@2x.png in Resources */,
 				D84AEB4A18A7F4220027FCFA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

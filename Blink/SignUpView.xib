@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BLKSignUpViewController">
             <connections>
+                <outlet property="logoView" destination="LgI-ih-nqO" id="0em-5A-rZ7"/>
                 <outlet property="view" destination="1" id="N1O-MP-wVn"/>
             </connections>
         </placeholder>
@@ -14,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LgI-ih-nqO">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconNoBackground60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="LgI-ih-nqO">
+                    <rect key="frame" x="136" y="218" width="49" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZz-fb-7dZ">
@@ -51,7 +52,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="xZz-fb-7dZ" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="Bsa-6L-CKE"/>
                 <constraint firstItem="VON-yz-VbI" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="JiT-aR-hq4"/>
@@ -64,4 +65,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="IconNoBackground60x60.png" width="60" height="60"/>
+    </resources>
 </document>

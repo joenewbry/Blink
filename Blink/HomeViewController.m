@@ -12,7 +12,7 @@
 #import "SBUserDiscovery.h"
 #import "SBBroadcastUser.h"
 
-@interface HomeViewController () <SwipeViewDelegate, SwipeViewDataSource, UINavigationBarDelegate>
+@interface HomeViewController () <SwipeViewDelegate, SwipeViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *discoveredUsers;
 @property (nonatomic, strong) NSNotificationCenter *mainCenter;
@@ -29,7 +29,8 @@
     if (self) {
         // Custom initialization
         self.discoveredUsers = [[NSMutableArray alloc] init];
-        self.profileViews = [[SwipeView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        //self.profileViews = [[SwipeView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        self.navigationController.navigationBar.delegate = self;
 
         //social bluetooth framework setup
         [SBUser createUserWithName:[PFUser currentUser].username];
@@ -121,13 +122,6 @@
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
 {
     [self.navigationItem setTitle:self.discoveredUsers[swipeView.currentItemIndex][@"profileName"]];
-}
-
-- (void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item
-{
-    [PFUser logOut];
-    [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
-    [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
 }
 
 @end
