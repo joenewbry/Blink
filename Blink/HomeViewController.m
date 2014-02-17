@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *discoveredUsers;
 @property (nonatomic, strong) NSNotificationCenter *mainCenter;
 @property (strong, nonatomic) IBOutlet SwipeView *swipeView;
+@property (strong, nonatomic) IBOutlet UIImageView *loadingSpinner;
 
 @end
 
@@ -47,6 +48,8 @@
         // TODO: update so that bluetooth framework provides this, just implement delegate
         self.mainCenter = [NSNotificationCenter defaultCenter];
         [self.mainCenter addObserver:self selector:@selector(foundNewUser:) name:@"kUserFoundWithObjectId" object:nil];
+
+        [self startSpin:self.loadingSpinner];
     }
     return self;
 }
@@ -65,6 +68,7 @@
         [self.swipeView reloadData];
     }];
 
+    [self stopSpin]; // stops loading spinner animation
 }
 
 - (void)viewDidLoad
@@ -126,5 +130,41 @@
 {
     [self.navigationItem setTitle:self.discoveredUsers[swipeView.currentItemIndex / 4][@"profileName"]];
 }
+
+BOOL animating;
+
+- (void)spinView:(UIView *)view WithOptions:(UIViewAnimationOptions)options {
+    // this spin completes 360 degrees every 2 seconds
+    [UIView animateWithDuration: 0.5f
+                          delay: 0.0f
+                        options: options
+                     animations: ^{
+                         view.transform = CGAffineTransformRotate(view.transform, M_PI / 2);
+                     }
+                     completion: ^(BOOL finished) {
+                         if (finished) {
+                             if (animating) {
+                                 // if flag still set, keep spinning with constant speed
+                                 [self spinView:view WithOptions:UIViewAnimationOptionCurveLinear];
+                             } else if (options != UIViewAnimationOptionCurveEaseOut) {
+                                 // one last spin, with deceleration
+                                 [self spinView:view WithOptions: UIViewAnimationOptionCurveEaseOut];
+                             }
+                         }
+                     }];
+}
+
+- (void) startSpin:(UIView *)view {
+    if (!animating) {
+        animating = YES;
+        [self spinView:view WithOptions: UIViewAnimationOptionCurveEaseIn];
+    }
+}
+
+- (void) stopSpin {
+    // set the flag to stop spinning after one last 90 degree increment
+    animating = NO;
+}
+
 
 @end

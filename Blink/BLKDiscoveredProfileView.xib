@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="loadingSpinner" destination="nAj-vl-UfC" id="sVK-id-sF8"/>
                 <outlet property="swipeView" destination="sEx-Pz-mKk" id="FUJ-Wj-DYT"/>
                 <outlet property="view" destination="1" id="KnV-9O-UT2"/>
             </connections>
@@ -15,15 +16,28 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEx-Pz-mKk" customClass="SwipeView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="nAj-vl-UfC">
+                    <rect key="frame" x="130" y="211" width="60" height="58"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEx-Pz-mKk" customClass="SwipeView">
                     <rect key="frame" x="0.0" y="63" width="320" height="417"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="sEx-Pz-mKk" secondAttribute="bottom" id="EiU-YP-FeK"/>
+                <constraint firstItem="sEx-Pz-mKk" firstAttribute="top" secondItem="1" secondAttribute="top" constant="63" id="nTN-d3-mDN"/>
+                <constraint firstAttribute="trailing" secondItem="sEx-Pz-mKk" secondAttribute="trailing" id="oO0-dv-Fn5"/>
+                <constraint firstItem="sEx-Pz-mKk" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="zZh-71-wLf"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="AppIcon60x60.png" width="60" height="60"/>
+    </resources>
 </document>

@@ -14,7 +14,7 @@ xcuserdata
 profile                    
 *.moved-aside
 DerivedData
-.idea/:w
+.idea/
 Blink.xcodeproj/project.xcworkspace/xcshareddata/
 Blink.xcodeproj/project.pbxproj
 
