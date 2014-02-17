@@ -16,15 +16,17 @@
 
 @property (nonatomic, strong) NSMutableArray *discoveredUsers;
 @property (nonatomic, strong) NSNotificationCenter *mainCenter;
+@property (strong, nonatomic) IBOutlet SwipeView *swipeView;
 
 @end
 
 @implementation HomeViewController
 
-@synthesize profileViews = _profileViews;
+@synthesize swipeView = _swipeView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -60,7 +62,7 @@
         for (PFUser *user in objects) {
             [self.discoveredUsers addObject:user];
         }
-        [self.profileViews reloadData];
+        [self.swipeView reloadData];
     }];
 
 }
@@ -69,17 +71,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    _swipeView.dataSource = self;
+    _swipeView.delegate = self;
+    _swipeView.alignment = SwipeViewAlignmentEdge;
+    _swipeView.pagingEnabled = YES;
+    _swipeView.wrapEnabled = YES;
+    _swipeView.truncateFinalPage = YES;
+    _swipeView.delaysContentTouches = YES;
 
-    _profileViews.dataSource = self;
-    _profileViews.delegate = nil;
-    _profileViews.alignment = SwipeViewAlignmentEdge;
-    _profileViews.pagingEnabled = YES;
-    _profileViews.wrapEnabled = YES;
-    _profileViews.truncateFinalPage = YES;
-    _profileViews.delaysContentTouches = YES;
-
-    [self.view addSubview:self.profileViews];
-    [self.profileViews reloadData];
+    [self.view addSubview:_swipeView];
+    [self.swipeView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -96,32 +97,34 @@
 - (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     if (!view) {
-        view = [[NSBundle mainBundle] loadNibNamed:@"BLKDiscoveredProfileView" owner:self options:nil][0];
+        view = [[NSBundle mainBundle] loadNibNamed:@"SwipeView" owner:self options:nil][0];
     }
 
-    UIImageView *profileImageView = (UIImageView *)[view viewWithTag:1];
+    UIImageView *profileImageView = (UIImageView *)[self.view viewWithTag:1];
     PFFile *profileImageFile = self.discoveredUsers[index/4][@"profileImage"];
     [profileImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         profileImageView.image = [UIImage imageWithData:data];
     }];
-    for (UIView *sub in [view subviews]){
-        NSLog(@"Subview description is %@", sub.description);
-    }
-    UILabel *collegeLabel = (UILabel *)[view viewWithTag:4];
-    collegeLabel.text = self.discoveredUsers[index/4][@"profileName"];  //@"Not saving this data yet";
-    UILabel *birthdayLabel = (UILabel *)[view viewWithTag:3];
-    birthdayLabel.text = self.discoveredUsers[index/4][@"birthday"];
-    UILabel *relationshipLabel = (UILabel *)[view viewWithTag:4];
+
+    UILabel *collegeLabel = (UILabel *)[self.view viewWithTag:2];
+    collegeLabel.text = self.discoveredUsers[index/4][@"college"];  //@"Not saving this data yet";
+    UILabel *birthdayLabel = (UILabel *)[self.view viewWithTag:3];
+    birthdayLabel.text = self.discoveredUsers[index/4][@"quote"];
+    UILabel *relationshipLabel = (UILabel *)[self.view viewWithTag:4];
     relationshipLabel.text =  self.discoveredUsers[index/4][@"relationship"];
-    UILabel *progressLabel = (UILabel *)[view viewWithTag:5];
+    UILabel *progressLabel = (UILabel *)[self.view viewWithTag:5];
     progressLabel.text = [NSString stringWithFormat:@"%ld / %lu", (long)index + 1, (unsigned long)[self.discoveredUsers count]];
+
+    if ([self.swipeView currentItemIndex] == index){
+        [self.navigationItem setTitle:self.discoveredUsers[index/4][@"profileName"]];
+    }
 
     return view;
 }
 
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
 {
-    [self.navigationItem setTitle:self.discoveredUsers[swipeView.currentItemIndex][@"profileName"]];
+    [self.navigationItem setTitle:self.discoveredUsers[swipeView.currentItemIndex / 4][@"profileName"]];
 }
 
 @end

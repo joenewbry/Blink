@@ -69,6 +69,10 @@
                     NSString *gender = userData[@"gender"];
                     NSString *birthday = userData[@"birthday"];
                     NSString *relationship = userData[@"relationship_status"];
+
+                    NSString *college = [self getCollegeStringFromEducation:userData[@"education"]];
+
+                    NSString *quotes = userData[@"quotes"];
                     NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
 
                     // save facebook information to parse
@@ -78,6 +82,8 @@
                     [PFUser currentUser][@"gender"] = gender;
                     [PFUser currentUser][@"birthday"] = birthday;
                     [PFUser currentUser][@"relationship"] = relationship;
+                    [PFUser currentUser][@"college"] = college;
+                    [PFUser currentUser][@"quote"] = quotes;
                     [currentUser saveInBackground];
 
                     _imgData = [[NSMutableData alloc] init];
@@ -89,6 +95,16 @@
             }];
         }
     }];
+}
+
+- (NSString *)getCollegeStringFromEducation:(FBGraphObject *)fBGraphObject
+{
+    for (NSDictionary *school in fBGraphObject) {
+        if ([school[@"type"] isEqualToString:@"College"]){
+            return school[@"school"][@"name"];
+        }
+    }
+    return @"No College Found";
 }
 
 // Called every time a chunk of the data is received
@@ -106,7 +122,7 @@
         if (error)  { NSLog(@"Error is %@", [error localizedDescription]); }
         else {
             NSLog(@"a user has saved data and should sign in");
-            HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+            HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:homeVC animated:YES];
         }
     }];

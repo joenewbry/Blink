@@ -4,8 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BLKDiscoveredProfileViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="swipeView" destination="sEx-Pz-mKk" id="FUJ-Wj-DYT"/>
                 <outlet property="view" destination="1" id="KnV-9O-UT2"/>
             </connections>
         </placeholder>
@@ -14,82 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a5G-yj-xAu">
-                    <rect key="frame" x="0.0" y="63" width="320" height="302"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEx-Pz-mKk" customClass="SwipeView">
+                    <rect key="frame" x="0.0" y="63" width="320" height="417"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="302" id="CcG-p9-sWr"/>
-                    </constraints>
-                </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yl-Fi-4rI">
-                    <rect key="frame" x="0.0" y="365" width="320" height="115"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( 1 / 9 )" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Z1-8x-RYY">
-                            <rect key="frame" x="139" y="90" width="42" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="Dwv-Ml-Xf1"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Relationship Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-XF-XMa">
-                            <rect key="frame" x="0.0" y="61" width="320" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="Zpt-E4-rYB"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
-                            <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BIRTHDAY:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQE-Ob-srX">
-                            <rect key="frame" x="0.0" y="32" width="320" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="egc-N2-2Cp"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COLLEGE:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLo-Cc-9Le">
-                            <rect key="frame" x="0.0" y="6" width="320" height="18"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.43529411759999997" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="8V3-XF-XMa" firstAttribute="top" secondItem="FQE-Ob-srX" secondAttribute="bottom" constant="8" id="3IJ-eQ-XGU"/>
-                        <constraint firstItem="gLo-Cc-9Le" firstAttribute="centerX" secondItem="0Z1-8x-RYY" secondAttribute="centerX" id="3cj-FP-Wb1"/>
-                        <constraint firstItem="gLo-Cc-9Le" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3yl-Fi-4rI" secondAttribute="top" constant="6" id="ENu-fe-WRY"/>
-                        <constraint firstItem="0Z1-8x-RYY" firstAttribute="top" secondItem="8V3-XF-XMa" secondAttribute="bottom" constant="8" id="H8x-ic-jV9"/>
-                        <constraint firstAttribute="bottom" secondItem="0Z1-8x-RYY" secondAttribute="bottom" priority="323" constant="4" id="Q43-fM-HCa"/>
-                        <constraint firstItem="gLo-Cc-9Le" firstAttribute="leading" secondItem="3yl-Fi-4rI" secondAttribute="leading" id="SOt-jq-bmA"/>
-                        <constraint firstItem="gLo-Cc-9Le" firstAttribute="top" secondItem="3yl-Fi-4rI" secondAttribute="top" priority="211" constant="6" id="VRW-sQ-65M"/>
-                        <constraint firstItem="gLo-Cc-9Le" firstAttribute="centerX" secondItem="8V3-XF-XMa" secondAttribute="centerX" id="VjS-bn-E6z"/>
-                        <constraint firstItem="FQE-Ob-srX" firstAttribute="top" secondItem="gLo-Cc-9Le" secondAttribute="bottom" constant="8" id="Wi9-gy-EsD"/>
-                        <constraint firstAttribute="trailing" secondItem="gLo-Cc-9Le" secondAttribute="trailing" id="jlD-Xk-EBK"/>
-                        <constraint firstItem="gLo-Cc-9Le" firstAttribute="centerX" secondItem="FQE-Ob-srX" secondAttribute="centerX" id="wKe-PR-Cqq"/>
-                    </constraints>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="a5G-yj-xAu" firstAttribute="trailing" secondItem="3yl-Fi-4rI" secondAttribute="trailing" id="2BU-E0-job"/>
-                <constraint firstItem="a5G-yj-xAu" firstAttribute="leading" secondItem="3yl-Fi-4rI" secondAttribute="leading" id="8ho-nm-Gn8"/>
-                <constraint firstAttribute="bottom" secondItem="3yl-Fi-4rI" secondAttribute="bottom" id="PQc-2F-3IZ"/>
-                <constraint firstAttribute="trailing" secondItem="a5G-yj-xAu" secondAttribute="trailing" id="U59-9K-69w"/>
-                <constraint firstItem="3yl-Fi-4rI" firstAttribute="top" secondItem="a5G-yj-xAu" secondAttribute="bottom" id="ZAY-87-Zci"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3yl-Fi-4rI" secondAttribute="bottom" id="chD-zQ-jEe"/>
-                <constraint firstItem="a5G-yj-xAu" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ctd-cW-kH8"/>
-                <constraint firstItem="a5G-yj-xAu" firstAttribute="top" secondItem="1" secondAttribute="top" constant="63" id="z7g-rs-o1B"/>
-            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
