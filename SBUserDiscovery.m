@@ -16,8 +16,9 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 }
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
-@property (strong, nonatomic) NSMutableSet *discoveredUsers;
-@property (strong, nonatomic) NSMutableSet *discoveringUsers;
+@property (strong, nonatomic) NSMutableSet *discoveringUsers; // peripherals that I'm attempting to connect to
+@property (strong, nonatomic) NSMutableArray *discoveredUsers; // peripherals that I've connected to
+@property (strong, nonatomic) NSMutableDictionary *userData;
 
 // store array of discovered users
 // send out messages when new user with data is found
@@ -73,13 +74,13 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
             self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey : @YES }];
         }
         self.discoveringUsers = [[NSMutableSet alloc] init];
-        self.discoveredUsers  = [[NSMutableSet alloc] init];
+        self.discoveredUsers  = [[NSMutableArray alloc] init];
     }
     return self;
 }
 - (void)searchForUsers
 {
-    [self.centralManager scanForPeripheralsWithServices:nil /*@[[CBUUID UUIDWithString:SBBroadcastUserServiceUUID]] **/options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO }];
+    [self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:SBBroadcastServiceUserProfileUUID]] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO }];
 }
 
 - (void)stopSearchForUsers
@@ -135,7 +136,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 {
     NSLog(@"Connected to peripheral with correct service UUID");
     NSLog(@"Discovering services");
-    [peripheral discoverServices:nil]; // search for all services
+    [peripheral discoverServices:nil /*@[SBBroadcastServiceUserProfileUUID]**/]; // search for user profile service
     peripheral.delegate = self;
     [self.discoveredUsers addObject:peripheral];
 }
@@ -149,16 +150,23 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     int count = 0;
+
+    
     for (CBService *service in peripheral.services) {
         NSLog(@"Discovered service %d UUID is %@ ", count, service.UUID);
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastUserServiceUUID]]) {
-            NSLog(@"Discovered correct service");
-            [peripheral discoverCharacteristics:nil forService:service];
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastServiceUserProfileUUID]]) {
+            NSLog(@"Discovered user profile service");
+            [peripheral discoverCharacteristics:@[[CBUUID UUIDWithNSUUID:SBBroadcastCharacteristicUserProfileObjectId],
+                                                  [CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileUserName],
+                                                  [CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileProfileImage],
+                                                  [CBUUID UUIDWithString: SBBroadcastCharacteristicUserProfileQuote],
+                                                  [CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileStatus]] forService:service];
         }
         count ++;
     }
 }
 
+// for found peripheral and service and characteristic attempt to read value
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     for (CBCharacteristic *characteristic in service.characteristics) {
@@ -168,15 +176,45 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     }
 }
 
+// read and store value depending on what characteristic is being read
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSData *myData = characteristic.value;
-    NSString *myString = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
-    NSLog(@"Data from correct peripheral and service is %@", myString);
-    [self.discoveredUserNames addObject:myString];
 
-    NSNotificationCenter *mainCenter = [NSNotificationCenter defaultCenter];
-    [mainCenter postNotificationName:@"kUserFoundWithObjectId" object:self userInfo:@{@"objectId" : myString}];
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId]]){
+        self.userData[@"objectId"] = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+        if ([self.delegate respondsToSelector:@selector(didReceiveObjectID:)]) {
+            [self.delegate didReceiveObjectID:self.userData[@"objectId"]];
+        }
+
+    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileUserName]]) {
+        self.userData[@"userName"]  = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+        if ([self.delegate respondsToSelector:@selector(didReceiveUserName:)]) {
+            [self.delegate didReceiveUserName:self.userData[@"userName"]];
+        }
+
+    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileQuote]]) {
+        self.userData[@"quote"] = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+        if ([self.delegate respondsToSelector:@selector(didReceiveQuote:)]) {
+            [self.delegate didReceiveQuote:self.userData[@"quote"]];
+        }
+
+    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileStatus]]) {
+        self.userData[@"status"] = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+        if ([self.delegate respondsToSelector:@selector(didRecieveStatus:)]) {
+            [self.delegate didReceiveStatus:self.userData[@"status"]];
+        }
+
+    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileProfileImage]]) {
+        self.userData[@"profileImage"]  = [UIImage imageWithData:myData];
+        if ([self.delegate respondsToSelector:@selector(didRecieveProfileImage:)]) {
+            [self.delegate didReceiveProfileImage:self.userData[@"profileImage"]];
+        }
+
+    } else {
+        NSLog(@"attempting to read characteristic %@", characteristic.description);
+    }
+
 }
 
 @end

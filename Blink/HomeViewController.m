@@ -12,7 +12,7 @@
 #import "SBUserDiscovery.h"
 #import "SBBroadcastUser.h"
 
-@interface HomeViewController () <SwipeViewDelegate, SwipeViewDataSource>
+@interface HomeViewController () <SwipeViewDelegate, SwipeViewDataSource, SBDiscoverUser>
 
 @property (nonatomic, strong) NSMutableArray *discoveredUsers;
 @property (nonatomic, strong) NSNotificationCenter *mainCenter;
@@ -36,13 +36,12 @@
         self.navigationController.navigationBar.delegate = self;
 
         //social bluetooth framework setup
-        [SBUser createUserWithName:[PFUser currentUser].username];
-        [SBUser currentUser].objectId = [PFUser currentUser].objectId;
         [SBBroadcastUser buildUserBroadcastScaffold];
         SBBroadcastUser *broadcastUser = [SBBroadcastUser currentBroadcastScaffold];
-        [broadcastUser peripheralAddUserNameService];
+        [broadcastUser peripheralAddUserProfileService];
         [broadcastUser peripheralManagerBroadcastServices];
         [SBUserDiscovery buildUserDiscoveryScaffold];
+        [SBUserDiscovery userDiscoveryScaffold].delegate = self;
 
         // listen for new user discovery to get UUID,
         // TODO: update so that bluetooth framework provides this, just implement delegate
@@ -164,6 +163,31 @@ BOOL animating;
 - (void) stopSpin {
     // set the flag to stop spinning after one last 90 degree increment
     animating = NO;
+}
+
+- (void)didReceiveObjectID:(NSString *)objectID
+{
+
+}
+
+- (void)didReceiveUserName:(NSString *)userName
+{
+
+}
+
+- (void)didReceiveStatus:(NSString *)status
+{
+
+}
+
+- (void)didReceiveQuote:(NSString *)quote
+{
+    
+}
+
+- (void)didReceiveProfileImage:(UIImage *)profileImage
+{
+
 }
 
 

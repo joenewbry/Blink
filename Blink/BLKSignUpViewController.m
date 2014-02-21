@@ -86,6 +86,12 @@
                     [PFUser currentUser][@"quote"] = quotes;
                     [currentUser saveInBackground];
 
+                    [SBUser createUser];
+                    [SBUser currentUser].userName = name;
+                    [SBUser currentUser].objectId = [PFUser currentUser].objectId;
+                    [SBUser currentUser].quote = quotes;
+                    [SBUser currentUser].status = relationship;
+
                     _imgData = [[NSMutableData alloc] init];
 
                     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.0f];
@@ -115,7 +121,9 @@
 // Called when the entire image is finished downloading
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // Set the image in the header imageView
-    PFFile *imageFile = [PFFile fileWithData:_imgData];
+    PFFile *imageFile = [PFFile fileWithData:_imgData]; // saves to parse
+    [SBUser currentUser].profileImage = [UIImage imageWithData:_imgData]; // saves to SBUser
+
     [PFUser currentUser][@"profileImage"] = imageFile;
     [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [self stopSpin];

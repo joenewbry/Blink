@@ -25,6 +25,15 @@
     return mySBUser;
 }
 
++ (SBUser *)createUser
+{
+    static SBUser *mySBUser = nil;
+    @synchronized(self) {
+        if (mySBUser == nil) mySBUser = [[self alloc] init];
+    }
+    return mySBUser;
+}
+
 + (SBUser *)createUserWithName:(NSString *)user
 {
     static SBUser *mySBUser = nil;

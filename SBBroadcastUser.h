@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString const *SBBroadcastUserUserPeripheralUUID;
-extern NSString const *SBBroadcastUserUserNameCharacteristicUUID;
-extern NSString const *SBBroadcastUserServiceUUID;
+extern NSString const *SBBroadcastPeripheralUserProfileUUID;
+extern NSString const *SBBroadcastServiceUserProfileUUID;
+extern NSString const *SBBroadcastCharacteristicUserProfileObjectId;
 
+extern NSString const *SBBroadcastPeripheralUserProfileUUID;
+extern NSString const *SBBroadcastServiceUserProfileUUID;
+extern NSString const *SBBroadcastCharacteristicUserProfileObjectId;
+extern NSString const *SBBroadcastCharacteristicUserProfileUserName;
+extern NSString const *SBBroadcastCharacteristicUserProfileProfileImage;
+extern NSString const *SBBroadcastCharacteristicUserProfileStatus;
+extern NSString const *SBBroadcastCharacteristicUserProfileQuote;
 
 @interface SBBroadcastUser : NSObject
 
@@ -19,7 +26,7 @@ extern NSString const *SBBroadcastUserServiceUUID;
 + (id)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
 + (id)currentBroadcastScaffold;
 
-- (void)peripheralAddUserNameService;
+- (void)peripheralAddUserProfileService;
 - (void)peripheralManagerBroadcastServices;
 - (void)peripheralManagerEndBroadcastServices;
 

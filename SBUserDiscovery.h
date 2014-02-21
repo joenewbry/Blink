@@ -8,25 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SBDiscoverUser;
+@protocol SBDiscoverUser
+
+@optional
+- (void)didReceiveObjectID:(NSString *)objectID;
+- (void)didReceiveUserName:(NSString *)userName;
+- (void)didReceiveQuote:(NSString *)quote;
+- (void)didReceiveStatus:(NSString *)status;
+- (void)didReceiveProfileImage:(UIImage *)profileImage;
+
+@end
 
 @interface SBUserDiscovery : NSObject
 
-+ (id)buildUserDiscoveryScaffold;
-+ (id)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
-+ (id)userDiscoveryScaffold;
++ (SBUserDiscovery *)buildUserDiscoveryScaffold;
++ (SBUserDiscovery *)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
++ (SBUserDiscovery *)userDiscoveryScaffold;
 
 - (void)searchForUsers;
 - (void)stopSearchForUsers;
 
-@property (strong, nonatomic) NSMutableSet *discoveredUserNames;
+@property (nonatomic, weak) id <SBDiscoverUser, NSObject> delegate;
+
 
 @end
 
-@protocol SBDiscoverUser
 
-@optional
-- (NSString *)didDiscoverUserWithName;
-- (NSDictionary *)didDiscoverUserWithDictionary;
-
-@end
