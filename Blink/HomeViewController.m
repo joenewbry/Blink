@@ -18,6 +18,10 @@
 @property (nonatomic, strong) NSNotificationCenter *mainCenter;
 @property (strong, nonatomic) IBOutlet SwipeView *swipeView;
 @property (strong, nonatomic) IBOutlet UIImageView *loadingSpinner;
+@property (strong, nonatomic) IBOutlet UILabel *objectIdLabel;
+@property (strong, nonatomic) IBOutlet UILabel *quoteLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 
 @end
 
@@ -167,22 +171,22 @@ BOOL animating;
 
 - (void)didReceiveObjectID:(NSString *)objectID
 {
-
+    self.objectIdLabel.text = objectID;
 }
 
 - (void)didReceiveUserName:(NSString *)userName
 {
-
+    self.usernameLabel.text = userName;
 }
 
 - (void)didReceiveStatus:(NSString *)status
 {
-
+    self.statusLabel.text = status;
 }
 
 - (void)didReceiveQuote:(NSString *)quote
 {
-    
+    self.quoteLabel.text = quote;
 }
 
 - (void)didReceiveProfileImage:(UIImage *)profileImage

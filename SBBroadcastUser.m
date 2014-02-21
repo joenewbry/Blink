@@ -199,10 +199,10 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
          [self respondToReadRequest:request forCharacteristic:self.userNameCharacteristic];
     } else if ([request.characteristic.UUID isEqual:self.profileImageCharacteristic.UUID]) {
         [self respondToReadRequest:request forCharacteristic:self.profileImageCharacteristic];
-    } else if ([request.characteristic.UUID isEqual:self.statusCharacteristic]) {
+    } else if ([request.characteristic.UUID isEqual:self.statusCharacteristic.UUID]) {
         [self respondToReadRequest:request forCharacteristic:self.statusCharacteristic];
-    } else if ([request.characteristic.UUID isEqual:self.quoteCharacteristic]) {
-        [self respondToReadRequest:request forCharacteristic:self.statusCharacteristic];
+    } else if ([request.characteristic.UUID isEqual:self.quoteCharacteristic.UUID]) {
+        [self respondToReadRequest:request forCharacteristic:self.quoteCharacteristic];
     } else {
         NSLog(@"An error with the read request occured");
      }

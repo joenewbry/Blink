@@ -58,6 +58,12 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     return mySBUserDiscovery;
 }
 
+- (NSMutableDictionary *)userData
+{
+    if (!_userData) _userData = [[NSMutableDictionary alloc]initWithDictionary:@{@"time-stamp" : @"Some date string"}];
+    return _userData;
+}
+
 - (id)init
 {
     return [self initWithLaunchOptions:nil];
@@ -198,7 +204,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
     } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileStatus]]) {
         self.userData[@"status"] = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
-        if ([self.delegate respondsToSelector:@selector(didRecieveStatus:)]) {
+        if ([self.delegate respondsToSelector:@selector(didReceiveStatus:)]) {
             [self.delegate didReceiveStatus:self.userData[@"status"]];
         }
 
