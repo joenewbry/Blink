@@ -13,6 +13,10 @@
 
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *objectId;
+@property (strong, nonatomic) NSString *quote;
+@property (strong, nonatomic) UIImage *profileImage;
+@property (strong, nonatomic) NSString *relationshipStatus;
+
 + (SBUser *)createUserWithName:(NSString *)user;
 + (SBUser *)currentUser;
 

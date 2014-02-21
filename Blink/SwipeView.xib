@@ -38,7 +38,7 @@
                                 <constraint firstAttribute="height" constant="21" id="MI5-Uj-0U5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
-                            <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.30910697992700731" green="0.38603444343065696" blue="0.38603444343065696" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIRTHDAY:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAO-xD-n1a">
