@@ -47,7 +47,7 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 {
     static SBBroadcastUser *mySBUserBroadcast = nil;
     @synchronized(self) {
-        if (mySBUserBroadcast ==nil) mySBUserBroadcast = [[self alloc] init];
+        if (mySBUserBroadcast == nil) mySBUserBroadcast = [[self alloc] init];
         // creates peripheral manager
     }
     return mySBUserBroadcast;
@@ -122,7 +122,7 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     self.userNameCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileUserName] properties:CBCharacteristicPropertyRead value:usernameData permissions:CBAttributePermissionsReadable];
 
     UIImage *profileImage = [SBUser currentUser].profileImage;
-    NSData *profileImageData = UIImagePNGRepresentation(profileImage);
+    NSData *profileImageData = UIImageJPEGRepresentation(profileImage, 1);
     self.profileImageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileProfileImage] properties:CBCharacteristicPropertyRead value:profileImageData permissions:CBAttributePermissionsReadable];
 
     NSString *status = [SBUser currentUser].status;

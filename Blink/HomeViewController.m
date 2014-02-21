@@ -40,8 +40,8 @@
         SBBroadcastUser *broadcastUser = [SBBroadcastUser currentBroadcastScaffold];
         [broadcastUser peripheralAddUserProfileService];
         [broadcastUser peripheralManagerBroadcastServices];
-        [SBUserDiscovery buildUserDiscoveryScaffold];
-        [SBUserDiscovery userDiscoveryScaffold].delegate = self;
+        SBUserDiscovery *myScaffold = [SBUserDiscovery buildUserDiscoveryScaffold];
+        myScaffold.delegate = self;
 
         // listen for new user discovery to get UUID,
         // TODO: update so that bluetooth framework provides this, just implement delegate
