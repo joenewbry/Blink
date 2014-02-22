@@ -29,14 +29,14 @@
         [PFFacebookUtils initializeFacebook];
     
         //init the window
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.backgroundColor = [UIColor whiteColor];
-
-        //makes sign up view controller
-        BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
-        self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
-        [self.window setRootViewController:self.navController];
-        [self.window makeKeyAndVisible];
+//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        self.window.backgroundColor = [UIColor whiteColor];
+//
+//        //makes sign up view controller
+//        BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
+//        self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
+//        [self.window setRootViewController:self.navController];
+//        [self.window makeKeyAndVisible];
 
     }
     
