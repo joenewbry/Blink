@@ -32,8 +32,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:true];
-    [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
-    [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
+    if ([SBBroadcastUser isBuilt]) [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
+    if ([SBUserDiscovery isBuilt]) [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,8 +130,7 @@
         if (error)  { NSLog(@"Error is %@", [error localizedDescription]); }
         else {
             NSLog(@"a user has saved data and should sign in");
-            HomeViewController *homeVC = [[HomeViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]];
-            [self.navigationController pushViewController:homeVC animated:YES];
+            [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
         }
     }];
 }

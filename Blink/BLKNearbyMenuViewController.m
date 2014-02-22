@@ -11,11 +11,8 @@
 @interface BLKNearbyMenuViewController ()
 
 @property (nonatomic)NSMutableDictionary *profileDictionary;
-@property (nonatomic)NSMutableArray *unreadMessagesArray;
+@property (nonatomic)NSMutableArray *messageArray;
 @property (nonatomic)NSMutableArray *nearbyArray;
-@property (weak, nonatomic) IBOutlet UITableViewCell *profileCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *messageCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *nearbyCell;
 
 @end
 
@@ -27,7 +24,7 @@
     [super viewDidLoad];
     
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
-    self.unreadMessagesArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
+    self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
                                                                          @"message" : @"whatsupppp!"},
                                                                        @{@"username" : @"Shooter McGavin",
                                                                          @"message" : @"SHooter mcgavin doing big things" },
@@ -55,7 +52,7 @@
 {
     // Returns count of unread and nearby arrays or 1 for profile section
     
-    if (section == 1) return [self.unreadMessagesArray count];
+    if (section == 1) return [self.messageArray count];
     if (section == 2) return [self.nearbyArray count];
     
     return 1;
@@ -108,8 +105,8 @@
     } else if (indexPath.section == 1){
         static NSString *CellIndentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.unreadMessagesArray[indexPath.row][@"username"];
-        cell.detailTextLabel.text = self.unreadMessagesArray[indexPath.row]
+        cell.textLabel.text = self.messageArray[indexPath.row][@"username"];
+        cell.detailTextLabel.text = self.messageArray[indexPath.row]
         [@"message"];
         
         return cell;
@@ -117,7 +114,7 @@
     } else if (indexPath.section == 2) {
         static NSString *CellIndentifier = @"NearbyCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.unreadMessagesArray[indexPath.row][@"username"];
+        cell.textLabel.text = self.messageArray[indexPath.row][@"username"];
         
         return cell;
 
@@ -126,6 +123,40 @@
     return nil;
 }
 
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        if (indexPath.section == 2) [self.nearbyArray removeObjectAtIndex:indexPath.row];
+        if (indexPath.section == 1) [self.messageArray removeObjectAtIndex:indexPath.row];
+
+        // When this next line is executed, the data has to agree with the changes this line is performing on the table view
+        // if the data doesn't agree, the app falls all over itself and dies
+        // that's why we remove the object from the contacts first
+        // if you don't believe me, try reversing these two lines... just go ahead and try
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+    //[self.tableView reloadData];
+    
+}
+
+#pragma mark - Table View Delegate
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //Disable editing for 1st row in section
+    return (indexPath.section == 0) ? UITableViewCellEditingStyleNone : UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
 
 #pragma mark - Navigation
 

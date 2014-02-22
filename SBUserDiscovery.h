@@ -21,6 +21,9 @@
 
 @interface SBUserDiscovery : NSObject
 
++ (BOOL)isBuilt;
++ (BOOL)isBroadcasting;
+
 + (SBUserDiscovery *)buildUserDiscoveryScaffold;
 + (SBUserDiscovery *)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
 + (SBUserDiscovery *)userDiscoveryScaffold;

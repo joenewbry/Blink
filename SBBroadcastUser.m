@@ -43,7 +43,20 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 
 @implementation SBBroadcastUser
 
-+ (id)buildUserBroadcastScaffold
++ (BOOL)isBuilt
+{
+    static SBBroadcastUser *mySBUserBroadcast = nil;
+    @synchronized(self) {
+        return (mySBUserBroadcast != nil) ? true : false;
+    }
+    return false;
+}
++ (BOOL)isBroadcasting
+{
+    return true;
+}
+
++ (SBBroadcastUser *)buildUserBroadcastScaffold
 {
     static SBBroadcastUser *mySBUserBroadcast = nil;
     @synchronized(self) {
@@ -53,7 +66,7 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     return mySBUserBroadcast;
 }
 
-+ (id)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
++ (SBBroadcastUser *)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
 {
     static SBBroadcastUser *mySBUserBroadcast = nil;
     @synchronized(self) {
@@ -62,7 +75,7 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     return mySBUserBroadcast;
 }
 
-+ (id)currentBroadcastScaffold
++ (SBBroadcastUser *)currentBroadcastScaffold
 {
     static SBBroadcastUser *mySBUserBroadcast = nil;
     @synchronized(self) {
@@ -106,6 +119,7 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 
 - (void)peripheralManagerEndBroadcastServices
 {
+    // TODO : add way to check to see if peripheral and central are created or not
     [self.peripheralManager stopAdvertising];
     self.peripheralManager = nil;
 }

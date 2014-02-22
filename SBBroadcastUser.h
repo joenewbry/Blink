@@ -22,9 +22,12 @@ extern NSString const *SBBroadcastCharacteristicUserProfileQuote;
 
 @interface SBBroadcastUser : NSObject
 
-+ (id)buildUserBroadcastScaffold;
-+ (id)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
-+ (id)currentBroadcastScaffold;
++ (BOOL)isBuilt;
++ (BOOL)isBroadcasting;
+
++ (SBBroadcastUser *)buildUserBroadcastScaffold;
++ (SBBroadcastUser *)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
++ (SBBroadcastUser *)currentBroadcastScaffold;
 
 - (void)peripheralAddUserProfileService;
 - (void)peripheralManagerBroadcastServices;
