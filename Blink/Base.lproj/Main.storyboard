@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T1Y-vc-fNw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="qlF-1F-cV7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Nearby Menu View Controller - Blink-->
+        <!--Nearby Menu View Controller - Nearby-->
         <scene sceneID="aYk-tn-cBZ">
             <objects>
-                <tableViewController id="a7l-EH-6G4" customClass="BLKNearbyMenuViewController" sceneMemberID="viewController">
+                <tableViewController title="Nearby" id="a7l-EH-6G4" customClass="BLKNearbyMenuViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BDS-fp-Jag">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="separatorColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -81,26 +80,23 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Blink" id="I85-qL-WoQ">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Oim-DV-Hr3">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WMP-vk-LEv">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" image="SquareIcon" id="SAy-AG-txR">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="kDp-rm-gGY" kind="push" id="Uta-wR-1um"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFo-YU-air" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="418" y="115"/>
+            <point key="canvasLocation" x="258" y="115"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller - Profile-->
         <scene sceneID="GrA-ng-fa0">
             <objects>
-                <viewController id="kDp-rm-gGY" sceneMemberID="viewController">
+                <viewController title="Profile" id="kDp-rm-gGY" customClass="BLKProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KTX-Do-REH"/>
                         <viewControllerLayoutGuide type="bottom" id="JG0-l2-Q6T"/>
@@ -108,12 +104,71 @@
                     <view key="view" contentMode="scaleToFill" id="qlW-Qp-GCd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-BN-aNp">
+                                <rect key="frame" x="0.0" y="58" width="320" height="422"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGF-iq-rr3" customClass="BLKDetailProfileView">
+                                <rect key="frame" x="0.0" y="384" width="320" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chad Newbry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8T-xi-bsD">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.043137254901960784" green="0.8784313725490196" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ztA-dC-uyt" appends="YES" id="4JM-Ey-G0Q"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="M6c-H8-Y12">
+                        <barButtonItem key="rightBarButtonItem" image="ChadIcon" id="QbL-Zu-yUX">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="TDb-1o-rVo" kind="push" id="k8G-Ra-xFW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="detailView" destination="MGF-iq-rr3" id="Ugb-GF-OQJ"/>
+                        <outlet property="detailViewTapped" destination="ztA-dC-uyt" id="2UG-bT-kbf"/>
+                        <outlet property="profileImage" destination="C3U-BN-aNp" id="KQb-Sk-Cbx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YaQ-UD-RD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ztA-dC-uyt"/>
             </objects>
-            <point key="canvasLocation" x="980" y="104"/>
+            <point key="canvasLocation" x="633" y="115"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eyY-Qv-m6R">
+            <objects>
+                <viewController id="TDb-1o-rVo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="top-Of-6fP"/>
+                        <viewControllerLayoutGuide type="bottom" id="9m4-lT-7hl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="85P-iE-uyO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="10O-MR-Gn8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cJ7-uc-eqY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1015" y="113"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="BAM-zK-2C2">
@@ -185,6 +240,7 @@
         <scene sceneID="bCe-ar-4FR">
             <objects>
                 <navigationController definesPresentationContext="YES" id="qlF-1F-cV7" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FhH-az-t8b">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -199,6 +255,8 @@
     </scenes>
     <resources>
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
+        <image name="ChadIcon" width="40" height="36"/>
+        <image name="SquareIcon" width="37" height="37"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

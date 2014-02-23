@@ -84,19 +84,17 @@
 - (void)configureNavigationBar
 {
     // set background color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor purpleColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:11.0/255.0 green:224.0/255.0 blue:240.0/255.0 alpha:1.0]];
 
     // set text title appearance settings
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-    shadow.shadowOffset = CGSizeMake(0, 1);
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
+        [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                           [UIFont fontWithName:@"GillSans-Light" size:30.0], NSFontAttributeName, nil]];
 
     // set back button appearance
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        
+    //[[UINavigationBar appearance] set]
 
     // sets the time wifi and stuff at the top to either white or black
 }

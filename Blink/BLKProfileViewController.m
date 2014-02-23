@@ -13,10 +13,16 @@
 
 @property (strong, nonatomic) NSMutableData *imgData;
 @property (strong, nonatomic) NSURLConnection *URLConnection;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UIView *detailView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *detailViewTapped;
+
 
 @end
 
 @implementation BLKProfileViewController
+
+
 
 - (id)init
 {
@@ -29,26 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor greenColor]];
-
-    UILabel *profileNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, 100, 100)];
-    profileNameLabel.text = [PFUser currentUser][@"profileName"];
-    profileNameLabel.textColor = [UIColor purpleColor];
-    [self.view addSubview:profileNameLabel];
-
-    UILabel *profileStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 80, 200,100)];
-    profileStatusLabel.text = [PFUser currentUser][@"relationship"];
-    [self.view addSubview:profileStatusLabel];
-
-    UILabel *profileGenderLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 120, 200, 100)];
-    profileGenderLabel.text = [PFUser currentUser][@"gender"];
-    [self.view addSubview:profileGenderLabel];
-
-    UILabel *profileBirthdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 160, 200, 100)];
-    profileBirthdayLabel.text = [PFUser currentUser][@"birthday"];
-    [self.view addSubview:profileBirthdayLabel];
-	// Do any additional setup after loading the view.
-
+    
     [self getFacebookProfileInformationAndSaveToParseUser];
 }
 
@@ -106,10 +93,16 @@
     [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) NSLog(@"Error is %@", [error localizedDescription]);
     }];
+    
+    [self setImageForProfileWithImage:_imgData];
+    
+}
 
-    UIImageView *profileImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:_imgData]];
-    [self.view addSubview:profileImageView];
-    [self.view sendSubviewToBack:profileImageView];
+# pragma mark-- HelperMethods
+
+- (void)setImageForProfileWithImage:(NSData *)imageData {
+    
+    self.profileImage.image = [[UIImage alloc] initWithData:imageData];
 }
 
 @end

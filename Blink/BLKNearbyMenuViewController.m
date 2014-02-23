@@ -23,6 +23,7 @@
 {
     [super viewDidLoad];
     
+    
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
     self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
                                                                          @"message" : @"whatsupppp!"},
@@ -40,6 +41,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Table view data source
 
@@ -69,8 +71,8 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 20)];
-    [headerView setBackgroundColor:[UIColor colorWithRed:255/255 green:153/255 blue:51/255 alpha:1.0]];
-    [headerView setAlpha:.95];
+    [headerView setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:51.0/255.0 alpha:1.0]];
+    [headerView setAlpha:1];
     
     NSString *headerText;
     
