@@ -32,11 +32,11 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessagingCell" textLabel="N89-ul-ErA" detailTextLabel="7kI-9R-iXY" style="IBUITableViewCellStyleSubtitle" id="eGN-IN-viJ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MessagingCell" textLabel="N89-ul-ErA" detailTextLabel="7kI-9R-iXY" style="IBUITableViewCellStyleSubtitle" id="eGN-IN-viJ">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eGN-IN-viJ" id="G1M-HK-IFh">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N89-ul-ErA">
@@ -55,6 +55,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="TDb-1o-rVo" kind="push" identifier="Go To Chat" id="Jmf-nv-pMR"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NearbyCell" textLabel="8ne-7L-6cs" style="IBUITableViewCellStyleDefault" id="c5Y-Qm-zXw">
                                 <rect key="frame" x="0.0" y="110" width="320" height="44"/>
@@ -91,7 +94,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFo-YU-air" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="258" y="115"/>
+            <point key="canvasLocation" x="238" y="-175"/>
         </scene>
         <!--My Profile View Controller - Profile-->
         <scene sceneID="GrA-ng-fa0">
@@ -150,18 +153,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YaQ-UD-RD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="647" y="115"/>
+            <point key="canvasLocation" x="723" y="-745"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="iDj-0X-KHj">
+            <objects>
+                <viewController id="p2D-8g-FiS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mPW-Os-7vu"/>
+                        <viewControllerLayoutGuide type="bottom" id="LmW-4R-m3v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mbo-dC-XR5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PKN-mB-Ei8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1049" y="-182"/>
+        </scene>
+        <!--Chat View Controller-->
         <scene sceneID="eyY-Qv-m6R">
             <objects>
-                <viewController id="TDb-1o-rVo" sceneMemberID="viewController">
+                <viewController id="TDb-1o-rVo" customClass="ChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="top-Of-6fP"/>
                         <viewControllerLayoutGuide type="bottom" id="9m4-lT-7hl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="85P-iE-uyO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -169,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJ7-uc-eqY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="113"/>
+            <point key="canvasLocation" x="675" y="424"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="BAM-zK-2C2">
@@ -236,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xn-ts-Rae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-648" y="115"/>
+            <point key="canvasLocation" x="-636" y="-175"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bCe-ar-4FR">
@@ -254,12 +275,18 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
+                        <outlet property="delegate" destination="hh6-e4-dap" id="pra-cz-yoM"/>
                         <segue destination="a7l-EH-6G4" kind="relationship" relationship="rootViewController" id="VTR-qL-g8a"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HyK-4a-d0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="hh6-e4-dap" customClass="BLKNavigationControllerDelegate">
+                    <connections>
+                        <outlet property="navigationController" destination="qlF-1F-cV7" id="CMu-EA-2pg"/>
+                    </connections>
+                </customObject>
             </objects>
-            <point key="canvasLocation" x="-104" y="115"/>
+            <point key="canvasLocation" x="-142" y="-175"/>
         </scene>
     </scenes>
     <resources>

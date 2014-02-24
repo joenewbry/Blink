@@ -8,6 +8,7 @@
 
 #import "BLKNearbyMenuViewController.h"
 #import "UIViewController+ViewUtils.h"
+#import "BLKChatViewController.h"
 
 @interface BLKNearbyMenuViewController ()
 
@@ -88,28 +89,21 @@
 {
 
     if (indexPath.section == 0) {
-        static NSString *CellIdentifier = @"ProfileCell";
+        static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.profileDictionary[@"username"];
+        cell.textLabel.text = self.messageArray[indexPath.row][@"username"];
+        cell.detailTextLabel.text = self.messageArray[indexPath.row][@"message"];
+
         
         return cell;
         
     } else if (indexPath.section == 1){
-        static NSString *CellIndentifier = @"MessagingCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.messageArray[indexPath.row][@"username"];
-        cell.detailTextLabel.text = self.messageArray[indexPath.row]
-        [@"message"];
-        
-        return cell;
-        
-    } else if (indexPath.section == 2) {
         static NSString *CellIndentifier = @"NearbyCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.messageArray[indexPath.row][@"username"];
-        
+        cell.textLabel.text = self.nearbyArray[indexPath.row][@"username"];
+               
         return cell;
-
+        
     }
     
     return nil;
@@ -157,6 +151,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"Go To Chat"]) {
+        if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
+            //could set vc properties here
+            
+            
+        }
+    }
 }
 
 

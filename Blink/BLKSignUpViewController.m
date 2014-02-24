@@ -11,7 +11,6 @@
 #import "SBUser.h"
 #import "SBBroadcastUser.h"
 #import "SBUserDiscovery.h"
-#import "HomeViewController.h"
 
 @interface BLKSignUpViewController () <NSURLConnectionDelegate>
 
