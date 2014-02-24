@@ -72,7 +72,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self displayPushNotificationFrom:@"Chad" WithMessage:@"Wanna lyft and stuff"];    
 }
 
 - (void)didReceiveMemoryWarning

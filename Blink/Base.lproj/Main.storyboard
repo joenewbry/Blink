@@ -254,10 +254,16 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
+                        <outlet property="delegate" destination="hh6-e4-dap" id="pra-cz-yoM"/>
                         <segue destination="a7l-EH-6G4" kind="relationship" relationship="rootViewController" id="VTR-qL-g8a"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HyK-4a-d0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="hh6-e4-dap" customClass="BLKNavigationControllerDelegate">
+                    <connections>
+                        <outlet property="navigationController" destination="qlF-1F-cV7" id="CMu-EA-2pg"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-104" y="115"/>
         </scene>
