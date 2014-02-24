@@ -88,6 +88,11 @@
 
     [self.view addSubview:_swipeView];
     [self.swipeView reloadData];
+    
+    
+  
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

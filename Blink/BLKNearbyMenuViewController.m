@@ -20,9 +20,14 @@
 @implementation BLKNearbyMenuViewController
 
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //set the background and shadow image to get rid of the line
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
     
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
     self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",

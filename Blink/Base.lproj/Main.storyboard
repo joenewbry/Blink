@@ -80,7 +80,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Blink" id="I85-qL-WoQ">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="user_circle" style="plain" id="SAy-AG-txR">
+                        <barButtonItem key="rightBarButtonItem" image="UserNaveIcon.png" style="plain" id="SAy-AG-txR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="kDp-rm-gGY" kind="push" id="nhM-2X-C73"/>
@@ -96,7 +96,6 @@
         <!--My Profile View Controller - Profile-->
         <scene sceneID="GrA-ng-fa0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YaQ-UD-RD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Profile" id="kDp-rm-gGY" customClass="BLKMyProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KTX-Do-REH"/>
@@ -149,6 +148,7 @@
                         <outlet property="profileImage" destination="C3U-BN-aNp" id="KQb-Sk-Cbx"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YaQ-UD-RD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="647" y="115"/>
         </scene>
@@ -264,7 +264,7 @@
     </scenes>
     <resources>
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
-        <image name="user_circle" width="37" height="37"/>
+        <image name="UserNaveIcon.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

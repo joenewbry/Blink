@@ -33,6 +33,14 @@
 
     }
     
+    //set navigation bar font type and size
+    [[UINavigationBar appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                     [UIFont fontWithName:@"GillSans-Light" size:30.0], NSFontAttributeName, nil]];
+    
+
+    
+    
 //    BLKDiscoveredProfileViewController *discoveredViewController = [[BLKDiscoveredProfileViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]     ];
 //    self.navController = [[UINavigationController alloc] initWithRootViewController:discoveredViewController];
 //    
@@ -40,6 +48,8 @@
 
     return YES;
 }
+
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
