@@ -125,14 +125,19 @@
     [SBUser currentUser].profileImage = [UIImage imageWithData:_imgData]; // saves to SBUser
 
     [PFUser currentUser][@"profileImage"] = imageFile;
+
+    UIImage *thumbnailImage =[UIImage imageWithData:_imgData scale:.1];
+    PFFile *thumbnailFile = [PFFile fileWithData:UIImagePNGRepresentation(thumbnailImage)];
+    [PFUser currentUser][@"thumbnailImage"] = thumbnailFile;
     [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [self stopSpin];
-        if (error)  { NSLog(@"Error is %@", [error localizedDescription]); }
+        if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
         else {
             NSLog(@"a user has saved data and should sign in");
-            [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
         }
     }];
+    
+    [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
 }
 
 BOOL animating;
