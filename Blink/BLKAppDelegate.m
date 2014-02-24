@@ -31,16 +31,6 @@
         // sets the time wifi and stuff at the top to either white or black
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-        //init the window
-//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        self.window.backgroundColor = [UIColor whiteColor];
-//
-//        //makes sign up view controller
-//        BLKSignUpViewController *signUpVC = [[BLKSignUpViewController alloc] initWithNibName:@"SignUpView" bundle:[NSBundle mainBundle]];
-//        self.navController = [[UINavigationController alloc] initWithRootViewController: signUpVC];
-//        [self.window setRootViewController:self.navController];
-//        [self.window makeKeyAndVisible];
-
     }
     
 //    BLKDiscoveredProfileViewController *discoveredViewController = [[BLKDiscoveredProfileViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]     ];

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+ViewUtils.h"
 
-@interface BLKNearbyMenuViewController : UITableViewController
+@interface BLKNearbyMenuViewController : UIViewController
 
 @end

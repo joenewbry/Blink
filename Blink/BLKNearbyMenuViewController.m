@@ -7,6 +7,7 @@
 //
 
 #import "BLKNearbyMenuViewController.h"
+#import "UIViewController+ViewUtils.h"
 
 @interface BLKNearbyMenuViewController ()
 
@@ -22,7 +23,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
     self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
@@ -47,26 +47,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Returns count of unread and nearby arrays or 1 for profile section
     
-    if (section == 1) return [self.messageArray count];
-    if (section == 2) return [self.nearbyArray count];
-    
-    return 1;
+    if (section == 0) return [self.messageArray count];
+    if (section == 1) return [self.nearbyArray count];
+    return 0;
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    if (section == 0) return @"Your Profile";
-//    if (section == 1) return @"Unread Messages";
-//    if (section == 2) return @"Nearby";
-//    
-//    return nil;
-//}
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -76,9 +67,8 @@
     
     NSString *headerText;
     
-    if (section == 0) headerText = @"Your Profile";
-    if (section == 1) headerText = @"Messages";
-    if (section == 2) headerText = @"Nearby";
+    if (section == 0) headerText = @"Messages";
+    if (section == 1) headerText = @"Nearby";
     
     UILabel *customLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0.0, 300.0, 20.0)];
     customLabel.textColor = [UIColor colorWithRed:234.0 green:222.0 blue:252.0 alpha:1];
@@ -87,12 +77,6 @@
 
     return headerView;
 }
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 30;
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

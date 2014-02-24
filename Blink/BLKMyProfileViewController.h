@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BLKProfileViewController : UIViewController <NSURLConnectionDelegate>
+@interface BLKMyProfileViewController : UIViewController <NSURLConnectionDelegate>
 
 
 @end
