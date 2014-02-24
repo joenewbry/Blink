@@ -28,10 +28,9 @@
         [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
         [PFFacebookUtils initializeFacebook];
 
-        [self configureNavigationBar];
-
+        // sets the time wifi and stuff at the top to either white or black
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
+
         //init the window
 //        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //        self.window.backgroundColor = [UIColor whiteColor];
@@ -78,25 +77,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-#pragma mark - Setup Methods
-- (void)configureNavigationBar
-{
-    // set background color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:11.0/255.0 green:224.0/255.0 blue:240.0/255.0 alpha:1.0]];
-
-    // set text title appearance settings
-        [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           [UIFont fontWithName:@"GillSans-Light" size:30.0], NSFontAttributeName, nil]];
-
-    // set back button appearance
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        
-    //[[UINavigationBar appearance] set]
-
-    // sets the time wifi and stuff at the top to either white or black
 }
 
 #pragma mark - FBIntegration

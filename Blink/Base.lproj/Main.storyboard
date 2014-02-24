@@ -9,14 +9,14 @@
             <objects>
                 <tableViewController title="Nearby" id="a7l-EH-6G4" customClass="BLKNearbyMenuViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BDS-fp-Jag">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileCell" textLabel="KcI-hR-6sn" style="IBUITableViewCellStyleDefault" id="clU-Ww-05m">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="clU-Ww-05m" id="MQf-SX-n65">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -33,7 +33,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessagingCell" textLabel="N89-ul-ErA" detailTextLabel="7kI-9R-iXY" style="IBUITableViewCellStyleSubtitle" id="eGN-IN-viJ">
-                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eGN-IN-viJ" id="G1M-HK-IFh">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -57,7 +57,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NearbyCell" textLabel="8ne-7L-6cs" style="IBUITableViewCellStyleDefault" id="c5Y-Qm-zXw">
-                                <rect key="frame" x="0.0" y="174" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c5Y-Qm-zXw" id="fAW-HD-Xfe">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -79,8 +79,8 @@
                             <outlet property="delegate" destination="a7l-EH-6G4" id="0Yx-tt-WdS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Blink" id="I85-qL-WoQ">
-                        <barButtonItem key="rightBarButtonItem" image="SquareIcon" id="SAy-AG-txR">
+                    <navigationItem key="navigationItem" id="I85-qL-WoQ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="SquareIcon" style="plain" id="SAy-AG-txR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="kDp-rm-gGY" kind="push" id="Uta-wR-1um"/>
@@ -102,11 +102,11 @@
                         <viewControllerLayoutGuide type="bottom" id="JG0-l2-Q6T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qlW-Qp-GCd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-BN-aNp">
-                                <rect key="frame" x="0.0" y="58" width="320" height="330"/>
+                                <rect key="frame" x="0.0" y="58" width="320" height="266"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MGF-iq-rr3">
@@ -164,7 +164,7 @@
                         <viewControllerLayoutGuide type="bottom" id="9m4-lT-7hl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="85P-iE-uyO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -228,7 +228,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Va9-wc-0lU"/>
                     <connections>
@@ -245,8 +246,13 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="qlF-1F-cV7" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FhH-az-t8b">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="FhH-az-t8b">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.43529411759999997" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.43529411759999997" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.43529411759999997" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="a7l-EH-6G4" kind="relationship" relationship="rootViewController" id="VTR-qL-g8a"/>
