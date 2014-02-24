@@ -9,15 +9,19 @@
 #import "UIViewController+ViewUtils.h"
 #import <Parse/Parse.h>
 #import "BLKSignUpViewController.h"
+#import <NZAlertView/NZAlertView.h>
 
 @implementation UIViewController (BLKViewUtils)
 
 - (void)displayPushNotificationFrom:(NSString *)userName WithMessage:(NSString *)message
 {
     NSString *title = [userName stringByAppendingString:@" wants to Chat!"];
-    UIAlertView *pushNotifView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Not Now" otherButtonTitles:@"Chat", nil];
-    pushNotifView.tag = 1;
-    [pushNotifView show];
+    //UIAlertView *pushNotifView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Not Now" otherButtonTitles:@"Chat", nil];
+    //pushNotifView.tag = 1;
+
+    UIAlertView *pushNotifAlertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Not Now" otherButtonTitles:@"Chat", nil];
+    pushNotifAlertView.tag = 1;
+    [pushNotifAlertView show];
 }
 
 - (void)displayLogoutModal
@@ -29,12 +33,13 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 1) { // wants to chat
+    if (alertView.tag == 1 && buttonIndex == 1) { // wants to chat
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    if (alertView.tag == 2) { // wants to log out
+    if (alertView.tag == 2 && buttonIndex == 2) { // wants to log out
         BLKSignUpViewController *newSignUpView = [[BLKSignUpViewController alloc] init];
-        [self presentViewController:newSignUpView animated:NO completion:nil];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
         [PFUser logOut];
 #warning implement other logout opperations here
     }
@@ -49,5 +54,19 @@
 
     }
 }
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake) {
+        [self displayLogoutModal];
+    }
+}
+
+
 
 @end

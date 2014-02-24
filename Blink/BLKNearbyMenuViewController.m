@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
     self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
                                                                          @"message" : @"whatsupppp!"},

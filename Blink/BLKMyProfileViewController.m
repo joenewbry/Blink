@@ -72,9 +72,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self displayPushNotificationFrom:@"Chad" WithMessage:@"Wanna lyft and stuff"];
-    [self displayLogoutModal];
-    
+    [self displayPushNotificationFrom:@"Chad" WithMessage:@"Wanna lyft and stuff"];    
 }
 
 - (void)didReceiveMemoryWarning

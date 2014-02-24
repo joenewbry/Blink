@@ -9,12 +9,6 @@
 #import "BLKAppDelegate.h"
 #import "BLKConstants.h"
 #import <Parse/Parse.h>
-#import "SBBroadcastUser.h"
-#import "SBUserDiscovery.h"
-#import "SBUser.h"
-#import "BLKSignUpViewController.h"
-#import "HomeViewController.h"
-#import "BLKDiscoveredProfileViewController.h"
 
 @implementation BLKAppDelegate
 
