@@ -29,6 +29,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
     
+
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
     self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
                                                                          @"message" : @"whatsupppp!"},
