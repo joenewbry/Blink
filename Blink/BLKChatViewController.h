@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JSMessagesViewController/JSMessagesViewController.h>
 
-@interface BLKChatViewController : UIViewController
+@interface BLKChatViewController : JSMessagesViewController <JSMessagesViewDataSource, JSMessagesViewDelegate>
+
+@property (strong, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSDictionary *avatars;
 
 @end

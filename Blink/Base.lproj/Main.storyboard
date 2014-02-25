@@ -176,7 +176,7 @@
         <!--Chat View Controller-->
         <scene sceneID="eyY-Qv-m6R">
             <objects>
-                <viewController id="TDb-1o-rVo" customClass="ChatViewController" sceneMemberID="viewController">
+                <viewController id="TDb-1o-rVo" customClass="BLKChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="top-Of-6fP"/>
                         <viewControllerLayoutGuide type="bottom" id="9m4-lT-7hl"/>
