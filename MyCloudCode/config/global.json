@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Blink": {
+            "applicationId": "uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03", 
+            "masterKey": "T2lU3c4Y93BnhP2rWWvTnVTa5K4mIwLo3J4mggl4"
+        }, 
+        "_default": {
+            "link": "Blink"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.17"
+    }
+}

@@ -14,6 +14,7 @@
 
 #import "BLKChatViewController.h"
 #import "JSMessage.h"
+#import <Parse/Parse.h>
 
 #define kSubtitleJobs @"Jobs"
 #define kSubtitleWoz @"Steve Wozniak"
@@ -29,6 +30,11 @@
     self.dataSource = self;
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    [self setBackgroundColor:[UIColor whiteColor]];
+
+
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
 
     self.title = @"Messages";
@@ -40,6 +46,7 @@
                     [JSAvatarImageFactory avatarImageNamed:@"user_circle" croppedToCircle:YES], kSubtitleWoz,
                     [JSAvatarImageFactory avatarImageNamed:@"user_circle" croppedToCircle:YES], kSubtitleCook,
                     nil];
+    self.messages = [NSMutableArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,19 +75,17 @@
 
 - (void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
 {
-    if ((self.messages.count - 1) % 2) {
-        [JSMessageSoundEffect playMessageSentSound];
-    }
-    else {
-        // for demo purposes only, mimicing received messages
-        [JSMessageSoundEffect playMessageReceivedSound];
-        sender = arc4random_uniform(10) % 2 ? kSubtitleCook : kSubtitleWoz;
-    }
-
+    [JSMessageSoundEffect playMessageSentSound];
     [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
 
     [self finishSend];
     [self scrollToBottomAnimated:YES];
+
+    PFObject *message = [PFObject objectWithClassName:@"Message"];
+    message[@"fromUser"] = [PFUser currentUser];
+    message[@"toUser"] = [PFUser currentUser];
+    message[@"message"] = text;
+    [message saveInBackground];
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
