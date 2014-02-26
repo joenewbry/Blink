@@ -83,15 +83,15 @@
 
     PFObject *message = [PFObject objectWithClassName:@"Message"];
     message[@"message"] = text;
-    [message saveInBackground];
-
-    PFObject *chat = [PFObject objectWithClassName:@"Chat"];
-    PFRelation *messages = [chat relationForKey:@"messages"];
-    [messages addObject:message];
-    [chat addObject:@[[PFUser currentUser]] forKey:@"recipientsArrayPFUser"];
-    [chat addObject:[PFUser currentUser] forKey:@"sender"];
-    [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (error) NSLog(@"Error for saving chat message is : %@", [error localizedDescription]);
+    [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        PFObject *chat = [PFObject objectWithClassName:@"Chat"];
+        PFRelation *messages = [chat relationForKey:@"messages"];
+        [messages addObject:message];
+        [chat addObject:[PFUser currentUser] forKey:@"recipientsArrayPFUser"];
+        [chat setValue:[PFUser currentUser] forKey:@"sender"];
+        [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) NSLog(@"Error for saving chat message is : %@", [error localizedDescription]);
+        }];
     }];
 }
 

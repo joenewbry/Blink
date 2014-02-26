@@ -41,6 +41,8 @@
     
 
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
+
+    [self performSegueWithIdentifier:@"toChat" sender:self];
 }
 
 - (void)didReceiveMemoryWarning
