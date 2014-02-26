@@ -11,11 +11,12 @@
 #import "SBUser.h"
 #import "SBBroadcastUser.h"
 #import "SBUserDiscovery.h"
+#import "BLKConstants.h"
+#import "BLKSaveImage.h"
 
-@interface BLKSignUpViewController () <NSURLConnectionDelegate>
 
-@property (nonatomic, strong) NSMutableData *imgData;
-@property (strong, nonatomic) NSURLConnection *URLConnection;
+@interface BLKSignUpViewController ()
+
 @property (strong, nonatomic) IBOutlet UIImageView *logoView;
 
 @end
@@ -61,82 +62,65 @@
                 if (error) {
                     NSLog(@"An error occured getting FBData: erro %@", error);
                 } else {
-                    NSDictionary *userData = (NSDictionary *)result;
+                    if (user) {
+                        NSLog(@"User has connected with facebook, initialize all processes");
+                        // stop spining icon
+                        [self stopSpin];
+                        [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
 
-                    NSString *facebookID = userData[@"id"];
-                    NSString *name = userData[@"name"];
-                    NSString *gender = userData[@"gender"];
-                    NSString *birthday = userData[@"birthday"];
-                    NSString *relationship = userData[@"relationship_status"];
+                        NSDictionary *userData = (NSDictionary *)result;
+                        [self parseUserDataAndSaveToParse:userData]; // FBProfileData to PFUser
+                        [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
+                        [self saveInstallationForPush]; // save unique push channel for logged in user
+                        [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread, maybe this will work
 
-                    NSString *college = [self getCollegeStringFromEducation:userData[@"education"]];
-
-                    NSString *quotes = userData[@"quotes"];
-                    NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-
-                    // save facebook information to parse
-                    PFUser *currentUser = [PFUser currentUser];
-                    [PFUser currentUser][@"facebookID"] = facebookID;
-                    [PFUser currentUser][@"profileName"] = name;
-                    [PFUser currentUser][@"gender"] = gender;
-                    [PFUser currentUser][@"birthday"] = birthday;
-                    [PFUser currentUser][@"relationship"] = relationship;
-                    [PFUser currentUser][@"college"] = college;
-                    [PFUser currentUser][@"quote"] = quotes;
-                    [currentUser saveInBackground];
-
-                    [SBUser createUser];
-                    [SBUser currentUser].userName = name;
-                    [SBUser currentUser].objectId = [PFUser currentUser].objectId;
-                    [SBUser currentUser].quote = quotes;
-                    [SBUser currentUser].status = relationship;
-
-                    _imgData = [[NSMutableData alloc] init];
-
-                    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.0f];
-                    
-                    self.URLConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+                    }
                 }
             }];
         }
     }];
 }
 
-- (NSString *)getCollegeStringFromEducation:(FBGraphObject *)fBGraphObject
+- (void)parseUserDataAndSaveToParse:(NSDictionary *)userData
 {
-    for (NSDictionary *school in fBGraphObject) {
-        if ([school[@"type"] isEqualToString:@"College"]){
-            return school[@"school"][@"name"];
-        }
-    }
-    return @"No College Found";
+    NSString *facebookID = userData[@"id"];
+    NSString *name = userData[@"name"];
+    NSString *gender = userData[@"gender"];
+    NSString *birthday = userData[@"birthday"];
+    NSString *relationship = userData[@"relationship_status"];
+    NSString *college = [self getCollegeStringFromEducation:userData[@"education"]];
+    NSString *quotes = userData[@"quotes"];
+    NSString *pictureURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
+
+    // save facebook information to parse
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[@"facebookID"] = facebookID;
+    currentUser[@"profileName"] = name;
+    currentUser[@"gender"] = gender;
+    currentUser[@"birthday"] = birthday;
+    currentUser[@"relationship"] = relationship;
+    currentUser[@"college"] = college;
+    currentUser[@"quote"] = quotes;
+    currentUser[@"pictureURL"] = pictureURL;
+    [currentUser saveInBackground];
 }
 
-// Called every time a chunk of the data is received
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [_imgData appendData:data]; // Build the image
+- (void)shareProfileViaBluetooth
+{
+    [SBUser createUser];
+    [SBUser currentUser].userName = [PFUser currentUser].username;
+    [SBUser currentUser].objectId = [PFUser currentUser].objectId;
+    [SBUser currentUser].quote = [PFUser currentUser][@"quote"];
+    [SBUser currentUser].status = [PFUser currentUser][@"relationship"];
 }
 
-// Called when the entire image is finished downloading
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // Set the image in the header imageView
-    PFFile *imageFile = [PFFile fileWithData:_imgData]; // saves to parse
-    [SBUser currentUser].profileImage = [UIImage imageWithData:_imgData]; // saves to SBUser
-
-    [PFUser currentUser][@"profileImage"] = imageFile;
-
-    UIImage *thumbnailImage =[UIImage imageWithData:_imgData scale:.1];
-    PFFile *thumbnailFile = [PFFile fileWithData:UIImagePNGRepresentation(thumbnailImage)];
-    [PFUser currentUser][@"thumbnailImage"] = thumbnailFile;
-    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [self stopSpin];
-        if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
-        else {
-            NSLog(@"a user has saved data and should sign in");
-        }
-    }];
-    
-    [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
+- (void)saveInstallationForPush
+{
+    NSString *privateChannelName =[NSString stringWithFormat:@"user_%@", [PFUser currentUser].objectId];
+    [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:kInstallationUserKey];
+    [[PFInstallation currentInstallation] addUniqueObject:privateChannelName forKey:kInstallationChannelsKey];
+    [[PFInstallation currentInstallation] saveEventually];
+    [[PFUser currentUser] setObject:privateChannelName forKey:kUserPrivateChannelKey];
 }
 
 BOOL animating;
@@ -172,6 +156,16 @@ BOOL animating;
 - (void) stopSpin {
     // set the flag to stop spinning after one last 90 degree increment
     animating = NO;
+}
+
+- (NSString *)getCollegeStringFromEducation:(FBGraphObject *)fBGraphObject
+{
+    for (NSDictionary *school in fBGraphObject) {
+        if ([school[@"type"] isEqualToString:@"College"]){
+            return school[@"school"][@"name"];
+        }
+    }
+    return @"No College Found";
 }
 
 @end

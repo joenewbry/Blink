@@ -33,7 +33,5 @@ extern NSString const *SBBroadcastCharacteristicUserProfileQuote;
 - (void)peripheralManagerBroadcastServices;
 - (void)peripheralManagerEndBroadcastServices;
 
-
-
 @end
 

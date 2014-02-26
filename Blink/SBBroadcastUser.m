@@ -191,6 +191,11 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     if (error) {
         NSLog(@"Error publishing myService: %@", [error localizedDescription]);
     }
+
+    if ([myService isEqual:self.userProfileService]){
+        [self peripheralManagerBroadcastServices];
+    }
+
 }
 
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error

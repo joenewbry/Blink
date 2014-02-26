@@ -7,8 +7,8 @@
 //
 
 #import "BLKAppDelegate.h"
-#import "BLKConstants.h"
 #import <Parse/Parse.h>
+#import "BLKConstants.h"
 
 @implementation BLKAppDelegate
 
@@ -19,8 +19,21 @@
     
     if (local) {
         //setup parse authorization, facebook login
-        [Parse setApplicationId:@"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03" clientKey:@"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ"];
+        [Parse setApplicationId:kParseAppID clientKey:kParseClient];
         [PFFacebookUtils initializeFacebook];
+
+        // sets app icon badge to 0
+        if (application.applicationIconBadgeNumber != 0) {
+            application.applicationIconBadgeNumber = 0;
+            [[PFInstallation currentInstallation] saveEventually];
+        }
+
+        PFACL *defaultACL = [PFACL ACL];
+        // Enable public read access by default, with any newly created PFOBjects belonging to the current users
+        [defaultACL setPublicReadAccess:YES];
+        [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+
+        [self configureRemoteNotifications:application];
 
         // sets the time wifi and stuff at the top to either white or black
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -31,14 +44,7 @@
     [[UINavigationBar appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor whiteColor], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"GillSans-Light" size:30.0], NSFontAttributeName, nil]];
-    
 
-    
-    
-//    BLKDiscoveredProfileViewController *discoveredViewController = [[BLKDiscoveredProfileViewController alloc] initWithNibName:@"BLKDiscoveredProfileView" bundle:[NSBundle mainBundle]     ];
-//    self.navController = [[UINavigationController alloc] initWithRootViewController:discoveredViewController];
-//    
-//    [self.window setRootViewController:self.navController];
 
     return YES;
 }
@@ -71,6 +77,51 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - remote notifications handling
+- (void)configureRemoteNotifications:(UIApplication *)application
+{
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound ];
+}
+
+// registered for specific remote notifications
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [PFPush storeDeviceToken:deviceToken];
+
+    if (application.applicationIconBadgeNumber != 0) {
+        application.applicationIconBadgeNumber = 0;
+    }
+
+    [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:kInstallationChannelsKey];
+
+    if ([PFUser currentUser]) {
+        // Make sure they are subscribed to private channel
+        NSString *privateChannelName = [[PFUser currentUser] objectForKey:kUserPrivateChannelKey];
+        if (privateChannelName && privateChannelName.length > 0) {
+            NSLog(@"Subscribing user to %@", privateChannelName);
+            [[PFInstallation currentInstallation] addUniqueObject:privateChannelName forKey:kInstallationChannelsKey];
+        }
+    }
+    [[PFInstallation currentInstallation] saveEventually];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    if ([error code] != 3010) { // 3010 is for iPhone Simulator
+        NSLog(@"Application failed to register for push notifications: %@", error);
+    }
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Recieved remote notification");
+    [PFPush handlePush:userInfo];
 }
 
 #pragma mark - FBIntegration

@@ -6,7 +6,16 @@
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#pragma mark - Parse Setup
 extern NSString *const kParseAppID;
 extern NSString *const kParseClient;
+
+#pragma mark - PFObject User Class
+// Field keys
+extern NSString *const kUserPrivateChannelKey;
+
+#pragma mark - Installation Class
+//Field keys
+extern NSString *const kInstallationChannelsKey;
+extern NSString *const kInstallationUserKey;
+extern NSString *const kPushPayloadFromUserObjectIDKey;

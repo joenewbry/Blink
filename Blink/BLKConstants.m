@@ -10,3 +10,9 @@
 
 NSString * const kParseAppID = @"uArzEK3OI68YCGI6KHTCNbV0XsNI2eHwHLVC0a03";
 NSString * const kParseClient = @"dauk1AeWtQy1d6YF8iX6jk1DqhThrPkIA7cTjVhZ";
+
+NSString * const kUserPrivateChannelKey = @"channel";
+
+NSString * const kInstallationChannelsKey = @"channels";
+NSString * const kInstallationUserKey = @"user";
+NSString * const kPushPayloadFromUserObjectIDKey = @"fu";
