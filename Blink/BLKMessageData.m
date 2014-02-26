@@ -10,4 +10,37 @@
 
 @implementation BLKMessageData
 
+static BLKMessageData *instance = nil;
++ (BLKMessageData *)instance {
+    @synchronized(self) {
+        if (instance == nil) instance = [[BLKMessageData alloc] init];
+    }
+    return instance;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self ) {
+
+    }
+    return self;
+}
+
+- (void)searchForMessagesIncluding:(PFUser *)currentUser
+{
+    PFQuery *messageQuery = [PFQuery queryWithClassName:@"Chat"];
+    [messageQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:@[currentUser]];
+    [messageQuery includeKey:@"recipientsArrayPFUser"];
+    [messageQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!self.messages) self.messages = [[NSMutableArray alloc] init];
+        for (PFObject *message in objects){
+            [self.messages addObject:message];
+        }
+        if ([self.delegate respondsToSelector:@selector(newMessageRecievedAllMessages:)]){
+            [self.delegate newMessageRecievedAllMessages:self.messages];
+        }
+    }];
+}
+
 @end

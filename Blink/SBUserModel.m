@@ -11,12 +11,13 @@
 @implementation SBUserModel
 
 - (id)initWithObjectId:(NSString *)objectId
-           AndUsername:(NSString *)username
+           andUsername:(NSString *)username
  andRelationshipStatus:(NSString *)relationshipStatus
       andThumbnailFile:(PFFile *)thumbnailFile
         andProfileFile:(PFFile *)profileFile
               andQuote:(NSString *)quote
             andCollege:(NSString *)college
+               andUser:(PFUser *)user;
 
 {
     self.objectId = objectId;
@@ -32,6 +33,7 @@
     }];
     self.quote = quote;
     self.college = college;
+    self.user = user;
     return self;
 }
 

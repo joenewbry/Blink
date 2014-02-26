@@ -18,8 +18,9 @@
 @property UIImage *profileImage;
 @property NSString *quote;
 @property NSString *college;
+@property PFUser *user;
 
 
--(id) initWithObjectId:(NSString *)objectId AndUsername:(NSString *)username andRelationshipStatus:(NSString *)relationshipStatus andThumbnailFile:(PFFile *)thumbnailFile andProfileFile:(PFFile *)profileFile andQuote:(NSString *)quote andCollege:(NSString *)college;
+-(id) initWithObjectId:(NSString *)objectId andUsername:(NSString *)username andRelationshipStatus:(NSString *)relationshipStatus andThumbnailFile:(PFFile *)thumbnailFile andProfileFile:(PFFile *)profileFile andQuote:(NSString *)quote andCollege:(NSString *)college andUser:(PFUser *)user;
 
 @end

@@ -10,8 +10,9 @@
 #import "UIViewController+ViewUtils.h"
 #import "BLKChatViewController.h"
 #import "SBNearbyUsers.h"
+#import "BLKMessageData.h"
 
-@interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate>
+@interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
 
 @property (nonatomic)NSMutableDictionary *profileDictionary;
 @property (nonatomic)NSMutableArray *messageArray;
@@ -26,9 +27,13 @@
 {
     [super viewDidLoad];
 
-    // start recieving discovery messages
+    // start recieving user discovery messages
     [SBNearbyUsers instance].delegate = self;
     self.nearbyArray = [[SBNearbyUsers instance] allUsers];
+
+    // start recieving message discovery messages
+    [BLKMessageData instance].delegate = self;
+    self.messageArray = [[BLKMessageData instance] messages];
     
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
@@ -36,11 +41,6 @@
     
 
     self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
-    self.messageArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe",
-                                                                         @"message" : @"whatsupppp!"},
-                                                                       @{@"username" : @"Shooter McGavin",
-                                                                         @"message" : @"SHooter mcgavin doing big things" },
-                                                                       ]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,6 +166,13 @@
 - (void)userConnectedWithNewArray:(NSMutableArray *)newArray
 {
     self.nearbyArray = newArray;
+    [self.tableView reloadData];
+}
+
+#pragma mark - BLKMessageDataDelegate
+- (void)newMessageRecievedAllMessages:(NSMutableArray *)messages
+{
+    self.messageArray = messages;
     [self.tableView reloadData];
 }
 

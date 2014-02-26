@@ -14,6 +14,7 @@
 #import "BLKConstants.h"
 #import "BLKSaveImage.h"
 #import "SBNearbyUsers.h"
+#import "BLKMessageData.h"
 
 
 @interface BLKSignUpViewController ()
@@ -77,6 +78,7 @@
 
                         [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
 
+                        [[BLKMessageData instance] searchForMessagesIncluding:user]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
                     }
                 }
             }];

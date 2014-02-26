@@ -60,7 +60,7 @@ static SBNearbyUsers *instance = nil;
     [userWithObjectId whereKey:@"objectId" equalTo:objectID];
     [userWithObjectId findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *firstObject = objects[0];
-        SBUserModel *newUser = [[SBUserModel alloc] initWithObjectId:objectID AndUsername:firstObject[@"profileName"] andRelationshipStatus:firstObject[@"relationship"] andThumbnailFile:firstObject[@"thumbnailImage"] andProfileFile:firstObject[@"profileImage"] andQuote:firstObject[@"quote"] andCollege:firstObject[@"college"]];
+        SBUserModel *newUser = [[SBUserModel alloc] initWithObjectId:objectID andUsername:firstObject[@"profileName"] andRelationshipStatus:firstObject[@"relationship"] andThumbnailFile:firstObject[@"thumbnailImage"] andProfileFile:firstObject[@"profileImage"] andQuote:firstObject[@"quote"] andCollege:firstObject[@"college"] andUser:(PFUser *)firstObject];
         [self.nearbyUsers addObject:newUser];
         if (!currentUser) currentUser = 0;
 
