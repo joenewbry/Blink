@@ -9,22 +9,26 @@
 #import "BLKNearbyMenuViewController.h"
 #import "UIViewController+ViewUtils.h"
 #import "BLKChatViewController.h"
+#import "SBNearbyUsers.h"
 
-@interface BLKNearbyMenuViewController ()
+@interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate>
 
 @property (nonatomic)NSMutableDictionary *profileDictionary;
 @property (nonatomic)NSMutableArray *messageArray;
 @property (nonatomic)NSMutableArray *nearbyArray;
+@property (nonatomic)SBUserModel *selectedUser;
 
 @end
 
 @implementation BLKNearbyMenuViewController
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // start recieving discovery messages
+    [SBNearbyUsers instance].delegate = self;
+    self.nearbyArray = [[SBNearbyUsers instance] allUsers];
     
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
@@ -37,10 +41,6 @@
                                                                        @{@"username" : @"Shooter McGavin",
                                                                          @"message" : @"SHooter mcgavin doing big things" },
                                                                        ]];
-    
-    self.nearbyArray = [[NSMutableArray alloc] initWithArray:@[@{@"username" : @"Joe"},
-                                                               @{@"username" : @"Shooter McGavin"},
-                                                               ]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,7 +100,7 @@
     } else if (indexPath.section == 1){
         static NSString *CellIndentifier = @"NearbyCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.nearbyArray[indexPath.row][@"username"];
+        cell.textLabel.text = [self.nearbyArray[indexPath.row] username];
                
         return cell;
         
@@ -127,8 +127,7 @@
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
-    //[self.tableView reloadData];
-    
+
 }
 
 #pragma mark - Table View Delegate
@@ -141,7 +140,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if (indexPath.section == 1){
+        self.selectedUser = self.nearbyArray[indexPath.row];
+    }
 }
 
 #pragma mark - Navigation
@@ -156,9 +157,16 @@
         if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
             //could set vc properties here
             
-            
         }
     }
+    
+}
+
+#pragma mark - NearbyUserDelegate
+- (void)userConnectedWithNewArray:(NSMutableArray *)newArray
+{
+    self.nearbyArray = newArray;
+    [self.tableView reloadData];
 }
 
 

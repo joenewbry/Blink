@@ -10,5 +10,6 @@
 #import "UIViewController+ViewUtils.h"
 
 @interface BLKNearbyMenuViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

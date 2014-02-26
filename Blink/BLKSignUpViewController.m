@@ -13,6 +13,7 @@
 #import "SBUserDiscovery.h"
 #import "BLKConstants.h"
 #import "BLKSaveImage.h"
+#import "SBNearbyUsers.h"
 
 
 @interface BLKSignUpViewController ()
@@ -73,6 +74,8 @@
                         [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
                         [self saveInstallationForPush]; // save unique push channel for logged in user
                         [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread, maybe this will work
+
+                        [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
 
                     }
                 }

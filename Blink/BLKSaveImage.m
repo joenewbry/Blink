@@ -58,20 +58,25 @@ static BLKSaveImage *instance = nil;
     PFFile *imageFile = [PFFile fileWithData:self.imgData]; // saves to parse
     [SBUser currentUser].profileImage = [UIImage imageWithData:self.imgData]; // saves to SBUser
 
-    [PFUser currentUser][@"profileImage"] = imageFile;
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [PFUser currentUser][@"profileImage"] = imageFile;
+        [[PFUser currentUser] saveEventually];
+    }];
 
     UIImage *thumbnailImage =[UIImage imageWithData:self.imgData scale:.1];
     PFFile *thumbnailFile = [PFFile fileWithData:UIImagePNGRepresentation(thumbnailImage)];
-    [PFUser currentUser][@"thumbnailImage"] = thumbnailFile;
-    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
-        else {
-            NSLog(@"a user has saved data, should already be signed in");
-            [SBBroadcastUser buildUserBroadcastScaffold];
-            [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserProfileService];
-        }
-    }];
 
+    [thumbnailFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [PFUser currentUser][@"thumbnailImage"] = thumbnailFile;
+        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
+            else {
+                NSLog(@"a user has saved data, should already be signed in");
+                [SBBroadcastUser buildUserBroadcastScaffold];
+                [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserProfileService];
+            }
+        }];
+    }];
 
 }
 @end

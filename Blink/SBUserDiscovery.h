@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SBDiscoverUser
+@protocol SBDiscoverUserDelegate
 
 @optional
 - (void)didReceiveObjectID:(NSString *)objectID;
@@ -31,7 +31,7 @@
 - (void)searchForUsers;
 - (void)stopSearchForUsers;
 
-@property (nonatomic, weak) id <SBDiscoverUser, NSObject> delegate;
+@property (nonatomic, weak) id <SBDiscoverUserDelegate, NSObject> delegate;
 
 
 @end

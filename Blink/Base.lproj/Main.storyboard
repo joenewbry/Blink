@@ -78,8 +78,8 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="a7l-EH-6G4" id="A3s-Yb-Yy8"/>
-                            <outlet property="delegate" destination="a7l-EH-6G4" id="0Yx-tt-WdS"/>
+                            <outlet property="dataSource" destination="a7l-EH-6G4" id="a2x-h7-kY0"/>
+                            <outlet property="delegate" destination="a7l-EH-6G4" id="77L-xk-Vyq"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Blink" id="I85-qL-WoQ">
@@ -91,6 +91,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="BDS-fp-Jag" id="GWO-e3-9Cj"/>
+                        <outlet property="view" destination="BDS-fp-Jag" id="lAu-jE-J5h"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFo-YU-air" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -291,7 +295,7 @@
     </scenes>
     <resources>
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
-        <image name="UserNaveIcon.png" width="30" height="30"/>
+        <image name="UserNaveIcon.png" width="60" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
