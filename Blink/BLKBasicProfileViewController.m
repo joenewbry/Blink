@@ -13,14 +13,9 @@
 
 @interface BLKBasicProfileViewController ()
 
-@property (nonatomic) NSMutableString *profileDetailHeaderString;
-@property (nonatomic) NSMutableString *profileDetailLabelString;
 @property (strong, nonatomic) NSMutableData *imgData;
 
 @property (strong, nonatomic) NSURLConnection *URLConnection;
-
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
-@property (weak, nonatomic) IBOutlet UIView *detailView;
 
 @property (nonatomic) BLKDetailViewController *detailVC;
 
@@ -85,9 +80,9 @@
 
 - (void)update {
     
-    [self.profileDetailHeaderLabel  setText:self.profileDetailHeaderString];
-    [self.profileDetailInformationLabel setText:self.profileDetailLabelString];
-    [self.profileImage setImage:[[UIImage alloc] initWithData:self.imgData]];
+    [self.profileNameLabel  setText:self.profileDetailHeaderString];
+    [self.quoteLabel setText:self.profileDetailLabelString];
+    [self.profileImageView setImage:[[UIImage alloc] initWithData:self.imgData]];
     
 }
 

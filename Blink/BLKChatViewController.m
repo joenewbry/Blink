@@ -83,11 +83,14 @@
 
     PFObject *message = [PFObject objectWithClassName:@"Message"];
     message[@"message"] = text;
+
+    // TODO check for existing object, then update
+    // else create a new chat object
     [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         PFObject *chat = [PFObject objectWithClassName:@"Chat"];
         PFRelation *messages = [chat relationForKey:@"messages"];
         [messages addObject:message];
-        [chat addObject:[PFUser currentUser] forKey:@"recipientsArrayPFUser"];
+        [chat setValue:[PFUser currentUser] forKey:@"recepient"];
         [chat setValue:[PFUser currentUser] forKey:@"sender"];
         [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) NSLog(@"Error for saving chat message is : %@", [error localizedDescription]);

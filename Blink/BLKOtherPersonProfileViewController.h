@@ -7,7 +7,10 @@
 //
 
 #import "BLKBasicProfileViewController.h"
+#import "SBUserModel.h"
 
 @interface BLKOtherPersonProfileViewController : BLKBasicProfileViewController
+
+-(void)setupUserData:(SBUserModel *)userData;
 
 @end

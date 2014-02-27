@@ -11,6 +11,7 @@
 #import "BLKChatViewController.h"
 #import "SBNearbyUsers.h"
 #import "BLKMessageData.h"
+#import "BLKOtherPersonProfileViewController.h"
 
 @interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
 
@@ -38,11 +39,7 @@
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
-    
 
-    self.profileDictionary = [[NSMutableDictionary alloc] initWithDictionary:@{@"username" : @"Chad"}];
-
-    [self performSegueWithIdentifier:@"toChat" sender:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,8 +139,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0){
+        self.selectedUser = self.messageArray[indexPath.row];
+    }
     if (indexPath.section == 1){
         self.selectedUser = self.nearbyArray[indexPath.row];
+        //[self performSegueWithIdentifier:@"toUserProfile" sender:self];
     }
 }
 
@@ -155,13 +156,13 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([segue.identifier isEqualToString:@"Go To Chat"]) {
-        if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
-            //could set vc properties here
-            
-        }
+    if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
+        //could set vc properties here
     }
-    
+    if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]){
+        [segue.destinationViewController setupUserData:self.selectedUser];
+    }
+
 }
 
 #pragma mark - NearbyUserDelegate

@@ -21,12 +21,8 @@ typedef enum BLKProfileState BLKProfileState;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
 
 @property (weak, nonatomic) IBOutlet UIButton *changeImageButton;
-@property (weak, nonatomic) IBOutlet UILabel *labelName;
-@property (weak, nonatomic) IBOutlet UILabel *labelInformation;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
-@property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *relationshipLabel;
-
+@property (weak, nonatomic)  UILabel *labelName;
+@property (weak, nonatomic)  UILabel *labelInformation;
 
 @property (nonatomic) UITextField * activeTextField;
 @property (nonatomic, strong) UITextField * textFieldName;
@@ -100,13 +96,13 @@ typedef enum BLKProfileState BLKProfileState;
         
         _textFieldName = [[UITextField alloc] init];
         [self.textFieldName setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Name Here"]];
-        [self.textFieldName setFrame:self.profileDetailHeaderLabel.frame];
+        [self.textFieldName setFrame:self.profileNameLabel.frame];
         [self.textFieldName setTextAlignment:NSTextAlignmentCenter];
         [self.textFieldName setBackgroundColor:[[UIColor alloc] initWithRed:(11.0/255.0) green:224.0/255.0 blue:240.0/255.0 alpha:1]];
         [self.textFieldName setTag:1];
         [self.textFieldName setDelegate:self];
         [self.scrollViewContainer addSubview:self.textFieldName];
-        [self.textFieldName setAttributedText:[[NSAttributedString alloc] initWithString:self.profileDetailHeaderLabel.text]];
+        [self.textFieldName setAttributedText:[[NSAttributedString alloc] initWithString:self.profileNameLabel.text]];
 
     } else {
         
@@ -119,12 +115,12 @@ typedef enum BLKProfileState BLKProfileState;
     if (!_textFieldInformation) {
         _textFieldInformation = [[UITextField alloc] init];
         [self.textFieldInformation setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Other Information Here"]];
-        [self.textFieldInformation setFrame:self.profileDetailInformationLabel.frame];
+        [self.textFieldInformation setFrame:self.quoteLabel.frame];
         [self.textFieldInformation setTextAlignment:NSTextAlignmentCenter];
         [self.textFieldInformation setTag:2];
         [self.textFieldInformation setDelegate:self];
         [self.scrollViewContainer addSubview:self.textFieldInformation];
-        [self.textFieldInformation setAttributedText:[[NSAttributedString alloc] initWithString:self.profileDetailInformationLabel.text]];
+        [self.textFieldInformation setAttributedText:[[NSAttributedString alloc] initWithString:self.quoteLabel.text]];
         
     } else {
         self.textFieldInformation.hidden = false;
@@ -236,7 +232,7 @@ typedef enum BLKProfileState BLKProfileState;
 #pragma mark -- UIImagePickerControllerDelegate Delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [self.profileImage setImage:info[UIImagePickerControllerOriginalImage]];
+    [self.profileImageView setImage:info[UIImagePickerControllerOriginalImage]];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

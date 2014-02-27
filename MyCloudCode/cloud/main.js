@@ -17,9 +17,8 @@
 
   Parse.Cloud.afterSave('Chat', function(request) {
     var query = new Parse.Query(Parse.Installation);
-    //alert("" + request.object.get("recipientsArrayPFUser"));
-    //query.notContainedIn('user', request.object.get("recipientsArrayPFUser")); // request.object.get is [] so sends to all push registered users
 
+    query.equalTo('user', request.object.get("recepient")); // request.object.get is [] so sends to all push registered users
 
     Parse.Push.send({
       where: query, // sets our installation query
@@ -27,7 +26,7 @@
         alert: 'new message',
         badge: "Increment",
         p: "m",
-        fu: request.object.get('sender').id, // Sender id
+        fu: request.object.get('sender').profileName, // Sender id // TODO: send user name insted
       },
     });
   });
