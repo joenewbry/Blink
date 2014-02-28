@@ -12,6 +12,8 @@
 #import "SBNearbyUsers.h"
 #import "BLKMessageData.h"
 #import "BLKOtherPersonProfileViewController.h"
+#import "BLKYourProfileViewController.h"
+#import "BLKOtherPersonProfileViewController.h"
 
 @interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
 
@@ -159,11 +161,44 @@
     if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
         //could set vc properties here
     }
-    if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]){
-        [segue.destinationViewController setupUserData:self.selectedUser];
+    
+    if ([segue.identifier isEqualToString:@"toMyProfile"] ||
+        [segue.identifier isEqualToString:@"toUserProfile"]) {
+        
+        if ([segue.destinationViewController isKindOfClass:[BLKYourProfileViewController class]]) {
+            BLKYourProfileViewController *pvc = (BLKYourProfileViewController *)segue.destinationViewController;
+            pvc.nameString = [[NSMutableString alloc] initWithString:@"chad"];
+            pvc.quoteString = [[NSMutableString alloc] initWithString:@"Lets gooo"];
+            pvc.relationshipString = [[NSMutableString alloc] initWithString:@"?????"];
+            pvc.collegeString = [[NSMutableString alloc] initWithString:@"CMC"];
+            pvc.imgData = [[NSMutableData alloc] init];
+            
+        } else if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]) {
+            BLKOtherPersonProfileViewController *ovc = (BLKOtherPersonProfileViewController *)segue.destinationViewController;
+            //see above for values to pass
+            
+            ovc.nameString = [[NSMutableString alloc] initWithString:@"Test Name Set"];
+            ovc.quoteString = [[NSMutableString alloc] initWithString:@"Seque Working?"];
+            ovc.relationshipString = [[NSMutableString alloc] initWithString:@"It's Complicated"];
+            ovc.collegeString = [[NSMutableString alloc] initWithString:@"Scripps"];
+            ovc.imgData = [[NSMutableData alloc] init];
+
+            
+            
+        }
     }
 
+    
+    
+    
+    
+//    if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]){
+//        [segue.destinationViewController setupUserData:self.selectedUser];
+//    }
+
 }
+
+
 
 #pragma mark - NearbyUserDelegate
 - (void)userConnectedWithNewArray:(NSMutableArray *)newArray

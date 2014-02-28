@@ -25,13 +25,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.profileNameLabel.text = self.userData.username;
-    self.quoteLabel.text = self.userData.quote;
-    self.collegeLabel.text = self.userData.college;
-    self.relationshipLabel.text = self.userData.relationshipStatus;
-    self.profileImageView.image = self.userData.profileImage;
-    self.profileDetailHeaderString = (NSMutableString *)self.userData.username;
-    self.profileDetailLabelString = (NSMutableString *)self.userData.quote;
+   
 }
 
 @end

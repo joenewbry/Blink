@@ -9,15 +9,18 @@
 #import "BLKBasicProfileViewController.h"
 #import <Parse/Parse.h>
 #import "UIViewController+ViewUtils.h"
-#import "BLKDetailViewController.h"
 
 @interface BLKBasicProfileViewController ()
 
-@property (strong, nonatomic) NSMutableData *imgData;
-
 @property (strong, nonatomic) NSURLConnection *URLConnection;
 
-@property (nonatomic) BLKDetailViewController *detailVC;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *relationshipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
+
+@property (nonatomic) NSMutableArray *labelArray;
 
 
 @end
@@ -26,29 +29,52 @@
 
 # pragma mark-- Getters_Setters
 
-@synthesize profileDetailLabelString = _profileDetailLabelString;
-@synthesize profileDetailHeaderString = _profileDetailHeaderString;
+@synthesize quoteString = _quoteString;
+@synthesize nameString = _nameString;
 
--(NSMutableString *)profileDetailLabelString {
-    if (!_profileDetailLabelString) _profileDetailLabelString = [[NSMutableString alloc] initWithString:@"Try inviting more friends to improve the Blink experience"];
-    
-    return _profileDetailLabelString;
+
+- (void)setImgData:(NSMutableData *)imgData {
+    _imgData = imgData;
+    [self update];
 }
 
--(NSMutableString *)profileDetailHeaderString {
-    if (!_profileDetailHeaderString) _profileDetailHeaderString = [[NSMutableString alloc] initWithString:@"Nobody Nearby"];
+-(NSMutableString *)nameString {
+    if (!_nameString) _nameString = [[NSMutableString alloc] initWithString:@"Nobody Nearby"];
     
-    return _profileDetailHeaderString;
+    return _nameString;
 }
 
--(void)setProfileDetailHeaderString:(NSMutableString *)profileDetailHeaderString {
-    _profileDetailHeaderString = profileDetailHeaderString;
+-(void)setNameString:(NSMutableString *)nameString {
+    _nameString = nameString;
     
     [self update];
 }
 
--(void)setProfileDetailLabelString:(NSMutableString *)profileDetailLabelString {
-    _profileDetailLabelString = profileDetailLabelString;
+- (NSMutableArray *)labelArray {
+    if (!_labelArray) _labelArray = [[NSMutableArray alloc] init];
+    
+    return _labelArray;
+}
+
+-(NSMutableString *)quoteString {
+    if (!_quoteString) _quoteString = [[NSMutableString alloc] initWithString:@"Try inviting more friends to improve the Blink experience"];
+    
+    return _quoteString;
+}
+
+- (void)setQuoteString:(NSMutableString *)quoteString {
+    _quoteString = quoteString;
+    [self update];
+}
+
+- (void)setRelationshipString:(NSMutableString *)relationshipString {
+    _relationshipString = relationshipString;
+    
+    [self update];
+}
+
+- (void)setCollegeString:(NSMutableString *)collegeString {
+    _collegeString = collegeString;
     
     [self update];
 }
@@ -59,6 +85,8 @@
 {
     self = [super init];
     if (self) {
+        
+        
     }
     return self;
 }
@@ -66,8 +94,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"Detail View initilizedin BasicProfileViewController");
-    self.detailVC = [[BLKDetailViewController alloc] init];
+    [self.labelArray addObjectsFromArray:@[self.nameLabel, self.quoteLabel, self.collegeLabel, self.relationshipLabel]];
+    [self update];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,11 +108,35 @@
 # pragma mark-- UpdateMethod
 
 - (void)update {
+    [self.imageView setImage:[[UIImage alloc] initWithData:self.imgData]];
+    [self.nameLabel  setText:self.nameString];
+    [self.quoteLabel setText:self.quoteString];
+    [self.collegeLabel setText:self.collegeString];
+    [self.relationshipLabel setText:self.relationshipString];
     
-    [self.profileNameLabel  setText:self.profileDetailHeaderString];
-    [self.quoteLabel setText:self.profileDetailLabelString];
-    [self.profileImageView setImage:[[UIImage alloc] initWithData:self.imgData]];
+}
+
+
+
+#pragma mark-- Helper
+
+- (UILabel *)getLabelFromTag:(NSInteger)tag {
     
+    for (UILabel *label in self.labelArray) {
+        if (label.tag == tag) {
+            return label;
+            break; // don't know if this is necessary
+        }
+    }
+    
+    NSLog(@"error didn't find frame for tag");
+    return [[UILabel alloc] init];
+    
+}
+
+- (void)setLablesToHidden:(BOOL)hidden {
+    [self.labelArray setValue:[NSNumber numberWithBool:hidden] forKey:@"hidden"];
+    NSLog(@"Hide values called");
 }
 
 @end

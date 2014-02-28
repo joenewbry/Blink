@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface BLKBasicProfileViewController : UIViewController 
-@property (weak, nonatomic) IBOutlet UILabel *profileNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
-@property (weak, nonatomic) IBOutlet UILabel *relationshipLabel;
-@property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 
-@property (nonatomic) NSMutableString *profileDetailHeaderString;
-@property (nonatomic) NSMutableString *profileDetailLabelString;
+@property (strong, nonatomic) NSMutableData *imgData;
+@property (nonatomic) NSMutableString *nameString;
+@property (nonatomic) NSMutableString *quoteString;
+@property (nonatomic) NSMutableString *relationshipString;
+@property (nonatomic) NSMutableString *collegeString;
 
+- (UILabel*)getLabelFromTag:(NSInteger)tag;
+- (void)setLablesToHidden:(BOOL)hidden;
 
 @end

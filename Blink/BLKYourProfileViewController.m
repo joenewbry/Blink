@@ -17,26 +17,35 @@ typedef enum BLKProfileState BLKProfileState;
 
 
 @interface BLKYourProfileViewController ()
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeStateButton;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeStateButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *changeImageButton;
-@property (weak, nonatomic)  UILabel *labelName;
-@property (weak, nonatomic)  UILabel *labelInformation;
 
 @property (nonatomic) UITextField * activeTextField;
-@property (nonatomic, strong) UITextField * textFieldName;
-@property (nonatomic, strong) UITextField * textFieldInformation;
+@property (nonatomic, strong) UITextField * nameTextField;
+@property (nonatomic, strong) UITextField * quoteTextField;
+@property (nonatomic, strong) UITextField * collegeTextField;
+@property (nonatomic, strong) UITextField * statusTextField;
+
+@property (nonatomic) NSMutableArray * textFieldArray; // probably could just populate this array based on the labels in BasisProfileVC
+//This would avoid having the five uitextfields above
 
 
 @property (nonatomic) BLKProfileState currentState;
 
 @end
 
-
-
-
 @implementation BLKYourProfileViewController
+
+#pragma mark-- LazyInstantiation
+
+-(NSMutableArray *)textFieldArray {
+    if (!_textFieldArray) _textFieldArray = [[NSMutableArray alloc] init];
+    
+    return _textFieldArray;
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -59,6 +68,7 @@ typedef enum BLKProfileState BLKProfileState;
     //required to make scroll view function properly
     [self.scrollViewContainer setContentSize:CGSizeMake(320, 1000)];
     self.scrollViewContainer.scrollEnabled = NO; // user can't scroll it
+    
 }
 
 
@@ -92,52 +102,61 @@ typedef enum BLKProfileState BLKProfileState;
 - (void)setupTextFields {
     
     //set up TextFields to Edit
-    if (!_textFieldName) {
+    if (!_nameTextField) {
         
-        _textFieldName = [[UITextField alloc] init];
-        [self.textFieldName setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Name Here"]];
-        [self.textFieldName setFrame:self.profileNameLabel.frame];
-        [self.textFieldName setTextAlignment:NSTextAlignmentCenter];
-        [self.textFieldName setBackgroundColor:[[UIColor alloc] initWithRed:(11.0/255.0) green:224.0/255.0 blue:240.0/255.0 alpha:1]];
-        [self.textFieldName setTag:1];
-        [self.textFieldName setDelegate:self];
-        [self.scrollViewContainer addSubview:self.textFieldName];
-        [self.textFieldName setAttributedText:[[NSAttributedString alloc] initWithString:self.profileNameLabel.text]];
-
+        _nameTextField = [[UITextField alloc] init];
+        [self setUpTextField:_nameTextField tag:1 defaultString:@"Name Here"];
     } else {
         
         //make sure text is current
-        self.textFieldName.hidden = false;
-        //[self.textFieldName setAttributedText:[[NSAttributedString alloc] initWithString:self.profileDetailHeaderLabel.text]];
+        self.nameTextField.hidden = false;
     }
     
     
-    if (!_textFieldInformation) {
-        _textFieldInformation = [[UITextField alloc] init];
-        [self.textFieldInformation setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Other Information Here"]];
-        [self.textFieldInformation setFrame:self.quoteLabel.frame];
-        [self.textFieldInformation setTextAlignment:NSTextAlignmentCenter];
-        [self.textFieldInformation setTag:2];
-        [self.textFieldInformation setDelegate:self];
-        [self.scrollViewContainer addSubview:self.textFieldInformation];
-        [self.textFieldInformation setAttributedText:[[NSAttributedString alloc] initWithString:self.quoteLabel.text]];
-        
+    if (!_quoteTextField) {
+        _quoteTextField = [[UITextField alloc] init];
+        [self setUpTextField:_quoteTextField tag:2 defaultString:@"Other information here"];
     } else {
-        self.textFieldInformation.hidden = false;
-        //[self.textFieldInformation setAttributedText:[[NSAttributedString alloc] initWithString:self.profileDetailInformationLabel.text]];
+        self.quoteTextField.hidden = false;
     }
+    
+    if (!_collegeTextField) {
+        _collegeTextField = [[UITextField alloc] init];
+        [self setUpTextField:_collegeTextField tag:3 defaultString:@""];
+    } else {
+        self.collegeTextField.hidden = false;
+    }
+    
+    if (!_statusTextField) {
+        _statusTextField = [[UITextField alloc] init];
+        [self setUpTextField:_statusTextField tag:4 defaultString:@"Single?"];
+    }
+    
     
     //make other labels invisibile
-    self.labelInformation.hidden = true;
-    self.labelName.hidden = true;
+    [self setLablesToHidden:true];
+}
+
+- (void)setUpTextField:(UITextField *)textField tag:(int)tag defaultString:(NSString *)defaultString {
+    
+    UILabel * tempLabel = [self getLabelFromTag:tag];
+    
+    [textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:defaultString]];
+    [textField setFrame:tempLabel.frame];
+    [textField setTextAlignment:tempLabel.textAlignment];
+    [textField setBackgroundColor:tempLabel.backgroundColor];
+    [textField setTag:tag];
+    [textField setDelegate:self];
+    [self.scrollViewContainer addSubview:textField];
+    [textField setAttributedText:tempLabel.attributedText];
+
+    [self.textFieldArray addObject:textField];
 }
 
 - (void)hideTextFields {
-    self.textFieldName.hidden = YES;
-    self.textFieldInformation.hidden = YES;
     
-    self.labelInformation.hidden = NO;
-    self.labelName.hidden = NO;
+    [self.textFieldArray setValue:[NSNumber numberWithBool:true] forKey:@"hidden"]; //not sure if this works
+    [self setLablesToHidden:false];
 }
 
 -(void)setStateViewing {
@@ -205,9 +224,13 @@ typedef enum BLKProfileState BLKProfileState;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (self.activeTextField.tag == 1) {
-        self.labelName.text = self.activeTextField.text;
+        self.nameString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
     } else if (self.activeTextField.tag == 2) {
-        self.labelInformation.text = self.activeTextField.text;
+         self.quoteString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+    } else if (self.activeTextField.tag == 3) {
+        self.collegeString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+    } else if (self.activeTextField.tag == 4) {
+        self.collegeString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
     }
     
     self.activeTextField = nil;
@@ -232,8 +255,9 @@ typedef enum BLKProfileState BLKProfileState;
 #pragma mark -- UIImagePickerControllerDelegate Delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [self.profileImageView setImage:info[UIImagePickerControllerOriginalImage]];
-    [self dismissViewControllerAnimated:NO completion:nil];
+   
+    [self setImgData:[[NSMutableData alloc] initWithData:UIImagePNGRepresentation(info[UIImagePickerControllerOriginalImage]) ]]; //stores NSMutableData but returns image. Might work better store the image as a property instead of theNSMutableData
+     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 
