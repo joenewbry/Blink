@@ -19,6 +19,7 @@
 @property (nonatomic)NSMutableArray *messageArray;
 @property (nonatomic)NSMutableArray *nearbyArray;
 @property (nonatomic)SBUserModel *selectedUser;
+@property (nonatomic)PFObject *messageData;
 
 @end
 
@@ -39,7 +40,6 @@
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,8 +90,8 @@
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = self.messageArray[indexPath.row][@"username"];
-        cell.detailTextLabel.text = self.messageArray[indexPath.row][@"message"];
+        cell.textLabel.text = self.messageArray[0][@"recipientsArrayPFUser"][0][@"profileName"];
+        cell.detailTextLabel.text = self.messageArray[0][@"mostRecentMessage"];
 
         
         return cell;
@@ -140,11 +140,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0){
-        self.selectedUser = self.messageArray[indexPath.row];
+        self.messageData = self.messageArray[indexPath.row];
+        [self performSegueWithIdentifier:@"toChat" sender:self];
     }
     if (indexPath.section == 1){
         self.selectedUser = self.nearbyArray[indexPath.row];
-        //[self performSegueWithIdentifier:@"toUserProfile" sender:self];
+        [self performSegueWithIdentifier:@"toOtherProfile" sender:self];
     }
 }
 
@@ -157,7 +158,7 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
-        //could set vc properties here
+        [segue.destinationViewController setupMessageData:self.messageData];
     }
     if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]){
         [segue.destinationViewController setupUserData:self.selectedUser];

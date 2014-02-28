@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <JSMessagesViewController/JSMessagesViewController.h>
+#import <Parse/Parse.h>
 
 @interface BLKChatViewController : JSMessagesViewController <JSMessagesViewDataSource, JSMessagesViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *messages;
-@property (strong, nonatomic) NSDictionary *avatars;
+@property (strong, nonatomic) NSMutableDictionary *avatars;
+
+- (void)setupMessageData:(PFObject *)messageData;
 
 @end
