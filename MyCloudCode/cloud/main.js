@@ -16,19 +16,35 @@
   });
 
   Parse.Cloud.afterSave('Chat', function(request) {
-    var query = new Parse.Query(Parse.Installation);
+    request.object.fetch({
+        success: function(chat){
+            alert("request object id" + chat.id);
+            alert("sender id " + chat.get('sender').id);
 
-    query.equalTo('user', request.object.get("recepient")); // request.object.get is [] so sends to all push registered users
+            chat.get('sender').fetch({
+                success: function(Sender){
+                    alert("sender name " + JSON.stringify(chat.get('sender'), null));
+                    alert("sender name is actually " + chat.get('sender').get('profileName'));
+                    alert("sender looks like " + JSON.stringify(chat, null));
 
-    Parse.Push.send({
-      where: query, // sets our installation query
-      data : {
-        alert: 'new message',
-        badge: "Increment",
-        p: "m",
-        fu: request.object.get('sender').profileName, // Sender id // TODO: send user name insted
-      },
+                    var query = new Parse.Query(Parse.Installation);
+                    query.containedIn('user', chat.get("recipientsArrayPFUser")); // request.object.get is [] so sends to all push registered users
+
+                    Parse.Push.send({
+                        where: query, // sets our installation query
+                        data : {
+                        alert: 'Message from ' + chat.get("sender").get('profileName'),
+                        badge: "Increment",
+                        p: "m",
+                        fu: chat.get("sender").get('profileName'),//Chat.object.get("sender").profileName, // Sender id // TODO: send user name insted
+                      },
+                    });   
+                }
+            }); 
+        }
+
     });
+
   });
     // var query = new Parse.Query(Parse.Installation);
     // query.equalTo('user', request.object.get("toUser"));

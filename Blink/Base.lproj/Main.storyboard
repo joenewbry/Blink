@@ -55,9 +55,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="TDb-1o-rVo" kind="push" identifier="toChat" id="Jmf-nv-pMR"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NearbyCell" textLabel="8ne-7L-6cs" style="IBUITableViewCellStyleDefault" id="c5Y-Qm-zXw">
                                 <rect key="frame" x="0.0" y="110" width="320" height="44"/>
@@ -75,9 +72,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="p2D-8g-FiS" kind="push" identifier="toUserProfile" id="a9p-J0-68c"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -97,6 +91,8 @@
                     <connections>
                         <outlet property="tableView" destination="BDS-fp-Jag" id="GWO-e3-9Cj"/>
                         <outlet property="view" destination="BDS-fp-Jag" id="lAu-jE-J5h"/>
+                        <segue destination="p2D-8g-FiS" kind="push" identifier="toOtherProfile" id="WT1-kH-JQw"/>
+                        <segue destination="TDb-1o-rVo" kind="push" identifier="toChat" id="t6o-LM-dqd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFo-YU-air" userLabel="First Responder" sceneMemberID="firstResponder"/>

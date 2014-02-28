@@ -16,9 +16,11 @@
 #import "JSMessage.h"
 #import <Parse/Parse.h>
 
-#define kSubtitleJobs @"Jobs"
-#define kSubtitleWoz @"Steve Wozniak"
-#define kSubtitleCook @"Mr. Cook"
+@interface BLKChatViewController ()
+
+@property (strong, nonatomic) NSMutableArray *PFUsersInChat;
+
+@end
 
 @implementation BLKChatViewController
 
@@ -39,14 +41,7 @@
 
     self.title = @"Messages";
     self.messageInputView.textView.placeHolder = @"New Message";
-    self.sender = @"Jobs";
-
-    self.avatars = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    [JSAvatarImageFactory avatarImageNamed:@"user_circle" croppedToCircle:YES], kSubtitleJobs,
-                    [JSAvatarImageFactory avatarImageNamed:@"user_circle" croppedToCircle:YES], kSubtitleWoz,
-                    [JSAvatarImageFactory avatarImageNamed:@"user_circle" croppedToCircle:YES], kSubtitleCook,
-                    nil];
-    self.messages = [NSMutableArray new];
+    self.sender = [PFUser currentUser][@"profileName"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,32 +76,62 @@
     [self finishSend];
     [self scrollToBottomAnimated:YES];
 
+//    PFQuery *findChatObject = [PFQuery queryWithClassName:@"Chat"];
+//    [findChatObject se]
+
     PFObject *message = [PFObject objectWithClassName:@"Message"];
     message[@"message"] = text;
+    message[@"sender"] = [PFUser currentUser];
+    [message saveInBackground];
 
-    // TODO check for existing object, then update
+    // check for existing object, then update
     // else create a new chat object
-    [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        PFObject *chat = [PFObject objectWithClassName:@"Chat"];
-        PFRelation *messages = [chat relationForKey:@"messages"];
-        [messages addObject:message];
-        [chat setValue:[PFUser currentUser] forKey:@"recepient"];
-        [chat setValue:[PFUser currentUser] forKey:@"sender"];
-        [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (error) NSLog(@"Error for saving chat message is : %@", [error localizedDescription]);
-        }];
+
+    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
+
+    // TODO figure out how to exact match rather than match and then filter results
+    [chatQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:self.PFUsersInChat];
+    [chatQuery includeKey:@"recipientsArrayPFUser"];
+    [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+
+            for (PFObject *potentialChat in objects){
+                // is exact match
+                if ([potentialChat[@"recipientsArrayPFUser"] count] == self.PFUsersInChat.count){
+                    PFObject *chat = potentialChat; // only one
+                    PFRelation *messages = [chat relationForKey:@"messages"];
+                    [messages addObject:message];
+                    [chat setValue:[PFUser currentUser] forKey:@"sender"];
+                    [chat setValue:text forKey:@"mostRecentMessage"];
+                    [chat saveInBackground];
+                    return;
+                }
+            }
+
+            PFObject *chat = [PFObject objectWithClassName:@"Chat"];
+            PFRelation *messages = [chat relationForKey:@"messages"];
+            [messages addObject:message];
+            [chat addUniqueObjectsFromArray:self.PFUsersInChat forKey:@"recipientsArrayPFUser"];
+            [chat setValue:[PFUser currentUser] forKey:@"sender"];
+            [chat saveInBackground];
+        }
     }];
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row % 2) ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
+    JSMessage *myMessage = (JSMessage *)self.messages[indexPath.row];
+    if ([[PFUser currentUser][@"profileName"] isEqualToString:myMessage.sender]) {
+        return JSBubbleMessageTypeOutgoing;
+    }
+    return JSBubbleMessageTypeIncoming;
 }
 
 - (UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row % 2) {
+    JSMessage *myMessage = (JSMessage *)self.messages[indexPath.row];
+    if ([[PFUser currentUser][@"profileName"] isEqualToString:myMessage.sender]) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
                                                           color:[UIColor colorWithRed:111.0/255.0 green:224.0/255.0 blue:240.0/255.0 alpha:1.0]];
     }
@@ -138,6 +163,7 @@
     if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
         cell.bubbleView.textView.textColor = [UIColor whiteColor];
 
+        // TODO change to underline not blue color
         if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
             [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
@@ -162,15 +188,6 @@
 #endif
 }
 
-//  *** Implement to use a custom send button
-//
-//  The button's frame is set automatically for you
-//
-//  - (UIButton *)sendButtonForInputView
-//
-
-//  *** Implement to prevent auto-scrolling when message is added
-//
 - (BOOL)shouldPreventScrollToBottomWhileUserScrolling
 {
     return YES;
@@ -192,8 +209,44 @@
 
 - (UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
 {
-    UIImage *image = [self.avatars objectForKey:sender];
+    JSMessage *myMessage = (JSMessage *)self.messages[indexPath.row];
+    UIImage *image = [self.avatars objectForKey:myMessage.sender];
     return [[UIImageView alloc] initWithImage:image];
 }
+
+#pragma mark - Load in current message data
+- (void)setupMessageData:(PFObject *)messageData
+{
+    // for fetching the proper Chat
+    self.PFUsersInChat = [NSMutableArray arrayWithArray:messageData[@"recipientsArrayPFUser"]];
+
+
+    // gets all previous chats
+    self.messages = [NSMutableArray new];
+    PFRelation *messages = messageData[@"messages"];
+    [[messages query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) NSLog(@"You done gufffed");
+        if (!error) {
+            for (PFObject *message in objects) {
+                [self.messages addObject:[[JSMessage alloc] initWithText:message[@"message"] sender:message[@"senderName"] date:message[@"updatedAt"]]];
+            }
+            [self.tableView reloadData];
+        }
+    }];
+
+    self.avatars = [NSMutableDictionary new];
+    for (PFUser *user in self.PFUsersInChat){
+        PFFile *userThumbnail = user[@"thumbnailImage"];
+
+        UIImage *placeholderImage = [UIImage imageNamed:@"user_circle"];
+
+        [self.avatars setValue:[JSAvatarImageFactory avatarImage:placeholderImage croppedToCircle:YES] forKey:user[@"profileName"]];
+        [userThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [self.avatars setValue:[JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES] forKey:user[@"profileName"]];
+            [self.tableView reloadData];
+        }];
+    }
+}
+
 
 @end
