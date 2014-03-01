@@ -10,6 +10,9 @@
 #import <Parse/Parse.h>
 #import "BLKSignUpViewController.h"
 #import <NZAlertView/NZAlertView.h>
+#import "BLKAppDelegate.h"
+#import "SBUserDiscovery.h"
+#import "SBBroadcastUser.h"
 
 @implementation UIViewController (BLKViewUtils)
 
@@ -36,12 +39,18 @@
     if (alertView.tag == 1 && buttonIndex == 1) { // wants to chat
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    if (alertView.tag == 2 && buttonIndex == 2) { // wants to log out
-        BLKSignUpViewController *newSignUpView = [[BLKSignUpViewController alloc] init];
+    if (alertView.tag == 2 && buttonIndex == 1) { // wants to log out
+        UIStoryboard *storyboard = self.storyboard;
+        BLKSignUpViewController *newSignUpView = [storyboard instantiateViewControllerWithIdentifier:@"signUp"];
         [self.navigationController popToRootViewControllerAnimated:NO];
+        [[self.navigationController presentingViewController] dismissViewControllerAnimated:NO completion:nil];
+        BLKAppDelegate *app = [[UIApplication sharedApplication] delegate];
+        app.window.rootViewController = newSignUpView;
+        [app.window makeKeyAndVisible];
         
         [PFUser logOut];
-#warning implement other logout opperations here
+        [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
+        [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
     }
 }
 

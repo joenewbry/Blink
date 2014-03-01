@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) id<SBNearbyUsersDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray *nearbyUsers;
+@property (strong, nonatomic) NSMutableSet *nearbyUserUUIDs;
 
 + (SBNearbyUsers *)instance;
 

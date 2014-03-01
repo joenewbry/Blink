@@ -15,6 +15,7 @@
 #import "BLKSaveImage.h"
 #import "SBNearbyUsers.h"
 #import "BLKMessageData.h"
+#import <NZAlertView/NZAlertView.h>
 
 
 @interface BLKSignUpViewController ()
@@ -49,22 +50,36 @@
 
     NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday"];
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-
         if (!user) {
+            [self stopSpin]; // stop spinner
             if (!error) {
                 NSLog(@"User canceled facebook login");
+                NZAlertView *canceledAlert = [[NZAlertView alloc] initWithStyle:NZAlertStyleInfo title:@"Facebook login canceled" message:@"To use Blink you need to sign in with Facebook."];
+                [canceledAlert setTextAlignment:NSTextAlignmentLeft];
+                [canceledAlert show];
             } else {
                 NSLog(@"An error occuered: %@", error);
+                if (error.code == 5){ // Internet connection appears to be offline
+                    NZAlertView *connectivityAlert = [[NZAlertView alloc] initWithStyle:NZAlertStyleInfo title:@"The Gnomes are on Strike" message:@"No internet connection detected. Try turning on 3G, 4G, or connecting to wifi!"];
+                    [connectivityAlert setTextAlignment:NSTextAlignmentLeft];
+                    [connectivityAlert show];
+                }
+
             }
 
         } else {
             FBRequest *request = [FBRequest requestForMe];
 
             [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                [self stopSpin]; // stop spinning modal
                 if (error) {
                     NSLog(@"An error occured getting FBData: erro %@", error);
+                    NZAlertView *fbDataErrorAlert = [[NZAlertView alloc] initWithStyle:NZAlertStyleInfo title:@"Oops, No Facebook Data" message:@"We weren't able to fetch your Facebook data. Try connecting with Facebook again. If you still can't log in get send an email to joenewbry@gmail.com or text 1-541-760-1871."];
+                    [fbDataErrorAlert setTextAlignment:NSTextAlignmentLeft];
+                    [fbDataErrorAlert show];
                 } else {
                     if (user) {
+                        // TODO: sometimes breaks doesn't perform segue
                         NSLog(@"User has connected with facebook, initialize all processes");
                         // stop spining icon
                         [self stopSpin];

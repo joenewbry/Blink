@@ -45,7 +45,9 @@ static SBNearbyUsers *instance = nil;
 
 - (SBUserModel *)nextUser
 {
-    return self.nearbyUsers[++currentUser];
+    if (!currentUser) return nil;
+    if (currentUser < self.nearbyUsers.count) return self.nearbyUsers[++currentUser];
+    return self.nearbyUsers[currentUser = 0];
 }
 
 - (NSMutableArray *)allUsers
@@ -56,21 +58,41 @@ static SBNearbyUsers *instance = nil;
 #pragma mark - SBUserDiscoverDelegate
 - (void)didReceiveObjectID:(NSString *)objectID
 {
-    PFQuery *userWithObjectId = [PFQuery queryWithClassName:@"_User"];
-    [userWithObjectId whereKey:@"objectId" equalTo:objectID];
-    [userWithObjectId findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        PFObject *firstObject = objects[0];
-        SBUserModel *newUser = [[SBUserModel alloc] initWithObjectId:objectID andUsername:firstObject[@"profileName"] andRelationshipStatus:firstObject[@"relationship"] andThumbnailFile:firstObject[@"thumbnailImage"] andProfileFile:firstObject[@"profileImage"] andQuote:firstObject[@"quote"] andCollege:firstObject[@"college"] andUser:(PFUser *)firstObject];
-        [self.nearbyUsers addObject:newUser];
-        if (!currentUser) currentUser = 0;
+    if (!self.nearbyUserUUIDs) self.nearbyUserUUIDs = [NSMutableSet new];
+    // check to make sure object hasn't already been discovered
+    if (![self.nearbyUserUUIDs containsObject:objectID]) {
+        PFQuery *userWithObjectId = [PFQuery queryWithClassName:@"_User"];
+        [userWithObjectId whereKey:@"objectId" equalTo:objectID];
+        [userWithObjectId findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            PFObject *firstObject = objects[0];
+            SBUserModel *newUser = [[SBUserModel alloc] initWithObjectId:objectID andUsername:firstObject[@"profileName"] andRelationshipStatus:firstObject[@"relationship"] andThumbnailFile:firstObject[@"thumbnailImage"] andProfileFile:firstObject[@"profileImage"] andQuote:firstObject[@"quote"] andCollege:firstObject[@"college"] andUser:(PFUser *)firstObject];
+            [self.nearbyUsers addObject:newUser];
+            if (!currentUser) currentUser = 0;
 
-        if ([self.delegate respondsToSelector:@selector(userConnected:)]) {
-            [self.delegate userConnected:newUser];
+            if ([self.delegate respondsToSelector:@selector(userConnected:)]) {
+                [self.delegate userConnected:newUser];
+            }
+            if ([self.delegate respondsToSelector:@selector(userConnectedWithNewArray:)]){
+                [self.delegate userConnectedWithNewArray:self.nearbyUsers];
+            }
+        }];
+    }
+}
+
+- (void)userDidDisconnectWithObjectID:(NSString *)objectID
+{
+    for (SBUserModel *user in self.nearbyUsers){
+        if ([user.objectId isEqualToString:objectID]){
+            [self.nearbyUsers removeObject:user];
+            [self.nearbyUserUUIDs removeObject:objectID];
+            if ([self.delegate respondsToSelector:@selector(userDisconnected:)]){
+                [self.delegate userDisconnected:user];
+            }
         }
-        if ([self.delegate respondsToSelector:@selector(userConnectedWithNewArray:)]){
-            [self.delegate userConnectedWithNewArray:self.nearbyUsers];
-        }
-    }];
+    }
+    if ([self.delegate respondsToSelector:@selector(userDisconnectedWithNewArray:)]){
+        [self.delegate userDisconnectedWithNewArray:self.nearbyUsers];
+    }
 }
 
 @end

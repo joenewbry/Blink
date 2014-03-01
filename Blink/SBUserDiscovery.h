@@ -16,6 +16,7 @@
 - (void)didReceiveQuote:(NSString *)quote;
 - (void)didReceiveStatus:(NSString *)status;
 - (void)didReceiveProfileImage:(UIImage *)profileImage;
+- (void)userDidDisconnectWithObjectID:(NSString *)objectID;
 
 @end
 

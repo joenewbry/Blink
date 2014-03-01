@@ -9,6 +9,7 @@
 #import "SBBroadcastUser.h"
 #import "SBUser.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <NZAlertView/NZAlertView.h>
 
 NSString *peripheralRestorationUUID = @"A6499ECB-0B6C-4609-B161-E3D15687AF3D";
 
@@ -161,18 +162,19 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 }
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
+    NSString *errorMessage = [[NSString alloc] init];
     switch (peripheral.state) {
         case CBPeripheralManagerStatePoweredOn:
             NSLog(@"peripheral state is powered on");
             break;
         case CBPeripheralManagerStatePoweredOff:
-            NSLog(@"peripheral state is powered off");
+            errorMessage = @"It looks like Bluetooth is turned off. Turn on Bluetooth to discover people!";
             break;
         case CBPeripheralManagerStateResetting:
             NSLog(@"peripheral state resetting");
             break;
         case CBPeripheralManagerStateUnauthorized:
-            NSLog(@"peripheral state unauthorized");
+            errorMessage = @"peripheral state unauthorized";
             break;
         case CBPeripheralManagerStateUnknown:
             NSLog(@"peripheral state unknown");
@@ -180,6 +182,14 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
         case CBPeripheralManagerStateUnsupported:
             NSLog(@"peripheral state unsupported");
             break;
+    }
+
+    if (peripheral.state == CBPeripheralManagerStateUnknown ||
+        peripheral.state == CBPeripheralManagerStateUnsupported ||
+        peripheral.state == CBPeripheralManagerStatePoweredOff ){
+        NZAlertView *alert = [[NZAlertView alloc] initWithStyle:NZAlertStyleError title:@"Turn on Bluetooth" message:errorMessage];
+        [alert setTextAlignment:NSTextAlignmentLeft];
+        [alert show];
     }
 
 
@@ -211,10 +221,8 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 {
     NSLog(@"Read request recieved");
     if ([request.characteristic.UUID isEqual:self.objectIdCharacteristic.UUID]) {
-        NSLog(@"object Id characteristic did recieve read request");
         [self respondToReadRequest:request forCharacteristic:self.objectIdCharacteristic];
     } else if ([request.characteristic.UUID isEqual:self.userNameCharacteristic.UUID]) {
-        NSLog(@"user name characteristic did recieve read request");
          [self respondToReadRequest:request forCharacteristic:self.userNameCharacteristic];
     } else if ([request.characteristic.UUID isEqual:self.profileImageCharacteristic.UUID]) {
         [self respondToReadRequest:request forCharacteristic:self.profileImageCharacteristic];

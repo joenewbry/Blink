@@ -9,6 +9,7 @@
 #import "SBUserDiscovery.h"
 #import "SBBroadcastUser.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "CBUUID+StringExtraction.h"
 
 NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5FC3EE95";
 
@@ -200,6 +201,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId]]){
         self.userData[@"objectId"] = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+
         if ([self.delegate respondsToSelector:@selector(didReceiveObjectID:)]) {
             [self.delegate didReceiveObjectID:self.userData[@"objectId"]];
         }
@@ -234,12 +236,32 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
 }
 
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"characteristic updated is %@", [characteristic.UUID representativeString]);
+}
+
+
+
 - (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
-    
-    //self.discoveredUsers
-    //self.discoveringUsers
+
+    for (CBService *service in invalidatedServices){
+        NSLog(@"Service ID is: %@", [service.UUID representativeString]);
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastServiceUserProfileUUID]]){
+            for (CBCharacteristic *characteristic in service.characteristics){
+                if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId]]){
+                    if ([self.delegate respondsToSelector:@selector(userDidDisconnectWithObjectID:)]){
+                        NSString *objectUUID = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+                        [self.delegate performSelector:@selector(userDidDisconnectWithObjectID:) withObject:objectUUID];
+                    }
+
+                }
+            }
+        }
+    }
 }
+
 
 @end
 

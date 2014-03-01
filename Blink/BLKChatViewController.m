@@ -38,6 +38,7 @@
 
 
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
+    
 
     self.title = @"Messages";
     self.messageInputView.textView.placeHolder = @"New Message";
@@ -82,6 +83,7 @@
     PFObject *message = [PFObject objectWithClassName:@"Message"];
     message[@"message"] = text;
     message[@"sender"] = [PFUser currentUser];
+    message[@"senderName"] = [PFUser currentUser][@"profileName"];
     [message saveInBackground];
 
     // check for existing object, then update
@@ -149,10 +151,7 @@
 
 - (BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row % 3 == 0) {
-        return YES;
-    }
-    return NO;
+    return YES;
 }
 
 //
@@ -224,13 +223,20 @@
     // gets all previous chats
     self.messages = [NSMutableArray new];
     PFRelation *messages = messageData[@"messages"];
-    [[messages query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery *messageQuery = [messages query];
+    [messageQuery orderByAscending:@"createdAt"];
+    [messageQuery includeKey:@"createdAt"];
+    [messageQuery includeKey:@"updatedAt"];
+    [messageQuery setCachePolicy:kPFCachePolicyCacheThenNetwork];
+    [messageQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) NSLog(@"You done gufffed");
         if (!error) {
+            self.messages = [NSMutableArray new];
             for (PFObject *message in objects) {
-                [self.messages addObject:[[JSMessage alloc] initWithText:message[@"message"] sender:message[@"senderName"] date:message[@"updatedAt"]]];
+                [self.messages addObject:[[JSMessage alloc] initWithText:message[@"message"] sender:message[@"senderName"] date:message.updatedAt]];
             }
             [self.tableView reloadData];
+            [self scrollToBottomAnimated:NO];
         }
     }];
 

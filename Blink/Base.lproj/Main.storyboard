@@ -278,7 +278,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="BAM-zK-2C2">
             <objects>
-                <viewController id="T1Y-vc-fNw" customClass="BLKSignUpViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signUp" id="T1Y-vc-fNw" customClass="BLKSignUpViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MrC-aj-qNZ"/>
                         <viewControllerLayoutGuide type="bottom" id="qvW-Tg-GuE"/>

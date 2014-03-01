@@ -32,8 +32,10 @@ static BLKMessageData *instance = nil;
     PFQuery *messageQuery = [PFQuery queryWithClassName:@"Chat"];
     [messageQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:@[currentUser]];
     [messageQuery includeKey:@"recipientsArrayPFUser"];
+    [messageQuery setCachePolicy:kPFCachePolicyCacheThenNetwork];
     [messageQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!self.messages) self.messages = [[NSMutableArray alloc] init];
+        // always reset so that cache and network don't stack
+        self.messages = [[NSMutableArray alloc] init];
         for (PFObject *message in objects){
             [self.messages addObject:message];
         }

@@ -183,9 +183,6 @@
             ovc.relationshipString = [[NSMutableString alloc] initWithString:@"It's Complicated"];
             ovc.collegeString = [[NSMutableString alloc] initWithString:@"Scripps"];
             ovc.imgData = [[NSMutableData alloc] init];
-
-            
-            
         }
     }
 
@@ -203,6 +200,12 @@
 
 #pragma mark - NearbyUserDelegate
 - (void)userConnectedWithNewArray:(NSMutableArray *)newArray
+{
+    self.nearbyArray = newArray;
+    [self.tableView reloadData];
+}
+
+- (void)userDisconnectedWithNewArray:(NSMutableArray *)newArray
 {
     self.nearbyArray = newArray;
     [self.tableView reloadData];
