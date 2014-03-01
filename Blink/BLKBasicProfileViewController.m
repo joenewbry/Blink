@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "UIViewController+ViewUtils.h"
 #import "UIView+LinerGradient.h"
+#import "BLKFeed.h"
 
 @interface BLKBasicProfileViewController ()
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *relationshipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
+@property (weak, nonatomic) IBOutlet BLKFeed *feedView;
 
 @property (nonatomic) NSMutableArray *labelArray;
 
@@ -30,11 +32,16 @@
 
 # pragma mark-- Getters_Setters
 
-
-
-
 @synthesize quote = _quote;
 @synthesize username = _username;
+
+/*
+- (BLKFeed *)feedView {
+    
+    if (!_feedView) _feedView = [[BLKFeed alloc] initWithTimerInterval:3.0];
+    
+}
+*/
 
 -(void)setSBUserModel:(SBUserModel *)SBUserModel {
     _SBUserModel = SBUserModel;
@@ -131,6 +138,8 @@
     [self.quoteLabel setText:self.quote];
     [self.collegeLabel setText:self.college];
     [self.relationshipLabel setText:self.relationshipStatus];
+    
+    
     
 }
 

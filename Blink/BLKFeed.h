@@ -10,7 +10,15 @@
 
 @interface BLKFeed : UIView
 
-- (void)addToFeed:(NSMutableString *)string;
-- ((NSMut))
+- (id)initWithTimerInterval:(float)timerInterval;
+
+- (void)addToFeed:(NSMutableAttributedString *)string;
+- (void)removeFromFeed:(int)index;
+- (void)clear;
+
+@property float timerInterval;
+@property (nonatomic) BOOL isAnimating;
+
+
 
 @end
