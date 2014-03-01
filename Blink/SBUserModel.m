@@ -29,7 +29,9 @@
     }];
     self.profileImage = [UIImage imageWithContentsOfFile:@"user_circle"];
     [profileFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (!error) self.profileImage = [UIImage imageWithData:data];
+        if (!error) {
+            self.profileImage = [UIImage imageWithData:data];
+        }
     }];
     self.quote = quote;
     self.college = college;

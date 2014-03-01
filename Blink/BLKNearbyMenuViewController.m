@@ -14,6 +14,7 @@
 #import "BLKOtherPersonProfileViewController.h"
 #import "BLKYourProfileViewController.h"
 #import "BLKOtherPersonProfileViewController.h"
+#import <JSMessagesViewController/JSAvatarImageFactory.h>
 
 @interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
 
@@ -92,16 +93,23 @@
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
         cell.textLabel.text = self.messageArray[0][@"recipientsArrayPFUser"][0][@"profileName"];
         cell.detailTextLabel.text = self.messageArray[0][@"mostRecentMessage"];
+        PFFile *imageThumbnail = self.messageArray[0][@"recipientsArrayPFUser"][0][@"thumbnailImage"];
+        [imageThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
+        }];
 
-        
         return cell;
         
     } else if (indexPath.section == 1){
         static NSString *CellIndentifier = @"NearbyCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
+        cell.layer.cornerRadius = cell.layer.bounds.size.height/2;
+        cell.clipsToBounds = true;
         cell.textLabel.text = [self.nearbyArray[indexPath.row] username];
+        cell.imageView.image = [JSAvatarImageFactory avatarImage:[self.nearbyArray[indexPath.row] thumbnailImg] croppedToCircle:YES];
                
         return cell;
         
