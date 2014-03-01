@@ -127,23 +127,23 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 - (void)peripheralAddUserProfileService
 {
     // read values from SBUser ToSetCharacteristicValues
-    NSString *objectId = [SBUser currentUser].objectId;
+    NSString *objectId = [SBUser currentUser].userModel.objectId;
     NSData *objectIdData = [objectId dataUsingEncoding:NSUTF8StringEncoding];
     self.objectIdCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId] properties:CBCharacteristicPropertyRead value:objectIdData permissions:CBAttributePermissionsReadable];
 
-    NSString *username = [SBUser currentUser].userName;
+    NSString *username = [SBUser currentUser].userModel.username;
     NSData *usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
     self.userNameCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileUserName] properties:CBCharacteristicPropertyRead value:usernameData permissions:CBAttributePermissionsReadable];
 
-    UIImage *profileImage = [SBUser currentUser].profileImage;
+    UIImage *profileImage = [SBUser currentUser].userModel.profileImage;
     NSData *profileImageData = UIImageJPEGRepresentation(profileImage, 1);
     self.profileImageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileProfileImage] properties:CBCharacteristicPropertyRead value:profileImageData permissions:CBAttributePermissionsReadable];
 
-    NSString *status = [SBUser currentUser].status;
+    NSString *status = [SBUser currentUser].userModel.relationshipStatus;
     NSData *statusData = [status dataUsingEncoding:NSUTF8StringEncoding];
     self.statusCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileStatus] properties:CBCharacteristicPropertyRead value:statusData permissions:CBAttributePermissionsReadable];
 
-    NSString *quote = [SBUser currentUser].quote;
+    NSString *quote = [SBUser currentUser].userModel.quote;
     NSData *quoteData = [quote dataUsingEncoding:NSUTF8StringEncoding];
     self.quoteCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileQuote] properties:CBCharacteristicPropertyRead value:quoteData permissions:CBAttributePermissionsReadable];
 

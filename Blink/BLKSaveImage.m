@@ -56,7 +56,7 @@ static BLKSaveImage *instance = nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // Set the image in the header imageView
     PFFile *imageFile = [PFFile fileWithData:self.imgData]; // saves to parse
-    [SBUser currentUser].profileImage = [UIImage imageWithData:self.imgData]; // saves to SBUser
+    [SBUser currentUser].userModel.profileImage = [UIImage imageWithData:self.imgData]; // saves to SBUser
 
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [PFUser currentUser][@"profileImage"] = imageFile;

@@ -107,11 +107,8 @@ typedef enum BLKProfileState BLKProfileState;
         _nameTextField = [[UITextField alloc] init];
         [self setUpTextField:_nameTextField tag:1 defaultString:@"Name Here"];
     } else {
-        
-        //make sure text is current
         self.nameTextField.hidden = false;
     }
-    
     
     if (!_quoteTextField) {
         _quoteTextField = [[UITextField alloc] init];
@@ -130,6 +127,8 @@ typedef enum BLKProfileState BLKProfileState;
     if (!_statusTextField) {
         _statusTextField = [[UITextField alloc] init];
         [self setUpTextField:_statusTextField tag:4 defaultString:@"Single?"];
+    } else {
+        self.statusTextField.hidden = false;
     }
     
     
@@ -149,6 +148,17 @@ typedef enum BLKProfileState BLKProfileState;
     [textField setDelegate:self];
     [self.scrollViewContainer addSubview:textField];
     [textField setAttributedText:tempLabel.attributedText];
+    
+    //TODO
+    UIFont *font = [UIFont fontWithName:@"Helvetica" size:18.0 ]; //DANGEROUS not a good way to do this
+    
+    NSMutableString * tempString = [[NSMutableString alloc] initWithString:@""];
+    if (!(tempLabel.text == nil)) {
+        tempString = (NSMutableString *)tempLabel.text;
+    }
+    
+    textField.attributedText = [[NSAttributedString alloc] initWithString:tempString
+                                                                attributes:([NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName])];
 
     [self.textFieldArray addObject:textField];
 }
@@ -224,13 +234,13 @@ typedef enum BLKProfileState BLKProfileState;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (self.activeTextField.tag == 1) {
-        self.nameString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        self.username = [[NSMutableString alloc] initWithString:self.activeTextField.text];
     } else if (self.activeTextField.tag == 2) {
-         self.quoteString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+         self.quote = [[NSMutableString alloc] initWithString:self.activeTextField.text];
     } else if (self.activeTextField.tag == 3) {
-        self.collegeString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        self.relationshipStatus = [[NSMutableString alloc] initWithString:self.activeTextField.text];
     } else if (self.activeTextField.tag == 4) {
-        self.collegeString = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        self.college = [[NSMutableString alloc] initWithString:self.activeTextField.text];
     }
     
     self.activeTextField = nil;
@@ -256,8 +266,8 @@ typedef enum BLKProfileState BLKProfileState;
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
    
-    [self setImgData:[[NSMutableData alloc] initWithData:UIImagePNGRepresentation(info[UIImagePickerControllerOriginalImage]) ]]; //stores NSMutableData but returns image. Might work better store the image as a property instead of theNSMutableData
-     [self dismissViewControllerAnimated:NO completion:nil];
+    self.profileImage = info[UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 

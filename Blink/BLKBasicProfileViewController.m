@@ -9,6 +9,7 @@
 #import "BLKBasicProfileViewController.h"
 #import <Parse/Parse.h>
 #import "UIViewController+ViewUtils.h"
+#import "UIView+LinerGradient.h"
 
 @interface BLKBasicProfileViewController ()
 
@@ -29,23 +30,38 @@
 
 # pragma mark-- Getters_Setters
 
-@synthesize quoteString = _quoteString;
-@synthesize nameString = _nameString;
 
 
-- (void)setImgData:(NSMutableData *)imgData {
-    _imgData = imgData;
+
+@synthesize quote = _quote;
+@synthesize username = _username;
+
+-(void)setSBUserModel:(SBUserModel *)SBUserModel {
+    _SBUserModel = SBUserModel;
+    
+    //anytime the SBUserModel gets set all the properties
+    _profileImage = _SBUserModel.profileImage;
+    
+    _username = (NSMutableString *)_SBUserModel.username;
+    
+    _quote = (NSMutableString *)_SBUserModel.quote;
+    _college = (NSMutableString *)_SBUserModel.college;
+    _relationshipStatus = (NSMutableString *)_SBUserModel.relationshipStatus;
+}
+
+- (void)setProfileImage:(UIImage *)profileImage {
+    _profileImage = profileImage;
     [self update];
 }
 
--(NSMutableString *)nameString {
-    if (!_nameString) _nameString = [[NSMutableString alloc] initWithString:@"Nobody Nearby"];
+-(NSMutableString *)username {
+    if (!_username) _username = [[NSMutableString alloc] initWithString:@"Nobody Nearby"];
     
-    return _nameString;
+    return _username;
 }
 
--(void)setNameString:(NSMutableString *)nameString {
-    _nameString = nameString;
+-(void)setUsername:(NSMutableString *)username {
+    _username = username;
     
     [self update];
 }
@@ -56,25 +72,25 @@
     return _labelArray;
 }
 
--(NSMutableString *)quoteString {
-    if (!_quoteString) _quoteString = [[NSMutableString alloc] initWithString:@"Try inviting more friends to improve the Blink experience"];
+-(NSMutableString *)quote {
+    if (!_quote) _quote = [[NSMutableString alloc] initWithString:@"Try inviting more friends to improve the Blink experience"];
     
-    return _quoteString;
+    return _quote;
 }
 
-- (void)setQuoteString:(NSMutableString *)quoteString {
-    _quoteString = quoteString;
+- (void)setQuote:(NSMutableString *)quote {
+    _quote = quote;
     [self update];
 }
 
-- (void)setRelationshipString:(NSMutableString *)relationshipString {
-    _relationshipString = relationshipString;
+- (void)setRelationshipStatus:(NSMutableString *)relationshipStatus {
+    _relationshipStatus = relationshipStatus;
     
     [self update];
 }
 
-- (void)setCollegeString:(NSMutableString *)collegeString {
-    _collegeString = collegeString;
+- (void)setCollege:(NSMutableString *)college {
+    _college = college;
     
     [self update];
 }
@@ -108,11 +124,13 @@
 # pragma mark-- UpdateMethod
 
 - (void)update {
-    [self.imageView setImage:[[UIImage alloc] initWithData:self.imgData]];
-    [self.nameLabel  setText:self.nameString];
-    [self.quoteLabel setText:self.quoteString];
-    [self.collegeLabel setText:self.collegeString];
-    [self.relationshipLabel setText:self.relationshipString];
+    [self.imageView setImage:self.profileImage];
+    [UIView addLinearGradientToView:self.imageView withPercentageCoverage:0.2 withColor:[UIColor blackColor] transparentToOpaque:YES];
+    
+    [self.nameLabel  setText:self.username];
+    [self.quoteLabel setText:self.quote];
+    [self.collegeLabel setText:self.college];
+    [self.relationshipLabel setText:self.relationshipStatus];
     
 }
 

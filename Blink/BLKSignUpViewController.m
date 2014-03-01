@@ -113,10 +113,10 @@
 - (void)shareProfileViaBluetooth
 {
     [SBUser createUser];
-    [SBUser currentUser].userName = [PFUser currentUser].username;
-    [SBUser currentUser].objectId = [PFUser currentUser].objectId;
-    [SBUser currentUser].quote = [PFUser currentUser][@"quote"];
-    [SBUser currentUser].status = [PFUser currentUser][@"relationship"];
+    [SBUser currentUser].userModel.username = [PFUser currentUser][@"profileName"];
+    [SBUser currentUser].userModel.objectId = [PFUser currentUser].objectId;
+    [SBUser currentUser].userModel.quote = [PFUser currentUser][@"quote"];
+    [SBUser currentUser].userModel.relationshipStatus = [PFUser currentUser][@"relationship"];
 }
 
 - (void)saveInstallationForPush

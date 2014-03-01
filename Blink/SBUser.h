@@ -7,15 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SBUserModel.h"
 
 @interface SBUser : NSObject {
 }
 
+@property (strong, nonatomic) SBUserModel *userModel;
+/*
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *objectId;
 @property (strong, nonatomic) NSString *quote;
 @property (strong, nonatomic) UIImage *profileImage;
 @property (strong, nonatomic) NSString *status;
+ **/
 
 + (SBUser *)createUserWithName:(NSString *)user;
 + (SBUser *)currentUser;
