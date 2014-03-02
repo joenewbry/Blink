@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBUserModel.h"
 
 @interface BLKBasicProfileViewController : UIViewController 
 
-@property (strong, nonatomic) NSMutableData *imgData;
-@property (nonatomic) NSMutableString *nameString;
-@property (nonatomic) NSMutableString *quoteString;
-@property (nonatomic) NSMutableString *relationshipString;
-@property (nonatomic) NSMutableString *collegeString;
+@property (strong, nonatomic) UIImage *profileImage;
+@property (nonatomic) NSMutableString *username;
+@property (nonatomic) NSMutableString *quote;
+@property (nonatomic) NSMutableString *relationshipStatus;
+@property (nonatomic) NSMutableString *college;
+
+@property (nonatomic) SBUserModel *SBUserModel;
 
 - (UILabel*)getLabelFromTag:(NSInteger)tag;
 - (void)setLablesToHidden:(BOOL)hidden;

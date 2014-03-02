@@ -47,7 +47,8 @@
 {
     if (self = [super init])
     {
-        self.userName = userName;
+        self.userModel = [SBUserModel new];
+        self.userModel.username = userName;
     }
     return self;
 }
