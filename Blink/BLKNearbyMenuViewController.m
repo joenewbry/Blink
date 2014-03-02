@@ -118,9 +118,9 @@
         static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-        cell.textLabel.text = self.messageArray[0][@"recipientsArrayPFUser"][0][@"profileName"];
-        cell.detailTextLabel.text = self.messageArray[0][@"mostRecentMessage"];
-        PFFile *imageThumbnail = self.messageArray[0][@"recipientsArrayPFUser"][0][@"thumbnailImage"];
+        cell.textLabel.text = [self putUserNameTogether:self.messageArray[indexPath.row][@"recipientsArrayPFUser"]];
+        cell.detailTextLabel.text = self.messageArray[indexPath.row][@"mostRecentMessage"];
+        PFFile *imageThumbnail = self.messageArray[indexPath.row][@"recipientsArrayPFUser"][0][@"thumbnailImage"];
         [imageThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
         }];
@@ -141,6 +141,8 @@
     
     return nil;
 }
+
+
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -195,36 +197,19 @@
         [segue.destinationViewController setupMessageData:self.messageData];
     }
     
-    if ([segue.identifier isEqualToString:@"toMyProfile"] ||
-        [segue.identifier isEqualToString:@"toOtherProfile"]) {
-        
+    if ([segue.identifier isEqualToString:@"toOtherProfile"]) {
+        if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]) {
+                    BLKOtherPersonProfileViewController *ovc = (BLKOtherPersonProfileViewController *)segue.destinationViewController;
+                    //see above for values to pass
+            [ovc setupUserData:self.selectedUser];
+        }
+    }
+    if ([segue.identifier isEqualToString:@"toMyProfile"]) {
         if ([segue.destinationViewController isKindOfClass:[BLKYourProfileViewController class]]) {
             BLKYourProfileViewController *pvc = (BLKYourProfileViewController *)segue.destinationViewController;
             pvc.SBUserModel = [SBUser currentUser].userModel;
-           
-            
-        } else if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]) {
-            BLKOtherPersonProfileViewController *ovc = (BLKOtherPersonProfileViewController *)segue.destinationViewController;
-            //see above for values to pass
-            ovc.SBUserModel = self.selectedUser;
-//            ovc.username = [[NSMutableString alloc] initWithString:@"Test Name Set"];
-//            ovc.quote = [[NSMutableString alloc] initWithString:@"Seque Working?"];
-//            ovc.relationshipStatus = [[NSMutableString alloc] initWithString:@"It's Complicated"];
-//            ovc.college = [[NSMutableString alloc] initWithString:@"Scripps"];
-//            ovc.profileImage = [UIImage imageNamed:@"MyProfileImage"];
-            
-            
         }
     }
-
-    
-    
-    
-    
-//    if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]){
-//        [segue.destinationViewController setupUserData:self.selectedUser];
-//    }
-
 }
 
 
@@ -247,6 +232,21 @@
 {
     self.messageArray = messages;
     [self.tableView reloadData];
+}
+
+#pragma mark - support classes
+- (NSString *)putUserNameTogether:(NSMutableArray *)users
+{
+    NSMutableString *userString = [[NSMutableString alloc] init];
+    for (PFUser *user in users){
+        if (![user isEqual:[PFUser currentUser]]){
+            if (user[@"profileName"]) {
+                if (userString.length > 0)[userString appendString:@" "];
+                [userString appendString:user[@"profileName"]];
+            }
+        }
+    }
+    return userString;
 }
 
 

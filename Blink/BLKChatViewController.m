@@ -36,13 +36,26 @@
 
     [self setBackgroundColor:[UIColor whiteColor]];
 
-
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
     
-
-    self.title = @"Messages";
+    NSString *title = [self putUserNameTogether:self.PFUsersInChat];
+    self.title = title;
     self.messageInputView.textView.placeHolder = @"New Message";
     self.sender = [PFUser currentUser][@"profileName"];
+}
+
+- (NSString *)putUserNameTogether:(NSMutableArray *)users
+{
+    NSMutableString *userString = [[NSMutableString alloc] init];
+    for (PFUser *user in users){
+        if (![user isEqual:[PFUser currentUser]]){
+            if (user[@"profileName"]) {
+                if (userString.length > 0)[userString appendString:@" "];
+                [userString appendString:user[@"profileName"]];
+            }
+        }
+    }
+    return userString;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,40 +97,49 @@
     message[@"message"] = text;
     message[@"sender"] = [PFUser currentUser];
     message[@"senderName"] = [PFUser currentUser][@"profileName"];
-    [message saveInBackground];
 
-    // check for existing object, then update
-    // else create a new chat object
+    // objects saved in relation must be saved to parse before being saved in relation
+    [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        // check for existing object, then update
+        // else create a new chat object
 
-    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
+        PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
 
-    // TODO figure out how to exact match rather than match and then filter results
-    [chatQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:self.PFUsersInChat];
-    [chatQuery includeKey:@"recipientsArrayPFUser"];
-    [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
+        // TODO figure out how to exact match rather than match and then filter results
+        [chatQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:self.PFUsersInChat];
+        [chatQuery includeKey:@"recipientsArrayPFUser"];
+        [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
 
-            for (PFObject *potentialChat in objects){
-                // is exact match
-                if ([potentialChat[@"recipientsArrayPFUser"] count] == self.PFUsersInChat.count){
-                    PFObject *chat = potentialChat; // only one
-                    PFRelation *messages = [chat relationForKey:@"messages"];
-                    [messages addObject:message];
-                    [chat setValue:[PFUser currentUser] forKey:@"sender"];
-                    [chat setValue:text forKey:@"mostRecentMessage"];
-                    [chat saveInBackground];
-                    return;
+                for (PFObject *potentialChat in objects){
+                    // is exact match
+                    if ([potentialChat[@"recipientsArrayPFUser"] count] == self.PFUsersInChat.count){
+                        PFObject *chat = potentialChat; // only one
+                        PFRelation *messages = [chat relationForKey:@"messages"];
+                        [messages addObject:message];
+                        [chat setValue:[PFUser currentUser] forKey:@"sender"];
+                        [chat setValue:text forKey:@"mostRecentMessage"];
+                        [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (error) NSLog(@"Error message: %@", [error localizedDescription]);
+                            else {
+                                NSLog(@"Save in background succeeded");
+                            }
+                        }];
+                        return;
+                    }
                 }
-            }
 
-            PFObject *chat = [PFObject objectWithClassName:@"Chat"];
-            PFRelation *messages = [chat relationForKey:@"messages"];
-            [messages addObject:message];
-            [chat addUniqueObjectsFromArray:self.PFUsersInChat forKey:@"recipientsArrayPFUser"];
-            [chat setValue:[PFUser currentUser] forKey:@"sender"];
-            [chat saveInBackground];
-        }
+                PFObject *chat = [PFObject objectWithClassName:@"Chat"];
+                PFRelation *messages = [chat relationForKey:@"messages"];
+                [messages addObject:message];
+                [chat addUniqueObjectsFromArray:self.PFUsersInChat forKey:@"recipientsArrayPFUser"];
+                [chat setValue:text forKey:@"mostRecentMessage"];
+                [chat setValue:[PFUser currentUser] forKey:@"sender"];
+                [chat saveInBackground];
+            }
+        }];
     }];
+
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -241,7 +263,22 @@
     }];
 
     self.avatars = [NSMutableDictionary new];
-    for (PFUser *user in self.PFUsersInChat){
+    [self setAvatarsForPFUsers:self.PFUsersInChat];
+}
+
+- (void)setupNewMessage:(PFUser *)chatWithUser
+{
+    self.PFUsersInChat = [NSMutableArray arrayWithArray:@[chatWithUser, [PFUser currentUser]]];
+
+    // no messages to query for so make empty array
+    self.messages = [NSMutableArray new];
+    self.avatars = [NSMutableDictionary new];
+    [self setAvatarsForPFUsers:self.PFUsersInChat];
+}
+
+- (void)setAvatarsForPFUsers:(NSMutableArray *)PFUsers
+{
+    for (PFUser *user in PFUsers){
         PFFile *userThumbnail = user[@"thumbnailImage"];
 
         UIImage *placeholderImage = [UIImage imageNamed:@"user_circle"];
@@ -253,6 +290,5 @@
         }];
     }
 }
-
 
 @end

@@ -16,5 +16,6 @@
 @property (strong, nonatomic) NSMutableDictionary *avatars;
 
 - (void)setupMessageData:(PFObject *)messageData;
+- (void)setupNewMessage:(PFUser *)chatWithUser;
 
 @end

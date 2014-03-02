@@ -7,6 +7,7 @@
 //
 
 #import "BLKOtherPersonProfileViewController.h"
+#import "BLKChatViewController.h"
 
 @interface BLKOtherPersonProfileViewController ()
 
@@ -26,6 +27,12 @@
     [super viewWillAppear:animated];
 
    
+}
+
+- (IBAction)chatButtonPressed:(UIBarButtonItem *)sender {
+    BLKChatViewController *chatController = [[BLKChatViewController alloc] init];
+    [chatController setupNewMessage:self.userData.user];
+    [self.navigationController pushViewController:chatController animated:NO];
 }
 
 @end

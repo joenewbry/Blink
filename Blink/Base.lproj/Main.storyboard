@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sSu-gg-T3u">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T1Y-vc-fNw">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -252,7 +252,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Other Profile" id="E62-NC-f9g">
-                        <barButtonItem key="rightBarButtonItem" image="chat_icon.png" style="plain" id="hy5-ey-x8V"/>
+                        <barButtonItem key="rightBarButtonItem" image="chat_icon.png" style="plain" id="hy5-ey-x8V">
+                            <connections>
+                                <action selector="chatButtonPressed:" destination="p2D-8g-FiS" id="gvS-bu-Kng"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collegeLabel" destination="AQN-gB-UHA" id="doz-qv-7c3"/>
@@ -381,38 +385,6 @@
                 </customObject>
             </objects>
             <point key="canvasLocation" x="-142" y="-175"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="gig-n3-0WF">
-            <objects>
-                <viewController id="sSu-gg-T3u" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="j0E-8s-KYD"/>
-                        <viewControllerLayoutGuide type="bottom" id="FBb-Dl-MTC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BxJ-SV-Erk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7T9-wB-c90">
-                                <rect key="frame" x="0.0" y="143" width="320" height="337"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconNoBackground60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="fDH-6Q-F3T">
-                                <rect key="frame" x="10" y="153" width="320" height="266"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconNoBackground60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="4C2-CX-axd">
-                                <rect key="frame" x="10" y="309" width="320" height="266"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qgp-B5-N3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-225" y="281"/>
         </scene>
     </scenes>
     <resources>
