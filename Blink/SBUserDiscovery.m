@@ -73,6 +73,13 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     return mySBUserDiscovery;
 }
 
+- (CBCentralManager *)centralManager
+{
+
+    if (!centralManager) centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey : @YES }];
+    return centralManager;
+}
+
 - (NSMutableDictionary *)userData
 {
     if (!_userData) _userData = [[NSMutableDictionary alloc]initWithDictionary:@{@"time-stamp" : @"Some date string"}];
@@ -92,7 +99,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
                                                   @{CBCentralManagerOptionShowPowerAlertKey : @YES,
                                                     CBCentralManagerOptionRestoreIdentifierKey : launchOptions[UIApplicationLaunchOptionsBluetoothCentralsKey]                                                            }];
         } else {
-            self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey : @YES }];
+
         }
         self.discoveringUsers = [[NSMutableSet alloc] init];
         self.discoveredUsers  = [[NSMutableArray alloc] init];

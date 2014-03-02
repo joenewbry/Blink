@@ -21,6 +21,7 @@
 @interface BLKSignUpViewController ()
 
 @property (strong, nonatomic) IBOutlet UIImageView *logoView;
+@property (strong, nonatomic) IBOutlet UIButton *joinWithFacebookButton;
 
 @end
 
@@ -47,11 +48,13 @@
 
 - (IBAction)facebookLoginPressed:(id)sender {
     [self startSpin:self.logoView];
-
+    [self.joinWithFacebookButton setEnabled:FALSE];
     NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday"];
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         if (!user) {
             [self stopSpin]; // stop spinner
+            [self.joinWithFacebookButton setEnabled:TRUE];
+
             if (!error) {
                 NSLog(@"User canceled facebook login");
                 NZAlertView *canceledAlert = [[NZAlertView alloc] initWithStyle:NZAlertStyleInfo title:@"Facebook login canceled" message:@"To use Blink you need to sign in with Facebook."];
@@ -72,6 +75,8 @@
 
             [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 [self stopSpin]; // stop spinning modal
+                [self.joinWithFacebookButton setEnabled:TRUE];
+
                 if (error) {
                     NSLog(@"An error occured getting FBData: erro %@", error);
                     NZAlertView *fbDataErrorAlert = [[NZAlertView alloc] initWithStyle:NZAlertStyleInfo title:@"Oops, No Facebook Data" message:@"We weren't able to fetch your Facebook data. Try connecting with Facebook again. If you still can't log in get send an email to joenewbry@gmail.com or text 1-541-760-1871."];
@@ -83,6 +88,8 @@
                         NSLog(@"User has connected with facebook, initialize all processes");
                         // stop spining icon
                         [self stopSpin];
+                        [self.joinWithFacebookButton setEnabled:TRUE];
+
                         [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
 
                         NSDictionary *userData = (NSDictionary *)result;
@@ -120,7 +127,7 @@
     currentUser[@"birthday"] = birthday;
     currentUser[@"relationship"] = relationship;
     currentUser[@"college"] = college;
-    currentUser[@"quote"] = quotes;
+    if (quotes) currentUser[@"quote"] = quotes;
     currentUser[@"pictureURL"] = pictureURL;
     [currentUser saveInBackground];
 }
