@@ -25,8 +25,8 @@
     //build the colors array for the gradient
     NSArray *colors = [NSArray arrayWithObjects:
                        (id)[theColor CGColor],
-                       (id)[[theColor colorWithAlphaComponent:0.9f] CGColor],
-                       (id)[[theColor colorWithAlphaComponent:0.6f] CGColor],
+                       (id)[[theColor colorWithAlphaComponent:0.7f] CGColor],
+                       (id)[[theColor colorWithAlphaComponent:0.5f] CGColor],
                        (id)[[theColor colorWithAlphaComponent:0.4f] CGColor],
                        (id)[[theColor colorWithAlphaComponent:0.3f] CGColor],
                        (id)[[theColor colorWithAlphaComponent:0.1f] CGColor],

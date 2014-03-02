@@ -10,7 +10,18 @@
 
 @interface BLKFeed : UIView
 
-- (void)addToFeed:(NSMutableString *)string;
-- ((NSMut))
+- (id)initWithTimerInterval:(float)timerInterval;
+
+
+- (void)addToFeed:(UILabel *)string;
+- (void)removeFromFeed:(int)index;
+-(BOOL)isEmpty;
+- (void)clear;
+- (void)start:(float)timerInterval;
+- (void)pause;
+
+@property float timerInterval;
+
+
 
 @end
