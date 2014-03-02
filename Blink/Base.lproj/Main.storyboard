@@ -134,6 +134,35 @@
                                                     <action selector="changeImageButton:" destination="kDp-rm-gGY" eventType="touchUpInside" id="Ygd-Bj-EMB"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBo-9g-a1p">
+                                                <rect key="frame" x="0.0" y="265" width="320" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.043137254899999998" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="21"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happy is the man who finds wisdom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Moy-WW-z0L">
+                                                <rect key="frame" x="0.0" y="312" width="320" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="College" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0H-R0-55k">
+                                                <rect key="frame" x="0.0" y="383" width="320" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Relationship Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-gf-Fes">
+                                                <rect key="frame" x="0.0" y="354" width="320" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WMb-te-X1w" customClass="BLKFeed">
                                                 <rect key="frame" x="0.0" y="377" width="320" height="39"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -159,8 +188,12 @@
                     <connections>
                         <outlet property="changeImageButton" destination="X0f-bn-8ma" id="EhU-LD-O5P"/>
                         <outlet property="changeStateButton" destination="YPM-Q5-A5h" id="6uF-YY-5wa"/>
-                        <outlet property="feedView" destination="WMb-te-X1w" id="0BM-uc-LMC"/>
+                        <outlet property="collegeLabel" destination="p0H-R0-55k" id="UeS-8i-7xt"/>
+                        <outlet property="feedView" destination="WMb-te-X1w" id="xJm-W9-rem"/>
                         <outlet property="imageView" destination="C3U-BN-aNp" id="9Gr-61-Gwx"/>
+                        <outlet property="nameLabel" destination="mBo-9g-a1p" id="AQT-9z-1aL"/>
+                        <outlet property="quoteLabel" destination="Moy-WW-z0L" id="nkv-To-5o5"/>
+                        <outlet property="relationshipLabel" destination="zuV-gf-Fes" id="iQe-9t-TXe"/>
                         <outlet property="scrollViewContainer" destination="Fp0-JI-czO" id="h6H-Kr-Sm9"/>
                     </connections>
                 </viewController>

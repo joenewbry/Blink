@@ -12,8 +12,10 @@
 
 - (id)initWithTimerInterval:(float)timerInterval;
 
-- (void)addToFeed:(NSMutableAttributedString *)string;
+
+- (void)addToFeed:(UILabel *)string;
 - (void)removeFromFeed:(int)index;
+-(BOOL)isEmpty;
 - (void)clear;
 
 @property float timerInterval;

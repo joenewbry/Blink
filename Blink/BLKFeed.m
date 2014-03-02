@@ -55,13 +55,12 @@
 
 #pragma mark-- ManageFeed
 
--(void)addToFeed:(NSMutableAttributedString *)string {
+-(void)addToFeed:(UILabel *)label {
     
-    UILabel * tempLabel= [[UILabel alloc] init];
-    [tempLabel setAttributedText:string];
-    [self addSubview:tempLabel];
-    tempLabel.alpha = 0; 
-    [self.feed addObject:tempLabel];
+    [self addSubview:label];
+    label.alpha = 0;
+    [self.feed addObject:label];
+
     
 }
 
@@ -85,6 +84,11 @@
     
     return tempLabel;
 }
+
+- (BOOL)isEmpty {
+    return !(self.feed.count > 0);
+}
+
 
 #pragma mark-- Animation
 

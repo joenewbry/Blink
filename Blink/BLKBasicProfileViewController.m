@@ -131,6 +131,16 @@
 # pragma mark-- UpdateMethod
 
 - (void)update {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+    [self.imageView setImage:[[UIImage alloc] initWithData:self.imgData]];
+    [self.nameLabel  setText:self.nameString];
+    [self.quoteLabel setText:self.quoteString];
+    [self.collegeLabel setText:self.collegeString];
+    [self.relationshipLabel setText:self.relationshipString];
+=======
+>>>>>>> Stashed changes
     [self.imageView setImage:self.profileImage];
     [UIView addLinearGradientToView:self.imageView withPercentageCoverage:0.2 withColor:[UIColor blackColor] transparentToOpaque:YES];
     
@@ -139,7 +149,18 @@
     [self.collegeLabel setText:self.college];
     [self.relationshipLabel setText:self.relationshipStatus];
     
+<<<<<<< Updated upstream
     
+=======
+    if ([self.feedView isEmpty]) {
+        [self.feedView addToFeed:[self.quoteLabel mutableCopy]];
+        [self.feedView addToFeed:[self.collegeLabel mutableCopy]];
+        [self.feedView addToFeed:[self.relationshipLabel mutableCopy]];
+    }
+    
+    self.feedView.isAnimating = YES;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     
 }
 
