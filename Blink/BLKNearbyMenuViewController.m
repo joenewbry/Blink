@@ -17,6 +17,7 @@
 #import <JSMessagesViewController/JSAvatarImageFactory.h>
 #import "SBUser.h"
 #import "BLKMessageData.h"
+#import "BLKSaveImage.h"
 
 @interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
 
@@ -38,6 +39,8 @@
     [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
 
     [[BLKMessageData instance] searchForMessagesIncluding:[PFUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
+
+    [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread
 }
 
 - (void)shareProfileViaBluetooth

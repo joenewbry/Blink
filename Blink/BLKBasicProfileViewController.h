@@ -11,6 +11,8 @@
 
 @interface BLKBasicProfileViewController : UIViewController 
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (strong, nonatomic) UIImage *profileImage;
 @property (nonatomic) NSMutableString *username;
 @property (nonatomic) NSMutableString *quote;

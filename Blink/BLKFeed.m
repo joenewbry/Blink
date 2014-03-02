@@ -57,6 +57,7 @@ static const NSInteger offset = 20;
             label.frame   = CGRectMake(0, -offset, label.frame.size.width, label.frame.size.height);
             [self.feed addObject:label];
             [self addSubview:label];
+            
         }
     }
 }
@@ -66,7 +67,11 @@ static const NSInteger offset = 20;
 }
 
 - (void)clear {
-    [self.feed removeAllObjects];
+    
+    while ([self.feed count] > 0) {
+        [[self.feed objectAtIndex:0] removeFromSuperview];
+        [self.feed removeObjectAtIndex:0];
+    }
 }
 
 - (UILabel *)getPrevious {
@@ -103,6 +108,11 @@ static const NSInteger offset = 20;
 - (void)pause {
     self.isAnimating = NO;
 }
+
+- (void)resume {
+    self.isAnimating = YES;
+}
+
 
 - (void)timerFireMethod:(NSTimer *)timer {
     

@@ -7,11 +7,13 @@
 //
 
 #import "BLKYourProfileViewController.h"
+#import <Parse/Parse.h>
 
 enum BLKProfileState {
+    BLKProfileStateViewing,
     BLKProfileStateEditingWithKeyboard,
     BLKProfileStateEditingWithoutKeyboard,
-    BLKProfileStateViewing
+    
 };
 typedef enum BLKProfileState BLKProfileState;
 
@@ -21,6 +23,7 @@ typedef enum BLKProfileState BLKProfileState;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *changeStateButton;
 
+@property (weak, nonatomic) IBOutlet UIView *blueBackgroundView;
 @property (weak, nonatomic) IBOutlet UIButton *changeImageButton;
 
 @property (nonatomic) UITextField * activeTextField;
@@ -59,9 +62,25 @@ typedef enum BLKProfileState BLKProfileState;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(onKeyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     
-    [self setLablesToHidden:YES];
+    UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     
+    /* failed attempt to dismiss keyboard on swipe
+    [self.scrollViewContainer setUserInteractionEnabled:YES];
+    [self.scrollViewContainer addGestureRecognizer:swipeDownGestureRecognizer];
+    [self setLablesToHidden:YES];
+     */
 }
+
+
+/*
+- (void)handleSwipe:(UISwipeGestureRecognizer *)gesture {
+    
+    if (self.currentState == BLKProfileStateEditingWithKeyboard) {
+        [self setStateEditingWithoutKeyboard];
+    }
+    
+} */
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -111,7 +130,7 @@ typedef enum BLKProfileState BLKProfileState;
     
     if (!_quoteTextField) {
         _quoteTextField = [[UITextField alloc] init];
-        [self setUpTextField:_quoteTextField tag:2 defaultString:@"Other information here"];
+        [self setUpTextField:_quoteTextField tag:2 defaultString:@"What's on your mind?"];
     } else {
         self.quoteTextField.hidden = false;
     }
@@ -125,14 +144,12 @@ typedef enum BLKProfileState BLKProfileState;
     
     if (!_statusTextField) {
         _statusTextField = [[UITextField alloc] init];
-        [self setUpTextField:_statusTextField tag:4 defaultString:@"Single?"];
+        [self setUpTextField:_statusTextField tag:4 defaultString:@"Relationship Status?"];
     } else {
         self.statusTextField.hidden = false;
     }
     
-    
-    //make other labels invisibile
-    [self setNormalViewToHidden:true];
+    [self.blueBackgroundView setHidden:NO];
 }
 
 - (void)setUpTextField:(UITextField *)textField tag:(int)tag defaultString:(NSString *)defaultString {
@@ -147,7 +164,7 @@ typedef enum BLKProfileState BLKProfileState;
     [textField setDelegate:self];
     [self.scrollViewContainer addSubview:textField];
     [textField setTextColor:[UIColor whiteColor]];
-    [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [textField setClearButtonMode:UITextFieldViewModeAlways];
     [textField setAttributedText:tempLabel.attributedText];
     
     //TODO
@@ -165,9 +182,8 @@ typedef enum BLKProfileState BLKProfileState;
 }
 
 - (void)hideTextFields {
-    
-    [self.textFieldArray setValue:[NSNumber numberWithBool:true] forKey:@"hidden"]; //not sure if this works
-    [self setLablesToHidden:false];
+    [self.textFieldArray setValue:[NSNumber numberWithBool:true] forKey:@"hidden"];
+    [self.blueBackgroundView setHidden:YES];
 }
 
 -(void)setStateViewing {
@@ -176,20 +192,20 @@ typedef enum BLKProfileState BLKProfileState;
     [self.changeStateButton setTitle:@"Edit"];
     [self.activeTextField resignFirstResponder]; // ends current editing session and dismisses keyboard
     [self.scrollViewContainer setContentOffset:CGPointZero animated:YES]; // scroll to top
+    [self setNormalViewToHidden:NO];
+    
     self.currentState = BLKProfileStateViewing;
 }
 
 - (void)setStateEditingWithKeyboard {
-    
     [self.changeStateButton setTitle:@"Done"];
     [self setupTextFields];
     self.changeImageButton.hidden = NO;
-    self.currentState = BLKProfileStateEditingWithKeyboard;
-    
-    
-    
-    
     [self.scrollViewContainer scrollRectToVisible:CGRectMake(0.0, 1000, 320, 22) animated:YES];
+    [self setNormalViewToHidden:YES];
+    
+    self.currentState = BLKProfileStateEditingWithKeyboard;
+
 
 }
 
@@ -197,9 +213,11 @@ typedef enum BLKProfileState BLKProfileState;
     [self.changeStateButton setTitle:@"Done"];
     [self setupTextFields];
     self.changeImageButton.hidden = NO;
-   
     [self.activeTextField resignFirstResponder]; // ends current editing session and dismisses keyboard
     [self.scrollViewContainer setContentOffset:CGPointZero animated:YES]; // move the scroll view back to 0,0
+    
+    [self setNormalViewToHidden:YES];
+    
     self.currentState = BLKProfileStateEditingWithoutKeyboard;
 }
 
@@ -237,15 +255,25 @@ typedef enum BLKProfileState BLKProfileState;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (self.activeTextField.tag == 1) {
         self.username = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        [PFUser currentUser][@"profileName"] = self.username;
+        self.SBUserModel.username = self.username;
     } else if (self.activeTextField.tag == 2) {
          self.quote = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-    } else if (self.activeTextField.tag == 3) {
-        self.relationshipStatus = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        [PFUser currentUser][@"quote"] = self.quote;
+        self.SBUserModel.quote = self.quote;
     } else if (self.activeTextField.tag == 4) {
+        self.relationshipStatus = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        [PFUser currentUser][@"relationship"] = self.relationshipStatus;
+        self.SBUserModel.relationshipStatus = self.relationshipStatus;
+    } else if (self.activeTextField.tag == 3) {
         self.college = [[NSMutableString alloc] initWithString:self.activeTextField.text];
+        [PFUser currentUser][@"college"] = self.college;
+        self.SBUserModel.college = self.college;
     }
     
     self.activeTextField = nil;
+    
+    [[PFUser currentUser] saveInBackground];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
