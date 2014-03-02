@@ -80,7 +80,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Blink" id="I85-qL-WoQ">
-                        <barButtonItem key="rightBarButtonItem" image="UserNaveIcon.png" style="plain" id="SAy-AG-txR">
+                        <barButtonItem key="rightBarButtonItem" image="user_profile_icon" style="plain" id="SAy-AG-txR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="kDp-rm-gGY" kind="push" identifier="toMyProfile" id="nhM-2X-C73"/>
@@ -123,10 +123,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </imageView>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0f-bn-8ma">
-                                                <rect key="frame" x="110" y="153" width="100" height="30"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0f-bn-8ma">
+                                                <rect key="frame" x="113" y="113" width="95" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Change Image">
+                                                <state key="normal" image="camera_icon">
                                                     <color key="titleColor" red="1" green="0.17885786889999999" blue="0.01075810764" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -134,6 +134,25 @@
                                                     <action selector="changeImageButton:" destination="kDp-rm-gGY" eventType="touchUpInside" id="Ygd-Bj-EMB"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZ4-0d-w1b">
+                                                <rect key="frame" x="0.0" y="256" width="320" height="160"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.043137254899999998" green="0.87843137250000003" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="College" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0H-R0-55k">
+                                                <rect key="frame" x="0.0" y="340" width="320" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happy is the man who finds wisdom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Moy-WW-z0L">
+                                                <rect key="frame" x="0.0" y="298" width="320" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBo-9g-a1p">
                                                 <rect key="frame" x="0.0" y="256" width="320" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -142,21 +161,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="College" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0H-R0-55k">
-                                                <rect key="frame" x="0.0" y="298" width="320" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Happy is the man who finds wisdom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Moy-WW-z0L">
-                                                <rect key="frame" x="0.0" y="340" width="320" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Relationship Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-gf-Fes">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Relationship Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-gf-Fes">
                                                 <rect key="frame" x="0.0" y="382" width="320" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
@@ -183,7 +188,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="0Pj-tY-1Y4">
+                    <navigationItem key="navigationItem" id="0Pj-tY-1Y4">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="YPM-Q5-A5h">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -193,6 +198,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="blueBackgroundView" destination="OZ4-0d-w1b" id="hr9-XF-bcn"/>
                         <outlet property="changeImageButton" destination="X0f-bn-8ma" id="EhU-LD-O5P"/>
                         <outlet property="changeStateButton" destination="YPM-Q5-A5h" id="6uF-YY-5wa"/>
                         <outlet property="collegeLabel" destination="p0H-R0-55k" id="UeS-8i-7xt"/>
@@ -208,7 +214,7 @@
             </objects>
             <point key="canvasLocation" x="723" y="-745"/>
         </scene>
-        <!--Other Person Profile View Controller - Other Profile-->
+        <!--Other Person Profile View Controller-->
         <scene sceneID="iDj-0X-KHj">
             <objects>
                 <viewController id="p2D-8g-FiS" customClass="BLKOtherPersonProfileViewController" sceneMemberID="viewController">
@@ -253,12 +259,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aev-FJ-CGv" customClass="BLKFeed">
+                                <rect key="frame" x="0.0" y="377" width="320" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Other Profile" id="E62-NC-f9g"/>
+                    <navigationItem key="navigationItem" id="E62-NC-f9g"/>
                     <connections>
                         <outlet property="collegeLabel" destination="AQN-gB-UHA" id="doz-qv-7c3"/>
+                        <outlet property="feedView" destination="aev-FJ-CGv" id="XdP-AC-V5K"/>
                         <outlet property="imageView" destination="gZA-6d-sbd" id="5nK-gN-iq1"/>
                         <outlet property="nameLabel" destination="1bV-Gj-LKa" id="xXj-tF-DBo"/>
                         <outlet property="quoteLabel" destination="bTs-xj-wML" id="xFn-7m-yG9"/>
@@ -420,7 +432,8 @@
     <resources>
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
         <image name="IconNoBackground60x60.png" width="60" height="60"/>
-        <image name="UserNaveIcon.png" width="30" height="30"/>
+        <image name="camera_icon" width="67" height="55"/>
+        <image name="user_profile_icon" width="73" height="71"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

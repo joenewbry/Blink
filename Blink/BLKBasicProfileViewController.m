@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) NSURLConnection *URLConnection;
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *relationshipLabel;
@@ -118,9 +118,22 @@
 {
     [super viewDidLoad];
     [self.labelArray addObjectsFromArray:@[self.nameLabel, self.quoteLabel, self.collegeLabel, self.relationshipLabel]];
+    
     [self update];
     [self setLablesToHidden:YES];
+    [self setUpFeedView];
     [self.feedView start:2.0];
+    
+    [UIView addLinearGradientToView:self.imageView
+             withPercentageCoverage:0.2
+                          withColor:[UIColor blackColor]
+                transparentToOpaque:YES]; // so its only applied once
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationItem setTitle:self.username];
 
 }
 
@@ -135,20 +148,11 @@
 - (void)update {
 
     [self.imageView setImage:self.profileImage];
-    [UIView addLinearGradientToView:self.imageView withPercentageCoverage:0.2 withColor:[UIColor blackColor] transparentToOpaque:YES];
     
     [self.nameLabel  setText:self.username];
     [self.quoteLabel setText:self.quote];
     [self.collegeLabel setText:self.college];
     [self.relationshipLabel setText:self.relationshipStatus];
-    
-
-    if ([self.feedView isEmpty]) {
-        [self.feedView addToFeed:[self deepLabelCopy:self.quoteLabel]];
-         [self.feedView addToFeed:[self deepLabelCopy:self.collegeLabel]];
-        [self.feedView addToFeed:[self deepLabelCopy: self.relationshipLabel]];
-    }
-    
     
 }
 
@@ -156,6 +160,13 @@
 
 #pragma mark-- Helper
 
+- (void)setUpFeedView {
+    if ([self.feedView isEmpty]) {
+        [self.feedView addToFeed:[self deepLabelCopy:self.quoteLabel]];
+        [self.feedView addToFeed:[self deepLabelCopy:self.collegeLabel]];
+        [self.feedView addToFeed:[self deepLabelCopy: self.relationshipLabel]];
+    }
+}
 - (UILabel *)deepLabelCopy:(UILabel *)label {
     UILabel *duplicateLabel = [[UILabel alloc] initWithFrame:label.frame];
     duplicateLabel.attributedText = label.attributedText;
@@ -186,9 +197,15 @@
 }
 
 - (void)setNormalViewToHidden:(BOOL)hidden {
-    [self setLablesToHidden:hidden];
+    //[self setLablesToHidden:hidden];
     [self.feedView setHidden:hidden];
-    [self.feedView pause];
+    if (hidden) {
+        [self.feedView pause];
+    } else {
+        [self.feedView clear];
+        [self setUpFeedView];
+        [self.feedView resume];
+    }
     NSLog(@"Hide values called");
 }
 
