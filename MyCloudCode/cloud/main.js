@@ -29,7 +29,7 @@
 
                     var query = new Parse.Query(Parse.Installation);
                     query.containedIn('user', chat.get("recipientsArrayPFUser")); // request.object.get is [] so sends to all push registered users
-
+                    query.notEqualTo('user', chat.get('sender'));
                     Parse.Push.send({
                         where: query, // sets our installation query
                         data : {
@@ -42,9 +42,7 @@
                 }
             }); 
         }
-
     });
-
   });
     // var query = new Parse.Query(Parse.Installation);
     // query.equalTo('user', request.object.get("toUser"));
