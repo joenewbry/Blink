@@ -9,41 +9,47 @@
 #import "BLKAppDelegate.h"
 #import <Parse/Parse.h>
 #import "BLKConstants.h"
+#import "BLKNearbyMenuViewController.h"
 
 @implementation BLKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    BOOL local = true;
+
     
-    
-    if (local) {
-        //setup parse authorization, facebook login
-        [Parse setApplicationId:kParseAppID clientKey:kParseClient];
-        [PFFacebookUtils initializeFacebook];
+    //setup parse authorization, facebook login
+    [Parse setApplicationId:kParseAppID clientKey:kParseClient];
+    [PFFacebookUtils initializeFacebook];
 
-        // sets app icon badge to 0
-        if (application.applicationIconBadgeNumber != 0) {
-            application.applicationIconBadgeNumber = 0;
-            [[PFInstallation currentInstallation] saveEventually];
-        }
-
-        PFACL *defaultACL = [PFACL ACL];
-        // Enable public read access by default, with any newly created PFOBjects belonging to the current users
-        [defaultACL setPublicReadAccess:YES];
-        [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
-
-        [self configureRemoteNotifications:application];
-
-        // sets the time wifi and stuff at the top to either white or black
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
+    // sets app icon badge to 0
+    if (application.applicationIconBadgeNumber != 0) {
+        application.applicationIconBadgeNumber = 0;
+        [[PFInstallation currentInstallation] saveEventually];
     }
-    
+
+    PFACL *defaultACL = [PFACL ACL];
+    // Enable public read access by default, with any newly created PFOBjects belonging to the current users
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+
+    [self configureRemoteNotifications:application];
+
+    // sets the time wifi and stuff at the top to either white or black
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+
     //set navigation bar font type and size
     [[UINavigationBar appearance]  setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor whiteColor], NSForegroundColorAttributeName,
                                                                      [UIFont fontWithName:@"GillSans-Light" size:30.0], NSFontAttributeName, nil]];
+
+    // If a user is already logged in, override storyboard launch
+    if ([PFUser currentUser]){
+        UIWindow *window = self.window;
+        UIStoryboard *storyboard = [[self.window rootViewController] storyboard];
+        UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"navController"];
+        window.rootViewController = navController;
+    }
 
 
     return YES;

@@ -94,13 +94,9 @@
 
                         NSDictionary *userData = (NSDictionary *)result;
                         [self parseUserDataAndSaveToParse:userData]; // FBProfileData to PFUser
-                        [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
+
                         [self saveInstallationForPush]; // save unique push channel for logged in user
                         [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread, maybe this will work
-
-                        [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
-
-                        [[BLKMessageData instance] searchForMessagesIncluding:user]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
                     }
                 }
             }];
@@ -130,15 +126,6 @@
     if (quotes) currentUser[@"quote"] = quotes;
     currentUser[@"pictureURL"] = pictureURL;
     [currentUser saveInBackground];
-}
-
-- (void)shareProfileViaBluetooth
-{
-    [SBUser createUser];
-    [SBUser currentUser].userModel.username = [PFUser currentUser][@"profileName"];
-    [SBUser currentUser].userModel.objectId = [PFUser currentUser].objectId;
-    [SBUser currentUser].userModel.quote = [PFUser currentUser][@"quote"];
-    [SBUser currentUser].userModel.relationshipStatus = [PFUser currentUser][@"relationship"];
 }
 
 - (void)saveInstallationForPush

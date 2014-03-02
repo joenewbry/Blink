@@ -16,6 +16,7 @@
 #import "BLKOtherPersonProfileViewController.h"
 #import <JSMessagesViewController/JSAvatarImageFactory.h>
 #import "SBUser.h"
+#import "BLKMessageData.h"
 
 @interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
 
@@ -33,6 +34,26 @@
 {
     [super viewDidLoad];
 
+    [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
+    [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
+
+    [[BLKMessageData instance] searchForMessagesIncluding:[PFUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
+}
+
+- (void)shareProfileViaBluetooth
+{
+    [SBUser createUser];
+    [SBUser currentUser].userModel.username = [PFUser currentUser][@"profileName"];
+    [SBUser currentUser].userModel.objectId = [PFUser currentUser].objectId;
+    [SBUser currentUser].userModel.quote = [PFUser currentUser][@"quote"];
+    [SBUser currentUser].userModel.relationshipStatus = [PFUser currentUser][@"relationship"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+
     // start recieving user discovery messages
     [SBNearbyUsers instance].delegate = self;
     self.nearbyArray = [[SBNearbyUsers instance] allUsers];
@@ -45,6 +66,8 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
