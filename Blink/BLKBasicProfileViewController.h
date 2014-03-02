@@ -21,5 +21,6 @@
 
 - (UILabel*)getLabelFromTag:(NSInteger)tag;
 - (void)setLablesToHidden:(BOOL)hidden;
+- (void)setNormalViewToHidden:(BOOL)hidden;
 
 @end

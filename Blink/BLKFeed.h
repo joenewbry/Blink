@@ -17,9 +17,10 @@
 - (void)removeFromFeed:(int)index;
 -(BOOL)isEmpty;
 - (void)clear;
+- (void)start:(float)timerInterval;
+- (void)pause;
 
 @property float timerInterval;
-@property (nonatomic) BOOL isAnimating;
 
 
 

@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *relationshipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
-@property (weak, nonatomic) IBOutlet BLKFeed *feedView;
+@property (strong, nonatomic) IBOutlet BLKFeed *feedView;
 
 @property (nonatomic) NSMutableArray *labelArray;
 
@@ -35,13 +35,13 @@
 @synthesize quote = _quote;
 @synthesize username = _username;
 
-/*
 - (BLKFeed *)feedView {
     
     if (!_feedView) _feedView = [[BLKFeed alloc] initWithTimerInterval:3.0];
+    return _feedView;
     
 }
-*/
+
 
 -(void)setSBUserModel:(SBUserModel *)SBUserModel {
     _SBUserModel = SBUserModel;
@@ -119,6 +119,8 @@
     [super viewDidLoad];
     [self.labelArray addObjectsFromArray:@[self.nameLabel, self.quoteLabel, self.collegeLabel, self.relationshipLabel]];
     [self update];
+    [self setLablesToHidden:YES];
+    [self.feedView start:2.0];
 
 }
 
@@ -131,16 +133,7 @@
 # pragma mark-- UpdateMethod
 
 - (void)update {
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-    [self.imageView setImage:[[UIImage alloc] initWithData:self.imgData]];
-    [self.nameLabel  setText:self.nameString];
-    [self.quoteLabel setText:self.quoteString];
-    [self.collegeLabel setText:self.collegeString];
-    [self.relationshipLabel setText:self.relationshipString];
-=======
->>>>>>> Stashed changes
+
     [self.imageView setImage:self.profileImage];
     [UIView addLinearGradientToView:self.imageView withPercentageCoverage:0.2 withColor:[UIColor blackColor] transparentToOpaque:YES];
     
@@ -149,24 +142,28 @@
     [self.collegeLabel setText:self.college];
     [self.relationshipLabel setText:self.relationshipStatus];
     
-<<<<<<< Updated upstream
-    
-=======
+
     if ([self.feedView isEmpty]) {
-        [self.feedView addToFeed:[self.quoteLabel mutableCopy]];
-        [self.feedView addToFeed:[self.collegeLabel mutableCopy]];
-        [self.feedView addToFeed:[self.relationshipLabel mutableCopy]];
+        [self.feedView addToFeed:[self deepLabelCopy:self.quoteLabel]];
+         [self.feedView addToFeed:[self deepLabelCopy:self.collegeLabel]];
+        [self.feedView addToFeed:[self deepLabelCopy: self.relationshipLabel]];
     }
     
-    self.feedView.isAnimating = YES;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     
 }
 
 
 
 #pragma mark-- Helper
+
+- (UILabel *)deepLabelCopy:(UILabel *)label {
+    UILabel *duplicateLabel = [[UILabel alloc] initWithFrame:label.frame];
+    duplicateLabel.attributedText = label.attributedText;
+    duplicateLabel.textColor = label.textColor;
+    duplicateLabel.backgroundColor = label.backgroundColor;
+    
+    return duplicateLabel;
+}
 
 - (UILabel *)getLabelFromTag:(NSInteger)tag {
     
@@ -184,6 +181,14 @@
 
 - (void)setLablesToHidden:(BOOL)hidden {
     [self.labelArray setValue:[NSNumber numberWithBool:hidden] forKey:@"hidden"];
+    
+    NSLog(@"Hide values called");
+}
+
+- (void)setNormalViewToHidden:(BOOL)hidden {
+    [self setLablesToHidden:hidden];
+    [self.feedView setHidden:hidden];
+    [self.feedView pause];
     NSLog(@"Hide values called");
 }
 

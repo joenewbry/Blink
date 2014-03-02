@@ -13,10 +13,14 @@
 @property (nonatomic) int currentIndex;
 @property (nonatomic) NSMutableArray *feed;
 @property (nonatomic) NSTimer *timer;
+@property (nonatomic) BOOL isAnimating;
+
 @end
 
 
 @implementation BLKFeed
+
+static const NSInteger offset = 20;
 
 #pragma mark-- Initialization
 
@@ -24,7 +28,7 @@
     self = [super init];
     
     if (self) {
-        self.timerInterval = timerInterval;
+
     } else {
         NSLog(@"error initializing self");
     }
@@ -34,34 +38,27 @@
 
 #pragma mark-- GettersAndSetters
 
--(NSTimer *)timer {
-    if (!_timer) _timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(animateLabelChange:) userInfo:nil repeats:YES];
-    
-    return _timer;
-}
-
 - (NSMutableArray *)feed {
     if (!_feed) _feed = [[NSMutableArray alloc] init];
     
     return _feed;
 }
 
--(void)setCurrentIndex:(int)currentIndex {
-    
-    if (!_currentIndex) _currentIndex = 0;
-    
-    [self animateLabelChange];
-}
-
 #pragma mark-- ManageFeed
 
 -(void)addToFeed:(UILabel *)label {
     
-    [self addSubview:label];
-    label.alpha = 0;
-    [self.feed addObject:label];
-
-    
+    if (label) {
+        if (label.text.length > 0) {
+            label.alpha = 0;
+            [label setTextColor:[UIColor whiteColor]];
+            [label setBackgroundColor:[UIColor clearColor]];
+            [label setHidden:NO];
+            label.frame   = CGRectMake(0, -offset, label.frame.size.width, label.frame.size.height);
+            [self.feed addObject:label];
+            [self addSubview:label];
+        }
+    }
 }
 
 -(void)removeFromFeed:(int)index {
@@ -92,22 +89,62 @@
 
 #pragma mark-- Animation
 
-- (void)animateLabelChange {
+-(void)start:(float)timerInterval {
+    self.isAnimating = YES;
+    self.timerInterval = timerInterval;
+    
+    if (!_timer) _timer = [NSTimer scheduledTimerWithTimeInterval:2.0f
+                                                           target:self
+                                                         selector:@selector(timerFireMethod:)
+                                                         userInfo:nil
+                                                          repeats:YES];
+}
+
+- (void)pause {
+    self.isAnimating = NO;
+}
+
+- (void)timerFireMethod:(NSTimer *)timer {
+    
+    UILabel * tempLabel = (UILabel *)self.feed[0];
+    
+    NSLog(@"%@", NSStringFromCGRect(tempLabel.frame));
+    NSLog(@"%hhd", tempLabel.isHidden);
+    NSLog(@"%f", tempLabel.alpha);
+    
+    NSLog(@"%f", self.timer.timeInterval);
+    
     if (self.isAnimating) {
+        
         if ([self getPrevious].alpha != 0) {
             // need to animate the previous view out
             
-            [UIView animateWithDuration:1.0 animations:^{
-                [self getPrevious].alpha = 0.0;
+            [UILabel animateWithDuration:.5 animations:^{
+                UILabel * previousLabel = [self getPrevious];
+                previousLabel.alpha = 0.0;
+                previousLabel.frame = CGRectMake(previousLabel.frame.origin.x,
+                                                 previousLabel.frame.origin.y +offset, previousLabel.frame.size.width,
+                                                 previousLabel.frame.size.height);
             }];
-            
         }
         
+        NSLog(@"animation called");
         //animate the currentView in
+        UILabel *currentLabel = [self getCurrent];
+        [currentLabel setFrame:CGRectMake(0.0, -offset, currentLabel.frame.size.width, currentLabel.frame.size.height)];
         
-        [UIView animateWithDuration:1.0 animations:^{
-            [self getCurrent].alpha = 1.0;
+        [UILabel animateWithDuration:.5 animations:^{
+            
+            [currentLabel setFrame: CGRectMake(currentLabel.frame.origin.x,
+                                               currentLabel.frame.origin.y + offset,
+                                               currentLabel.frame.size.width,
+                                               currentLabel.frame.size.height)];
+            currentLabel.alpha = 1.0;
+            
         }];
+        
+        self.currentIndex = (self.currentIndex == (self.feed.count -1)) ? 0 : (self.currentIndex +1);
+        
     }
 }
 

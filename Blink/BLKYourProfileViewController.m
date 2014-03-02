@@ -58,7 +58,8 @@ typedef enum BLKProfileState BLKProfileState;
     //handle the keyboard notification
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(onKeyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
-
+    
+    [self setLablesToHidden:YES];
     
 }
 
@@ -86,8 +87,6 @@ typedef enum BLKProfileState BLKProfileState;
      [self presentViewController:imgPicker animated:true completion:NULL];
      }
 }
-
-
 
 - (IBAction)changeStateButton:(id)sender {
     
@@ -119,7 +118,7 @@ typedef enum BLKProfileState BLKProfileState;
     
     if (!_collegeTextField) {
         _collegeTextField = [[UITextField alloc] init];
-        [self setUpTextField:_collegeTextField tag:3 defaultString:@""];
+        [self setUpTextField:_collegeTextField tag:3 defaultString:@"College?"];
     } else {
         self.collegeTextField.hidden = false;
     }
@@ -133,7 +132,7 @@ typedef enum BLKProfileState BLKProfileState;
     
     
     //make other labels invisibile
-    [self setLablesToHidden:true];
+    [self setNormalViewToHidden:true];
 }
 
 - (void)setUpTextField:(UITextField *)textField tag:(int)tag defaultString:(NSString *)defaultString {
@@ -147,6 +146,8 @@ typedef enum BLKProfileState BLKProfileState;
     [textField setTag:tag];
     [textField setDelegate:self];
     [self.scrollViewContainer addSubview:textField];
+    [textField setTextColor:[UIColor whiteColor]];
+    [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [textField setAttributedText:tempLabel.attributedText];
     
     //TODO
@@ -176,7 +177,6 @@ typedef enum BLKProfileState BLKProfileState;
     [self.activeTextField resignFirstResponder]; // ends current editing session and dismisses keyboard
     [self.scrollViewContainer setContentOffset:CGPointZero animated:YES]; // scroll to top
     self.currentState = BLKProfileStateViewing;
-    
 }
 
 - (void)setStateEditingWithKeyboard {
@@ -185,6 +185,8 @@ typedef enum BLKProfileState BLKProfileState;
     [self setupTextFields];
     self.changeImageButton.hidden = NO;
     self.currentState = BLKProfileStateEditingWithKeyboard;
+    
+    
     
     
     [self.scrollViewContainer scrollRectToVisible:CGRectMake(0.0, 1000, 320, 22) animated:YES];
