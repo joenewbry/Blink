@@ -209,7 +209,7 @@
             </objects>
             <point key="canvasLocation" x="723" y="-745"/>
         </scene>
-        <!--Other Person Profile View Controller-->
+        <!--Other Person Profile View Controller - Other Profile-->
         <scene sceneID="iDj-0X-KHj">
             <objects>
                 <viewController id="p2D-8g-FiS" customClass="BLKOtherPersonProfileViewController" sceneMemberID="viewController">
@@ -403,6 +403,8 @@
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
         <image name="IconNoBackground60x60.png" width="60" height="60"/>
         <image name="camera_icon" width="67" height="55"/>
+        <image name="chat_icon.png" width="40" height="36"/>
+        <image name="user_circle.png" width="32" height="32"/>
         <image name="user_profile_icon" width="73" height="71"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

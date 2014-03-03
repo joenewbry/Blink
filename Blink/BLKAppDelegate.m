@@ -27,10 +27,12 @@
         [[PFInstallation currentInstallation] saveEventually];
     }
 
-    PFACL *defaultACL = [PFACL ACL];
-    // Enable public read access by default, with any newly created PFOBjects belonging to the current users
-    [defaultACL setPublicReadAccess:YES];
-    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    // turning on public acl read access, to patch up later
+
+//    PFACL *defaultACL = [PFACL ACL];
+//    // Enable public read access by default, with any newly created PFOBjects belonging to the current users
+//    [defaultACL setPublicReadAccess:YES];
+//    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
 
     [self configureRemoteNotifications:application];
 
