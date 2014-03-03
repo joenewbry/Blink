@@ -196,7 +196,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     for (CBCharacteristic *characteristic in service.characteristics) {
-        NSLog(@"Reading value for characteristic %@", characteristic);
+        //NSLog(@"Reading value for characteristic %@", characteristic);
         [peripheral readValueForCharacteristic:characteristic];
     }
 }
@@ -238,7 +238,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
         }
 
     } **/else {
-        NSLog(@"attempting to read characteristic %@", characteristic.description);
+        //NSLog(@"attempting to read characteristic %@", characteristic.description);
     }
 
 }
