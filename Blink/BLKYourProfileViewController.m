@@ -62,11 +62,12 @@ typedef enum BLKProfileState BLKProfileState;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(onKeyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     
+    /* failed attempt to dismiss keyboard on swipe
+
     UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     
-    /* failed attempt to dismiss keyboard on swipe
-    [self.scrollViewContainer setUserInteractionEnabled:YES];
+        [self.scrollViewContainer setUserInteractionEnabled:YES];
     [self.scrollViewContainer addGestureRecognizer:swipeDownGestureRecognizer];
     [self setLablesToHidden:YES];
      */

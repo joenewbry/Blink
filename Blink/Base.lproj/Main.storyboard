@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T1Y-vc-fNw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T1Y-vc-fNw">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
@@ -24,7 +24,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N89-ul-ErA">
-                                            <rect key="frame" x="62" y="3" width="34" height="22"/>
+                                            <rect key="frame" x="60" y="3" width="34" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <accessibilityTraits key="traits" none="YES" image="YES" staticText="YES"/>
@@ -34,14 +34,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7kI-9R-iXY">
-                                            <rect key="frame" x="62" y="25" width="43" height="15"/>
+                                            <rect key="frame" x="60" y="25" width="43" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="user_circle.png" id="4Ra-lw-x7y">
-                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <rect key="frame" x="15" y="6" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -55,14 +55,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Nearby" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ne-7L-6cs">
-                                            <rect key="frame" x="62" y="0.0" width="223" height="43"/>
+                                            <rect key="frame" x="60" y="0.0" width="225" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="user_circle.png" id="hkS-v6-TnH">
-                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <rect key="frame" x="15" y="6" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -209,7 +209,7 @@
             </objects>
             <point key="canvasLocation" x="723" y="-745"/>
         </scene>
-        <!--Other Person Profile View Controller-->
+        <!--Other Person Profile View Controller - Other Profile-->
         <scene sceneID="iDj-0X-KHj">
             <objects>
                 <viewController id="p2D-8g-FiS" customClass="BLKOtherPersonProfileViewController" sceneMemberID="viewController">
@@ -222,7 +222,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconNoBackground60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="gZA-6d-sbd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="266"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-Gj-LKa">
@@ -403,6 +403,8 @@
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
         <image name="IconNoBackground60x60.png" width="60" height="60"/>
         <image name="camera_icon" width="67" height="55"/>
+        <image name="chat_icon.png" width="30" height="30"/>
+        <image name="user_circle.png" width="30" height="30"/>
         <image name="user_profile_icon" width="73" height="71"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

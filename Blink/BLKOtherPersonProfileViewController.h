@@ -11,6 +11,4 @@
 
 @interface BLKOtherPersonProfileViewController : BLKBasicProfileViewController
 
--(void)setupUserData:(SBUserModel *)userData;
-
 @end

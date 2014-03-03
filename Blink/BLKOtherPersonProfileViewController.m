@@ -17,11 +17,6 @@
 
 @implementation BLKOtherPersonProfileViewController
 
-- (void)setupUserData:(SBUserModel *)userData
-{
-    self.userData = userData;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

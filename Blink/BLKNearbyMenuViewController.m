@@ -204,7 +204,8 @@
         if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]) {
                     BLKOtherPersonProfileViewController *ovc = (BLKOtherPersonProfileViewController *)segue.destinationViewController;
                     //see above for values to pass
-            [ovc setupUserData:self.selectedUser];
+            ovc.SBUserModel = self.selectedUser;
+           
         }
     }
     if ([segue.identifier isEqualToString:@"toMyProfile"]) {
