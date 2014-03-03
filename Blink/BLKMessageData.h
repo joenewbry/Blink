@@ -19,7 +19,7 @@
 @interface BLKMessageData : NSObject
 
 @property (weak, nonatomic) id<BLKMessageDataDelegate, NSObject> delegate;
-@property (strong, nonatomic) NSMutableArray *messages;
+@property (strong, nonatomic) NSMutableArray *chats;
 
 + (BLKMessageData *)instance;
 - (void)searchForMessagesIncluding:(PFUser *)currentUser;

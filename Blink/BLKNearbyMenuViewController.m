@@ -63,8 +63,9 @@
 
     // start recieving message discovery messages
     [BLKMessageData instance].delegate = self;
-    self.messageArray = [[BLKMessageData instance] messages];
-    
+    self.messageArray = [[BLKMessageData instance] chats];
+    [BLKMessageData instance].delegate = self;
+
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
@@ -242,9 +243,9 @@
 {
     NSMutableString *userString = [[NSMutableString alloc] init];
     for (PFUser *user in users){
-        if (![user isEqual:[PFUser currentUser]]){
+        if (![user.username isEqual:[PFUser currentUser].username]){
             if (user[@"profileName"]) {
-                if (userString.length > 0)[userString appendString:@" "];
+                if (userString.length > 0)[userString appendString:@" & "];
                 [userString appendString:user[@"profileName"]];
             }
         }

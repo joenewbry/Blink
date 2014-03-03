@@ -7,6 +7,7 @@
 //
 
 #import "BLKMessageData.h"
+#import <JSMessagesViewController/JSMessage.h>
 
 @implementation BLKMessageData
 
@@ -29,18 +30,20 @@ static BLKMessageData *instance = nil;
 
 - (void)searchForMessagesIncluding:(PFUser *)currentUser
 {
-    PFQuery *messageQuery = [PFQuery queryWithClassName:@"Chat"];
-    [messageQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:@[currentUser]];
-    [messageQuery includeKey:@"recipientsArrayPFUser"];
-    [messageQuery setCachePolicy:kPFCachePolicyCacheThenNetwork];
-    [messageQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
+    [chatQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:@[currentUser]];
+    [chatQuery includeKey:@"recipientsArrayPFUser"];
+    [chatQuery includeKey:@"messages"];
+    [chatQuery setCachePolicy:kPFCachePolicyCacheThenNetwork];
+    [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         // always reset so that cache and network don't stack
-        self.messages = [[NSMutableArray alloc] init];
-        for (PFObject *message in objects){
-            [self.messages addObject:message];
+        if (error) NSLog(@"Error fetching message data is: %@", [error localizedDescription]);
+        self.chats = [[NSMutableArray alloc] init];
+        for (PFObject *chat in objects){
+            [self.chats addObject:chat];
         }
         if ([self.delegate respondsToSelector:@selector(newMessageRecievedAllMessages:)]){
-            [self.delegate newMessageRecievedAllMessages:self.messages];
+            [self.delegate newMessageRecievedAllMessages:self.chats];
         }
     }];
 }

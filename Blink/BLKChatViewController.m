@@ -48,7 +48,7 @@
 {
     NSMutableString *userString = [[NSMutableString alloc] init];
     for (PFUser *user in users){
-        if (![user isEqual:[PFUser currentUser]]){
+        if (![user.username isEqual:[PFUser currentUser].username]){
             if (user[@"profileName"]) {
                 if (userString.length > 0)[userString appendString:@" "];
                 [userString appendString:user[@"profileName"]];
@@ -94,6 +94,11 @@
 //    [findChatObject se]
 
     PFObject *message = [PFObject objectWithClassName:@"Message"];
+    PFACL *acl = [PFACL ACL];
+    for (PFUser *user in self.PFUsersInChat){
+        [acl setWriteAccess:TRUE forUser:user];
+    }
+    [message setACL:acl];
     message[@"message"] = text;
     message[@"sender"] = [PFUser currentUser];
     message[@"senderName"] = [PFUser currentUser][@"profileName"];
@@ -115,8 +120,7 @@
                     // is exact match
                     if ([potentialChat[@"recipientsArrayPFUser"] count] == self.PFUsersInChat.count){
                         PFObject *chat = potentialChat; // only one
-                        PFRelation *messages = [chat relationForKey:@"messages"];
-                        [messages addObject:message];
+                        [chat addObject:message forKey:@"messages"];
                         [chat setValue:[PFUser currentUser] forKey:@"sender"];
                         [chat setValue:text forKey:@"mostRecentMessage"];
                         [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -130,8 +134,7 @@
                 }
 
                 PFObject *chat = [PFObject objectWithClassName:@"Chat"];
-                PFRelation *messages = [chat relationForKey:@"messages"];
-                [messages addObject:message];
+                [chat addObject:message forKey:@"messages"];
                 [chat addUniqueObjectsFromArray:self.PFUsersInChat forKey:@"recipientsArrayPFUser"];
                 [chat setValue:text forKey:@"mostRecentMessage"];
                 [chat setValue:[PFUser currentUser] forKey:@"sender"];
@@ -243,24 +246,7 @@
 
 
     // gets all previous chats
-    self.messages = [NSMutableArray new];
-    PFRelation *messages = messageData[@"messages"];
-    PFQuery *messageQuery = [messages query];
-    [messageQuery orderByAscending:@"createdAt"];
-    [messageQuery includeKey:@"createdAt"];
-    [messageQuery includeKey:@"updatedAt"];
-    [messageQuery setCachePolicy:kPFCachePolicyCacheThenNetwork];
-    [messageQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) NSLog(@"You done gufffed");
-        if (!error) {
-            self.messages = [NSMutableArray new];
-            for (PFObject *message in objects) {
-                [self.messages addObject:[[JSMessage alloc] initWithText:message[@"message"] sender:message[@"senderName"] date:message.updatedAt]];
-            }
-            [self.tableView reloadData];
-            [self scrollToBottomAnimated:NO];
-        }
-    }];
+    self.messages = messageData[@"chatMessageData"];
 
     self.avatars = [NSMutableDictionary new];
     [self setAvatarsForPFUsers:self.PFUsersInChat];
