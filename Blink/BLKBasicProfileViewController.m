@@ -54,6 +54,8 @@
     _quote = (NSMutableString *)_SBUserModel.quote;
     _college = (NSMutableString *)_SBUserModel.college;
     _relationshipStatus = (NSMutableString *)_SBUserModel.relationshipStatus;
+    
+    
 }
 
 - (void)setProfileImage:(UIImage *)profileImage {

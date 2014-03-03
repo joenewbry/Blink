@@ -10,9 +10,6 @@
 #import "BLKChatViewController.h"
 
 @interface BLKOtherPersonProfileViewController ()
-
-@property (nonatomic, strong) SBUserModel* userData;
-
 @end
 
 @implementation BLKOtherPersonProfileViewController
@@ -26,7 +23,7 @@
 
 - (IBAction)chatButtonPressed:(UIBarButtonItem *)sender {
     BLKChatViewController *chatController = [[BLKChatViewController alloc] init];
-    [chatController setupNewMessage:self.userData.user];
+    [chatController setupNewMessage:self.SBUserModel.user];
     [self.navigationController pushViewController:chatController animated:NO];
 }
 
