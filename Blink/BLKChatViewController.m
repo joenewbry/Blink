@@ -246,7 +246,7 @@
 
 
     // gets all previous chats
-    self.messages = messageData[@"chatMessageData"];
+    self.messages = messageData[@"messages"];
 
     self.avatars = [NSMutableDictionary new];
     [self setAvatarsForPFUsers:self.PFUsersInChat];

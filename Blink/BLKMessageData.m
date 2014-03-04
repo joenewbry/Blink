@@ -40,7 +40,7 @@ static BLKMessageData *instance = nil;
         if (error) NSLog(@"Error fetching message data is: %@", [error localizedDescription]);
         self.chats = [[NSMutableArray alloc] init];
         for (PFObject *chat in objects){
-            [self.chats addObject:chat];
+            [self.chats addObject:chat]; // FIX chats are retrieved as NSNULL, check how they're being saved/retrieved
         }
         if ([self.delegate respondsToSelector:@selector(newMessageRecievedAllMessages:)]){
             [self.delegate newMessageRecievedAllMessages:self.chats];

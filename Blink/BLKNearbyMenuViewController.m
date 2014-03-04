@@ -38,8 +38,6 @@
     [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
     [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
 
-    [[BLKMessageData instance] searchForMessagesIncluding:[PFUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
-
     [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread
 }
 
@@ -63,8 +61,9 @@
 
     // start recieving message discovery messages
     [BLKMessageData instance].delegate = self;
-    self.messageArray = [[BLKMessageData instance] chats];
-    [BLKMessageData instance].delegate = self;
+    self.messageArray = [[BLKMessageData instance] chats]; // get current chats
+    [[BLKMessageData instance] searchForMessagesIncluding:[PFUser currentUser]]; //look for chats including user
+    [BLKMessageData instance].delegate = self; // update message section when new chat is found
 
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
@@ -196,6 +195,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
     
     if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
         [segue.destinationViewController setupMessageData:self.messageData];
