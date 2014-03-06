@@ -14,7 +14,7 @@
 #import "BLKConstants.h"
 #import "BLKSaveImage.h"
 #import "SBNearbyUsers.h"
-#import "BLKMessageData.h"
+#import "BLKChatData.h"
 #import <NZAlertView/NZAlertView.h>
 
 

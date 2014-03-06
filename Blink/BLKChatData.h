@@ -8,20 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "BLKMessageObject.h"
 
 @protocol BLKMessageDataDelegate
 @optional
 - (void)newMessageRecievedAllMessages:(NSMutableArray *)messages;
-- (void)newMessageRecieved:(PFObject *)message;
+- (void)newMessageRecieved:(BLKMessageObject *)message;
 
 @end
 
-@interface BLKMessageData : NSObject
+@interface BLKChatData : NSObject
 
 @property (weak, nonatomic) id<BLKMessageDataDelegate, NSObject> delegate;
 @property (strong, nonatomic) NSMutableArray *chats;
 
-+ (BLKMessageData *)instance;
++ (BLKChatData *)instance;
 - (void)searchForMessagesIncluding:(PFUser *)currentUser;
 
 

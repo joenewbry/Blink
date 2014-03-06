@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import "BLKMessageData.h"
+#import "BLKChatData.h"
 #import <JSMessagesViewController/JSMessage.h>
 
-@implementation BLKMessageData
+@implementation BLKChatData
 
-static BLKMessageData *instance = nil;
-+ (BLKMessageData *)instance {
+static BLKChatData *instance = nil;
++ (BLKChatData *)instance {
     @synchronized(self) {
-        if (instance == nil) instance = [[BLKMessageData alloc] init];
+        if (instance == nil) instance = [[BLKChatData alloc] init];
     }
     return instance;
 }
@@ -40,9 +40,14 @@ static BLKMessageData *instance = nil;
         if (error) NSLog(@"Error fetching message data is: %@", [error localizedDescription]);
         self.chats = [[NSMutableArray alloc] init];
         for (PFObject *chat in objects){
-            [self.chats addObject:chat];
+            BLKMessageObject *aChat = [[BLKMessageObject alloc] init];
+            aChat.message = chat[@"message"];
+            aChat.sender = chat[@"sender"];
+            aChat.senderName = chat[@"senderName"];
+            [self.chats addObject:aChat];
         }
-        if ([self.delegate respondsToSelector:@selector(newMessageRecievedAllMessages:)]){
+        if ([self.delegate respondsToSelector:@selector
+             (newMessageRecievedAllMessages:)]){
             [self.delegate newMessageRecievedAllMessages:self.chats];
         }
     }];

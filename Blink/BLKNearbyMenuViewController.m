@@ -10,13 +10,13 @@
 #import "UIViewController+ViewUtils.h"
 #import "BLKChatViewController.h"
 #import "SBNearbyUsers.h"
-#import "BLKMessageData.h"
+#import "BLKChatData.h"
 #import "BLKOtherPersonProfileViewController.h"
 #import "BLKYourProfileViewController.h"
 #import "BLKOtherPersonProfileViewController.h"
 #import <JSMessagesViewController/JSAvatarImageFactory.h>
 #import "SBUser.h"
-#import "BLKMessageData.h"
+#import "BLKChatData.h"
 #import "BLKSaveImage.h"
 
 @interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
@@ -38,7 +38,7 @@
     [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
     [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
 
-    [[BLKMessageData instance] searchForMessagesIncluding:[PFUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
+    [[BLKChatData instance] searchForMessagesIncluding:[PFUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
 
     [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread
 }
@@ -62,9 +62,9 @@
     self.nearbyArray = [[SBNearbyUsers instance] allUsers];
 
     // start recieving message discovery messages
-    [BLKMessageData instance].delegate = self;
-    self.messageArray = [[BLKMessageData instance] chats];
-    [BLKMessageData instance].delegate = self;
+    [BLKChatData instance].delegate = self;
+    self.messageArray = [[BLKChatData instance] chats];
+    [BLKChatData instance].delegate = self;
 
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
