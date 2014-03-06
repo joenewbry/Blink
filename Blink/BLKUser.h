@@ -9,7 +9,7 @@
 #import <Parse/PFUser.h>
 #import <Parse/PFFile.h>
 
-@interface BLKUserProfile : PFUser <PFSubclassing>
+@interface BLKUser : PFUser <PFSubclassing>
 
 @property (retain) NSString *profileName;
 @property (retain) NSString *gender;
@@ -20,6 +20,6 @@
 @property (retain) PFFile *profilePicture;
 @property (retain) PFFile *profilePictureThumbnail;
 
-+ (BLKUserProfile *)currentUser;
++ (BLKUser *)currentUser;
 
 @end

@@ -15,11 +15,15 @@
 
 @implementation SBUser
 
+
+// class methods to create a singleton instance of SBUser
+// used to control social bluetooth controls and set what
+// data gets shared out to other people
 + (SBUser *)currentUser
 {
     static SBUser *mySBUser = nil;
     @synchronized(self) {
-        if (mySBUser == nil) mySBUser = [[self alloc] initWithUserName:@"Default User"];
+        if (mySBUser == nil) mySBUser = [[self alloc] init];
     }
     return mySBUser;
 }
@@ -33,23 +37,28 @@
     return mySBUser;
 }
 
-+ (SBUser *)createUserWithName:(NSString *)user
++ (SBUser *)createUserWithObjectId:(NSString *)objectId
 {
     static SBUser *mySBUser = nil;
     @synchronized(self) {
-        if (mySBUser == nil) mySBUser = [[self alloc] initWithUserName:user];
+        if (mySBUser == nil) mySBUser = [[self alloc] initWithObjectId:objectId];
     }
     return mySBUser;
 }
 
-- (id)initWithUserName:(NSString *)userName
+- (id)initWithObjectId:(NSString *)objectId
 {
     if (self = [super init])
     {
         self.userModel = [SBUserModel new];
-        self.userModel.username = userName;
+        self.userModel.objectId = objectId;
     }
     return self;
+}
+
+- (void)shareProfile
+{
+    
 }
 
 @end

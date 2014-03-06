@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SBUser.h"
 
-@protocol SBDiscoverUserDelegate
+@protocol SBUserDiscoveryDelegate
 
 @optional
 - (void)didReceiveObjectID:(NSString *)objectID;
@@ -16,23 +17,22 @@
 - (void)didReceiveQuote:(NSString *)quote;
 - (void)didReceiveStatus:(NSString *)status;
 - (void)didReceiveProfileImage:(UIImage *)profileImage;
-- (void)userDidDisconnectWithObjectID:(NSString *)objectID;
+- (void)didReceiveSBUser:(SBUser *)sbUser;
 
 @end
 
 @interface SBUserDiscovery : NSObject
 
-+ (BOOL)isBuilt;
-+ (BOOL)isBroadcasting;
++ (SBUserDiscovery *)createUserDiscovery;
 
-+ (SBUserDiscovery *)buildUserDiscoveryScaffold;
-+ (SBUserDiscovery *)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
-+ (SBUserDiscovery *)userDiscoveryScaffold;
+// TODO, not currently handled but used for long term searching for users
++ (SBUserDiscovery *)createUserDiscoveryWithLaunchOptions:(NSDictionary *)launchOptions;
++ (SBUserDiscovery *)currentUserDiscovery;
 
 - (void)searchForUsers;
 - (void)stopSearchForUsers;
 
-@property (nonatomic, weak) id <SBDiscoverUserDelegate, NSObject> delegate;
+@property (nonatomic, weak) id <SBUserDiscoveryDelegate, NSObject> delegate;
 
 
 @end

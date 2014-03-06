@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import "SBBroadcastUser.h"
+#import "SBUserBroadcast.h"
 #import "SBUser.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <NZAlertView/NZAlertView.h>
@@ -21,7 +21,7 @@ NSString *SBBroadcastCharacteristicUserProfileProfileImage = @"9F4EBB16-B1E1-4F6
 NSString *SBBroadcastCharacteristicUserProfileStatus = @"DA595224-C6F0-46DE-9C4C-EC75F43DC823";
 NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-96F123BA37E7";
 
-@interface SBBroadcastUser () <CBPeripheralManagerDelegate>
+@interface SBUserBroadcast () <CBPeripheralManagerDelegate>
 
 - (id)init;
 - (id)initWithLaunchOptions:(NSDictionary *)launchOptions;
@@ -42,11 +42,11 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 
 @end
 
-@implementation SBBroadcastUser
+@implementation SBUserBroadcast
 
 + (BOOL)isBuilt
 {
-    static SBBroadcastUser *mySBUserBroadcast = nil;
+    static SBUserBroadcast *mySBUserBroadcast = nil;
     @synchronized(self) {
         return (mySBUserBroadcast != nil) ? true : false;
     }
@@ -57,9 +57,9 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     return true;
 }
 
-+ (SBBroadcastUser *)buildUserBroadcastScaffold
++ (SBUserBroadcast *)createUserBroadcast
 {
-    static SBBroadcastUser *mySBUserBroadcast = nil;
+    static SBUserBroadcast *mySBUserBroadcast = nil;
     @synchronized(self) {
         if (mySBUserBroadcast == nil) mySBUserBroadcast = [[self alloc] init];
         // creates peripheral manager
@@ -67,18 +67,18 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     return mySBUserBroadcast;
 }
 
-+ (SBBroadcastUser *)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
++ (SBUserBroadcast *)createUserBroadcastWithLaunchOptions:(NSDictionary *)launchOptions
 {
-    static SBBroadcastUser *mySBUserBroadcast = nil;
+    static SBUserBroadcast *mySBUserBroadcast = nil;
     @synchronized(self) {
         if (mySBUserBroadcast == nil) mySBUserBroadcast = [[self alloc] initWithLaunchOptions:launchOptions];
     }
     return mySBUserBroadcast;
 }
 
-+ (SBBroadcastUser *)currentBroadcastScaffold
++ (SBUserBroadcast *)currentUserBroadcast
 {
-    static SBBroadcastUser *mySBUserBroadcast = nil;
+    static SBUserBroadcast *mySBUserBroadcast = nil;
     @synchronized(self) {
         if (mySBUserBroadcast == nil) mySBUserBroadcast = [[self alloc] init];
     }
@@ -99,7 +99,9 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 - (id)initWithLaunchOptions:(NSDictionary *)launchOptions
 {
     if (self = [super init]) {
-        if (launchOptions) {
+        // if there is a restoration key in launch options for peripheral
+        // then use it to restore, if not then don't make restoration identifier
+        if (launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey]) {
             self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{ CBCentralManagerOptionShowPowerAlertKey : @YES,
                 CBCentralManagerOptionRestoreIdentifierKey : launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey]
                                                                                                              }];

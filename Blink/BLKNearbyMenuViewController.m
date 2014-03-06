@@ -18,12 +18,13 @@
 #import "SBUser.h"
 #import "BLKChatData.h"
 #import "BLKSaveImage.h"
+#import "SBUserConnection.h"
 
-@interface BLKNearbyMenuViewController () <SBNearbyUsersDelegate, BLKMessageDataDelegate>
+@interface BLKNearbyMenuViewController () <SBUserConnectionDelegate, BLKChatDataDelegate>
 
 @property (nonatomic)NSMutableDictionary *profileDictionary;
 @property (nonatomic)NSMutableArray *messageArray;
-@property (nonatomic)NSMutableArray *nearbyArray;
+@property (nonatomic)NSMutableArray *nearbyUsersArray;
 @property (nonatomic)SBUserModel *selectedUser;
 @property (nonatomic)PFObject *messageData;
 
@@ -58,8 +59,8 @@
     
 
     // start recieving user discovery messages
-    [SBNearbyUsers instance].delegate = self;
-    self.nearbyArray = [[SBNearbyUsers instance] allUsers];
+    [SBUserConnection currentUserConnection].delegate = self;
+    self.nearbyUsersArray = [[SBUserConnection currentUserConnection] allUsersBy:SBNextUserByNewest];
 
     // start recieving message discovery messages
     [BLKChatData instance].delegate = self;
@@ -92,7 +93,7 @@
     // Returns count of unread and nearby arrays or 1 for profile section
     
     if (section == 0) return [self.messageArray count];
-    if (section == 1) return [self.nearbyArray count];
+    if (section == 1) return [self.nearbyUsersArray count];
     return 0;
 }
 
@@ -136,8 +137,8 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
         cell.layer.cornerRadius = cell.layer.bounds.size.height/2;
         cell.clipsToBounds = true;
-        cell.textLabel.text = [self.nearbyArray[indexPath.row] username];
-        cell.imageView.image = [JSAvatarImageFactory avatarImage:[self.nearbyArray[indexPath.row] thumbnailImg] croppedToCircle:YES];
+        cell.textLabel.text = [self.nearbyUsersArray[indexPath.row] username];
+        cell.imageView.image = [JSAvatarImageFactory avatarImage:[self.nearbyUsersArray[indexPath.row] thumbnailImg] croppedToCircle:YES];
                
         return cell;
         
@@ -153,7 +154,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        if (indexPath.section == 2) [self.nearbyArray removeObjectAtIndex:indexPath.row];
+        if (indexPath.section == 2) [self.nearbyUsersArray removeObjectAtIndex:indexPath.row];
         if (indexPath.section == 1) [self.messageArray removeObjectAtIndex:indexPath.row];
 
         // When this next line is executed, the data has to agree with the changes this line is performing on the table view
@@ -184,7 +185,7 @@
         [self performSegueWithIdentifier:@"toChat" sender:self];
     }
     if (indexPath.section == 1){
-        self.selectedUser = self.nearbyArray[indexPath.row];
+        self.selectedUser = self.nearbyUsersArray[indexPath.row];
         [self performSegueWithIdentifier:@"toOtherProfile" sender:self];
     }
 }
@@ -221,13 +222,13 @@
 #pragma mark - NearbyUserDelegate
 - (void)userConnectedWithNewArray:(NSMutableArray *)newArray
 {
-    self.nearbyArray = newArray;
+    self.nearbyUsersArray = newArray;
     [self.tableView reloadData];
 }
 
 - (void)userDisconnectedWithNewArray:(NSMutableArray *)newArray
 {
-    self.nearbyArray = newArray;
+    self.nearbyUsersArray = newArray;
     [self.tableView reloadData];
 }
 

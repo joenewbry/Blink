@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SBUser.h"
+#import "SBUserDiscovery.h"
 
 enum SBNextUserBy {
     SBNextUserByNewest,
@@ -16,23 +17,30 @@ enum SBNextUserBy {
 
 typedef enum SBNextUserBy SBNextUserBy;
 
-@protocol SBUserConnectionDelegate <NSObject>
+@protocol SBUserConnectionDelegate
 
 @optional
+- (void)userDidConnect:(SBUser *)user;
 
-// user did enter or leave bluetooth range
-- (SBUser *)userDidConnect;
-- (NSString *)userDidConnectWithUUID;
-- (SBUser *)userDidDisconnect;
-- (NSString *)userDidDisconnectWithUUID;
+// used to bring app out of the background state ???
+// TODO implement these other delegate methods
+- (void)userDidConnectWithobjectId:(NSString *)objectId;
+- (void)userDidDisconnect:(SBUser *)user;
+- (void)userDidDisconnectObjectId:(NSString *)objectId;
 
 // user proximity measure
 - (float) distanceFromUser;
 
 @end
 
+@interface SBUserConnection : NSObject <SBUserDiscoveryDelegate>
 
-@interface SBUserConnection : NSObject
+@property (weak, nonatomic) id<SBUserConnectionDelegate, NSObject> delegate;
+@property (strong, nonatomic) NSMutableArray *sbUsers;
+
+// creating singleton instance
++ (SBUserConnection *)createUserConnection;
++ (SBUserConnection *)currentUserConnection;
 
 // specific user distance metrics
 - (void)trackDistanceFromUser:(SBUser *)sbUser;
@@ -40,6 +48,6 @@ typedef enum SBNextUserBy SBNextUserBy;
 
 // information on users in group ordered by SBNextUserBy
 - (SBUser *)nextUserBy:(SBNextUserBy)nextUserBy;
-- (NSArray *)allUsersBy:(SBNextUserBy)allUserBy;
+- (NSMutableArray *)allUsersBy:(SBNextUserBy)allUserBy;
 
 @end

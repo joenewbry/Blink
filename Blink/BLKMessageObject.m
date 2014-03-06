@@ -18,4 +18,9 @@
     return @"Message";
 }
 
++ (void)registerSubclass
+{
+    [super registerSubclass];
+}
+
 @end

@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "BLKMessageObject.h"
 
-@protocol BLKMessageDataDelegate
+@protocol BLKChatDataDelegate
 @optional
 - (void)newMessageRecievedAllMessages:(NSMutableArray *)messages;
 - (void)newMessageRecieved:(BLKMessageObject *)message;
@@ -19,7 +19,7 @@
 
 @interface BLKChatData : NSObject
 
-@property (weak, nonatomic) id<BLKMessageDataDelegate, NSObject> delegate;
+@property (weak, nonatomic) id<BLKChatDataDelegate, NSObject> delegate;
 @property (strong, nonatomic) NSMutableArray *chats;
 
 + (BLKChatData *)instance;

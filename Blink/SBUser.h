@@ -13,17 +13,9 @@
 }
 
 @property (strong, nonatomic) SBUserModel *userModel;
-/*
-@property (strong, nonatomic) NSString *userName;
-@property (strong, nonatomic) NSString *objectId;
-@property (strong, nonatomic) NSString *quote;
-@property (strong, nonatomic) UIImage *profileImage;
-@property (strong, nonatomic) NSString *status;
- **/
 
 // class methods to create user and get currentUser
-+ (SBUser *)createUserWithName:(NSString *)user;
-+ (SBUser *)createUserWithUUID:(NSString *)name;
++ (SBUser *)createUserWithObjectId:(NSString *)objectId;
 + (SBUser *)currentUser;
 + (SBUser *)createUser;
 

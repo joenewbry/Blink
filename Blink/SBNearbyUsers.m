@@ -38,9 +38,9 @@ static SBNearbyUsers *instance = nil;
 
 - (void)searchForUsers
 {
-    [SBUserDiscovery buildUserDiscoveryScaffold];
-    [[SBUserDiscovery userDiscoveryScaffold] setDelegate:self];
-    [[SBUserDiscovery userDiscoveryScaffold] searchForUsers];
+    [SBUserDiscovery createUserDiscovery];
+    [[SBUserDiscovery currentUserDiscovery] setDelegate:self];
+    [[SBUserDiscovery currentUserDiscovery] searchForUsers];
 }
 
 - (SBUserModel *)nextUser

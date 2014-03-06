@@ -10,13 +10,19 @@
 #import <Parse/Parse.h>
 #import "BLKConstants.h"
 #import "BLKNearbyMenuViewController.h"
+#import "SBUserBroadcast.h"
+#import "SBUserDiscovery.h"
+#import "BLKMessageObject.h"
+#import "BLKUser.h"
 
 @implementation BLKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Parse PFObject subclass setup
+    [BLKMessageObject registerSubclass];
+    [BLKUser registerSubclass];
 
-    
     //setup parse authorization, facebook login
     [Parse setApplicationId:kParseAppID clientKey:kParseClient];
     [PFFacebookUtils initializeFacebook];
@@ -51,6 +57,11 @@
         UIStoryboard *storyboard = [[self.window rootViewController] storyboard];
         UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"navController"];
         window.rootViewController = navController;
+
+        // if there are launch options for a peripheral it will be for the
+        // social bluetooth user broadcast peripheral
+        [SBUserBroadcast createUserBroadcastWithLaunchOptions:launchOptions];
+        [SBUserDiscovery createUserDiscoveryWithLaunchOptions:launchOptions];
     }
 
 

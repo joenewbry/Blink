@@ -21,7 +21,8 @@
 		D84AEB6218A7F4220027FCFA /* BlinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D84AEB6118A7F4220027FCFA /* BlinkTests.m */; };
 		D873497618C8487800FE6F3A /* SBUserConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497518C8487800FE6F3A /* SBUserConnection.m */; };
 		D873497918C84D4E00FE6F3A /* BLKMessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497818C84D4E00FE6F3A /* BLKMessageObject.m */; };
-		D873497D18C8522E00FE6F3A /* BLKUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497C18C8522E00FE6F3A /* BLKUserProfile.m */; };
+		D873497D18C8522E00FE6F3A /* BLKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497C18C8522E00FE6F3A /* BLKUser.m */; };
+		D873498E18C8EA4500FE6F3A /* BLKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0A18C644F20035A8A8 /* BLKAppDelegate.m */; };
 		D880DD8618C6460E00C78248 /* BLKBasicProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0C18C644F20035A8A8 /* BLKBasicProfileViewController.m */; };
 		D880DD8718C6460E00C78248 /* BLKChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0E18C644F20035A8A8 /* BLKChatViewController.m */; };
 		D880DD8818C6460E00C78248 /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C1018C644F20035A8A8 /* BLKConstants.m */; };
@@ -35,7 +36,7 @@
 		D880DD9018C6460E00C78248 /* BLKSaveImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C2018C644F20035A8A8 /* BLKSaveImage.m */; };
 		D880DD9118C6460E00C78248 /* BLKYourProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C2318C644F20035A8A8 /* BLKYourProfileViewController.m */; };
 		D880DD9218C6460E00C78248 /* CBUUID+StringExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C2518C644F20035A8A8 /* CBUUID+StringExtraction.m */; };
-		D880DD9318C6460E00C78248 /* SBBroadcastUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C4A18C644F20035A8A8 /* SBBroadcastUser.m */; };
+		D880DD9318C6460E00C78248 /* SBUserBroadcast.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C4A18C644F20035A8A8 /* SBUserBroadcast.m */; };
 		D880DD9418C6460E00C78248 /* SBNearbyUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C4C18C644F20035A8A8 /* SBNearbyUsers.m */; };
 		D880DD9518C6460E00C78248 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C4E18C644F20035A8A8 /* SBUser.m */; };
 		D880DD9618C6460E00C78248 /* SBUserDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C5018C644F20035A8A8 /* SBUserDiscovery.m */; };
@@ -112,8 +113,8 @@
 		D8902CA418C644F20035A8A8 /* user_profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4318C644F20035A8A8 /* user_profile_icon@2x.png */; };
 		D8902CA518C644F20035A8A8 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4618C644F20035A8A8 /* LaunchImage@2x.png */; };
 		D8902CA618C644F20035A8A8 /* LaunchImage@R4.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4718C644F20035A8A8 /* LaunchImage@R4.png */; };
-		D8902CA818C644F20035A8A8 /* SBBroadcastUser.h in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4918C644F20035A8A8 /* SBBroadcastUser.h */; };
-		D8902CA918C644F20035A8A8 /* SBBroadcastUser.m in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4A18C644F20035A8A8 /* SBBroadcastUser.m */; };
+		D8902CA818C644F20035A8A8 /* SBUserBroadcast.h in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4918C644F20035A8A8 /* SBUserBroadcast.h */; };
+		D8902CA918C644F20035A8A8 /* SBUserBroadcast.m in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4A18C644F20035A8A8 /* SBUserBroadcast.m */; };
 		D8902CAA18C644F20035A8A8 /* SBNearbyUsers.h in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4B18C644F20035A8A8 /* SBNearbyUsers.h */; };
 		D8902CAB18C644F20035A8A8 /* SBNearbyUsers.m in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4C18C644F20035A8A8 /* SBNearbyUsers.m */; };
 		D8902CAC18C644F20035A8A8 /* SBUser.h in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4D18C644F20035A8A8 /* SBUser.h */; };
@@ -173,8 +174,8 @@
 		D873497518C8487800FE6F3A /* SBUserConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUserConnection.m; sourceTree = "<group>"; };
 		D873497718C84D4E00FE6F3A /* BLKMessageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKMessageObject.h; sourceTree = "<group>"; };
 		D873497818C84D4E00FE6F3A /* BLKMessageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKMessageObject.m; sourceTree = "<group>"; };
-		D873497B18C8522E00FE6F3A /* BLKUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKUserProfile.h; sourceTree = "<group>"; };
-		D873497C18C8522E00FE6F3A /* BLKUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKUserProfile.m; sourceTree = "<group>"; };
+		D873497B18C8522E00FE6F3A /* BLKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKUser.h; sourceTree = "<group>"; };
+		D873497C18C8522E00FE6F3A /* BLKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKUser.m; sourceTree = "<group>"; };
 		D8902BFA18C644F20035A8A8 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		D8902BFB18C644F20035A8A8 /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
 		D8902BFC18C644F20035A8A8 /* AppIcon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40.png; sourceTree = "<group>"; };
@@ -243,8 +244,8 @@
 		D8902C4318C644F20035A8A8 /* user_profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_profile_icon@2x.png"; sourceTree = "<group>"; };
 		D8902C4618C644F20035A8A8 /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		D8902C4718C644F20035A8A8 /* LaunchImage@R4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@R4.png"; sourceTree = "<group>"; };
-		D8902C4918C644F20035A8A8 /* SBBroadcastUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBBroadcastUser.h; sourceTree = "<group>"; };
-		D8902C4A18C644F20035A8A8 /* SBBroadcastUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBBroadcastUser.m; sourceTree = "<group>"; };
+		D8902C4918C644F20035A8A8 /* SBUserBroadcast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBUserBroadcast.h; sourceTree = "<group>"; };
+		D8902C4A18C644F20035A8A8 /* SBUserBroadcast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBUserBroadcast.m; sourceTree = "<group>"; };
 		D8902C4B18C644F20035A8A8 /* SBNearbyUsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBNearbyUsers.h; sourceTree = "<group>"; };
 		D8902C4C18C644F20035A8A8 /* SBNearbyUsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBNearbyUsers.m; sourceTree = "<group>"; };
 		D8902C4D18C644F20035A8A8 /* SBUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
@@ -512,18 +513,18 @@
 			children = (
 				D873497418C8487800FE6F3A /* SBUserConnection.h */,
 				D873497518C8487800FE6F3A /* SBUserConnection.m */,
-				D8902C4918C644F20035A8A8 /* SBBroadcastUser.h */,
-				D8902C4A18C644F20035A8A8 /* SBBroadcastUser.m */,
+				D8902C4F18C644F20035A8A8 /* SBUserDiscovery.h */,
+				D8902C5018C644F20035A8A8 /* SBUserDiscovery.m */,
+				D8902C4918C644F20035A8A8 /* SBUserBroadcast.h */,
+				D8902C4A18C644F20035A8A8 /* SBUserBroadcast.m */,
 				D8902C4B18C644F20035A8A8 /* SBNearbyUsers.h */,
 				D8902C4C18C644F20035A8A8 /* SBNearbyUsers.m */,
 				D8902C4D18C644F20035A8A8 /* SBUser.h */,
 				D8902C4E18C644F20035A8A8 /* SBUser.m */,
-				D8902C4F18C644F20035A8A8 /* SBUserDiscovery.h */,
-				D8902C5018C644F20035A8A8 /* SBUserDiscovery.m */,
 				D8902C5118C644F20035A8A8 /* SBUserModel.h */,
-				D873497B18C8522E00FE6F3A /* BLKUserProfile.h */,
-				D873497C18C8522E00FE6F3A /* BLKUserProfile.m */,
 				D8902C5218C644F20035A8A8 /* SBUserModel.m */,
+				D873497B18C8522E00FE6F3A /* BLKUser.h */,
+				D873497C18C8522E00FE6F3A /* BLKUser.m */,
 			);
 			name = SocialBluetooth;
 			sourceTree = "<group>";
@@ -828,10 +829,10 @@
 				D8902CBA18C644F20035A8A8 /* user_nav_icon.png in Resources */,
 				D8902C9118C644F20035A8A8 /* AppIcon29x29@2x.png in Resources */,
 				D8902CAB18C644F20035A8A8 /* SBNearbyUsers.m in Resources */,
-				D8902CA918C644F20035A8A8 /* SBBroadcastUser.m in Resources */,
+				D8902CA918C644F20035A8A8 /* SBUserBroadcast.m in Resources */,
 				D8902CA118C644F20035A8A8 /* SquareIcon.png in Resources */,
 				D84AEB4118A7F4220027FCFA /* InfoPlist.strings in Resources */,
-				D8902CA818C644F20035A8A8 /* SBBroadcastUser.h in Resources */,
+				D8902CA818C644F20035A8A8 /* SBUserBroadcast.h in Resources */,
 				D8902C8A18C644F20035A8A8 /* BLKYourProfileViewController.h in Resources */,
 				D8902C8B18C644F20035A8A8 /* BLKYourProfileViewController.m in Resources */,
 				D8902C9518C644F20035A8A8 /* camera_icon.png in Resources */,
@@ -930,6 +931,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D873498E18C8EA4500FE6F3A /* BLKAppDelegate.m in Sources */,
 				D880DD8618C6460E00C78248 /* BLKBasicProfileViewController.m in Sources */,
 				D880DD8718C6460E00C78248 /* BLKChatViewController.m in Sources */,
 				D880DD8818C6460E00C78248 /* BLKConstants.m in Sources */,
@@ -943,11 +945,11 @@
 				D880DD9018C6460E00C78248 /* BLKSaveImage.m in Sources */,
 				D880DD9118C6460E00C78248 /* BLKYourProfileViewController.m in Sources */,
 				D880DD9218C6460E00C78248 /* CBUUID+StringExtraction.m in Sources */,
-				D880DD9318C6460E00C78248 /* SBBroadcastUser.m in Sources */,
+				D880DD9318C6460E00C78248 /* SBUserBroadcast.m in Sources */,
 				D880DD9418C6460E00C78248 /* SBNearbyUsers.m in Sources */,
 				D880DD9518C6460E00C78248 /* SBUser.m in Sources */,
 				D880DD9618C6460E00C78248 /* SBUserDiscovery.m in Sources */,
-				D873497D18C8522E00FE6F3A /* BLKUserProfile.m in Sources */,
+				D873497D18C8522E00FE6F3A /* BLKUser.m in Sources */,
 				D880DD9718C6460E00C78248 /* SBUserModel.m in Sources */,
 				D880DD9818C6460E00C78248 /* UIView+LinerGradient.m in Sources */,
 				D880DD9918C6460E00C78248 /* UIViewController+ViewUtils.m in Sources */,

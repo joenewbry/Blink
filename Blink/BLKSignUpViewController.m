@@ -9,13 +9,15 @@
 #import "BLKSignUpViewController.h"
 #import <Parse/Parse.h>
 #import "SBUser.h"
-#import "SBBroadcastUser.h"
 #import "SBUserDiscovery.h"
 #import "BLKConstants.h"
 #import "BLKSaveImage.h"
 #import "SBNearbyUsers.h"
 #import "BLKChatData.h"
 #import <NZAlertView/NZAlertView.h>
+
+#import "SBUserBroadcast.h"
+
 
 
 @interface BLKSignUpViewController ()
@@ -36,8 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:true];
-    if ([SBBroadcastUser isBuilt]) [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
-    if ([SBUserDiscovery isBuilt]) [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
+    [[SBUserBroadcast currentUserBroadcast] peripheralManagerEndBroadcastServices];
 }
 
 - (void)didReceiveMemoryWarning

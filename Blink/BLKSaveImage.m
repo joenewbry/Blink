@@ -9,7 +9,7 @@
 #import "BLKSaveImage.h"
 #import <Parse/Parse.h>
 #import "SBUser.h"
-#import "SBBroadcastUser.h"
+#import "SBUserBroadcast.h"
 
 @interface BLKSaveImage ()
 
@@ -72,8 +72,8 @@ static BLKSaveImage *instance = nil;
             if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
             else {
                 NSLog(@"a user has saved data, should already be signed in");
-                [SBBroadcastUser buildUserBroadcastScaffold];
-                [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserProfileService];
+                [SBUserBroadcast createUserBroadcast];
+                [[SBUserBroadcast currentUserBroadcast] peripheralAddUserProfileService];
             }
         }];
     }];

@@ -12,7 +12,7 @@
 #import <NZAlertView/NZAlertView.h>
 #import "BLKAppDelegate.h"
 #import "SBUserDiscovery.h"
-#import "SBBroadcastUser.h"
+#import "SBUserBroadcast.h"
 
 @implementation UIViewController (BLKViewUtils)
 
@@ -49,8 +49,8 @@
         [app.window makeKeyAndVisible];
         
         [PFUser logOut];
-        [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
-        [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
+        [[SBUserDiscovery currentUserDiscovery] stopSearchForUsers];
+        [[SBUserBroadcast currentUserBroadcast] peripheralManagerEndBroadcastServices];
     }
 }
 

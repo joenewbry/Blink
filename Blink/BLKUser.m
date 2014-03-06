@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.
 //
 
-#import "BLKUserProfile.h"
+#import "BLKUser.h"
 #import <Parse/PFObject+Subclass.h>
 
-@implementation BLKUserProfile
+@implementation BLKUser
 
 @dynamic profileName;
 @dynamic gender;
@@ -20,11 +20,15 @@
 @dynamic profilePicture;
 @dynamic profilePictureThumbnail;
 
-+ (BLKUserProfile *)currentUser
++ (BLKUser *)currentUser
 {
-    return (BLKUserProfile *)[PFUser currentUser];
+    return (BLKUser *)[PFUser currentUser];
 }
 
++ (void)registerSubclass
+{
+    [super registerSubclass];
+}
 
 
 @end
