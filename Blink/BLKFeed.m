@@ -105,12 +105,18 @@ static const NSInteger offset = 20;
                                                           repeats:YES];
 }
 
+
+
 - (void)pause {
     self.isAnimating = NO;
 }
 
 - (void)resume {
     self.isAnimating = YES;
+}
+
+- (void)stop {
+    [self.timer invalidate];
 }
 
 

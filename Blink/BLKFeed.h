@@ -20,6 +20,7 @@
 - (void)start:(float)timerInterval;
 - (void)pause;
 - (void)resume;
+- (void)stop;
 
 @property float timerInterval;
 

@@ -139,6 +139,12 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.feedView stop];
+}
+
 # pragma mark-- UpdateMethod
 
 - (void)update {
