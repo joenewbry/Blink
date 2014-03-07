@@ -24,7 +24,6 @@
 		D873497D18C8522E00FE6F3A /* BLKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497C18C8522E00FE6F3A /* BLKUser.m */; };
 		D873498E18C8EA4500FE6F3A /* BLKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0A18C644F20035A8A8 /* BLKAppDelegate.m */; };
 		D873499318C9740F00FE6F3A /* BLKChatObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D873499218C9740F00FE6F3A /* BLKChatObject.m */; };
-		D873499418C97A8500FE6F3A /* BLKSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C2118C644F20035A8A8 /* BLKSignUpViewController.m */; };
 		D880DD8618C6460E00C78248 /* BLKBasicProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0C18C644F20035A8A8 /* BLKBasicProfileViewController.m */; };
 		D880DD8718C6460E00C78248 /* BLKChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0E18C644F20035A8A8 /* BLKChatViewController.m */; };
 		D880DD8818C6460E00C78248 /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C1018C644F20035A8A8 /* BLKConstants.m */; };
@@ -937,7 +936,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D873499418C97A8500FE6F3A /* BLKSignUpViewController.m in Sources */,
 				D873498E18C8EA4500FE6F3A /* BLKAppDelegate.m in Sources */,
 				D880DD8618C6460E00C78248 /* BLKBasicProfileViewController.m in Sources */,
 				D873499318C9740F00FE6F3A /* BLKChatObject.m in Sources */,
