@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		247FD05018CA79BB00E212C0 /* BLKNSUserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 247FD04F18CA79BB00E212C0 /* BLKNSUserDefaultsHelper.m */; };
 		696B44203B6247E094E60B53 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DA1E5E3D04835B1E7731C /* libPods.a */; };
 		D84AEB3718A7F4220027FCFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3618A7F4220027FCFA /* Foundation.framework */; };
 		D84AEB3918A7F4220027FCFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3818A7F4220027FCFA /* CoreGraphics.framework */; };
@@ -156,6 +157,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		247FD04E18CA79BB00E212C0 /* BLKNSUserDefaultsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKNSUserDefaultsHelper.h; sourceTree = "<group>"; };
+		247FD04F18CA79BB00E212C0 /* BLKNSUserDefaultsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKNSUserDefaultsHelper.m; sourceTree = "<group>"; };
 		74F52CF771734F63ABA9B791 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7F6DA1E5E3D04835B1E7731C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84AEB3318A7F4220027FCFA /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -485,6 +488,8 @@
 		D873498518C857F400FE6F3A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				247FD04E18CA79BB00E212C0 /* BLKNSUserDefaultsHelper.h */,
+				247FD04F18CA79BB00E212C0 /* BLKNSUserDefaultsHelper.m */,
 				D8902C2418C644F20035A8A8 /* CBUUID+StringExtraction.h */,
 				D8902C2518C644F20035A8A8 /* CBUUID+StringExtraction.m */,
 				D8902C5318C644F20035A8A8 /* UIView+LinerGradient.h */,
@@ -956,6 +961,7 @@
 				D880DD9A18C6460E00C78248 /* BLKDiscoveredProfiles.m in Sources */,
 				D880DD9B18C6460E00C78248 /* Profile.m in Sources */,
 				D873497618C8487800FE6F3A /* SBUserConnection.m in Sources */,
+				247FD05018CA79BB00E212C0 /* BLKNSUserDefaultsHelper.m in Sources */,
 				D873497918C84D4E00FE6F3A /* BLKMessageObject.m in Sources */,
 				D84AEB4318A7F4220027FCFA /* main.m in Sources */,
 			);

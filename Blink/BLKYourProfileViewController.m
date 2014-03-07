@@ -7,6 +7,7 @@
 //
 
 #import "BLKYourProfileViewController.h"
+#import "BLKNSUserDefaultsHelper.h"
 #import <Parse/Parse.h>
 
 enum BLKProfileState {
@@ -41,6 +42,22 @@ typedef enum BLKProfileState BLKProfileState;
 @end
 
 @implementation BLKYourProfileViewController
+
+
+#pragma mark-- SetUp
+
+- (void)setBLKUser:(BLKUser *)user {
+    
+    self.username = [[BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_NAME] mutableCopy];
+    self.college = [[BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_COLLEGE] mutableCopy];
+    self.quote = [[BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_QUOTE] mutableCopy];
+    self.relationshipStatus = [[BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_RELATIONSHIP_STATUS] mutableCopy];
+    
+    self.profileImage = [[UIImage alloc] initWithContentsOfFile:
+                         [BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_PROFILE_IMAGE]];
+    
+    [super setBLKUser:user];
+}
 
 #pragma mark-- LazyInstantiation
 
@@ -254,22 +271,28 @@ typedef enum BLKProfileState BLKProfileState;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    //saves any text field changes to both user defaults and parse
     if (self.activeTextField.tag == 1) {
         self.username = [[NSMutableString alloc] initWithString:self.activeTextField.text];
         [BLKUser currentUser].profileName = self.username;
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.username key:BLK_NAME];
         self.user.username = self.username;
     } else if (self.activeTextField.tag == 2) {
          self.quote = [[NSMutableString alloc] initWithString:self.activeTextField.text];
         [BLKUser currentUser].quote = self.quote;
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.quote key:BLK_QUOTE];
         self.user.quote = self.quote;
     } else if (self.activeTextField.tag == 4) {
         self.relationshipStatus = [[NSMutableString alloc] initWithString:self.activeTextField.text];
         [BLKUser currentUser].relationshipStatus = self.relationshipStatus;
         self.user.relationshipStatus = self.relationshipStatus;
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.relationshipStatus key:BLK_RELATIONSHIP_STATUS];
     } else if (self.activeTextField.tag == 3) {
         self.college = [[NSMutableString alloc] initWithString:self.activeTextField.text];
         [BLKUser currentUser].college = self.college;
         self.user.college = self.college;
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.college key:BLK_COLLEGE];
     }
     
     //TODO all the if statements above: does this reference to the saved BLKUser work for saving the data?
@@ -299,8 +322,29 @@ typedef enum BLKProfileState BLKProfileState;
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     self.profileImage = info[UIImagePickerControllerOriginalImage];
-    //[BLKUser currentUser].profilePicture = [self.profileImage;
-
+    
+    NSData *data = UIImageJPEGRepresentation(self.profileImage, 1.0f);
+    
+    //save image to the documents folder
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //gets the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"profile.jpg"];
+    [data writeToFile:filePath atomically:YES];
+    
+    //save image path string to NSUserDefaults
+    [BLKNSUserDefaultsHelper setUserPropertyStringForKey:filePath key:BLK_PROFILE_IMAGE];
+    
+    //save PFFile to parse
+    PFFile *file = [PFFile fileWithData:data];
+    [BLKUser currentUser].profilePicture = file;
+    [[BLKUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+        } else {
+            NSLog(@"Saved image");
+        }
+    }];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

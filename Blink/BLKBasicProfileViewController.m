@@ -48,17 +48,43 @@
 {
     _user = user;
     
-    NSLog(@"profile pic %@", _user.profilePictureThumbnail );
+    //if values are already set then no need to fetch them from parse
+    //in this case the values have been set by NSUserDefaults
     
-    [_user.profilePicture getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        
-        self.profileImage = [UIImage imageWithData:data];
-    }];
+    if (!self.profileImage) {
+        [_user.profilePicture getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            
+            if (error) {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            } else {
+                self.profileImage = [UIImage imageWithData:data];
+            }
+        }];
+    }
     
-    _username = [_user.profileName mutableCopy];
-    _quote = [_user.quote mutableCopy];
-    _college = [_user.college mutableCopy];
-    _relationshipStatus = [_user.relationshipStatus mutableCopy];
+    
+    //TODO bug not urgent
+    if (!_username) {
+        _username = [_user.profileName mutableCopy];
+    }
+    
+    if (!_quote) {
+        _quote = [_user.quote mutableCopy];
+    }
+    
+    if (!_college) {
+        _college = [_user.college mutableCopy];
+    }
+    
+    if (!_relationshipStatus) {
+        _relationshipStatus = [_user.relationshipStatus mutableCopy];
+    }
+}
+
+- (NSMutableArray *)labelArray {
+    if (!_labelArray) _labelArray  = [[NSMutableArray alloc] init];
+    
+    return _labelArray;
 }
 
 - (void)setProfileImage:(UIImage *)profileImage {
@@ -66,28 +92,11 @@
     [self update];
 }
 
--(NSMutableString *)username {
-    if (!_username) _username = [[NSMutableString alloc] initWithString:@"Nobody Nearby"];
-    
-    return _username;
-}
 
 -(void)setUsername:(NSMutableString *)username {
     _username = username;
     
     [self update];
-}
-
-- (NSMutableArray *)labelArray {
-    if (!_labelArray) _labelArray = [[NSMutableArray alloc] init];
-    
-    return _labelArray;
-}
-
--(NSMutableString *)quote {
-    if (!_quote) _quote = [[NSMutableString alloc] initWithString:@"Try inviting more friends to improve the Blink experience"];
-    
-    return _quote;
 }
 
 - (void)setQuote:(NSMutableString *)quote {
@@ -160,8 +169,6 @@
     [self.relationshipLabel setText:self.relationshipStatus];
     
 }
-
-
 
 #pragma mark-- Helper
 

@@ -30,5 +30,4 @@
     [super registerSubclass];
 }
 
-
 @end
