@@ -18,14 +18,14 @@
 //
 
 #import <Parse/PFObject+Subclass.h>
-#import "SBUser.h"
+#import "BLKUser.h"
 
 @interface BLKMessageObject : PFObject <PFSubclassing>
 // accessing this is the same as object for key "title"
 +(NSString *)parseClassName;
 
 @property (retain) NSString *message;
-@property (retain) SBUser *sender;
+@property (retain) BLKUser *sender;
 @property (retain) NSString *senderName;
 
 @end

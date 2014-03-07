@@ -25,4 +25,6 @@
 - (void)setLablesToHidden:(BOOL)hidden;
 - (void)setNormalViewToHidden:(BOOL)hidden;
 
+- (void)setBLKUser:(BLKUser *)user;
+
 @end

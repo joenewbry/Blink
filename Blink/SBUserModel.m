@@ -7,6 +7,7 @@
 //
 
 #import "SBUserModel.h"
+#import "BLKUser.h"
 
 @implementation SBUserModel
 
@@ -17,7 +18,7 @@
         andProfileFile:(PFFile *)profileFile
               andQuote:(NSString *)quote
             andCollege:(NSString *)college
-               andUser:(PFUser *)user;
+               andUser:(BLKUser *)user;
 
 {
     self.objectId = objectId;

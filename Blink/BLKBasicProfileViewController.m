@@ -203,4 +203,9 @@
     NSLog(@"Hide values called");
 }
 
+- (void)setBLKUser:(BLKUser *)user
+{
+    NSLog(@"Should override setBLKUser is subclass");
+}
+
 @end

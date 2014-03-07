@@ -11,16 +11,11 @@
 
 @interface BLKOtherPersonProfileViewController ()
 
-@property (nonatomic, strong) SBUserModel* userData;
+@property (nonatomic, strong) BLKUser* user;
 
 @end
 
 @implementation BLKOtherPersonProfileViewController
-
-- (void)setupUserData:(SBUserModel *)userData
-{
-    self.userData = userData;
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -31,8 +26,13 @@
 
 - (IBAction)chatButtonPressed:(UIBarButtonItem *)sender {
     BLKChatViewController *chatController = [[BLKChatViewController alloc] init];
-    [chatController setupNewMessage:self.userData.user];
+    [chatController setupMessageDataWithUsers:self.user];
     [self.navigationController pushViewController:chatController animated:NO];
+}
+
+- (void)setBLKUser:(BLKUser *)user
+{
+    self.user = user;
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "SBNearbyUsers.h"
+#import <Parse/PFQuery.h>
 
 @implementation SBNearbyUsers
 
@@ -61,11 +62,12 @@ static SBNearbyUsers *instance = nil;
     if (!self.nearbyUserUUIDs) self.nearbyUserUUIDs = [NSMutableSet new];
     // check to make sure object hasn't already been discovered
     if (![self.nearbyUserUUIDs containsObject:objectID]) {
-        PFQuery *userWithObjectId = [PFQuery queryWithClassName:@"_User"];
-        [userWithObjectId whereKey:@"objectId" equalTo:objectID];
-        [userWithObjectId findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFQuery *userWithUUID = [BLKUser query];
+
+        [userWithUUID whereKey:@"objectId" equalTo:objectID];
+        [userWithUUID findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             PFObject *firstObject = objects[0];
-            SBUserModel *newUser = [[SBUserModel alloc] initWithObjectId:objectID andUsername:firstObject[@"profileName"] andRelationshipStatus:firstObject[@"relationship"] andThumbnailFile:firstObject[@"thumbnailImage"] andProfileFile:firstObject[@"profileImage"] andQuote:firstObject[@"quote"] andCollege:firstObject[@"college"] andUser:(PFUser *)firstObject];
+            SBUserModel *newUser = [[SBUserModel alloc] initWithObjectId:objectID andUsername:firstObject[@"profileName"] andRelationshipStatus:firstObject[@"relationship"] andThumbnailFile:firstObject[@"thumbnailImage"] andProfileFile:firstObject[@"profileImage"] andQuote:firstObject[@"quote"] andCollege:firstObject[@"college"] andUser:(BLKUser *)firstObject];
             [self.nearbyUsers addObject:newUser];
             if (!currentUser) currentUser = 0;
 

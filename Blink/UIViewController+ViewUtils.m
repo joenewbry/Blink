@@ -48,7 +48,7 @@
         app.window.rootViewController = newSignUpView;
         [app.window makeKeyAndVisible];
         
-        [PFUser logOut];
+        [BLKUser logOut];
         [[SBUserDiscovery currentUserDiscovery] stopSearchForUsers];
         [[SBUserBroadcast currentUserBroadcast] peripheralManagerEndBroadcastServices];
     }

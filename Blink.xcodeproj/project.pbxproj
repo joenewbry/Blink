@@ -23,6 +23,8 @@
 		D873497918C84D4E00FE6F3A /* BLKMessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497818C84D4E00FE6F3A /* BLKMessageObject.m */; };
 		D873497D18C8522E00FE6F3A /* BLKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D873497C18C8522E00FE6F3A /* BLKUser.m */; };
 		D873498E18C8EA4500FE6F3A /* BLKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0A18C644F20035A8A8 /* BLKAppDelegate.m */; };
+		D873499318C9740F00FE6F3A /* BLKChatObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D873499218C9740F00FE6F3A /* BLKChatObject.m */; };
+		D873499418C97A8500FE6F3A /* BLKSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C2118C644F20035A8A8 /* BLKSignUpViewController.m */; };
 		D880DD8618C6460E00C78248 /* BLKBasicProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0C18C644F20035A8A8 /* BLKBasicProfileViewController.m */; };
 		D880DD8718C6460E00C78248 /* BLKChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C0E18C644F20035A8A8 /* BLKChatViewController.m */; };
 		D880DD8818C6460E00C78248 /* BLKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C1018C644F20035A8A8 /* BLKConstants.m */; };
@@ -176,6 +178,8 @@
 		D873497818C84D4E00FE6F3A /* BLKMessageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKMessageObject.m; sourceTree = "<group>"; };
 		D873497B18C8522E00FE6F3A /* BLKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKUser.h; sourceTree = "<group>"; };
 		D873497C18C8522E00FE6F3A /* BLKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKUser.m; sourceTree = "<group>"; };
+		D873499118C9740F00FE6F3A /* BLKChatObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLKChatObject.h; sourceTree = "<group>"; };
+		D873499218C9740F00FE6F3A /* BLKChatObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLKChatObject.m; sourceTree = "<group>"; };
 		D8902BFA18C644F20035A8A8 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		D8902BFB18C644F20035A8A8 /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
 		D8902BFC18C644F20035A8A8 /* AppIcon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40.png; sourceTree = "<group>"; };
@@ -348,7 +352,6 @@
 		D84AEB3C18A7F4220027FCFA /* Blink */ = {
 			isa = PBXGroup;
 			children = (
-				D873498918C8590300FE6F3A /* External */,
 				D8902C0618C644F20035A8A8 /* Main.storyboard */,
 				D8902C0918C644F20035A8A8 /* BLKAppDelegate.h */,
 				D8902C0A18C644F20035A8A8 /* BLKAppDelegate.m */,
@@ -361,6 +364,7 @@
 				D873498A18C8594400FE6F3A /* Views */,
 				D873498C18C8598400FE6F3A /* NavigationAnimation */,
 				D873498518C857F400FE6F3A /* Utilities */,
+				D873498918C8590300FE6F3A /* External */,
 				D8902C5B18C644F20035A8A8 /* wut dis?????? */,
 				D873498B18C8595F00FE6F3A /* Resources */,
 				D84AEB3D18A7F4220027FCFA /* Supporting Files */,
@@ -402,6 +406,8 @@
 			children = (
 				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
 				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
+				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
+				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
 				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
 				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
 			);
@@ -931,8 +937,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D873499418C97A8500FE6F3A /* BLKSignUpViewController.m in Sources */,
 				D873498E18C8EA4500FE6F3A /* BLKAppDelegate.m in Sources */,
 				D880DD8618C6460E00C78248 /* BLKBasicProfileViewController.m in Sources */,
+				D873499318C9740F00FE6F3A /* BLKChatObject.m in Sources */,
 				D880DD8718C6460E00C78248 /* BLKChatViewController.m in Sources */,
 				D880DD8818C6460E00C78248 /* BLKConstants.m in Sources */,
 				D880DD8918C6460E00C78248 /* BLKFeed.m in Sources */,

@@ -14,6 +14,8 @@
 #import "SBUserDiscovery.h"
 #import "BLKMessageObject.h"
 #import "BLKUser.h"
+#import "BLKChatObject.h"
+
 
 @implementation BLKAppDelegate
 
@@ -22,6 +24,7 @@
     // Parse PFObject subclass setup
     [BLKMessageObject registerSubclass];
     [BLKUser registerSubclass];
+    [BLKChatObject registerSubclass];
 
     //setup parse authorization, facebook login
     [Parse setApplicationId:kParseAppID clientKey:kParseClient];
@@ -52,7 +55,7 @@
                                                                      [UIFont fontWithName:@"GillSans-Light" size:30.0], NSFontAttributeName, nil]];
 
     // If a user is already logged in, override storyboard launch
-    if ([PFUser currentUser]){
+    if ([BLKUser currentUser]){
         UIWindow *window = self.window;
         UIStoryboard *storyboard = [[self.window rootViewController] storyboard];
         UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"navController"];
@@ -60,8 +63,11 @@
 
         // if there are launch options for a peripheral it will be for the
         // social bluetooth user broadcast peripheral
-        [SBUserBroadcast createUserBroadcastWithLaunchOptions:launchOptions];
-        [SBUserDiscovery createUserDiscoveryWithLaunchOptions:launchOptions];
+        if (!TARGET_IPHONE_SIMULATOR) { // included in main.m
+            [SBUserBroadcast createUserBroadcastWithLaunchOptions:launchOptions];
+            [SBUserDiscovery createUserDiscoveryWithLaunchOptions:launchOptions];
+        }
+
     }
 
 
@@ -119,9 +125,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 
     [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:kInstallationChannelsKey];
 
-    if ([PFUser currentUser]) {
+    if ([BLKUser currentUser]) {
         // Make sure they are subscribed to private channel
-        NSString *privateChannelName = [[PFUser currentUser] objectForKey:kUserPrivateChannelKey];
+        NSString *privateChannelName = [[BLKUser currentUser] objectForKey:kUserPrivateChannelKey];
         if (privateChannelName && privateChannelName.length > 0) {
             NSLog(@"Subscribing user to %@", privateChannelName);
             [[PFInstallation currentInstallation] addUniqueObject:privateChannelName forKey:kInstallationChannelsKey];

@@ -19,13 +19,15 @@
 #import "BLKChatData.h"
 #import "BLKSaveImage.h"
 #import "SBUserConnection.h"
+#import "SBUserBroadcast.h"
 
 @interface BLKNearbyMenuViewController () <SBUserConnectionDelegate, BLKChatDataDelegate>
 
 @property (nonatomic)NSMutableDictionary *profileDictionary;
 @property (nonatomic)NSMutableArray *messageArray;
 @property (nonatomic)NSMutableArray *nearbyUsersArray;
-@property (nonatomic)SBUserModel *selectedUser;
+@property (nonatomic)BLKUser *selectedUser;
+@property (nonatomic)NSMutableArray *usersInConversation;
 @property (nonatomic)PFObject *messageData;
 
 @end
@@ -36,31 +38,32 @@
 {
     [super viewDidLoad];
 
-    [self shareProfileViaBluetooth]; // share PFUser data over bluetooth
-    [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
+    if (!TARGET_IPHONE_SIMULATOR) [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
 
-    [[BLKChatData instance] searchForMessagesIncluding:[PFUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
+    [[BLKChatData instance] searchForMessagesIncluding:[BLKUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
+    [BLKChatData instance].delegate = self;
+    [[BLKChatData instance] refresh];
 
-    [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread
-}
+    // Share Profile
+    [SBUser createUserWithObjectId:[BLKUser currentUser].objectId];
+    [[SBUserBroadcast currentUserBroadcast] peripheralAddUserProfileService];
 
-- (void)shareProfileViaBluetooth
-{
-    [SBUser createUser];
-    [SBUser currentUser].userModel.username = [PFUser currentUser][@"profileName"];
-    [SBUser currentUser].userModel.objectId = [PFUser currentUser].objectId;
-    [SBUser currentUser].userModel.quote = [PFUser currentUser][@"quote"];
-    [SBUser currentUser].userModel.relationshipStatus = [PFUser currentUser][@"relationship"];
+    // Search for profile
+    [SBUserConnection createUserConnection];
+    // start recieving user discovery messages
+    [SBUserConnection currentUserConnection].delegate = self;
+    self.nearbyUsersArray = [[SBUserConnection currentUserConnection] allUsersBy:SBNextUserByNewest];
+
+    // handles saving user profile image on background thread
+    // TODO move to block in sign up view rather than own class
+    [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[BLKUser currentUser][@"pictureURL"]]]; // save image on another thread
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
 
-    // start recieving user discovery messages
-    [SBUserConnection currentUserConnection].delegate = self;
-    self.nearbyUsersArray = [[SBUserConnection currentUserConnection] allUsersBy:SBNextUserByNewest];
+
 
     // start recieving message discovery messages
     [BLKChatData instance].delegate = self;
@@ -123,9 +126,9 @@
         static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-        cell.textLabel.text = [self putUserNameTogether:self.messageArray[indexPath.row][@"recipientsArrayPFUser"]];
+        cell.textLabel.text = [self putUserNameTogether:self.messageArray[indexPath.row][@"participants"]];
         cell.detailTextLabel.text = self.messageArray[indexPath.row][@"mostRecentMessage"];
-        PFFile *imageThumbnail = self.messageArray[indexPath.row][@"recipientsArrayPFUser"][0][@"thumbnailImage"];
+        PFFile *imageThumbnail = self.messageArray[indexPath.row][@"participants"][0][@"thumbnailImage"];
         [imageThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
         }];
@@ -135,10 +138,16 @@
     } else if (indexPath.section == 1){
         static NSString *CellIndentifier = @"NearbyCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIndentifier forIndexPath:indexPath];
+
+        // get the user
+        BLKUser *myUser = [self.nearbyUsersArray objectAtIndex:indexPath.row];
         cell.layer.cornerRadius = cell.layer.bounds.size.height/2;
         cell.clipsToBounds = true;
-        cell.textLabel.text = [self.nearbyUsersArray[indexPath.row] username];
-        cell.imageView.image = [JSAvatarImageFactory avatarImage:[self.nearbyUsersArray[indexPath.row] thumbnailImg] croppedToCircle:YES];
+        cell.textLabel.text = myUser.profileName;
+        [myUser.profilePictureThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
+        }];
+        cell.imageView.image = [UIImage imageNamed:@"user_circle"];
                
         return cell;
         
@@ -181,7 +190,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0){
-        self.messageData = self.messageArray[indexPath.row];
+        PFObject *chat = self.messageArray[indexPath.row];
+        self.usersInConversation = [NSMutableArray new];
+        self.usersInConversation = chat[@"participants"];
+
         [self performSegueWithIdentifier:@"toChat" sender:self];
     }
     if (indexPath.section == 1){
@@ -199,14 +211,14 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
-        [segue.destinationViewController setupMessageData:self.messageData];
+        [segue.destinationViewController setupMessageDataWithUsers:self.usersInConversation];
     }
     
     if ([segue.identifier isEqualToString:@"toOtherProfile"]) {
         if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]) {
                     BLKOtherPersonProfileViewController *ovc = (BLKOtherPersonProfileViewController *)segue.destinationViewController;
                     //see above for values to pass
-            [ovc setupUserData:self.selectedUser];
+            [ovc setBLKUser:self.selectedUser];
         }
     }
     if ([segue.identifier isEqualToString:@"toMyProfile"]) {
@@ -219,10 +231,11 @@
 
 
 
-#pragma mark - NearbyUserDelegate
-- (void)userConnectedWithNewArray:(NSMutableArray *)newArray
+#pragma mark - SBUserConnectionDelegate (For discovering when people are nearby)
+- (void)userDidConnect:(BLKUser *)user
 {
-    self.nearbyUsersArray = newArray;
+    if (!self.nearbyUsersArray) self.nearbyUsersArray = [NSMutableArray new];
+    [self.nearbyUsersArray addObject:user];
     [self.tableView reloadData];
 }
 
@@ -233,9 +246,10 @@
 }
 
 #pragma mark - BLKMessageDataDelegate
-- (void)newMessageRecievedAllMessages:(NSMutableArray *)messages
+// TODO implement this in 
+- (void)newChatRecieved:(PFObject *)chat
 {
-    self.messageArray = messages;
+    [self.messageArray addObject:chat];
     [self.tableView reloadData];
 }
 
@@ -243,8 +257,8 @@
 - (NSString *)putUserNameTogether:(NSMutableArray *)users
 {
     NSMutableString *userString = [[NSMutableString alloc] init];
-    for (PFUser *user in users){
-        if (![user.username isEqual:[PFUser currentUser].username]){
+    for (BLKUser *user in users){
+        if (![user.username isEqual:[BLKUser currentUser].username]){
             if (user[@"profileName"]) {
                 if (userString.length > 0)[userString appendString:@" & "];
                 [userString appendString:user[@"profileName"]];

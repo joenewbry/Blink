@@ -19,9 +19,10 @@
 // class methods to create a singleton instance of SBUser
 // used to control social bluetooth controls and set what
 // data gets shared out to other people
+static SBUser *mySBUser = nil;
+
 + (SBUser *)currentUser
 {
-    static SBUser *mySBUser = nil;
     @synchronized(self) {
         if (mySBUser == nil) mySBUser = [[self alloc] init];
     }
@@ -30,7 +31,6 @@
 
 + (SBUser *)createUser
 {
-    static SBUser *mySBUser = nil;
     @synchronized(self) {
         if (mySBUser == nil) mySBUser = [[self alloc] init];
     }
@@ -39,9 +39,9 @@
 
 + (SBUser *)createUserWithObjectId:(NSString *)objectId
 {
-    static SBUser *mySBUser = nil;
     @synchronized(self) {
         if (mySBUser == nil) mySBUser = [[self alloc] initWithObjectId:objectId];
+        
     }
     return mySBUser;
 }

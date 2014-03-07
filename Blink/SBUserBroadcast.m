@@ -221,7 +221,6 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
 {
-    NSLog(@"Read request recieved");
     if ([request.characteristic.UUID isEqual:self.objectIdCharacteristic.UUID]) {
         [self respondToReadRequest:request forCharacteristic:self.objectIdCharacteristic];
     } else if ([request.characteristic.UUID isEqual:self.userNameCharacteristic.UUID]) {

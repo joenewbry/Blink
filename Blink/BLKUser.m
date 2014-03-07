@@ -1,6 +1,6 @@
 //
 //  BLKUserProfile.m
-//  Subclassing PFUser to make updating basic profile information faster
+//  Subclassing BLKUser to make updating basic profile information faster
 //
 //  Created by Joe Newbry on 3/5/14.
 //  Copyright (c) 2014 Joe Newbry. All rights reserved.

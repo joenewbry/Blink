@@ -20,7 +20,7 @@ typedef enum SBNextUserBy SBNextUserBy;
 @protocol SBUserConnectionDelegate
 
 @optional
-- (void)userDidConnect:(SBUser *)user;
+- (void)userDidConnect:(BLKUser *)user;
 
 // used to bring app out of the background state ???
 // TODO implement these other delegate methods

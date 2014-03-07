@@ -1,4 +1,4 @@
-//
+ //
 //  main.m
 //  Blink
 //
@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "BLKAppDelegate.h"
+
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#endif
 
 int main(int argc, char * argv[])
 {

@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "BLKMessageObject.h"
+#import "BLKChatObject.h"
 
 @protocol BLKChatDataDelegate
 @optional
 - (void)newMessageRecievedAllMessages:(NSMutableArray *)messages;
 - (void)newMessageRecieved:(BLKMessageObject *)message;
+- (void)newChatRecieved:(BLKChatObject *)chat;
 
 @end
 
@@ -23,7 +25,9 @@
 @property (strong, nonatomic) NSMutableArray *chats;
 
 + (BLKChatData *)instance;
-- (void)searchForMessagesIncluding:(PFUser *)currentUser;
+- (void)searchForMessagesIncluding:(BLKUser *)currentUser;
+- (NSMutableArray *)messagesForConversationBetween:(NSArray *)users;
+- (void)refresh;
 
 
 @end

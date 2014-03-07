@@ -8,6 +8,7 @@
 
 #import "SBUserConnection.h"
 #import "BLKUser.h"
+#import <Parse/PFQuery.h>
 
 @implementation SBUserConnection
 
@@ -85,16 +86,20 @@ static SBUserConnection *instance = nil;
 #pragma mark - SBUserDiscoveryDelegate methods
 - (void)didReceiveObjectID:(NSString *)objectID
 {
-    PFQuery *queryForParseUser = [PFQuery queryWithClassName:@"_User"];
+    PFQuery *queryForParseUser = [BLKUser query];
     [queryForParseUser whereKey:@"objectId" equalTo:objectID];
     [queryForParseUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         // TODO check if this casting works
-        BLKUser *newUser = (BLKUser *)object;
-        [self.sbUsers addObject:newUser];
 
-        if ([self.delegate respondsToSelector:@selector(userDidConnect:)]){
-            [self.delegate performSelector:@selector(userDidConnect:) withObject:newUser];
+        if (!error) {
+            BLKUser *newUser = (BLKUser *)object;
+            [self.sbUsers addObject:newUser];
+
+            if ([self.delegate respondsToSelector:@selector(userDidConnect:)]){
+                [self.delegate performSelector:@selector(userDidConnect:) withObject:newUser];
+            }
         }
+
     }];
 }
 
