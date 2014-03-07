@@ -298,8 +298,9 @@ typedef enum BLKProfileState BLKProfileState;
 #pragma mark -- UIImagePickerControllerDelegate Delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-   
     self.profileImage = info[UIImagePickerControllerOriginalImage];
+    //[BLKUser currentUser].profilePicture = [self.profileImage;
+
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

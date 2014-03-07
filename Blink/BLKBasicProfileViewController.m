@@ -48,8 +48,10 @@
 {
     _user = user;
     
+    NSLog(@"profile pic %@", _user.profilePictureThumbnail );
     
-    [_user.profilePictureThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+    [_user.profilePicture getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        
         self.profileImage = [UIImage imageWithData:data];
     }];
     
@@ -195,8 +197,6 @@
 
 - (void)setLablesToHidden:(BOOL)hidden {
     [self.labelArray setValue:[NSNumber numberWithBool:hidden] forKey:@"hidden"];
-    
-    NSLog(@"Hide values called");
 }
 
 - (void)setNormalViewToHidden:(BOOL)hidden {

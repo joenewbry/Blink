@@ -122,14 +122,6 @@ static const NSInteger offset = 20;
 
 - (void)timerFireMethod:(NSTimer *)timer {
     
-    UILabel * tempLabel = (UILabel *)self.feed[0];
-    
-    NSLog(@"%@", NSStringFromCGRect(tempLabel.frame));
-    NSLog(@"%hhd", tempLabel.isHidden);
-    NSLog(@"%f", tempLabel.alpha);
-    
-    NSLog(@"%f", self.timer.timeInterval);
-    
     if (self.isAnimating) {
         
         if ([self getPrevious].alpha != 0) {
@@ -144,7 +136,6 @@ static const NSInteger offset = 20;
             }];
         }
         
-        NSLog(@"animation called");
         //animate the currentView in
         UILabel *currentLabel = [self getCurrent];
         [currentLabel setFrame:CGRectMake(0.0, -offset, currentLabel.frame.size.width, currentLabel.frame.size.height)];

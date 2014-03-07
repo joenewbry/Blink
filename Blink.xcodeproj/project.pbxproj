@@ -401,19 +401,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D873497A18C84D6000FE6F3A /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
-				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
-				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
-				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
-				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
-				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
-			);
-			name = Chat;
-			sourceTree = "<group>";
-		};
 		D873497E18C8567200FE6F3A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +435,12 @@
 			children = (
 				D8902C0D18C644F20035A8A8 /* BLKChatViewController.h */,
 				D8902C0E18C644F20035A8A8 /* BLKChatViewController.m */,
+				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
+				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
+				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
+				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
+				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
+				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -507,7 +500,6 @@
 			children = (
 				D873497E18C8567200FE6F3A /* Profile */,
 				D873498118C8569E00FE6F3A /* Chat */,
-				D873497A18C84D6000FE6F3A /* Chat */,
 				D873498218C856C900FE6F3A /* Home */,
 				D873498318C856E000FE6F3A /* SignUp */,
 			);
