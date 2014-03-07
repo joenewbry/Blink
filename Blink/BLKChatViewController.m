@@ -193,7 +193,7 @@
         // TODO change to underline not blue color
         if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
-            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+            [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
 
             cell.bubbleView.textView.linkTextAttributes = attrs;
         }

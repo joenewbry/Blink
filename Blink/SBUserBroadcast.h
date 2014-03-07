@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString const *SBBroadcastPeripheralUserProfileUUID;
-extern NSString const *SBBroadcastServiceUserProfileUUID;
-extern NSString const *SBBroadcastCharacteristicUserProfileObjectId;
+extern NSString  * const SBBroadcastPeripheralUserProfileUUID;
+extern NSString  * const SBBroadcastServiceUserProfileUUID;
+extern NSString  * const SBBroadcastCharacteristicUserProfileObjectId;
 
-extern NSString const *SBBroadcastPeripheralUserProfileUUID;
-extern NSString const *SBBroadcastServiceUserProfileUUID;
-extern NSString const *SBBroadcastCharacteristicUserProfileObjectId;
-extern NSString const *SBBroadcastCharacteristicUserProfileUserName;
-extern NSString const *SBBroadcastCharacteristicUserProfileProfileImage;
-extern NSString const *SBBroadcastCharacteristicUserProfileStatus;
-extern NSString const *SBBroadcastCharacteristicUserProfileQuote;
+extern NSString  * const SBBroadcastPeripheralUserProfileUUID;
+extern NSString  * const SBBroadcastServiceUserProfileUUID;
+extern NSString  * const SBBroadcastCharacteristicUserProfileObjectId;
+extern NSString  * const SBBroadcastCharacteristicUserProfileUserName;
+extern NSString  * const SBBroadcastCharacteristicUserProfileProfileImage;
+extern NSString  * const SBBroadcastCharacteristicUserProfileStatus;
+extern NSString  * const SBBroadcastCharacteristicUserProfileQuote;
 
 @interface SBUserBroadcast : NSObject
 

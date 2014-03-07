@@ -13,13 +13,13 @@
 
 NSString *peripheralRestorationUUID = @"A6499ECB-0B6C-4609-B161-E3D15687AF3D";
 
-NSString *SBBroadcastPeripheralUserProfileUUID = @"FC038B47-0022-4F8B-A8A3-74EC7D930B56";
-NSString *SBBroadcastServiceUserProfileUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A1F6";
-NSString *SBBroadcastCharacteristicUserProfileObjectId = @"2863DBD0-C65D-4F75-86B2-4A29D59776A5";
-NSString *SBBroadcastCharacteristicUserProfileUserName = @"5B7CF31D-31E9-4402-977D-6E0085B33293";
-NSString *SBBroadcastCharacteristicUserProfileProfileImage = @"9F4EBB16-B1E1-4F67-9746-A5CEB54B98B8";
-NSString *SBBroadcastCharacteristicUserProfileStatus = @"DA595224-C6F0-46DE-9C4C-EC75F43DC823";
-NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-96F123BA37E7";
+NSString * const SBBroadcastPeripheralUserProfileUUID = @"FC038B47-0022-4F8B-A8A3-74EC7D930B56";
+NSString * const SBBroadcastServiceUserProfileUUID = @"1EF38271-ADE8-44A5-B9B6-BAB493D9A1F6";
+NSString * const SBBroadcastCharacteristicUserProfileObjectId = @"2863DBD0-C65D-4F75-86B2-4A29D59776A5";
+NSString * const SBBroadcastCharacteristicUserProfileUserName = @"5B7CF31D-31E9-4402-977D-6E0085B33293";
+NSString * const SBBroadcastCharacteristicUserProfileProfileImage = @"9F4EBB16-B1E1-4F67-9746-A5CEB54B98B8";
+NSString * const SBBroadcastCharacteristicUserProfileStatus = @"DA595224-C6F0-46DE-9C4C-EC75F43DC823";
+NSString * const SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-96F123BA37E7";
 
 @interface SBUserBroadcast () <CBPeripheralManagerDelegate>
 

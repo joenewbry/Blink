@@ -140,6 +140,8 @@
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.layer.cornerRadius = cell.layer.bounds.size.height/2;
+        cell.clipsToBounds = true;
 
         cell.textLabel.text = [self putUserNameTogether:self.messageArray[indexPath.row][@"participants"]];
         cell.detailTextLabel.text = self.messageArray[indexPath.row][@"mostRecentMessage"];

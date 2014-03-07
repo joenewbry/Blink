@@ -229,9 +229,9 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
         if ([service.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastServiceUserProfileUUID]]){
             for (CBCharacteristic *characteristic in service.characteristics){
                 if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId]]){
-                    if ([self.delegate respondsToSelector:@selector(userDidDisconnectWithObjectID:)]){
+                    if ([self.delegate respondsToSelector:@selector(userDidDisconnectWithObjectId:)]){
                         NSString *objectUUID = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-                        [self.delegate performSelector:@selector(userDidDisconnectWithObjectID:) withObject:objectUUID];
+                        [self.delegate performSelector:@selector(userDidDisconnectWithObjectId:) withObject:objectUUID];
                     }
 
                 }

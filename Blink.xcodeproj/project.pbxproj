@@ -61,7 +61,6 @@
 		D8902C6D18C644F20035A8A8 /* AppIcon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0418C644F20035A8A8 /* AppIcon72x72.png */; };
 		D8902C6E18C644F20035A8A8 /* AppIcon72x72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0518C644F20035A8A8 /* AppIcon72x72@2x.png */; };
 		D8902C6F18C644F20035A8A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0618C644F20035A8A8 /* Main.storyboard */; };
-		D8902C7018C644F20035A8A8 /* Blink-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0818C644F20035A8A8 /* Blink-Info.plist */; };
 		D8902C7118C644F20035A8A8 /* BLKAppDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0918C644F20035A8A8 /* BLKAppDelegate.h */; };
 		D8902C7218C644F20035A8A8 /* BLKAppDelegate.m in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0A18C644F20035A8A8 /* BLKAppDelegate.m */; };
 		D8902C7318C644F20035A8A8 /* BLKBasicProfileViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = D8902C0B18C644F20035A8A8 /* BLKBasicProfileViewController.h */; };
@@ -97,21 +96,13 @@
 		D8902C9118C644F20035A8A8 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C2918C644F20035A8A8 /* AppIcon29x29@2x.png */; };
 		D8902C9218C644F20035A8A8 /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C2A18C644F20035A8A8 /* AppIcon40x40@2x.png */; };
 		D8902C9318C644F20035A8A8 /* AppIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C2B18C644F20035A8A8 /* AppIcon60x60@2x.png */; };
-		D8902C9418C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C2C18C644F20035A8A8 /* Contents.json */; };
 		D8902C9518C644F20035A8A8 /* camera_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C2E18C644F20035A8A8 /* camera_icon.png */; };
-		D8902C9618C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C2F18C644F20035A8A8 /* Contents.json */; };
-		D8902C9718C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3118C644F20035A8A8 /* Contents.json */; };
 		D8902C9818C644F20035A8A8 /* user_nav_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3218C644F20035A8A8 /* user_nav_icon.png */; };
-		D8902C9918C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3418C644F20035A8A8 /* Contents.json */; };
 		D8902C9A18C644F20035A8A8 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3518C644F20035A8A8 /* LaunchImage@2x.png */; };
 		D8902C9B18C644F20035A8A8 /* LaunchImage@R4.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3618C644F20035A8A8 /* LaunchImage@R4.png */; };
-		D8902C9C18C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3818C644F20035A8A8 /* Contents.json */; };
 		D8902C9D18C644F20035A8A8 /* MyProfileImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3918C644F20035A8A8 /* MyProfileImage.png */; };
-		D8902C9E18C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3B18C644F20035A8A8 /* Contents.json */; };
 		D8902C9F18C644F20035A8A8 /* NearbyMenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3C18C644F20035A8A8 /* NearbyMenuIcon.png */; };
-		D8902CA018C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3E18C644F20035A8A8 /* Contents.json */; };
 		D8902CA118C644F20035A8A8 /* SquareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C3F18C644F20035A8A8 /* SquareIcon.png */; };
-		D8902CA218C644F20035A8A8 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4118C644F20035A8A8 /* Contents.json */; };
 		D8902CA318C644F20035A8A8 /* user_profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4218C644F20035A8A8 /* user_profile_icon.png */; };
 		D8902CA418C644F20035A8A8 /* user_profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4318C644F20035A8A8 /* user_profile_icon@2x.png */; };
 		D8902CA518C644F20035A8A8 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902C4618C644F20035A8A8 /* LaunchImage@2x.png */; };
@@ -829,11 +820,8 @@
 				D8902C7418C644F20035A8A8 /* BLKBasicProfileViewController.m in Resources */,
 				D8B30C7C18B0843E0072882D /* LaunchImage@2x.png in Resources */,
 				D8902C8F18C644F20035A8A8 /* home.png in Resources */,
-				D8902C9918C644F20035A8A8 /* Contents.json in Resources */,
 				D8902CAE18C644F20035A8A8 /* SBUserDiscovery.h in Resources */,
 				D8902CAA18C644F20035A8A8 /* SBNearbyUsers.h in Resources */,
-				D8902C9718C644F20035A8A8 /* Contents.json in Resources */,
-				D8902C9418C644F20035A8A8 /* Contents.json in Resources */,
 				D8902C8918C644F20035A8A8 /* BLKSignUpViewController.m in Resources */,
 				D8902C8E18C644F20035A8A8 /* chat_icon.png in Resources */,
 				D8902C7818C644F20035A8A8 /* BLKConstants.m in Resources */,
@@ -850,7 +838,6 @@
 				D8902CBD18C644F20035A8A8 /* BLKSignUpViewController.h in Resources */,
 				D8902CB918C644F20035A8A8 /* Profile.m in Resources */,
 				D8902CB818C644F20035A8A8 /* Profile.h in Resources */,
-				D8902C9E18C644F20035A8A8 /* Contents.json in Resources */,
 				D8902C8D18C644F20035A8A8 /* CBUUID+StringExtraction.m in Resources */,
 				D8902C9318C644F20035A8A8 /* AppIcon60x60@2x.png in Resources */,
 				D8902C7C18C644F20035A8A8 /* BLKChatData.m in Resources */,
@@ -859,7 +846,6 @@
 				D8B30C7D18B0843E0072882D /* LaunchImage@R4.png in Resources */,
 				D8902C6718C644F20035A8A8 /* AppIcon50x50.png in Resources */,
 				D8902C7D18C644F20035A8A8 /* BLKNavigationControllerDelegate.h in Resources */,
-				D8902CA018C644F20035A8A8 /* Contents.json in Resources */,
 				D8902CB118C644F20035A8A8 /* SBUserModel.m in Resources */,
 				D8902C9B18C644F20035A8A8 /* LaunchImage@R4.png in Resources */,
 				D8902C8018C644F20035A8A8 /* BLKNearbyMenuViewController.m in Resources */,
@@ -881,7 +867,6 @@
 				D8902C9518C644F20035A8A8 /* camera_icon.png in Resources */,
 				D8902C7918C644F20035A8A8 /* BLKFeed.h in Resources */,
 				D8902C6618C644F20035A8A8 /* AppIcon40x40@2x.png in Resources */,
-				D8902C9618C644F20035A8A8 /* Contents.json in Resources */,
 				D8902C6A18C644F20035A8A8 /* AppIcon57x57@2x.png in Resources */,
 				D8902C8718C644F20035A8A8 /* BLKSaveImage.h in Resources */,
 				D8902CA518C644F20035A8A8 /* LaunchImage@2x.png in Resources */,
@@ -889,7 +874,6 @@
 				D8902C7118C644F20035A8A8 /* BLKAppDelegate.h in Resources */,
 				D8902C6818C644F20035A8A8 /* AppIcon50x50@2x.png in Resources */,
 				D8B30C7618B083CD0072882D /* AppIcon29x29@2x.png in Resources */,
-				D8902C9C18C644F20035A8A8 /* Contents.json in Resources */,
 				D8902C9818C644F20035A8A8 /* user_nav_icon.png in Resources */,
 				D8902CA418C644F20035A8A8 /* user_profile_icon@2x.png in Resources */,
 				D8902C7218C644F20035A8A8 /* BLKAppDelegate.m in Resources */,
@@ -898,7 +882,6 @@
 				D8902C7518C644F20035A8A8 /* BLKChatViewController.h in Resources */,
 				D8902CAC18C644F20035A8A8 /* SBUser.h in Resources */,
 				D8902C7718C644F20035A8A8 /* BLKConstants.h in Resources */,
-				D8902C7018C644F20035A8A8 /* Blink-Info.plist in Resources */,
 				D8902CB618C644F20035A8A8 /* BLKDiscoveredProfiles.h in Resources */,
 				D8902CA618C644F20035A8A8 /* LaunchImage@R4.png in Resources */,
 				D8B30C7818B083CD0072882D /* AppIcon60x60@2x.png in Resources */,
@@ -911,7 +894,6 @@
 				D8902CB718C644F20035A8A8 /* BLKDiscoveredProfiles.m in Resources */,
 				D8902C6D18C644F20035A8A8 /* AppIcon72x72.png in Resources */,
 				D8902C8318C644F20035A8A8 /* BLKPopAnimator.h in Resources */,
-				D8902CA218C644F20035A8A8 /* Contents.json in Resources */,
 				D8B30C7F18B0874B0072882D /* IconNoBackground60x60@2x.png in Resources */,
 				D8902C6918C644F20035A8A8 /* AppIcon57x57.png in Resources */,
 				D8902CB518C644F20035A8A8 /* UIViewController+ViewUtils.m in Resources */,

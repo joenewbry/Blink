@@ -20,11 +20,11 @@
 + (SBUser *)createUser;
 
 // SBUser sharing controls
-- (void)shareProfile;
-- (void)shareProfileWithLaunchOptions:(NSDictionary *)launchOptions broadcastInBackground:(BOOL)shouldBroadcast;
-- (void)shareUUID;
-- (void)shareUUIDWithLaunchOptions:(NSDictionary *)launchOptions broadcastInBackground:(BOOL)shouldBoradcast;
-- (void)stopShareProfile;
-- (void)logout;
+//- (void)shareProfile;
+//- (void)shareProfileWithLaunchOptions:(NSDictionary *)launchOptions broadcastInBackground:(BOOL)shouldBroadcast;
+//- (void)shareUUID;
+//- (void)shareUUIDWithLaunchOptions:(NSDictionary *)launchOptions broadcastInBackground:(BOOL)shouldBoradcast;
+//- (void)stopShareProfile;
+//- (void)logout;
 
 @end
