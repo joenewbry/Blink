@@ -23,22 +23,25 @@
 
             chat.get('sender').fetch({
                 success: function(Sender){
-                    alert("sender name " + JSON.stringify(chat.get('sender'), null));
-                    alert("sender name is actually " + chat.get('sender').get('profileName'));
-                    alert("sender looks like " + JSON.stringify(chat, null));
-
-                    var query = new Parse.Query(Parse.Installation);
-                    query.containedIn('user', chat.get("recipientsArrayPFUser")); // request.object.get is [] so sends to all push registered users
-                    query.notEqualTo('user', chat.get('sender'));
-                    Parse.Push.send({
-                        where: query, // sets our installation query
-                        data : {
-                        alert: 'Message from ' + chat.get("sender").get('profileName'),
-                        badge: "Increment",
-                        p: "m",
-                        fu: chat.get("sender").get('profileName'),//Chat.object.get("sender").profileName, // Sender id // TODO: send user name insted
+                    chat.get('participants').fetch({
+                        success: function(participants){
+                            var query = new Parse.Query(Parse.Installation);
+                            query.containedIn('user', chat.get("participants")); // request.object.get is [] so sends to all push registered users
+                            query.notEqualTo('user', chat.get('sender'));
+                            Parse.Push.send({
+                            where: query, // sets our installation query
+                            data : {
+                            alert: 'Message from ' + chat.get("sender").get('profileName'),
+                            badge: "Increment",
+                            p: "m",
+                            fu: chat.get("sender").get('profileName'),//Chat.object.get("sender").profileName, // Sender id // TODO: send user name insted
                       },
                     });   
+                        }
+                    });
+                    // alert("sender name " + JSON.stringify(chat.get('sender'), null));
+                    // alert("participants are " + chat.get('participants'));
+                    // alert("sender looks like " + JSON.stringify(chat, null));
                 }
             }); 
         }

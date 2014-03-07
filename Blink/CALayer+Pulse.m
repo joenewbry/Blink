@@ -15,19 +15,24 @@
 // TODO make it so the radius distance, time, fadeout, pause duration are configurable
 +(void)pulseLayer:(CALayer *)layer
 {
+    NSNumber *width = [NSNumber numberWithFloat:layer.bounds.size.width];
+    NSNumber *height = [NSNumber numberWithFloat:layer.bounds.size.height];
+    NSNumber *radius = [NSNumber numberWithFloat:layer.bounds.size.width/2]; // assuming circle
+    NSNumber *growFactor = @15;
+    NSNumber *growthRadius = [NSNumber numberWithFloat:growFactor.floatValue/2];
     CABasicAnimation* grow = [CABasicAnimation animationWithKeyPath:@"bounds.size.width"];
-    grow.fromValue = @10;
-    grow.toValue = @30;
+    grow.fromValue = width;
+    grow.byValue = growFactor;
     grow.duration = .75;
 
     CABasicAnimation *grow2 = [CABasicAnimation animationWithKeyPath:@"bounds.size.height"];
-    grow2.fromValue = @10;
-    grow2.toValue = @30;
+    grow2.fromValue = height;
+    grow2.byValue = growFactor;
     grow2.duration = .75;
 
     CABasicAnimation *grow3 = [CABasicAnimation animationWithKeyPath:@"cornerRadius"];
-    grow3.fromValue = @5;
-    grow3.toValue = @15;
+    grow3.fromValue = radius;
+    grow3.byValue = growthRadius;
     grow3.duration = .75;
 
     CABasicAnimation *grow4 = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -35,17 +40,23 @@
     grow4.toValue = @0.0;
     grow4.duration = .75;
 
-    CABasicAnimation *grow5 = [CABasicAnimation animationWithKeyPath:@"hidden"];
-    grow5.fromValue = [NSNumber numberWithBool:false];
-    grow5.toValue = [NSNumber numberWithBool:true];
-    grow5.duration = .75;
+
 
     CAAnimationGroup *pulseGroup = [CAAnimationGroup animation];
-    pulseGroup.duration = 3;
+    pulseGroup.duration = .75;
     pulseGroup.repeatCount = 1000;
     pulseGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    pulseGroup.animations = @[grow, grow2, grow3, grow4, grow5];
-    [layer addAnimation:pulseGroup forKey:@"pulseGroup"];
+    pulseGroup.animations = @[grow, grow2, grow3, grow4];
+
+    CALayer *pulseCircle = [CALayer layer];
+    pulseCircle.bounds = layer.bounds;
+    pulseCircle.position = CGPointMake(layer.bounds.size.width/2, layer.bounds.size.height/2);
+    pulseCircle.cornerRadius = layer.cornerRadius;
+    pulseCircle.masksToBounds = true;
+    pulseCircle.borderColor = [UIColor purpleColor].CGColor;
+    pulseCircle.borderWidth = .25;
+    [layer addSublayer:pulseCircle];
+    [pulseCircle addAnimation:pulseGroup forKey:@"pulseGroup"];
 }
 
 @end

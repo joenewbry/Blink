@@ -69,10 +69,6 @@ static BLKSaveImage *instance = nil;
     [thumbnailFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         [BLKUser currentUser][@"thumbnailImage"] = thumbnailFile;
         [[BLKUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
-            else {
-                NSLog(@"a user has saved data, should already be signed in");
-            }
         }];
     }];
 

@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
 @property (strong, nonatomic) IBOutlet BLKFeed *feedView;
 
+
+
 @property (nonatomic) NSMutableArray *labelArray;
 
 
@@ -42,18 +44,19 @@
     
 }
 
+- (void)setBLKUser:(BLKUser *)user
+{
+    _user = user;
 
--(void)setSBUserModel:(SBUserModel *)SBUserModel {
-    _SBUserModel = SBUserModel;
+    [_user.profilePicture getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        
+        self.profileImage = [UIImage imageWithData:data];
+    }];
     
-    //anytime the SBUserModel gets set all the properties
-    _profileImage = _SBUserModel.profileImage;
-    
-    _username = (NSMutableString *)_SBUserModel.username;
-    
-    _quote = (NSMutableString *)_SBUserModel.quote;
-    _college = (NSMutableString *)_SBUserModel.college;
-    _relationshipStatus = (NSMutableString *)_SBUserModel.relationshipStatus;
+    _username = [_user.profileName mutableCopy];
+    _quote = [_user.quote mutableCopy];
+    _college = [_user.college mutableCopy];
+    _relationshipStatus = [_user.relationshipStatus mutableCopy];
 }
 
 - (void)setProfileImage:(UIImage *)profileImage {
@@ -137,6 +140,12 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.feedView stop];
+}
+
 # pragma mark-- UpdateMethod
 
 - (void)update {
@@ -179,15 +188,12 @@
         }
     }
     
-    NSLog(@"error didn't find frame for tag");
     return [[UILabel alloc] init];
     
 }
 
 - (void)setLablesToHidden:(BOOL)hidden {
     [self.labelArray setValue:[NSNumber numberWithBool:hidden] forKey:@"hidden"];
-    
-    NSLog(@"Hide values called");
 }
 
 - (void)setNormalViewToHidden:(BOOL)hidden {
@@ -200,12 +206,6 @@
         [self setUpFeedView];
         [self.feedView resume];
     }
-    NSLog(@"Hide values called");
-}
-
-- (void)setBLKUser:(BLKUser *)user
-{
-    NSLog(@"Should override setBLKUser is subclass");
 }
 
 @end

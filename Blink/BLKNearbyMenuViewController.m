@@ -69,6 +69,7 @@
     [super viewWillAppear:animated];
 
     // start recieving message discovery messages
+
     [BLKChatData instance].delegate = self;
     self.messageArray = [[BLKChatData instance] chats];
     [BLKChatData instance].delegate = self;
@@ -144,9 +145,8 @@
         cell.detailTextLabel.text = self.messageArray[indexPath.row][@"mostRecentMessage"];
         PFFile *imageThumbnail = self.messageArray[indexPath.row][@"participants"][0][@"thumbnailImage"];
         [imageThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
+            cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:NO];
         }];
-        [CALayer pulseLayer:cell.layer];
 
         return cell;
         
@@ -162,11 +162,12 @@
         cell.textLabel.text = myUser.profileName;
         [myUser.profilePictureThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
+            [CALayer pulseLayer:cell.imageView.layer];
+
         }];
         cell.imageView.image = [UIImage imageNamed:@"user_circle"];
 
-        [CALayer pulseLayer:cell.layer];
-               
+
         return cell;
         
     }
@@ -228,6 +229,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+    
     if ([segue.destinationViewController isKindOfClass:[BLKChatViewController class]]) {
         [segue.destinationViewController setupMessageDataWithUsers:self.usersInConversation];
     }
@@ -236,13 +238,15 @@
         if ([segue.destinationViewController isKindOfClass:[BLKOtherPersonProfileViewController class]]) {
                     BLKOtherPersonProfileViewController *ovc = (BLKOtherPersonProfileViewController *)segue.destinationViewController;
                     //see above for values to pass
+
             [ovc setBLKUser:self.selectedUser];
+
         }
     }
     if ([segue.identifier isEqualToString:@"toMyProfile"]) {
         if ([segue.destinationViewController isKindOfClass:[BLKYourProfileViewController class]]) {
             BLKYourProfileViewController *pvc = (BLKYourProfileViewController *)segue.destinationViewController;
-            pvc.SBUserModel = [SBUser currentUser].userModel;
+            [pvc setBLKUser:[BLKUser currentUser]];
         }
     }
 }

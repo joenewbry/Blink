@@ -31,7 +31,7 @@
 {
     UIAlertView *logoutView = [[UIAlertView alloc] initWithTitle:@"Want to Logout" message:@"Loging out will make it so you cannot be discovered by people around you but if you're ready to go rouge, we hope to see you back soon!" delegate:self cancelButtonTitle:@"Not Now" otherButtonTitles:@"Log Out", nil];
     logoutView.tag = 2;
-    [logoutView show];
+    if (!logoutView.visible) [logoutView show];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex

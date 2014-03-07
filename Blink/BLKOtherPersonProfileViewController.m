@@ -11,8 +11,6 @@
 
 @interface BLKOtherPersonProfileViewController ()
 
-@property (nonatomic, strong) BLKUser* user;
-
 @end
 
 @implementation BLKOtherPersonProfileViewController
@@ -26,13 +24,12 @@
 
 - (IBAction)chatButtonPressed:(UIBarButtonItem *)sender {
     BLKChatViewController *chatController = [[BLKChatViewController alloc] init];
-    [chatController setupMessageDataWithUsers:self.user];
+
+    [chatController setupMessageDataWithUsers:[[NSMutableArray alloc] initWithObjects:self.user,[BLKUser currentUser], nil]]; //TODO pass array of users in chat
+
     [self.navigationController pushViewController:chatController animated:NO];
 }
 
-- (void)setBLKUser:(BLKUser *)user
-{
-    self.user = user;
-}
+
 
 @end

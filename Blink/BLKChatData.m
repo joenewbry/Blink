@@ -40,8 +40,6 @@ static BLKChatData *instance = nil;
     [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         // always reset so that cache and network don't stack
         if (error)  {
-            if (error.code == kPFErrorCacheMiss) NSLog(@"No cache for requested object");
-            else NSLog(@"Error fetching message data is: %@", [error localizedDescription]);
         }
         self.chats = [[NSMutableArray alloc] init];
 
@@ -70,7 +68,6 @@ static BLKChatData *instance = nil;
             return [aChat objectForKey:@"messages"];
         }
     }
-    NSLog(@"No conversation found for message conversation between two users");
     return nil;
 }
 

@@ -47,6 +47,7 @@
 		D880DD9B18C6460E00C78248 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C5A18C644F20035A8A8 /* Profile.m */; };
 		D8853C1218CA28B1001D881D /* BLKChatData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C1418C644F20035A8A8 /* BLKChatData.m */; };
 		D8853C1518CA4DC7001D881D /* CALayer+Pulse.m in Sources */ = {isa = PBXBuildFile; fileRef = D8853C1418CA4DC7001D881D /* CALayer+Pulse.m */; };
+		D8853C1A18CA64E2001D881D /* BLKSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8902C2118C644F20035A8A8 /* BLKSignUpViewController.m */; };
 		D8902C6318C644F20035A8A8 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902BFA18C644F20035A8A8 /* AppIcon29x29.png */; };
 		D8902C6418C644F20035A8A8 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902BFB18C644F20035A8A8 /* AppIcon29x29@2x.png */; };
 		D8902C6518C644F20035A8A8 /* AppIcon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = D8902BFC18C644F20035A8A8 /* AppIcon40x40.png */; };
@@ -378,8 +379,6 @@
 		D84AEB3D18A7F4220027FCFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D8853C1318CA4DC7001D881D /* CALayer+Pulse.h */,
-				D8853C1418CA4DC7001D881D /* CALayer+Pulse.m */,
 				D84AEB3E18A7F4220027FCFA /* Blink-Info.plist */,
 				D84AEB3F18A7F4220027FCFA /* InfoPlist.strings */,
 				D84AEB4218A7F4220027FCFA /* main.m */,
@@ -404,19 +403,6 @@
 				D84AEB5E18A7F4220027FCFA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D873497A18C84D6000FE6F3A /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
-				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
-				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
-				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
-				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
-				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
-			);
-			name = Chat;
 			sourceTree = "<group>";
 		};
 		D873497E18C8567200FE6F3A /* Profile */ = {
@@ -453,6 +439,12 @@
 			children = (
 				D8902C0D18C644F20035A8A8 /* BLKChatViewController.h */,
 				D8902C0E18C644F20035A8A8 /* BLKChatViewController.m */,
+				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
+				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
+				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
+				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
+				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
+				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -497,6 +489,8 @@
 		D873498518C857F400FE6F3A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D8853C1318CA4DC7001D881D /* CALayer+Pulse.h */,
+				D8853C1418CA4DC7001D881D /* CALayer+Pulse.m */,
 				D8902C2418C644F20035A8A8 /* CBUUID+StringExtraction.h */,
 				D8902C2518C644F20035A8A8 /* CBUUID+StringExtraction.m */,
 				D8902C5318C644F20035A8A8 /* UIView+LinerGradient.h */,
@@ -521,20 +515,10 @@
 		D873498718C8585800FE6F3A /* SocialBluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				D873497418C8487800FE6F3A /* SBUserConnection.h */,
-				D873497518C8487800FE6F3A /* SBUserConnection.m */,
-				D8902C4F18C644F20035A8A8 /* SBUserDiscovery.h */,
-				D8902C5018C644F20035A8A8 /* SBUserDiscovery.m */,
-				D8902C4918C644F20035A8A8 /* SBUserBroadcast.h */,
-				D8902C4A18C644F20035A8A8 /* SBUserBroadcast.m */,
-				D8902C4B18C644F20035A8A8 /* SBNearbyUsers.h */,
-				D8902C4C18C644F20035A8A8 /* SBNearbyUsers.m */,
-				D8902C4D18C644F20035A8A8 /* SBUser.h */,
-				D8902C4E18C644F20035A8A8 /* SBUser.m */,
-				D8902C5118C644F20035A8A8 /* SBUserModel.h */,
-				D8902C5218C644F20035A8A8 /* SBUserModel.m */,
-				D873497B18C8522E00FE6F3A /* BLKUser.h */,
-				D873497C18C8522E00FE6F3A /* BLKUser.m */,
+				D8853C1718CA6066001D881D /* Broadcast */,
+				D8853C1618CA605A001D881D /* Discovery */,
+				D8853C1818CA608E001D881D /* User */,
+				D8853C1918CA6096001D881D /* Unused */,
 			);
 			name = SocialBluetooth;
 			sourceTree = "<group>";
@@ -598,9 +582,50 @@
 		D873499518CA258800FE6F3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D873497A18C84D6000FE6F3A /* Chat */,
+				D873497B18C8522E00FE6F3A /* BLKUser.h */,
+				D873497C18C8522E00FE6F3A /* BLKUser.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		D8853C1618CA605A001D881D /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				D873497418C8487800FE6F3A /* SBUserConnection.h */,
+				D873497518C8487800FE6F3A /* SBUserConnection.m */,
+				D8902C4F18C644F20035A8A8 /* SBUserDiscovery.h */,
+				D8902C5018C644F20035A8A8 /* SBUserDiscovery.m */,
+			);
+			name = Discovery;
+			sourceTree = "<group>";
+		};
+		D8853C1718CA6066001D881D /* Broadcast */ = {
+			isa = PBXGroup;
+			children = (
+				D8902C4918C644F20035A8A8 /* SBUserBroadcast.h */,
+				D8902C4A18C644F20035A8A8 /* SBUserBroadcast.m */,
+			);
+			name = Broadcast;
+			sourceTree = "<group>";
+		};
+		D8853C1818CA608E001D881D /* User */ = {
+			isa = PBXGroup;
+			children = (
+				D8902C4D18C644F20035A8A8 /* SBUser.h */,
+				D8902C4E18C644F20035A8A8 /* SBUser.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		D8853C1918CA6096001D881D /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				D8902C4B18C644F20035A8A8 /* SBNearbyUsers.h */,
+				D8902C4C18C644F20035A8A8 /* SBNearbyUsers.m */,
+				D8902C5118C644F20035A8A8 /* SBUserModel.h */,
+				D8902C5218C644F20035A8A8 /* SBUserModel.m */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		D8902C2D18C644F20035A8A8 /* AppIcon.appiconset */ = {
@@ -949,6 +974,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8853C1A18CA64E2001D881D /* BLKSignUpViewController.m in Sources */,
 				D8853C1218CA28B1001D881D /* BLKChatData.m in Sources */,
 				D873499618CA25A700FE6F3A /* BLKChatObject.m in Sources */,
 				D873499718CA25A700FE6F3A /* BLKMessageObject.m in Sources */,

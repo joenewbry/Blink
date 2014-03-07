@@ -167,22 +167,18 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     NSString *errorMessage = [[NSString alloc] init];
     switch (peripheral.state) {
         case CBPeripheralManagerStatePoweredOn:
-            NSLog(@"peripheral state is powered on");
             break;
         case CBPeripheralManagerStatePoweredOff:
             errorMessage = @"It looks like Bluetooth is turned off. Turn on Bluetooth to discover people!";
             break;
         case CBPeripheralManagerStateResetting:
-            NSLog(@"peripheral state resetting");
             break;
         case CBPeripheralManagerStateUnauthorized:
             errorMessage = @"peripheral state unauthorized";
             break;
         case CBPeripheralManagerStateUnknown:
-            NSLog(@"peripheral state unknown");
             break;
         case CBPeripheralManagerStateUnsupported:
-            NSLog(@"peripheral state unsupported");
             break;
     }
 
@@ -201,7 +197,6 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
             didAddService:(CBService *)myService
                     error:(NSError *)error {
     if (error) {
-        NSLog(@"Error publishing myService: %@", [error localizedDescription]);
     }
 
     if ([myService isEqual:self.userProfileService]){
@@ -213,9 +208,7 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
 {
     if (error) {
-        NSLog(@"Error advertising: %@", [error localizedDescription]);
     } else {
-        NSLog(@"peripheral did start advertising peripheral named: %@", peripheral.description);
     }
 }
 
@@ -232,7 +225,6 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
     } else if ([request.characteristic.UUID isEqual:self.quoteCharacteristic.UUID]) {
         [self respondToReadRequest:request forCharacteristic:self.quoteCharacteristic];
     } else {
-        NSLog(@"An error with the read request occured");
      }
 }
 
@@ -240,7 +232,6 @@ NSString *SBBroadcastCharacteristicUserProfileQuote = @"E34C3A53-4D39-409D-AF50-
 - (void)respondToReadRequest:(CBATTRequest *)request forCharacteristic:(CBCharacteristic *)characteristic
 {
     if (request.offset > characteristic.value.length) {
-        NSLog(@"Incorect request bounds");
         return;
     }
     request.value = [characteristic.value subdataWithRange:NSMakeRange(request.offset, characteristic.value.length - request.offset)];

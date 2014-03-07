@@ -62,11 +62,12 @@ typedef enum BLKProfileState BLKProfileState;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(onKeyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     
+    /* failed attempt to dismiss keyboard on swipe
+
     UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     
-    /* failed attempt to dismiss keyboard on swipe
-    [self.scrollViewContainer setUserInteractionEnabled:YES];
+        [self.scrollViewContainer setUserInteractionEnabled:YES];
     [self.scrollViewContainer addGestureRecognizer:swipeDownGestureRecognizer];
     [self setLablesToHidden:YES];
      */
@@ -255,21 +256,23 @@ typedef enum BLKProfileState BLKProfileState;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (self.activeTextField.tag == 1) {
         self.username = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [BLKUser currentUser][@"profileName"] = self.username;
-        self.SBUserModel.username = self.username;
+        [BLKUser currentUser].profileName = self.username;
+        self.user.username = self.username;
     } else if (self.activeTextField.tag == 2) {
          self.quote = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [BLKUser currentUser][@"quote"] = self.quote;
-        self.SBUserModel.quote = self.quote;
+        [BLKUser currentUser].quote = self.quote;
+        self.user.quote = self.quote;
     } else if (self.activeTextField.tag == 4) {
         self.relationshipStatus = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [BLKUser currentUser][@"relationship"] = self.relationshipStatus;
-        self.SBUserModel.relationshipStatus = self.relationshipStatus;
+        [BLKUser currentUser].relationshipStatus = self.relationshipStatus;
+        self.user.relationshipStatus = self.relationshipStatus;
     } else if (self.activeTextField.tag == 3) {
         self.college = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [BLKUser currentUser][@"college"] = self.college;
-        self.SBUserModel.college = self.college;
+        [BLKUser currentUser].college = self.college;
+        self.user.college = self.college;
     }
+    
+    //TODO all the if statements above: does this reference to the saved BLKUser work for saving the data?
     
     self.activeTextField = nil;
     
@@ -295,8 +298,9 @@ typedef enum BLKProfileState BLKProfileState;
 #pragma mark -- UIImagePickerControllerDelegate Delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-   
     self.profileImage = info[UIImagePickerControllerOriginalImage];
+    //[BLKUser currentUser].profilePicture = [self.profileImage;
+
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

@@ -129,12 +129,7 @@
                         [chat addObject:message forKey:@"messages"];
                         [chat setValue:[BLKUser currentUser] forKey:@"sender"];
                         [chat setValue:text forKey:@"mostRecentMessage"];
-                        [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (error) NSLog(@"Error message: %@", [error localizedDescription]);
-                            else {
-                                NSLog(@"Save in background succeeded");
-                            }
-                        }];
+                        [chat saveInBackground];
                         return;
                     }
 
@@ -249,9 +244,11 @@
 #pragma mark - new chat message data source
 - (void)newMessageRecievedAllMessages:(NSMutableArray *)messages
 {
+
     self.messages = [self messagesFromBLKMessages:messages];
     [self.tableView reloadData];
 }
+
 
 - (void)newMessageRecieved:(BLKMessageObject *)message
 {

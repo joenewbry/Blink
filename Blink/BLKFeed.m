@@ -27,12 +27,6 @@ static const NSInteger offset = 20;
 - (id)initWithTimerInterval:(float)timerInterval {
     self = [super init];
     
-    if (self) {
-
-    } else {
-        NSLog(@"error initializing self");
-    }
-    
     return self;
 }
 
@@ -105,6 +99,8 @@ static const NSInteger offset = 20;
                                                           repeats:YES];
 }
 
+
+
 - (void)pause {
     self.isAnimating = NO;
 }
@@ -113,16 +109,12 @@ static const NSInteger offset = 20;
     self.isAnimating = YES;
 }
 
+- (void)stop {
+    [self.timer invalidate];
+}
+
 
 - (void)timerFireMethod:(NSTimer *)timer {
-    
-    UILabel * tempLabel = (UILabel *)self.feed[0];
-    
-    NSLog(@"%@", NSStringFromCGRect(tempLabel.frame));
-    NSLog(@"%hhd", tempLabel.isHidden);
-    NSLog(@"%f", tempLabel.alpha);
-    
-    NSLog(@"%f", self.timer.timeInterval);
     
     if (self.isAnimating) {
         
@@ -138,7 +130,6 @@ static const NSInteger offset = 20;
             }];
         }
         
-        NSLog(@"animation called");
         //animate the currentView in
         UILabel *currentLabel = [self getCurrent];
         [currentLabel setFrame:CGRectMake(0.0, -offset, currentLabel.frame.size.width, currentLabel.frame.size.height)];
