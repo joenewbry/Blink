@@ -256,25 +256,27 @@ typedef enum BLKProfileState BLKProfileState;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (self.activeTextField.tag == 1) {
         self.username = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [PFUser currentUser][@"profileName"] = self.username;
-        self.SBUserModel.username = self.username;
+        [BLKUser currentUser].profileName = self.username;
+        self.user.username = self.username;
     } else if (self.activeTextField.tag == 2) {
          self.quote = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [PFUser currentUser][@"quote"] = self.quote;
-        self.SBUserModel.quote = self.quote;
+        [BLKUser currentUser].quote = self.quote;
+        self.user.quote = self.quote;
     } else if (self.activeTextField.tag == 4) {
         self.relationshipStatus = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [PFUser currentUser][@"relationship"] = self.relationshipStatus;
-        self.SBUserModel.relationshipStatus = self.relationshipStatus;
+        [BLKUser currentUser].relationshipStatus = self.relationshipStatus;
+        self.user.relationshipStatus = self.relationshipStatus;
     } else if (self.activeTextField.tag == 3) {
         self.college = [[NSMutableString alloc] initWithString:self.activeTextField.text];
-        [PFUser currentUser][@"college"] = self.college;
-        self.SBUserModel.college = self.college;
+        [BLKUser currentUser].college = self.college;
+        self.user.college = self.college;
     }
+    
+    //TODO all the if statements above: does this reference to the saved BLKUser work for saving the data?
     
     self.activeTextField = nil;
     
-    [[PFUser currentUser] saveInBackground];
+    [[BLKUser currentUser] saveInBackground];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {

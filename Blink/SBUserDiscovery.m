@@ -7,7 +7,7 @@
 //
 
 #import "SBUserDiscovery.h"
-#import "SBBroadcastUser.h"
+#import "SBUserBroadcast.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "CBUUID+StringExtraction.h"
 
@@ -31,21 +31,8 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 @synthesize discoveredUsers;
 
 #pragma mark - External API
-+ (BOOL)isBuilt
-{
-    static SBUserDiscovery *userDiscovery = nil;
-    @synchronized(self) {
-        return (userDiscovery != nil) ? true : false;
-    }
-    return false;
-}
 
-+ (BOOL)isBroadcasting
-{
-    return false;
-}
-
-+ (id)buildUserDiscoveryScaffold
++ (id)createUserDiscovery
 {
     static SBUserDiscovery *mySBUserDiscovery = nil;
     @synchronized(self) {
@@ -54,7 +41,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     return mySBUserDiscovery;
 }
 
-+ (id)buildUserDiscoveryScaffoldWithLaunchOptions:(NSDictionary *)launchOptions
++ (id)createUserDiscoveryWithLaunchOptions:(NSDictionary *)launchOptions
 {
     static SBUserDiscovery *mySBUserDiscovery = nil;
     @synchronized(self) {
@@ -63,7 +50,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
     return mySBUserDiscovery;
 }
 
-+ (id)userDiscoveryScaffold
++ (id)currentUserDiscovery
 {
     static SBUserDiscovery *mySBUserDiscovery = nil;
     static dispatch_once_t onceToken;

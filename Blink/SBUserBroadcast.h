@@ -20,15 +20,16 @@ extern NSString const *SBBroadcastCharacteristicUserProfileProfileImage;
 extern NSString const *SBBroadcastCharacteristicUserProfileStatus;
 extern NSString const *SBBroadcastCharacteristicUserProfileQuote;
 
-@interface SBBroadcastUser : NSObject
+@interface SBUserBroadcast : NSObject
 
 + (BOOL)isBuilt;
 + (BOOL)isBroadcasting;
 
-+ (SBBroadcastUser *)buildUserBroadcastScaffold;
-+ (SBBroadcastUser *)buildUserBroadcastScaffoldWithLaunchOptions:(NSDictionary *)launchOptions;
-+ (SBBroadcastUser *)currentBroadcastScaffold;
++ (SBUserBroadcast *)createUserBroadcast;
++ (SBUserBroadcast *)createUserBroadcastWithLaunchOptions:(NSDictionary *)launchOptions;
++ (SBUserBroadcast *)currentUserBroadcast;
 
+// TODO RENAME and add warnings if properties aren't set
 - (void)peripheralAddUserProfileService;
 - (void)peripheralManagerBroadcastServices;
 - (void)peripheralManagerEndBroadcastServices;

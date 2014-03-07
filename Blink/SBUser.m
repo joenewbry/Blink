@@ -15,42 +15,50 @@
 
 @implementation SBUser
 
-//TODO: how to make it so both of these methods look at the same place?
+
+// class methods to create a singleton instance of SBUser
+// used to control social bluetooth controls and set what
+// data gets shared out to other people
+static SBUser *mySBUser = nil;
+
 + (SBUser *)currentUser
 {
-    static SBUser *mySBUser = nil;
-    @synchronized(self) {
-        if (mySBUser == nil) mySBUser = [[self alloc] initWithUserName:@"Default User"];
-    }
-    return mySBUser;
-}
-
-+ (SBUser *)createUser
-{
-    static SBUser *mySBUser = nil;
     @synchronized(self) {
         if (mySBUser == nil) mySBUser = [[self alloc] init];
     }
     return mySBUser;
 }
 
-+ (SBUser *)createUserWithName:(NSString *)user
++ (SBUser *)createUser
 {
-    static SBUser *mySBUser = nil;
     @synchronized(self) {
-        if (mySBUser == nil) mySBUser = [[self alloc] initWithUserName:user];
+        if (mySBUser == nil) mySBUser = [[self alloc] init];
     }
     return mySBUser;
 }
 
-- (id)initWithUserName:(NSString *)userName
++ (SBUser *)createUserWithObjectId:(NSString *)objectId
+{
+    @synchronized(self) {
+        if (mySBUser == nil) mySBUser = [[self alloc] initWithObjectId:objectId];
+        
+    }
+    return mySBUser;
+}
+
+- (id)initWithObjectId:(NSString *)objectId
 {
     if (self = [super init])
     {
         self.userModel = [SBUserModel new];
-        self.userModel.username = userName;
+        self.userModel.objectId = objectId;
     }
     return self;
+}
+
+- (void)shareProfile
+{
+    
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
+#import "BLKUser.h"
 
 @interface SBUserModel : NSObject
 
@@ -18,9 +18,9 @@
 @property UIImage *profileImage;
 @property NSString *quote;
 @property NSString *college;
-@property PFUser *user;
+@property BLKUser *user;
 
 
--(id) initWithObjectId:(NSString *)objectId andUsername:(NSString *)username andRelationshipStatus:(NSString *)relationshipStatus andThumbnailFile:(PFFile *)thumbnailFile andProfileFile:(PFFile *)profileFile andQuote:(NSString *)quote andCollege:(NSString *)college andUser:(PFUser *)user;
+-(id) initWithObjectId:(NSString *)objectId andUsername:(NSString *)username andRelationshipStatus:(NSString *)relationshipStatus andThumbnailFile:(PFFile *)thumbnailFile andProfileFile:(PFFile *)profileFile andQuote:(NSString *)quote andCollege:(NSString *)college andUser:(BLKUser *)user;
 
 @end

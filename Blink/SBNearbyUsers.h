@@ -20,7 +20,7 @@
 @end
 
 
-@interface SBNearbyUsers : NSObject <SBDiscoverUserDelegate>
+@interface SBNearbyUsers : NSObject <SBUserDiscoveryDelegate>
 
 @property (weak, nonatomic) id<SBNearbyUsersDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray *nearbyUsers;

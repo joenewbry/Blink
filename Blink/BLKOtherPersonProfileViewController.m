@@ -10,6 +10,7 @@
 #import "BLKChatViewController.h"
 
 @interface BLKOtherPersonProfileViewController ()
+
 @end
 
 @implementation BLKOtherPersonProfileViewController
@@ -23,8 +24,12 @@
 
 - (IBAction)chatButtonPressed:(UIBarButtonItem *)sender {
     BLKChatViewController *chatController = [[BLKChatViewController alloc] init];
-    [chatController setupNewMessage:self.SBUserModel.user];
+
+    [chatController setupMessageDataWithUsers:[[NSMutableArray alloc] initWithObjects:self.user, nil]]; //TODO pass array of users in chat
+
     [self.navigationController pushViewController:chatController animated:NO];
 }
+
+
 
 @end

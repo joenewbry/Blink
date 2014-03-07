@@ -9,7 +9,7 @@
 #import "BLKSaveImage.h"
 #import <Parse/Parse.h>
 #import "SBUser.h"
-#import "SBBroadcastUser.h"
+#import "SBUserBroadcast.h"
 
 @interface BLKSaveImage ()
 
@@ -59,21 +59,19 @@ static BLKSaveImage *instance = nil;
     [SBUser currentUser].userModel.profileImage = [UIImage imageWithData:self.imgData]; // saves to SBUser
 
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [PFUser currentUser][@"profileImage"] = imageFile;
-        [[PFUser currentUser] saveEventually];
+        [BLKUser currentUser][@"profileImage"] = imageFile;
+        [[BLKUser currentUser] saveEventually];
     }];
 
     UIImage *thumbnailImage =[UIImage imageWithData:self.imgData scale:.1];
     PFFile *thumbnailFile = [PFFile fileWithData:UIImagePNGRepresentation(thumbnailImage)];
 
     [thumbnailFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [PFUser currentUser][@"thumbnailImage"] = thumbnailFile;
-        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [BLKUser currentUser][@"thumbnailImage"] = thumbnailFile;
+        [[BLKUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error)  { NSLog(@"Error saving profile %@", [error localizedDescription]); }
             else {
                 NSLog(@"a user has saved data, should already be signed in");
-                [SBBroadcastUser buildUserBroadcastScaffold];
-                [[SBBroadcastUser currentBroadcastScaffold] peripheralAddUserProfileService];
             }
         }];
     }];

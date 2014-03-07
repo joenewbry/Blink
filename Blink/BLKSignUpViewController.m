@@ -9,13 +9,15 @@
 #import "BLKSignUpViewController.h"
 #import <Parse/Parse.h>
 #import "SBUser.h"
-#import "SBBroadcastUser.h"
 #import "SBUserDiscovery.h"
 #import "BLKConstants.h"
 #import "BLKSaveImage.h"
 #import "SBNearbyUsers.h"
-#import "BLKMessageData.h"
+#import "BLKChatData.h"
 #import <NZAlertView/NZAlertView.h>
+
+#import "SBUserBroadcast.h"
+
 
 
 @interface BLKSignUpViewController ()
@@ -36,8 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:true];
-    if ([SBBroadcastUser isBuilt]) [[SBBroadcastUser currentBroadcastScaffold] peripheralManagerEndBroadcastServices];
-    if ([SBUserDiscovery isBuilt]) [[SBUserDiscovery userDiscoveryScaffold] stopSearchForUsers];
+    [[SBUserBroadcast currentUserBroadcast] peripheralManagerEndBroadcastServices];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,10 +94,10 @@
                         [self performSegueWithIdentifier:@"toHomeScreen" sender:self];
 
                         NSDictionary *userData = (NSDictionary *)result;
-                        [self parseUserDataAndSaveToParse:userData]; // FBProfileData to PFUser
+                        [self parseUserDataAndSaveToParse:userData]; // FBProfileData to BLKUser
 
                         [self saveInstallationForPush]; // save unique push channel for logged in user
-                        [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[PFUser currentUser][@"pictureURL"]]]; // save image on another thread, maybe this will work
+                        [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[BLKUser currentUser][@"pictureURL"]]]; // save image on another thread, maybe this will work
                     }
                 }
             }];
@@ -116,7 +117,7 @@
     NSString *pictureURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
 
     // save facebook information to parse
-    PFUser *currentUser = [PFUser currentUser];
+    BLKUser *currentUser = [BLKUser currentUser];
     currentUser[@"facebookID"] = facebookID;
     currentUser[@"profileName"] = name;
     currentUser[@"gender"] = gender;
@@ -130,11 +131,11 @@
 
 - (void)saveInstallationForPush
 {
-    NSString *privateChannelName =[NSString stringWithFormat:@"user_%@", [PFUser currentUser].objectId];
-    [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:kInstallationUserKey];
+    NSString *privateChannelName =[NSString stringWithFormat:@"user_%@", [BLKUser currentUser].objectId];
+    [[PFInstallation currentInstallation] setObject:[BLKUser currentUser] forKey:kInstallationUserKey];
     [[PFInstallation currentInstallation] addUniqueObject:privateChannelName forKey:kInstallationChannelsKey];
     [[PFInstallation currentInstallation] saveEventually];
-    [[PFUser currentUser] setObject:privateChannelName forKey:kUserPrivateChannelKey];
+    [[BLKUser currentUser] setObject:privateChannelName forKey:kUserPrivateChannelKey];
 }
 
 BOOL animating;

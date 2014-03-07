@@ -15,8 +15,10 @@
 #import "BLKChatViewController.h"
 #import "JSMessage.h"
 #import <Parse/Parse.h>
+#import "BLKMessageObject.h"
+#import "BLKChatData.h"
 
-@interface BLKChatViewController ()
+@interface BLKChatViewController () <BLKChatDataDelegate>
 
 @property (strong, nonatomic) NSMutableArray *PFUsersInChat;
 
@@ -28,27 +30,32 @@
 
 - (void)viewDidLoad
 {
+    // check for new table data
+    [BLKChatData instance].delegate = self;
+    [[BLKChatData instance] refresh];
     self.delegate = self;
     self.dataSource = self;
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
-
     [self setBackgroundColor:[UIColor whiteColor]];
 
+    // configure button font
     [[JSBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
-    
+
+    // set title
     NSString *title = [self putUserNameTogether:self.PFUsersInChat];
     self.title = title;
     self.messageInputView.textView.placeHolder = @"New Message";
-    self.sender = [PFUser currentUser][@"profileName"];
+    self.sender = [BLKUser currentUser].profileName;
+    [self.tableView reloadData];
 }
 
 - (NSString *)putUserNameTogether:(NSMutableArray *)users
 {
     NSMutableString *userString = [[NSMutableString alloc] init];
-    for (PFUser *user in users){
-        if (![user.username isEqual:[PFUser currentUser].username]){
+    for (BLKUser *user in users){
+        if (![user.username isEqual:[BLKUser currentUser].username]){
             if (user[@"profileName"]) {
                 if (userString.length > 0)[userString appendString:@" "];
                 [userString appendString:user[@"profileName"]];
@@ -86,22 +93,20 @@
 {
     [JSMessageSoundEffect playMessageSentSound];
     [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
-
     [self finishSend];
     [self scrollToBottomAnimated:YES];
 
-//    PFQuery *findChatObject = [PFQuery queryWithClassName:@"Chat"];
-//    [findChatObject se]
+    BLKMessageObject *message = [[BLKMessageObject alloc] init];
 
-    PFObject *message = [PFObject objectWithClassName:@"Message"];
     PFACL *acl = [PFACL ACL];
-    for (PFUser *user in self.PFUsersInChat){
+    for (BLKUser *user in self.PFUsersInChat){
         [acl setWriteAccess:TRUE forUser:user];
+        [acl setReadAccess:TRUE forUser:user];
     }
     [message setACL:acl];
-    message[@"message"] = text;
-    message[@"sender"] = [PFUser currentUser];
-    message[@"senderName"] = [PFUser currentUser][@"profileName"];
+    message.message = text;
+    message.sender = [BLKUser currentUser];
+    message.senderName = [BLKUser currentUser][@"profileName"];
 
     // objects saved in relation must be saved to parse before being saved in relation
     [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -111,17 +116,18 @@
         PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
 
         // TODO figure out how to exact match rather than match and then filter results
-        [chatQuery whereKey:@"recipientsArrayPFUser" containsAllObjectsInArray:self.PFUsersInChat];
-        [chatQuery includeKey:@"recipientsArrayPFUser"];
+        [chatQuery whereKey:@"participants" containsAllObjectsInArray:self.PFUsersInChat];
+        [chatQuery includeKey:@"participants"];
         [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-
+                BOOL isSaved = false;
                 for (PFObject *potentialChat in objects){
                     // is exact match
-                    if ([potentialChat[@"recipientsArrayPFUser"] count] == self.PFUsersInChat.count){
+                    if ([potentialChat[@"participants"] count] == self.PFUsersInChat.count){
+                        isSaved = true;
                         PFObject *chat = potentialChat; // only one
                         [chat addObject:message forKey:@"messages"];
-                        [chat setValue:[PFUser currentUser] forKey:@"sender"];
+                        [chat setValue:[BLKUser currentUser] forKey:@"sender"];
                         [chat setValue:text forKey:@"mostRecentMessage"];
                         [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                             if (error) NSLog(@"Error message: %@", [error localizedDescription]);
@@ -131,14 +137,16 @@
                         }];
                         return;
                     }
-                }
 
-                PFObject *chat = [PFObject objectWithClassName:@"Chat"];
-                [chat addObject:message forKey:@"messages"];
-                [chat addUniqueObjectsFromArray:self.PFUsersInChat forKey:@"recipientsArrayPFUser"];
-                [chat setValue:text forKey:@"mostRecentMessage"];
-                [chat setValue:[PFUser currentUser] forKey:@"sender"];
-                [chat saveInBackground];
+                }
+                if (!isSaved) {
+                    PFObject *chat = [PFObject objectWithClassName:@"Chat"];
+                    [chat addObject:message forKey:@"messages"];
+                    [chat addUniqueObjectsFromArray:self.PFUsersInChat forKey:@"participants"];
+                    [chat setValue:text forKey:@"mostRecentMessage"];
+                    [chat setValue:[BLKUser currentUser] forKey:@"sender"];
+                    [chat saveInBackground];
+                }
             }
         }];
     }];
@@ -148,7 +156,7 @@
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSMessage *myMessage = (JSMessage *)self.messages[indexPath.row];
-    if ([[PFUser currentUser][@"profileName"] isEqualToString:myMessage.sender]) {
+    if ([[BLKUser currentUser].profileName isEqualToString:myMessage.sender]) {
         return JSBubbleMessageTypeOutgoing;
     }
     return JSBubbleMessageTypeIncoming;
@@ -158,7 +166,7 @@
                        forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSMessage *myMessage = (JSMessage *)self.messages[indexPath.row];
-    if ([[PFUser currentUser][@"profileName"] isEqualToString:myMessage.sender]) {
+    if ([[BLKUser currentUser].profileName isEqualToString:myMessage.sender]) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type
                                                           color:[UIColor colorWithRed:111.0/255.0 green:224.0/255.0 blue:240.0/255.0 alpha:1.0]];
     }
@@ -238,43 +246,70 @@
     return [[UIImageView alloc] initWithImage:image];
 }
 
+#pragma mark - new chat message data source
+- (void)newMessageRecievedAllMessages:(NSMutableArray *)messages
+{
+
+    self.messages = [self messagesFromBLKMessages:messages];
+    [self.tableView reloadData];
+}
+
+
+- (void)newMessageRecieved:(BLKMessageObject *)message
+{
+    [self.messages addObject:[self messageFromBLKMessageObject:message]];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Load in current message data
-- (void)setupMessageData:(PFObject *)messageData
+- (void)setupMessageDataWithUsers:(NSMutableArray *)users
 {
-    // for fetching the proper Chat
-    self.PFUsersInChat = [NSMutableArray arrayWithArray:messageData[@"recipientsArrayPFUser"]];
+    // for fetching the proper BLKMessageObjects
+    NSMutableArray *chatMessages = [[BLKChatData instance] messagesForConversationBetween:users];
 
-
-    // gets all previous chats
-    self.messages = messageData[@"messages"];
-
-    self.avatars = [NSMutableDictionary new];
-    [self setAvatarsForPFUsers:self.PFUsersInChat];
-}
-
-- (void)setupNewMessage:(PFUser *)chatWithUser
-{
-    self.PFUsersInChat = [NSMutableArray arrayWithArray:@[chatWithUser, [PFUser currentUser]]];
-
-    // no messages to query for so make empty array
     self.messages = [NSMutableArray new];
+    // use each BLKMessage Object to create JSMessage
+    self.messages = [self messagesFromBLKMessages:chatMessages];
+
+    //self.messages = [NSMutableArray new];
+    self.PFUsersInChat = [[NSMutableArray alloc] initWithArray:users];
+
     self.avatars = [NSMutableDictionary new];
     [self setAvatarsForPFUsers:self.PFUsersInChat];
 }
 
-- (void)setAvatarsForPFUsers:(NSMutableArray *)PFUsers
+- (void)setAvatarsForPFUsers:(NSMutableArray *)blkUsers
 {
-    for (PFUser *user in PFUsers){
-        PFFile *userThumbnail = user[@"thumbnailImage"];
+    for (BLKUser *user in blkUsers){
 
         UIImage *placeholderImage = [UIImage imageNamed:@"user_circle"];
 
-        [self.avatars setValue:[JSAvatarImageFactory avatarImage:placeholderImage croppedToCircle:YES] forKey:user[@"profileName"]];
-        [userThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            [self.avatars setValue:[JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES] forKey:user[@"profileName"]];
-            [self.tableView reloadData];
+        [self.avatars setValue:[JSAvatarImageFactory avatarImage:placeholderImage croppedToCircle:YES] forKey:user.profileName];
+        [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            BLKUser *refreshedUser = (BLKUser *)object;
+            [refreshedUser.profilePictureThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                [self.avatars setValue:[JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES] forKey:user.profileName];
+                [self.tableView reloadData];
+            }];
         }];
+
     }
 }
+
+#pragma mark - UTILS
+- (JSMessage *)messageFromBLKMessageObject:(BLKMessageObject *)message
+{
+    return [[JSMessage alloc] initWithText:message.message sender:message.senderName date:message.createdAt];
+}
+
+- (NSMutableArray *)messagesFromBLKMessages:(NSMutableArray *)messages
+{
+    NSMutableArray *chatBubbles = [NSMutableArray new];
+    for (BLKMessageObject *message in messages){
+        [chatBubbles addObject:[[JSMessage alloc] initWithText:message.message sender:message.senderName date:message.createdAt]];
+    }
+    return chatBubbles;
+}
+
 
 @end

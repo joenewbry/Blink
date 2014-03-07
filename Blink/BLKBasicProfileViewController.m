@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *collegeLabel;
 @property (strong, nonatomic) IBOutlet BLKFeed *feedView;
 
+
+
 @property (nonatomic) NSMutableArray *labelArray;
 
 
@@ -42,20 +44,19 @@
     
 }
 
-
--(void)setSBUserModel:(SBUserModel *)SBUserModel {
-    _SBUserModel = SBUserModel;
-    
-    //anytime the SBUserModel gets set all the properties
-    _profileImage = _SBUserModel.profileImage;
-    
-    _username = (NSMutableString *)_SBUserModel.username;
-    
-    _quote = (NSMutableString *)_SBUserModel.quote;
-    _college = (NSMutableString *)_SBUserModel.college;
-    _relationshipStatus = (NSMutableString *)_SBUserModel.relationshipStatus;
+- (void)setBLKUser:(BLKUser *)user
+{
+    _user = user;
     
     
+    [_user.profilePictureThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        self.profileImage = [UIImage imageWithData:data];
+    }];
+    
+    _username = [_user.profileName mutableCopy];
+    _quote = [_user.quote mutableCopy];
+    _college = [_user.college mutableCopy];
+    _relationshipStatus = [_user.relationshipStatus mutableCopy];
 }
 
 - (void)setProfileImage:(UIImage *)profileImage {
