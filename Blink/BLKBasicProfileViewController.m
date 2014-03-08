@@ -62,6 +62,7 @@
         }];
     }
     
+
     
     //TODO bug not urgent
     if (!_username) {
@@ -197,7 +198,6 @@
         }
     }
     
-    NSLog(@"error didn't find frame for tag");
     return [[UILabel alloc] init];
     
 }
@@ -216,7 +216,6 @@
         [self setUpFeedView];
         [self.feedView resume];
     }
-    NSLog(@"Hide values called");
 }
 
 @end

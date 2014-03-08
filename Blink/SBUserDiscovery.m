@@ -90,6 +90,8 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
         }
         self.discoveringUsers = [[NSMutableSet alloc] init];
         self.discoveredUsers  = [[NSMutableArray alloc] init];
+        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:
+                               @{CBCentralManagerOptionShowPowerAlertKey : @YES}];
     }
     return self;
 }
@@ -111,30 +113,24 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
 {
-
+    NSLog(@"central manager restoring state");
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
      switch (central.state) {
         case CBCentralManagerStatePoweredOff:
-            NSLog(@"State powered off");
             break;
         case CBCentralManagerStatePoweredOn:
-            NSLog(@"State powered on");
             [self searchForUsers];
             break;
         case CBCentralManagerStateResetting:
-            NSLog(@"State resetting");
             break;
         case CBCentralManagerStateUnauthorized:
-            NSLog(@"State unauthorized");
             break;
         case CBCentralManagerStateUnknown:
-            NSLog(@"State unknown");
             break;
         case CBCentralManagerStateUnsupported:
-            NSLog(@"State unsupported");
             break;
     }
 
@@ -142,6 +138,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    NSLog(@"Central manager found peripherpheral");
     [self.discoveringUsers addObject:peripheral];
     [self.centralManager connectPeripheral:peripheral options:nil];
 }
@@ -156,7 +153,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-
+    NSLog(@"Central manager disconnected from peripheral");
 }
 
 // peripheral delegate methods
@@ -166,9 +163,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
     
     for (CBService *service in peripheral.services) {
-        NSLog(@"Discovered service %d UUID is %@ ", count, service.UUID);
         if ([service.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastServiceUserProfileUUID]]) {
-            NSLog(@"Discovered user profile service");
             [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId],
                                                   [CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileUserName],
                                                   [CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileProfileImage],
@@ -183,7 +178,6 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     for (CBCharacteristic *characteristic in service.characteristics) {
-        //NSLog(@"Reading value for characteristic %@", characteristic);
         [peripheral readValueForCharacteristic:characteristic];
     }
 }
@@ -218,16 +212,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
             [self.delegate didReceiveStatus:self.userData[@"status"]];
         }
 
-    } /*else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileProfileImage]]) {
-        self.userData[@"profileImage"]  = [UIImage imageWithData:myData];
-        if ([self.delegate respondsToSelector:@selector(didRecieveProfileImage:)]) {
-            [self.delegate didReceiveProfileImage:self.userData[@"profileImage"]];
-        }
-
-    } **/else {
-        //NSLog(@"attempting to read characteristic %@", characteristic.description);
     }
-
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -241,13 +226,12 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 {
 
     for (CBService *service in invalidatedServices){
-        NSLog(@"Service ID is: %@", [service.UUID representativeString]);
         if ([service.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastServiceUserProfileUUID]]){
             for (CBCharacteristic *characteristic in service.characteristics){
                 if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:SBBroadcastCharacteristicUserProfileObjectId]]){
-                    if ([self.delegate respondsToSelector:@selector(userDidDisconnectWithObjectID:)]){
+                    if ([self.delegate respondsToSelector:@selector(userDidDisconnectWithObjectId:)]){
                         NSString *objectUUID = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-                        [self.delegate performSelector:@selector(userDidDisconnectWithObjectID:) withObject:objectUUID];
+                        [self.delegate performSelector:@selector(userDidDisconnectWithObjectId:) withObject:objectUUID];
                     }
 
                 }

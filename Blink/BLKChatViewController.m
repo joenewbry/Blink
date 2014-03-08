@@ -129,12 +129,7 @@
                         [chat addObject:message forKey:@"messages"];
                         [chat setValue:[BLKUser currentUser] forKey:@"sender"];
                         [chat setValue:text forKey:@"mostRecentMessage"];
-                        [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (error) NSLog(@"Error message: %@", [error localizedDescription]);
-                            else {
-                                NSLog(@"Save in background succeeded");
-                            }
-                        }];
+                        [chat saveInBackground];
                         return;
                     }
 
@@ -198,7 +193,7 @@
         // TODO change to underline not blue color
         if ([cell.bubbleView.textView respondsToSelector:@selector(linkTextAttributes)]) {
             NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
-            [attrs setValue:[UIColor blueColor] forKey:UITextAttributeTextColor];
+            [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
 
             cell.bubbleView.textView.linkTextAttributes = attrs;
         }

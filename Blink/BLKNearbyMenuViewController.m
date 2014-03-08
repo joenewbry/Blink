@@ -20,6 +20,7 @@
 #import "BLKSaveImage.h"
 #import "SBUserConnection.h"
 #import "SBUserBroadcast.h"
+#import "CALayer+Pulse.h"
 
 @interface BLKNearbyMenuViewController () <SBUserConnectionDelegate, BLKChatDataDelegate>
 
@@ -30,6 +31,8 @@
 @property (nonatomic)NSMutableArray *usersInConversation;
 @property (nonatomic)PFObject *messageData;
 
+@property (strong, nonatomic) CALayer *pulse;
+
 @end
 
 @implementation BLKNearbyMenuViewController
@@ -38,33 +41,32 @@
 {
     [super viewDidLoad];
 
-    if (!TARGET_IPHONE_SIMULATOR) [[SBNearbyUsers instance] searchForUsers]; // instantiates User discover and starts search, listening for UUIDs
+    if (!TARGET_IPHONE_SIMULATOR) {
+        // Share Profile
+        [SBUser createUserWithObjectId:[BLKUser currentUser].objectId];
+        [[SBUserBroadcast currentUserBroadcast] peripheralAddUserProfileService];
+
+        // Search for profile
+        [SBUserConnection createUserConnection];
+        // start recieving user discovery messages
+        [SBUserConnection currentUserConnection].delegate = self;
+        self.nearbyUsersArray = [[SBUserConnection currentUserConnection] allUsersBy:SBNextUserByNewest];
+    }
 
     [[BLKChatData instance] searchForMessagesIncluding:[BLKUser currentUser]]; // starts search for messages that include current user, return in format that displays well in table view and also includes message data
     [BLKChatData instance].delegate = self;
     [[BLKChatData instance] refresh];
-
-    // Share Profile
-    [SBUser createUserWithObjectId:[BLKUser currentUser].objectId];
-    [[SBUserBroadcast currentUserBroadcast] peripheralAddUserProfileService];
-
-
-    // Search for profile
-    [SBUserConnection createUserConnection];
-    // start recieving user discovery messages
-    [SBUserConnection currentUserConnection].delegate = self;
-    self.nearbyUsersArray = [[SBUserConnection currentUserConnection] allUsersBy:SBNextUserByNewest];
 
     // handles saving user profile image on background thread
     // TODO move to block in sign up view rather than own class
     [[BLKSaveImage instanceSavedImage] saveImageInBackground:[NSURL URLWithString:[BLKUser currentUser][@"pictureURL"]]]; // save image on another thread
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-
 
     // start recieving message discovery messages
 
@@ -75,6 +77,17 @@
     //set the background and shadow image to get rid of the line
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc]init];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+//    [CATransaction begin]; {
+//        [CATransaction setAnimationDuration:3.0];
+//        self.pulse.bounds = CGRectMake(0, 0, 40, 40);
+//        self.pulse.opacity = 1.0;
+//        self.pulse.cornerRadius = 20;
+//    }
+//    [CATransaction commit];
 }
 
 
@@ -127,12 +140,14 @@
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"MessagingCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.layer.cornerRadius = cell.layer.bounds.size.height/2;
+        cell.clipsToBounds = true;
 
         cell.textLabel.text = [self putUserNameTogether:self.messageArray[indexPath.row][@"participants"]];
         cell.detailTextLabel.text = self.messageArray[indexPath.row][@"mostRecentMessage"];
         PFFile *imageThumbnail = self.messageArray[indexPath.row][@"participants"][0][@"thumbnailImage"];
         [imageThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
+            cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:NO];
         }];
 
         return cell;
@@ -144,13 +159,17 @@
         // get the user
         BLKUser *myUser = [self.nearbyUsersArray objectAtIndex:indexPath.row];
         cell.layer.cornerRadius = cell.layer.bounds.size.height/2;
+
         cell.clipsToBounds = true;
         cell.textLabel.text = myUser.profileName;
         [myUser.profilePictureThumbnail getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.imageView.image = [JSAvatarImageFactory avatarImage:[UIImage imageWithData:data] croppedToCircle:YES];
+            [CALayer pulseLayer:cell.imageView.layer];
+
         }];
         cell.imageView.image = [UIImage imageNamed:@"user_circle"];
-               
+
+
         return cell;
         
     }

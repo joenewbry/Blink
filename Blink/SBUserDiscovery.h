@@ -19,6 +19,9 @@
 - (void)didReceiveProfileImage:(UIImage *)profileImage;
 - (void)didReceiveSBUser:(SBUser *)sbUser;
 
+// TODO get disconnect working
+- (void)userDidDisconnectWithObjectId:(NSString *)userId;
+
 @end
 
 @interface SBUserDiscovery : NSObject

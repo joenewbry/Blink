@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T1Y-vc-fNw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T1Y-vc-fNw">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -40,7 +40,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="user_circle.png" id="4Ra-lw-x7y">
+                                        <imageView opaque="NO" multipleTouchEnabled="YES" tag="1" contentMode="scaleAspectFit" image="user_circle.png" id="4Ra-lw-x7y">
                                             <rect key="frame" x="15" y="6" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -61,7 +61,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="user_circle.png" id="hkS-v6-TnH">
+                                        <imageView opaque="NO" multipleTouchEnabled="YES" tag="1" contentMode="scaleAspectFit" image="user_circle.png" id="hkS-v6-TnH">
                                             <rect key="frame" x="15" y="6" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -75,7 +75,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Blink" id="I85-qL-WoQ">
-                        <barButtonItem key="rightBarButtonItem" image="user_profile_icon" style="plain" id="SAy-AG-txR">
+                        <barButtonItem key="rightBarButtonItem" image="user_profile_icon" id="SAy-AG-txR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="kDp-rm-gGY" kind="push" identifier="toMyProfile" id="nhM-2X-C73"/>
@@ -106,17 +106,20 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fp0-JI-czO">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fp0-JI-czO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-2W-6gK">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6l-2W-6gK">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconNoBackground60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-BN-aNp">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-BN-aNp">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="320" id="KQX-Cq-yVJ"/>
+                                                </constraints>
                                             </imageView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0f-bn-8ma">
                                                 <rect key="frame" x="113" y="113" width="95" height="55"/>
@@ -166,22 +169,38 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="320" id="4sJ-33-Ram"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="9AN-Kr-aTn"/>
-                                            <constraint firstAttribute="height" constant="416" id="Yn6-mi-brz"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="416" id="hjU-oA-MTW"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="qTd-yl-Zgz"/>
+                                            <constraint firstAttribute="bottom" secondItem="C3U-BN-aNp" secondAttribute="bottom" id="4k2-cb-xch"/>
+                                            <constraint firstAttribute="height" constant="416" id="LFj-ew-Ed4"/>
+                                            <constraint firstItem="C3U-BN-aNp" firstAttribute="top" secondItem="W6l-2W-6gK" secondAttribute="top" id="PUC-sa-ggK"/>
+                                            <constraint firstItem="C3U-BN-aNp" firstAttribute="leading" secondItem="W6l-2W-6gK" secondAttribute="leading" id="hlf-L8-cjJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="C3U-BN-aNp" secondAttribute="trailing" id="onc-ob-tSg"/>
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="W6l-2W-6gK" firstAttribute="leading" secondItem="Fp0-JI-czO" secondAttribute="leading" id="3Pv-AF-2SC"/>
+                                    <constraint firstItem="W6l-2W-6gK" firstAttribute="centerX" secondItem="Fp0-JI-czO" secondAttribute="centerX" id="Ktv-aQ-qMn"/>
+                                    <constraint firstItem="W6l-2W-6gK" firstAttribute="top" secondItem="Fp0-JI-czO" secondAttribute="top" id="XnC-7i-KUv"/>
+                                    <constraint firstAttribute="trailing" secondItem="W6l-2W-6gK" secondAttribute="trailing" id="ZWe-At-cxH"/>
+                                    <constraint firstItem="W6l-2W-6gK" firstAttribute="centerY" secondItem="Fp0-JI-czO" secondAttribute="centerY" id="wt8-3j-9nI"/>
+                                    <constraint firstAttribute="bottom" secondItem="W6l-2W-6gK" secondAttribute="bottom" id="xus-r6-LKD"/>
+                                </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WMb-te-X1w" customClass="BLKFeed">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMb-te-X1w" customClass="BLKFeed">
                                 <rect key="frame" x="0.0" y="377" width="320" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Fp0-JI-czO" firstAttribute="top" secondItem="qlW-Qp-GCd" secondAttribute="top" id="3Gp-LZ-WUd"/>
+                            <constraint firstItem="Fp0-JI-czO" firstAttribute="leading" secondItem="WMb-te-X1w" secondAttribute="leading" id="Ibn-6L-gTj"/>
+                            <constraint firstItem="Fp0-JI-czO" firstAttribute="trailing" secondItem="WMb-te-X1w" secondAttribute="trailing" id="Kob-9C-Ctc"/>
+                            <constraint firstItem="Fp0-JI-czO" firstAttribute="bottom" secondItem="WMb-te-X1w" secondAttribute="bottom" id="cLK-eH-1WC"/>
+                            <constraint firstItem="WMb-te-X1w" firstAttribute="top" secondItem="KTX-Do-REH" secondAttribute="bottom" constant="377" id="heU-qY-CzM"/>
+                            <constraint firstItem="Fp0-JI-czO" firstAttribute="leading" secondItem="qlW-Qp-GCd" secondAttribute="leading" id="rWJ-iE-J1U"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0Pj-tY-1Y4">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="YPM-Q5-A5h">
@@ -263,7 +282,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Other Profile" id="E62-NC-f9g">
-                        <barButtonItem key="rightBarButtonItem" image="chat_icon.png" style="plain" id="hy5-ey-x8V">
+                        <barButtonItem key="rightBarButtonItem" image="chat_icon.png" id="hy5-ey-x8V">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="chatButtonPressed:" destination="p2D-8g-FiS" id="gvS-bu-Kng"/>
                             </connections>

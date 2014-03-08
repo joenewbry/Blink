@@ -27,12 +27,6 @@ static const NSInteger offset = 20;
 - (id)initWithTimerInterval:(float)timerInterval {
     self = [super init];
     
-    if (self) {
-
-    } else {
-        NSLog(@"error initializing self");
-    }
-    
     return self;
 }
 

@@ -25,7 +25,7 @@
 - (IBAction)chatButtonPressed:(UIBarButtonItem *)sender {
     BLKChatViewController *chatController = [[BLKChatViewController alloc] init];
 
-    [chatController setupMessageDataWithUsers:[[NSMutableArray alloc] initWithObjects:self.user, nil]]; //TODO pass array of users in chat
+    [chatController setupMessageDataWithUsers:[[NSMutableArray alloc] initWithObjects:self.user,[BLKUser currentUser], nil]]; //TODO pass array of users in chat
 
     [self.navigationController pushViewController:chatController animated:NO];
 }

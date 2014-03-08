@@ -129,7 +129,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
         // Make sure they are subscribed to private channel
         NSString *privateChannelName = [[BLKUser currentUser] objectForKey:kUserPrivateChannelKey];
         if (privateChannelName && privateChannelName.length > 0) {
-            NSLog(@"Subscribing user to %@", privateChannelName);
             [[PFInstallation currentInstallation] addUniqueObject:privateChannelName forKey:kInstallationChannelsKey];
         }
     }
@@ -145,7 +144,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"Recieved remote notification");
     [PFPush handlePush:userInfo];
 }
 
