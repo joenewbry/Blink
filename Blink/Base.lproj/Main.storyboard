@@ -282,7 +282,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Other Profile" id="E62-NC-f9g">
-                        <barButtonItem key="rightBarButtonItem" image="chat_icon.png" id="hy5-ey-x8V">
+                        <barButtonItem key="rightBarButtonItem" image="Chat Icon1" id="hy5-ey-x8V">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="chatButtonPressed:" destination="p2D-8g-FiS" id="gvS-bu-Kng"/>
@@ -425,9 +425,9 @@
     </scenes>
     <resources>
         <image name="AppIcon60x60@2x.png" width="60" height="60"/>
+        <image name="Chat Icon1" width="34" height="30"/>
         <image name="IconNoBackground60x60.png" width="60" height="60"/>
         <image name="camera_icon" width="67" height="55"/>
-        <image name="chat_icon.png" width="40" height="36"/>
         <image name="user_circle.png" width="30" height="30"/>
         <image name="user_profile_icon" width="73" height="71"/>
     </resources>
