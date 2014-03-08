@@ -380,8 +380,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="Va9-wc-0lU"/>
                     <connections>
+                        <outlet property="blinkLabel" destination="3Cs-s5-6tf" id="Gbo-ky-X2U"/>
                         <outlet property="joinWithFacebookButton" destination="2pC-U1-v4y" id="CR6-Xh-ZXM"/>
+                        <outlet property="lineImage" destination="jTZ-Mj-UXZ" id="ayh-Ge-LwU"/>
+                        <outlet property="lineView" destination="jTZ-Mj-UXZ" id="Dnh-6Z-ftu"/>
                         <outlet property="logoView" destination="WIS-tP-doc" id="JdW-8C-cP0"/>
+                        <outlet property="subheadLabel" destination="CBa-Gm-taI" id="kZD-u6-etK"/>
                         <segue destination="qlF-1F-cV7" kind="modal" identifier="toHomeScreen" modalTransitionStyle="crossDissolve" animates="NO" id="k9t-Bd-hmN"/>
                     </connections>
                 </viewController>

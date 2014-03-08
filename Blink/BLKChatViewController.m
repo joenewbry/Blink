@@ -46,6 +46,7 @@
     // set title
     NSString *title = [self putUserNameTogether:self.PFUsersInChat];
     self.title = title;
+    
     self.messageInputView.textView.placeHolder = @"New Message";
     self.sender = [BLKUser currentUser].profileName;
     [self.tableView reloadData];

@@ -21,6 +21,9 @@
 
 
 @interface BLKSignUpViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *blinkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subheadLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @property (strong, nonatomic) IBOutlet UIImageView *logoView;
 @property (strong, nonatomic) IBOutlet UIButton *joinWithFacebookButton;
