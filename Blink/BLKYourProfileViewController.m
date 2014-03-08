@@ -36,7 +36,6 @@ typedef enum BLKProfileState BLKProfileState;
 @property (nonatomic) NSMutableArray * textFieldArray; // probably could just populate this array based on the labels in BasisProfileVC
 //This would avoid having the five uitextfields above
 
-
 @property (nonatomic) BLKProfileState currentState;
 
 @end
@@ -53,8 +52,7 @@ typedef enum BLKProfileState BLKProfileState;
     self.quote = [[BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_QUOTE] mutableCopy];
     self.relationshipStatus = [[BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_RELATIONSHIP_STATUS] mutableCopy];
     
-    self.profileImage = [[UIImage alloc] initWithContentsOfFile:
-                         [BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_PROFILE_IMAGE]];
+    //image is set in basic profile vc
     
     [super setBLKUser:user];
 }
@@ -65,6 +63,33 @@ typedef enum BLKProfileState BLKProfileState;
     if (!_textFieldArray) _textFieldArray = [[NSMutableArray alloc] init];
     
     return _textFieldArray;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //check to see if any NSUserDefaults aren't set
+    
+    if (![BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_NAME] ||
+        ![BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_COLLEGE] ||
+        ![BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_QUOTE] ||
+        ![BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_RELATIONSHIP_STATUS]) {
+        
+        //some of the defaults haven't been set so save them
+        
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.username key:BLK_NAME];
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.college key:BLK_COLLEGE];
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.quote key:BLK_QUOTE];
+        [BLKNSUserDefaultsHelper setUserPropertyStringForKey:self.relationshipStatus key:BLK_RELATIONSHIP_STATUS];
+        
+        dispatch_queue_t saveImage = dispatch_queue_create("save image", NULL);
+        dispatch_async(saveImage, ^{
+            [self saveUIImageToCache:self.profileImage];
+        });
+
+        
+    }
+
 }
 
 -(void)viewDidLoad {
@@ -323,16 +348,9 @@ typedef enum BLKProfileState BLKProfileState;
     
     self.profileImage = info[UIImagePickerControllerOriginalImage];
     
+    [self saveUIImageToCache:self.profileImage];
+    
     NSData *data = UIImageJPEGRepresentation(self.profileImage, 1.0f);
-    
-    //save image to the documents folder
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0]; //gets the docs directory
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"profile.jpg"];
-    [data writeToFile:filePath atomically:YES];
-    
-    //save image path string to NSUserDefaults
-    [BLKNSUserDefaultsHelper setUserPropertyStringForKey:filePath key:BLK_PROFILE_IMAGE];
     
     //save PFFile to parse
     PFFile *file = [PFFile fileWithData:data];
@@ -346,6 +364,21 @@ typedef enum BLKProfileState BLKProfileState;
     }];
     
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (void)saveUIImageToCache:(UIImage *)image {
+    
+    NSData *data = UIImageJPEGRepresentation(image, 1.0f);
+    
+    //save image to the documents folder
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //gets the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"profile.jpg"];
+    [data writeToFile:filePath atomically:YES];
+    
+    //save image path string to NSUserDefaults
+    [BLKNSUserDefaultsHelper setUserPropertyStringForKey:filePath key:BLK_PROFILE_IMAGE];
+    
 }
 
 

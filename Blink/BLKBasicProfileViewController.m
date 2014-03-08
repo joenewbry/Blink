@@ -11,6 +11,7 @@
 #import "UIViewController+ViewUtils.h"
 #import "UIView+LinerGradient.h"
 #import "BLKFeed.h"
+#import "BLKNSUserDefaultsHelper.h"
 
 @interface BLKBasicProfileViewController ()
 
@@ -51,18 +52,51 @@
     //if values are already set then no need to fetch them from parse
     //in this case the values have been set by NSUserDefaults
     
-    if (!self.profileImage) {
-        [_user.profilePicture getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            
-            if (error) {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            } else {
-                self.profileImage = [UIImage imageWithData:data];
-            }
-        }];
-    }
-    
+   
+         // if the current user is you
+            dispatch_queue_t fetchImage = dispatch_queue_create("fetch image", NULL);
+            dispatch_async(fetchImage,
+            ^{
+                
+                UIImage * tempImage;
+                //if current user is you try to read image from NSUserDefaults
+                
+                if ([[BLKUser currentUser].objectId isEqualToString:_user.objectId])
+                {
+                
+                    tempImage =[[UIImage alloc] initWithContentsOfFile:
+                                [BLKNSUserDefaultsHelper getUserPropertyStringForKey:BLK_PROFILE_IMAGE]];
+                }
+                
+                //if image couldn't be read from cache read it Parse
+                if (!tempImage)
+                {
+                    
+                    NSError *error;
+                    
+                    NSData *data = [_user.profilePicture getData:&error];
+                    
+                    if (error) {
+                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    } else {
+                        tempImage = [UIImage imageWithData:data];
+                        
+                        
+                    }
+                    
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    self.profileImage = tempImage;
+                    
+                });
 
+            });
+
+        
+        
+    
     
     //TODO bug not urgent
     if (!_username) {
