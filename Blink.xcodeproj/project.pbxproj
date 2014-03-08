@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		247FD05318CAA23B00E212C0 /* BLKNSUserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 247FD05218CAA23B00E212C0 /* BLKNSUserDefaultsHelper.m */; };
 		696B44203B6247E094E60B53 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DA1E5E3D04835B1E7731C /* libPods.a */; };
 		D84AEB3718A7F4220027FCFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3618A7F4220027FCFA /* Foundation.framework */; };
 		D84AEB3918A7F4220027FCFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84AEB3818A7F4220027FCFA /* CoreGraphics.framework */; };
@@ -148,6 +149,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		247FD05118CAA23B00E212C0 /* BLKNSUserDefaultsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLKNSUserDefaultsHelper.h; path = Blink/BLKNSUserDefaultsHelper.h; sourceTree = "<group>"; };
+		247FD05218CAA23B00E212C0 /* BLKNSUserDefaultsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLKNSUserDefaultsHelper.m; path = Blink/BLKNSUserDefaultsHelper.m; sourceTree = "<group>"; };
 		74F52CF771734F63ABA9B791 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7F6DA1E5E3D04835B1E7731C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84AEB3318A7F4220027FCFA /* Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blink.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +310,8 @@
 		D84AEB2A18A7F4220027FCFA = {
 			isa = PBXGroup;
 			children = (
+				247FD05118CAA23B00E212C0 /* BLKNSUserDefaultsHelper.h */,
+				247FD05218CAA23B00E212C0 /* BLKNSUserDefaultsHelper.m */,
 				D84AEB3C18A7F4220027FCFA /* Blink */,
 				D84AEB5B18A7F4220027FCFA /* BlinkTests */,
 				D84AEB3518A7F4220027FCFA /* Frameworks */,
@@ -984,6 +989,7 @@
 				D880DD9918C6460E00C78248 /* UIViewController+ViewUtils.m in Sources */,
 				D880DD9A18C6460E00C78248 /* BLKDiscoveredProfiles.m in Sources */,
 				D880DD9B18C6460E00C78248 /* Profile.m in Sources */,
+				247FD05318CAA23B00E212C0 /* BLKNSUserDefaultsHelper.m in Sources */,
 				D873497618C8487800FE6F3A /* SBUserConnection.m in Sources */,
 				D84AEB4318A7F4220027FCFA /* main.m in Sources */,
 			);
