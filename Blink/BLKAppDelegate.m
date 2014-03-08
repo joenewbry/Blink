@@ -15,6 +15,7 @@
 #import "BLKMessageObject.h"
 #import "BLKUser.h"
 #import "BLKChatObject.h"
+#import "BLKChatData.h"
 
 
 @implementation BLKAppDelegate
@@ -144,7 +145,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+        [PFPush handlePush:userInfo];
+    } else {
+        [[BLKChatData instance] refresh];
+    }
 }
 
 #pragma mark - FBIntegration

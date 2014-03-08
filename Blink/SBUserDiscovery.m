@@ -153,7 +153,7 @@ NSString const *centralManagerRestorationUUID = @"F2552FC0-92C9-4A60-AA97-215E5F
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    NSLog(@"Central manager disconnected from peripheral");
+    if (error) NSLog(@"Central manager disconnected from peripheral with error: @%", [error localizedDescription]);
 }
 
 // peripheral delegate methods

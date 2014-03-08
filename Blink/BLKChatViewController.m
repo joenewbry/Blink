@@ -68,7 +68,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self scrollToBottomAnimated:NO];
+    //[self scrollToBottomAnimated:YES];
 }
 
 #pragma mark - Actions
@@ -94,7 +94,6 @@
     [JSMessageSoundEffect playMessageSentSound];
     [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
     [self finishSend];
-    [self scrollToBottomAnimated:YES];
 
     BLKMessageObject *message = [[BLKMessageObject alloc] init];
 
@@ -247,14 +246,18 @@
 
     self.messages = [self messagesFromBLKMessages:messages];
     [self.tableView reloadData];
+    [self scrollToBottomAnimated:YES];
+
+    //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:[self.messages count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 
-- (void)newMessageRecieved:(BLKMessageObject *)message
-{
-    [self.messages addObject:[self messageFromBLKMessageObject:message]];
-    [self.tableView reloadData];
-}
+//- (void)newMessageRecieved:(BLKMessageObject *)message
+//{
+//    [self.messages addObject:[self messageFromBLKMessageObject:message]];
+//    [self.tableView reloadData];
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:[self.messages count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//}
 
 #pragma mark - Load in current message data
 - (void)setupMessageDataWithUsers:(NSMutableArray *)users

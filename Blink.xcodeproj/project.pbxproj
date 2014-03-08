@@ -435,12 +435,6 @@
 			children = (
 				D8902C0D18C644F20035A8A8 /* BLKChatViewController.h */,
 				D8902C0E18C644F20035A8A8 /* BLKChatViewController.m */,
-				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
-				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
-				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
-				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
-				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
-				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -578,6 +572,7 @@
 		D873499518CA258800FE6F3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D8853C1B18CAA9F4001D881D /* Chat */,
 				D873497B18C8522E00FE6F3A /* BLKUser.h */,
 				D873497C18C8522E00FE6F3A /* BLKUser.m */,
 			);
@@ -622,6 +617,19 @@
 				D8902C5218C644F20035A8A8 /* SBUserModel.m */,
 			);
 			name = Unused;
+			sourceTree = "<group>";
+		};
+		D8853C1B18CAA9F4001D881D /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D8902C1318C644F20035A8A8 /* BLKChatData.h */,
+				D8902C1418C644F20035A8A8 /* BLKChatData.m */,
+				D873499118C9740F00FE6F3A /* BLKChatObject.h */,
+				D873499218C9740F00FE6F3A /* BLKChatObject.m */,
+				D873497718C84D4E00FE6F3A /* BLKMessageObject.h */,
+				D873497818C84D4E00FE6F3A /* BLKMessageObject.m */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		D8902C2D18C644F20035A8A8 /* AppIcon.appiconset */ = {
